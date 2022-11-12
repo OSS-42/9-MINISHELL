@@ -38,7 +38,7 @@ NC = \033[0;39m
 
 #*****INTRO*****
 define intro_mandatory
-@bash $(D_INTRO)intro.sh
+@bash $(D_INTRO)intro_daftpunk.sh
 endef
 
 define intro_bonus
