@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/15 12:01:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:14:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 /***** minishell.c *****/
 
+void	couccou(void);
 void	couccou(void);
 void	couccou(void);
 
