@@ -13,6 +13,9 @@ OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 D_INTRO = pretty/
 LIBFT = libft.a
 D_LIBFT = libft/
+RLCONF = librl/config.log
+LIBRL = libhistory.a libreadline.a
+D_LIBRL = librl/
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
 #D_OBJ_BONUS = obj_bonus/
@@ -101,7 +104,7 @@ SRCS = minishell.c \
 
 #SRCS_BONUS = src_bonus/...
 
-all:	deadpool do_libft $(NAME)
+all:	deadpool do_libft do_librl $(NAME)
 
 deadpool:
 	@$(call intro_mandatory)
@@ -109,8 +112,18 @@ deadpool:
 do_libft:
 	@$(MAKE) -C $(D_LIBFT)
 
+$(RLCONF):
+	@echo "$(LGREEN)LIB READLINE Configuration started ...$(DEF_COLOR)"
+	@cd librl && ./configure --silent
+	@echo "$(LGREEN)LIB READLINE Configuration completed ...$(DEF_COLOR)"
+
+do_librl: $(RLCONF)
+	@echo "$(LGREEN)LIB READLINE Compilation started ...$(DEF_COLOR)"
+	@$(MAKE) -s -C $(D_LIBRL)
+	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(DEF_COLOR)"
+
 $(NAME):	$(OBJS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(D_LIBFT)$(LIBFT)
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
 	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"
 	@echo "$(LGREEN)Software Compilation completed ...$(NO_OF_FILES) files available !$(DEF_COLOR)"
 
@@ -135,13 +148,15 @@ $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))
 	@$(RM) $(D_OBJ_BONUS)
-	@$(MAKE) --no-print-directory -C $(D_LIBFT) clean
 
 fclean:	clean
 	@$(call fcleaning, $(RM) $(NAME))
 	@$(RM) $(NAME_BONUS)
+
+lclean: fclean
 	@$(MAKE) --no-print-directory -C $(D_LIBFT) fclean
+	@$(MAKE) -s --no-print-directory -C $(D_LIBRL) distclean
 
 re:	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean lclean re
