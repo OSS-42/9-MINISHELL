@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra
 #CFLAGS = -fsanitize=thread
 RM = rm -rf
-HEADER = includes/philo.h
+HEADER = includes/minishell.h
 D_SRC = src/
 D_OBJ = obj/
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
@@ -123,7 +123,7 @@ do_librl: $(RLCONF)
 	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(DEF_COLOR)"
 
 $(NAME):	$(OBJS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
+	@$(CC) $(CFLAGS) -o -lreadline $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
 	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"
 	@echo "$(LGREEN)Software Compilation completed ...$(NO_OF_FILES) files available !$(DEF_COLOR)"
 
@@ -135,7 +135,7 @@ $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 #	@$(call intro_bonus)
 
 #$(NAME_BONUS): deadpool_bonus $(OBJS_BONUS)
-#	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT)
+#	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
 #	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"
 #	@echo "$(LGREEN)Software Compilation completed !$(DEF_COLOR)"
 
