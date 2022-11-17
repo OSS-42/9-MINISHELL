@@ -123,7 +123,7 @@ do_librl: $(RLCONF)
 	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(DEF_COLOR)"
 
 $(NAME):	$(OBJS)
-	@$(CC) $(CFLAGS) -o -lreadline $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
 	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"
 	@echo "$(LGREEN)Software Compilation completed ...$(NO_OF_FILES) files available !$(DEF_COLOR)"
 
