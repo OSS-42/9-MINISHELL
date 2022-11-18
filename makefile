@@ -15,6 +15,8 @@ D_LIBFT = libft/
 LIBFT = libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
+# Pour faire fonctionner readline, modification du code dans readline.h et history.h
+# Il faut enlever les conditions "if" autour de rlstdc.h
 RLCONF = librl/config.log
 D_LIBRL = librl/
 LIBRL = libhistory.a libreadline.a
