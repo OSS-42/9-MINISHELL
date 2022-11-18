@@ -45,6 +45,11 @@ all:	deadpool $(NAME)
 $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
+#automatic launch
+	@sleep 3
+	@clear
+	@$(call intro_minishell)
+	@./minishell
 
 deadpool:
 	@$(call intro_mandatory)
@@ -119,6 +124,9 @@ define intro_bonus
 @bash $(D_INTRO)intro_bonus.sh
 endef
 
+define intro_minishell
+@bash $(D_INTRO)intro_minishell.sh
+endef
 #----------------------------------- COLORS -----------------------------------#
 LRED = \033[91m
 RED = \033[91m
