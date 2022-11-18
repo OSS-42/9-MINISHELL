@@ -22,10 +22,10 @@
 #if !defined (_READLINE_H_)
 #define _READLINE_H_
 
-# include "rlstdc.h"
-# include "rltypedefs.h"
-# include "keymaps.h"
-# include "tilde.h"
+#  include "rlstdc.h"
+#  include "rltypedefs.h"
+#  include "keymaps.h"
+#  include "tilde.h"
 
 /* Hex-encoded Readline version number. */
 #define RL_READLINE_VERSION	0x0802		/* Readline 8.2 */

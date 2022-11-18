@@ -5,7 +5,7 @@ NAME = minishell
 #NAME_BONUS = minishell_bonus
 
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra -I/librl -I/includes -I/libft/includes
+CFLAGS = -g -Wall -Werror -Wextra -I./librl -I./includes -I./libft/includes
 RM = rm -rf
 
 #------------------------------------------------------------------------------#
@@ -15,11 +15,11 @@ D_LIBFT = libft/
 LIBFT = libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
-# Pour faire fonctionner readline, modification du code dans readline.h et history.h
-# Il faut enlever les conditions "if" autour de rlstdc.h
+# Pour faire fonctionner readline, modification du code dans keymap.h, readline.h et history.h
+# Il faut enlever les conditions "if" autour de rlstdc.h (et les autres .h)
 RLCONF = librl/config.log
 D_LIBRL = librl/
-LIBRL = libhistory.a libreadline.a
+LIBRL = librl/libhistory.a librl/libreadline.a
 
 #------------------------------------------------------------------------------#
 #									SOURCES									   #
@@ -42,7 +42,7 @@ OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 all:	deadpool $(NAME)
 
 $(NAME):	do_libft do_librl $(OBJS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
+	@$(CC) $(CFLAGS) $(OBJS) $(D_LIBFT)$(LIBFT) $(LIBRL) -o $@
 	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 
@@ -52,15 +52,15 @@ deadpool:
 do_libft: $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
 
-$(RLCONF): $(D_OBJ)
-	@echo "$(LGREEN)LIB READLINE Configuration started ...$(NC)"
-	@cd librl && ./configure --silent
-	@echo "$(LGREEN)LIB READLINE Configuration completed ...$(NC)"
-
 do_librl: $(RLCONF)
 	@echo "$(LGREEN)LIB READLINE Compilation started ...$(NC)"
 	@$(MAKE) -s -C $(D_LIBRL)
 	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(NC)"
+
+$(RLCONF): $(D_OBJ)
+	@echo "$(LGREEN)LIB READLINE Configuration started ...$(NC)"
+	@cd librl && ./configure --silent
+	@echo "$(LGREEN)LIB READLINE Configuration completed ...$(NC)"
 
 $(D_OBJ):
 	@mkdir -p $(D_OBJ)
@@ -139,15 +139,15 @@ CLEAN_STRING = "Cleaning"
 
 #----------------------------------- DEFINE -----------------------------------#
 define run_and_test
-printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"; \
+printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \

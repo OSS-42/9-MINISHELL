@@ -24,8 +24,8 @@
 
 #include <time.h>		/* XXX - for history timestamp code */
 
-# include "rlstdc.h"
-# include "rltypedefs.h"
+#  include "rlstdc.h"
+#  include "rltypedefs.h"
 
 #ifdef __STDC__
 typedef void *histdata_t;
