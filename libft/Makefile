@@ -1,100 +1,19 @@
-#****VARIABLES****
+#------------------------------------------------------------------------------#
+#								   GENERAL									   #
+#------------------------------------------------------------------------------#
 NAME = libft.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-I -nostartfiles
 RM = rm -rf
 AR = ar rcs
-D_OBJ = obj/
-D_SRC = src/
+
+#------------------------------------------------------------------------------#
+#									SOURCES									   #
+#------------------------------------------------------------------------------#
 HEADER = includes/libft.h
-OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
-
-OK_STRING = "[OK]"
-ERROR_STRING = "[ERROR]"
-WARN_STRING = "[WARNING]"
-COMP_STRING = "Generating"
-CLEAN_STRING = "Cleaning"
-ARCH_STRING = "Archiving"
-
-FCLEAN = 0
-
-#****COLORS****
-LRED = \033[91m
-LGREEN = \033[92m
-LYELLOW = \033[93
-LMAGENTA = \033[95m
-LCYAN = \033[96m
-DEF_COLOR = \033[0;39m
-
-NO_OF_FILES := $(words $(wildcard $(D_SRC)*.c))
-
-#****MAKEUP RULE****
-#****before emoji :
-#printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "$(LGREEN)$(OK_STRING)$(DEF_COLOR)\n";
-define run_and_test
-printf "$(LRED)■$(DEF_COLOR)"; \
-$(1) 2> $@.log; \
-RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(DEF_COLOR)\n"; \
-	elif [ -s $@.log ]; then \
-			printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(DEF_COLOR)\n"; \
-	fi; \
-	cat $@.log; \
-	rm -f $@.log; \
-	exit $$RESULT
-endef
-
-define cleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories$(DEF_COLOR)\r"; \
-$(1) 2> $@.log; \
-RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "💥$(DEF_COLOR)\n"; \
-	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "⚠️$(DEF_COLOR)\n"; \
-	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "✅$(DEF_COLOR)\n"; \
-	fi; \
-	cat $@.log; \
-	rm -f $@.log; \
-	exit $$RESULT
-endef
-
-define fcleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files$(DEF_COLOR)\r"; \
-$(1) 2> $@.log; \
-RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "💥$(DEF_COLOR)\n"; \
-	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Filess" "⚠️$(DEF_COLOR)\n"; \
-	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "✅$(DEF_COLOR)\n"; \
-	fi; \
-	cat $@.log; \
-	rm -f $@.log; \
-	exit $$RESULT
-endef
-
-define archiving
-printf "%b" "\n$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"; \
-$(1) 2> $@.log; \
-RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "💥$(DEF_COLOR)\n"; \
-	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "⚠️$(DEF_COLOR)\n"; \
-	else \
-		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "✅$(DEF_COLOR)\n"; \
-	fi; \
-	cat $@.log; \
-	rm -f $@.log; \
-	exit $$RESULT
-endef
-
-#****SOURCES****
+D_SRC = src/
+D_OBJ = obj/
 SRCS = \
 		src/ft_isalpha.c \
 		src/ft_isdigit.c \
@@ -143,12 +62,17 @@ SRCS = \
 		src/get_next_line_utils.c \
 		src/free_dbl_ptr.c \
 		src/ft_atolong.c
+OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
+
+#------------------------------------------------------------------------------#
+#									 RULES									   #
+#------------------------------------------------------------------------------#
 
 all:	$(NAME)
 
 $(NAME): $(OBJS)
 	@$(call archiving, $(AR) $@ $(OBJS))
-	@echo "$(LGREEN)LIBFT completed... $(NO_OF_FILES) files done !$(DEF_COLOR)"
+	@echo "$(LGREEN)LIBFT completed !$(NC)"
 
 $(OBJS) : $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 	@mkdir -p $(D_OBJ)
@@ -172,3 +96,90 @@ re: fclean all
 # ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c
 # ft_striter.c ft_strequ.c ft_strnequ.c ft_putendl.c 
 #=============================================================#
+
+#------------------------------------------------------------------------------#
+#								  MAKEUP RULES								   #
+#------------------------------------------------------------------------------#
+
+#----------------------------------- SOURCE -----------------------------------#
+
+#----------------------------------- INTROS -----------------------------------#
+
+#----------------------------------- COLORS -----------------------------------#
+LRED = \033[91m
+LGREEN = \033[92m
+LYELLOW = \033[93
+LMAGENTA = \033[95m
+LCYAN = \033[96m
+NC = \033[0;39m
+
+#----------------------------------- TEXTES -----------------------------------#
+OK_STRING = "[OK]"
+ERROR_STRING = "[ERROR]"
+WARN_STRING = "[WARNING]"
+COMP_STRING = "Generating"
+CLEAN_STRING = "Cleaning"
+ARCH_STRING = "Archiving"
+
+#----------------------------------- DEFINE -----------------------------------#
+define run_and_test
+printf "$(LRED)■$(NC)"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+			printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define cleaning
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define fcleaning
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Filess" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define archiving
+printf "%b" "\n$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
