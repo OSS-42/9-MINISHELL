@@ -33,15 +33,13 @@ NO_OF_FILES := $(words $(wildcard $(D_SRC)*.c))
 #****before emoji :
 #printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "$(LGREEN)$(OK_STRING)$(DEF_COLOR)\n";
 define run_and_test
-printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"; \
+printf "$(LRED)■$(DEF_COLOR)"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "💥$(DEF_COLOR)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(DEF_COLOR)\n"; \
 	elif [ -s $@.log ]; then \
-			printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "⚠️$(DEF_COLOR)\n"; \
-	else \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "✅$(DEF_COLOR)\n"; \
+			printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(DEF_COLOR)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
@@ -81,13 +79,13 @@ RESULT=$$?; \
 endef
 
 define archiving
-printf "%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"; \
+printf "%b" "\n$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)$(DEF_COLOR)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $@" "💥$(DEF_COLOR)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "💥$(DEF_COLOR)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $@" "⚠️$(DEF_COLOR)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "⚠️$(DEF_COLOR)\n"; \
 	else \
 		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "✅$(DEF_COLOR)\n"; \
 	fi; \
