@@ -5,14 +5,14 @@ NAME = minishell
 #NAME_BONUS = minishell_bonus
 
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra -I./librl -I./includes -I./libft/includes
+CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -rf
 
 #------------------------------------------------------------------------------#
 #								   LIBRARIES								   #
 #------------------------------------------------------------------------------#
 D_LIBFT = libft/
-LIBFT = libft.a
+LIBFT = libft/libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
 # Pour faire fonctionner readline, modification du code dans keymap.h, readline.h et history.h
@@ -27,7 +27,7 @@ LIBRL = librl/libhistory.a librl/libreadline.a
 HEADER = includes/minishell.h
 D_SRC = src/
 D_OBJ = obj/
-SRCS = src/minishell.c \
+SRCS = src/minishell.c
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 #HEADER_BONUS = includes/minishell_bonus.h
@@ -41,26 +41,24 @@ OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 all:	deadpool $(NAME)
 
-$(NAME):	do_libft do_librl $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(D_LIBFT)$(LIBFT) $(LIBRL) -o $@
-	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
+#-lcurses pour les signaux
+$(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 
 deadpool:
 	@$(call intro_mandatory)
 
-do_libft: $(D_LIBFTHEAD)
+$(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
 
-do_librl: $(RLCONF)
-	@echo "$(LGREEN)LIB READLINE Compilation started ...$(NC)"
-	@$(MAKE) -s -C $(D_LIBRL)
-	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(NC)"
-
-$(RLCONF): $(D_OBJ)
+$(LIBRL):
 	@echo "$(LGREEN)LIB READLINE Configuration started ...$(NC)"
 	@cd librl && ./configure --silent
 	@echo "$(LGREEN)LIB READLINE Configuration completed ...$(NC)"
+	@echo "$(LGREEN)LIB READLINE Compilation started ...$(NC)"
+	@$(MAKE) -s -C $(D_LIBRL)
+	@echo "$(LGREEN)LIB READLINE Compilation completed ...$(NC)"
 
 $(D_OBJ):
 	@mkdir -p $(D_OBJ)
@@ -70,11 +68,11 @@ $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))
-	@$(RM) $(D_OBJ_BONUS)
+#	@$(RM) $(D_OBJ_BONUS)
 
 fclean:	clean
 	@$(call fcleaning, $(RM) $(NAME))
-	@$(RM) $(NAME_BONUS)
+#	@$(RM) $(NAME_BONUS)
 
 lclean: fclean
 	@$(call lcleaning)
@@ -136,18 +134,19 @@ ERROR_STRING = "[ERROR]"
 WARN_STRING = "[WARNING]"
 COMP_STRING = "Generating"
 CLEAN_STRING = "Cleaning"
+CREAT_STRING = "Creating"
 
 #----------------------------------- DEFINE -----------------------------------#
 define run_and_test
-printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@$(NC)\r"; \
+printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $@" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
@@ -196,6 +195,22 @@ RESULT=$$?; \
 		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBRARIES Files" "⚠️$(NC)\n"; \
 	else \
 		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBRARIES Files" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define creating
+printf "%b" "$(LCYAN)$(CREAT_STRING)$(LMAGENTA) $(@F)$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CREAT_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CREAT_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(CREAT_STRING)$(LMAGENTA) $(@F)" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
