@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/18 14:37:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/21 13:21:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(void)
 {
-	char	*line;
+	t_vault	*data;
 
-	line = readline("alive>");
-	free(line);
+	data->line = readline("alive>");
+	free(data->line);
 	return (0);
 }
