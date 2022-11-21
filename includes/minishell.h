@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/21 14:01:39 by momo             ###   ########.fr       */
+/*   Updated: 2022/11/21 15:27:52 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_data
 void	malloc_struct(t_data **data, int argc, char **argv, char **env);
 void	init_struct(t_data *data, int argc, char **argv, char **env);
 void	explore_readline(t_data	*data);
+int		ft_strcmp(char *str, char *cmp);
+
 
 /**** BUILT_IN ****/
 

@@ -32,6 +32,7 @@ SRCS = \
 		src/ft_strchr.c \
 		src/ft_strrchr.c \
 		src/ft_strncmp.c \
+		src/ft_strcmp.c \
 		src/ft_memchr.c \
 		src/ft_memcmp.c \
 		src/ft_strnstr.c \
@@ -61,7 +62,7 @@ SRCS = \
 		src/get_next_line.c \
 		src/get_next_line_utils.c \
 		src/free_dbl_ptr.c \
-		src/ft_atolong.c 
+		src/ft_atolong.c
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 #------------------------------------------------------------------------------#

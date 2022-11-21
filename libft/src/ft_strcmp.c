@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   explore_readline.c                                 :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/21 15:45:07 by momo             ###   ########.fr       */
+/*   Created: 2022/11/21 15:41:57 by momo              #+#    #+#             */
+/*   Updated: 2022/11/21 15:42:42 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/libft.h"
 
-void	explore_readline(t_data	*data)
+int	ft_strcmp(char *str, char *cmp)
 {
-	data->read_line = readline("alive>");
-	add_history(data->read_line);
-	data->split_readline = ft_split(data->read_line, ' ');
-	if (ft_strcmp("cd", data->split_readline[0]) == 1)
-		ft_cd(data);
-	// if (ft_strncmp(data->split_readline[0], "pwd", 3) == 0)
-	// 	if (getcwd())
+	int	i;
+	int	j;
+	while (str[i])
+		i++;
+	while (cmp[j])
+		j++;
+	if (j != i)
+		return (0);
+	while (i >= 0)
+	{
+		if (str[i] != cmp[j])
+			return (0);
+		i--;
+		j--;
+	}
+	return (1);
 }
