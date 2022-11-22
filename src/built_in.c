@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/22 15:03:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:12:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_pwd(t_vault *data)
 		// 	perror("");
 		ft_putstr_fd(pwd, 1);
 		write(1, "\n", 1);
+		free (pwd);
 	}
 }
 
