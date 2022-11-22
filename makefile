@@ -54,6 +54,7 @@ $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 	@clear
 	@$(call intro_minishell)
 	@./minishell
+# À changer au moment du rendu
 
 deadpool:
 	@$(call intro_mandatory)

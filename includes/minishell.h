@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 09:03:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/22 09:39:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,26 @@
 # include "../librl/readline.h"
 # include "../librl/history.h"
 
-/***** STRUTUCE *****/
+/***** STRUTURE *****/
 
-typedef struct s_data
+typedef struct s_vault
 {
 	char	**env;
 	char	*read_line;
-	char	**split_readline;
-}	t_data;
+	char	**readline_decomposer;
+}	t_vault;
 
 /***** minishell.c *****/
 
-// void	malloc_struct(t_data **data, int argc, char **argv, char **env);
-void	init_struct(t_data **data);
-void	explore_readline(t_data	*data);
+void	init_struct(t_vault **data);
 
-/**** BUILT_IN ****/
+/***** explore_readline.c *****/
 
-void	ft_cd(t_data *data);
+void	explore_readline(t_vault	*data);
+
+/**** built_in.c ****/
+
+void	ft_cd(t_vault *data);
 
 /***** POUR DEBUG *****/
 

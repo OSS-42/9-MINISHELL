@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:19:32 by momo              #+#    #+#             */
-/*   Updated: 2022/11/22 09:03:44 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/22 09:34:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 extern char	**environ;
 
-// void	malloc_struct(t_data **data, int argc, char **argv, char **env)
+// void	malloc_struct(t_vault **data, int argc, char **argv, char **env)
 // {
-// 	*data = malloc(sizeof (t_data));
+// 	*data = malloc(sizeof (t_vault));
 // 	if (!*data)
 // 	{
 // 		free(data);
@@ -25,7 +25,7 @@ extern char	**environ;
 // 	init_struct(*data, argc, argv, env);
 // }
 
-void	init_struct(t_data **data)
+void	init_struct(t_vault **data)
 {
 	(*data)->env = environ;
 }
