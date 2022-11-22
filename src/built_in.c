@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/21 14:46:43 by momo             ###   ########.fr       */
+/*   Updated: 2022/11/22 08:42:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_cd(t_data *data)
 {
-			if (chdir(data->split_readline[1]) != 0)
-			perror("");
+	if (chdir(data->split_readline[1]) != 0)
+		perror("");
 }
 
 // void	ft_pwd(t_data *data)

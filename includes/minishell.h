@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/21 16:05:09 by momo             ###   ########.fr       */
+/*   Updated: 2022/11/22 08:47:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ void	malloc_struct(t_data **data, int argc, char **argv, char **env);
 void	init_struct(t_data *data, int argc, char **argv, char **env);
 void	explore_readline(t_data	*data);
 
-
 /**** BUILT_IN ****/
 
 void	ft_cd(t_data *data);
-
 
 /***** POUR DEBUG *****/
 

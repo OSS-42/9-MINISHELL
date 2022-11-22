@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_define.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:19:32 by momo              #+#    #+#             */
-/*   Updated: 2022/11/21 13:59:37 by momo             ###   ########.fr       */
+/*   Updated: 2022/11/22 08:42:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	malloc_struct(t_data **data, int argc, char **argv, char **env)
 	}
 	init_struct(*data, argc, argv, env);
 }
-
 
 void	init_struct(t_data *data, int argc, char **argv, char **env)
 {
