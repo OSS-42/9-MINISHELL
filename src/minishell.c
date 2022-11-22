@@ -6,17 +6,17 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 08:42:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/22 09:02:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **env)
+int	main(void)
 {
 	t_data	*data;
 
-	malloc_struct(&data, argc, argv, env);
+	init_struct(&data);
 	while (1)
 	{
 		explore_readline(data);
