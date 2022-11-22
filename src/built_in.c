@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/22 15:12:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/22 16:40:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,22 @@ void	ft_pwd(t_vault *data)
 
 void	ft_echo(t_vault *data)
 {
-	char	**echo_args;
 	int		i;
 	int		flag_n;
 
 	i = 1;
 	flag_n = 0;
-	if (echo_args[1] == "-n")
+	if (ft_strcmp(data->readline_decomposer[1], "-n") == 1)
 	{
 		i = 2;
 		flag_n = 1;
 	}
-	echo_args = ft_split(data, " ");
-	while (echo_args[i])
+	while (data->readline_decomposer[i])
 	{
-		ft_putstr_fd(echo_args[i], 1);
+		if (data->readline_decomposer[i])
+			ft_putstr_fd(data->readline_decomposer[i], 1);
+		else
+			break ;
 		i++;
 	}
 	if (flag_n == 0)
