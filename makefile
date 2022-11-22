@@ -27,7 +27,11 @@ LIBRL = librl/libhistory.a librl/libreadline.a
 HEADER = includes/minishell.h
 D_SRC = src/
 D_OBJ = obj/
-SRCS = src/minishell.c
+SRCS =	src/minishell.c \
+		src/personnal_fonction.c \
+		src/struct_define.c \
+		src/built_in.c \
+		src/explore_readline.c
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 #HEADER_BONUS = includes/minishell_bonus.h
@@ -50,6 +54,7 @@ $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 	@clear
 	@$(call intro_minishell)
 	@./minishell
+# À changer au moment du rendu
 
 deadpool:
 	@$(call intro_mandatory)

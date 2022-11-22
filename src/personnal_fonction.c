@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 09:56:52 by ewurstei         ###   ########.fr       */
+/*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
+/*   Updated: 2022/11/22 08:42:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(void)
+void	print_double_array(char **array)
 {
-	t_vault	*data;
+	int	i;
 
-	init_struct(&data);
-	while (1)
+	i = 0;
+	while (array[i])
 	{
-		data->read_line = readline("alive>");
-		add_history(data->read_line);
-		explore_readline(data);
-		free(data->read_line);
+		printf("%s\n", array[i]);
+		i++;
 	}
-	return (0);
 }

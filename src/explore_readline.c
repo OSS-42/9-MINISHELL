@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 09:56:52 by ewurstei         ###   ########.fr       */
+/*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
+/*   Updated: 2022/11/22 09:37:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(void)
+void	explore_readline(t_vault	*data)
 {
-	t_vault	*data;
-
-	init_struct(&data);
-	while (1)
-	{
-		data->read_line = readline("alive>");
-		add_history(data->read_line);
-		explore_readline(data);
-		free(data->read_line);
-	}
-	return (0);
+	data->readline_decomposer = ft_split(data->read_line, ' ');
+	if (ft_strcmp("cd", data->readline_decomposer[0]) == 1)
+		ft_cd(data);
+	// if (ft_strncmp(data->readline_decomposer[0], "pwd", 3) == 0)
+	// 	if (getcwd())
 }

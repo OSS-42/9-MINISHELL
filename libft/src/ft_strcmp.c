@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 09:56:52 by ewurstei         ###   ########.fr       */
+/*   Created: 2022/11/21 15:41:57 by momo              #+#    #+#             */
+/*   Updated: 2022/11/22 09:22:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/libft.h"
 
-int	main(void)
+int	ft_strcmp(char *str, char *cmp)
 {
-	t_vault	*data;
+	int	i;
+	int	j;
 
-	init_struct(&data);
-	while (1)
+	i = 0;
+	j = 0;
+	while (str[i])
+		i++;
+	while (cmp[j])
+		j++;
+	if (j != i)
+		return (0);
+	while (i >= 0)
 	{
-		data->read_line = readline("alive>");
-		add_history(data->read_line);
-		explore_readline(data);
-		free(data->read_line);
+		if (str[i] != cmp[j])
+			return (0);
+		i--;
+		j--;
 	}
-	return (0);
+	return (1);
 }

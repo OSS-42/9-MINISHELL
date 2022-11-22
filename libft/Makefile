@@ -32,6 +32,7 @@ SRCS = \
 		src/ft_strchr.c \
 		src/ft_strrchr.c \
 		src/ft_strncmp.c \
+		src/ft_strcmp.c \
 		src/ft_memchr.c \
 		src/ft_memcmp.c \
 		src/ft_strnstr.c \
@@ -90,11 +91,11 @@ re: fclean all
 
 #=================== DONE BUT NOT ASKED FOR ==================#
 # ft_strmap.c ft_strstr.c ft_strcat.c  ft_strcmp.c ft_strcpy.c
-# ft_strncat.c  ft_strncpy.c 
+# ft_strncat.c  ft_strncpy.c
 # ft_putchar.c ft_putnbr.c ft_putstr.c
 #======================== NOT ASK FOR ========================#
 # ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c
-# ft_striter.c ft_strequ.c ft_strnequ.c ft_putendl.c 
+# ft_striter.c ft_strequ.c ft_strnequ.c ft_putendl.c
 #=============================================================#
 
 #------------------------------------------------------------------------------#
