@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 13:24:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:08:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	built_in(t_vault *data)
 		ft_echo(data);
 	if (ft_strcmp("env", data->readline_decomposer[0]) == 1)
 		ft_env (data);
+	if (ft_strcmp("unset", data->readline_decomposer[0]) == 1)
+		ft_unset (data);
 	if (ft_strcmp("exit", data->readline_decomposer[0]) == 1)
 		ft_exit (0);
 }

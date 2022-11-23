@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 13:21:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 16:08:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ typedef struct s_vault
 {
 	char	*env_path;
 	char	**env;
+	char	**env_unset;
 	char	*read_line;
 	char	**readline_decomposer;
+	char	*unset_arg;
 	char	*test;
 }	t_vault;
 
@@ -47,13 +49,17 @@ void	init_struct(t_vault **data);
 void	explore_readline(t_vault	*data);
 void	built_in(t_vault *data);
 
-/**** built_in.c ****/
+/***** built_in.c *****/
 
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data);
+
+/***** built_in2.c *****/
+void	ft_unset(t_vault *data);
+void	remove_line(t_vault *data, int i);
 
 /***** POUR DEBUG *****/
 
