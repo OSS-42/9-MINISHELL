@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 09:56:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 10:50:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	main(void)
 {
-	t_vault	*data;
+	t_vault	data;
 
-	init_struct(&data);
+	data.test = getenv("PATH");
 	while (1)
 	{
-		data->read_line = readline("alive>");
-		add_history(data->read_line);
-		explore_readline(data);
-		free(data->read_line);
+		data.read_line = readline("alive>");
+		add_history(data.read_line);
+		explore_readline(&data);
+		free(data.read_line);
 	}
 	return (0);
 }

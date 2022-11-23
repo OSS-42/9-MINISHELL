@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/22 15:08:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:45:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_vault
 	char	**env;
 	char	*read_line;
 	char	**readline_decomposer;
+	char	*test;
 }	t_vault;
 
 /***** minishell.c *****/
