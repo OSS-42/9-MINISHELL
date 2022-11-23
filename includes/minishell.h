@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 13:14:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:21:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_struct(t_vault **data);
 /***** explore_readline.c *****/
 
 void	explore_readline(t_vault	*data);
+void	built_in(t_vault *data);
 
 /**** built_in.c ****/
 

@@ -6,15 +6,20 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 13:16:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:24:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	explore_readline(t_vault	*data)
+void	explore_readline(t_vault *data)
 {
 	data->readline_decomposer = ft_split(data->read_line, ' ');
+	built_in(data);
+}
+
+void	built_in(t_vault *data)
+{
 	if (ft_strcmp("cd", data->readline_decomposer[0]) == 1)
 		ft_cd(data);
 	if (ft_strcmp("pwd", data->readline_decomposer[0]) == 1)

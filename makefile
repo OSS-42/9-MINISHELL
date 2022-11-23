@@ -52,8 +52,8 @@ $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 #automatic launch
 	@sleep 3
 	@clear
-	@$(call intro_minishell)
-	@./minishell
+#	@$(call intro_minishell)
+#	@./minishell
 # À changer au moment du rendu
 
 deadpool:
