@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 10:33:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 10:54:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_vault
 	char	*env_path;
 	char	*read_line;
 	char	**readline_decomposer;
+	char	*test;
 }	t_vault;
 
 /***** minishell.c *****/
