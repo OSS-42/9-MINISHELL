@@ -31,6 +31,7 @@ SRCS =	src/minishell.c \
 		src/personnal_fonction.c \
 		src/struct_define.c \
 		src/built_in.c \
+		src/built_in2.c \
 		src/explore_readline.c
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
