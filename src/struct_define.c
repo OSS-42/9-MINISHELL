@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   struct_define.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:19:32 by momo              #+#    #+#             */
-/*   Updated: 2022/11/22 09:34:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:45:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern char	**environ;
+//extern char	**environ;
 
 // void	malloc_struct(t_vault **data, int argc, char **argv, char **env)
 // {
@@ -25,7 +25,7 @@ extern char	**environ;
 // 	init_struct(*data, argc, argv, env);
 // }
 
-void	init_struct(t_vault **data)
-{
-	(*data)->env = environ;
-}
+//void	init_struct(t_vault **data)
+//{
+//	(*data)->env = environ;
+//}
