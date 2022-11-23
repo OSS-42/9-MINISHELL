@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 11:33:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:14:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 typedef struct s_vault
 {
 	char	*env_path;
+	char	**env;
 	char	*read_line;
 	char	**readline_decomposer;
 	char	*test;
@@ -51,6 +52,7 @@ void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
+void	ft_env(t_vault *data);
 
 /***** POUR DEBUG *****/
 

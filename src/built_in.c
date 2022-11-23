@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 11:35:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 13:19:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,18 @@ void	ft_exit(t_vault *data)
 	//prevoir les free en fonction d'ou on est dans le programme lors de exit
 	(void) data;
 	exit (0);
+}
+
+void	ft_env(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->env[i])
+	{
+		ft_putstr_fd(data->env[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
+	return ;
 }
