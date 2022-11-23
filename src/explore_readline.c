@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 11:35:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/23 11:40:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void	built_in(t_vault *data)
 		ft_pwd(data);
 	if (ft_strcmp("echo", data->readline_decomposer[0]) == 1)
 		ft_echo(data);
+	if (ft_strcmp("exit", data->readline_decomposer[0]) == 1)
+		ft_exit (0);
 }

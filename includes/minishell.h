@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 11:30:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/23 11:40:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	built_in(t_vault *data);
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
+void	ft_exit(t_vault *data);
 
 /***** POUR DEBUG *****/
 

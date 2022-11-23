@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/22 16:40:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:35:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	ft_pwd(t_vault *data)
 			size_buffer++;
 			pwd = calloc(sizeof(char), size_buffer);
 		}
-		// if (pwd == NULL)
-		// 	perror("");
 		ft_putstr_fd(pwd, 1);
 		write(1, "\n", 1);
 		free (pwd);
@@ -51,7 +49,9 @@ void	ft_echo(t_vault *data)
 
 	i = 1;
 	flag_n = 0;
-	if (ft_strcmp(data->readline_decomposer[1], "-n") == 1)
+	if (!(data->readline_decomposer[1]))
+		return ;
+	else if (ft_strcmp(data->readline_decomposer[1], "-n") == 1)
 	{
 		i = 2;
 		flag_n = 1;
@@ -68,4 +68,11 @@ void	ft_echo(t_vault *data)
 		ft_putstr_fd("\n", 1);
 	else
 		return ;
+}
+
+void	ft_exit(t_vault *data)
+{
+	//prevoir les free en fonction d'ou on est dans le programme lors de exit
+	(void) data;
+	exit (0);
 }
