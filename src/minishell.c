@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 10:54:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 10:55:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ int	main(void)
 {
 	t_vault	data;
 
-	data.test = getenv("PATH");
+	if (!getenv("PATH"))
+		return (0);
+	else
+		data.test = getenv("PATH");
 	while (1)
 	{
 		data.read_line = readline("alive>");
