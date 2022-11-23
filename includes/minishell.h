@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 10:54:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 11:33:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	explore_readline(t_vault	*data);
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
+void	ft_exit(t_vault *data);
 
 /***** POUR DEBUG *****/
 
