@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 11:41:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/24 14:21:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ int	main(void)
 {
 	t_vault	data;
 
-	if (!getenv("PATH"))
-		return (0);
-	else
-		data.test = getenv("PATH");
 	while (1)
 	{
 		data.read_line = readline("alive>");

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 11:40:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/24 14:19:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_vault
 	char	*env_path;
 	char	*read_line;
 	char	**readline_decomposer;
-	char	*test;
+	char	**clean_decomposer;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -44,6 +44,11 @@ void	init_struct(t_vault **data);
 /***** explore_readline.c *****/
 
 void	explore_readline(t_vault	*data);
+void	find_str_doublequote(t_vault *data);
+void	replace_decomposer_array(t_vault *data, int len, int begin, int end);
+void	find_decomposer_to_switch(t_vault *data, int i);
+void	malloc_clean_decomposer(t_vault *data);
+// void	reduce_space(t_vault *data);
 void	built_in(t_vault *data);
 
 /**** built_in.c ****/
