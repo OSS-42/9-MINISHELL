@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 09:18:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:51:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	remove_line_env(t_vault *data, int i)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-	data->env_unset = ft_calloc(rows, 1);
+	if (data->env_unset)
+		free_dbl_ptr((void **) data->env_unset);
+	data->env_unset = ft_calloc(rows, sizeof(char *));
 	j = 0;
 	rows = 0;
 	while (data->env[rows])
@@ -28,6 +30,7 @@ void	remove_line_env(t_vault *data, int i)
 		if (rows == i)
 			rows++;
 		data->env_unset[j] = ft_strdup(data->env[rows]);
+//segfault si derniere ligne rows +1 cherche a lire en dehors de la memoire.
 		rows++;
 		j++;
 	}
@@ -52,7 +55,10 @@ void	ft_unset(t_vault *data)
 					ft_strlen(data->unset_arg)) == NULL)
 				i++;
 			else
+			{
 				remove_line_env(data, i);
+				return ;
+			}
 		}
 	}
 	return ;
@@ -60,7 +66,9 @@ void	ft_unset(t_vault *data)
 
 void	add_line_env(t_vault *data, int i)
 {
-	data->env_export = ft_calloc(1, i + 1);
+	if (data->env_export)
+		free_dbl_ptr((void **)data->env_export);
+	data->env_export = ft_calloc(i + 2, sizeof(char *));
 	i = 0;
 	while (data->env[i])
 	{
