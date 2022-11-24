@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 16:06:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:01:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_cd(t_vault *data)
 {
-	if (chdir(data->readline_decomposer[1]) != 0)
+	if (chdir(data->rl_decomp[1]) != 0)
 		perror("cd");
 }
 
@@ -25,7 +25,7 @@ void	ft_pwd(t_vault *data)
 
 	(void)data;
 	size_buffer = 1;
-	if (data->readline_decomposer[1] != NULL)
+	if (data->rl_decomp[1] != NULL)
 		write(2, "pwd: too many arguments\n", 24);
 	else
 	{
@@ -49,17 +49,17 @@ void	ft_echo(t_vault *data)
 
 	i = 1;
 	flag_n = 0;
-	if (!(data->readline_decomposer[1]))
+	if (!(data->rl_decomp[1]))
 		return ;
-	else if (ft_strcmp(data->readline_decomposer[1], "-n") == 1)
+	else if (ft_strcmp(data->rl_decomp[1], "-n") == 1)
 	{
 		i = 2;
 		flag_n = 1;
 	}
-	while (data->readline_decomposer[i])
+	while (data->rl_decomp[i])
 	{
-		if (data->readline_decomposer[i])
-			ft_putstr_fd(data->readline_decomposer[i], 1);
+		if (data->rl_decomp[i])
+			ft_putstr_fd(data->rl_decomp[i], 1);
 		else
 			break ;
 		i++;
