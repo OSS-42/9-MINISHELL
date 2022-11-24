@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/23 21:33:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 09:18:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_unset(t_vault *data)
 				remove_line_env(data, i);
 		}
 	}
-	free(data->unset_arg);
 	return ;
 }
 
@@ -66,11 +65,9 @@ void	add_line_env(t_vault *data, int i)
 	while (data->env[i])
 	{
 		data->env_export[i] = ft_strdup(data->env[i]);
-		free(data->env[i]);
 		i++;
 	}
 	data->env_export[i] = ft_strdup(data->export_arg);
-	free(data->export_arg);
 	data->env = &data->env_export[0];
 	return ;
 }
@@ -94,8 +91,7 @@ void	ft_export(t_vault *data)
 		}
 		else
 		{
-			len = ft_strlen(data->rl_decomp[1]) -
-				ft_strlen(ft_strchr(data->rl_decomp[1], '='));
+			len = ft_strlen(data->rl_decomp[1]) - ft_strlen(ft_strchr(data->rl_decomp[1], '='));
 			data->export_var = ft_substr(data->rl_decomp[1], 0, len + 1);
 		}
 		while (data->env[i])
@@ -110,8 +106,6 @@ void	ft_export(t_vault *data)
 			}
 		}
 		add_line_env(data, i);
-		free(data->export_arg);
-		free(data->export_var);
 		return ;
 	}	
 }
