@@ -27,13 +27,13 @@ LIBRL = librl/libhistory.a librl/libreadline.a
 HEADER = includes/minishell.h
 D_SRC = src/
 D_OBJ = obj/
+OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 SRCS =	src/minishell.c \
 		src/personnal_fonction.c \
 		src/struct_define.c \
 		src/built_in.c \
 		src/built_in2.c \
 		src/explore_readline.c
-OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
@@ -51,7 +51,7 @@ $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 #automatic launch
-	@sleep 3
+	@sleep 2
 	@clear
 #	@$(call intro_minishell)
 #	@./minishell
