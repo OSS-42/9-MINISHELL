@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 22:21:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 23:02:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
-void	ft_env(t_vault *data);
+void	ft_env(t_vault *data, int env);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data);

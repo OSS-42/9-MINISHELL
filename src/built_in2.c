@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 22:45:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 23:19:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void	order_env(t_vault *data)
 	int		j;
 
 	i = 0;
-	j = 0;
 	rows = 0;
 	while (data->env[rows])
 		rows++;
@@ -145,16 +144,17 @@ void	order_env(t_vault *data)
 					free(data->order_var);
 				data->order_var = ft_calloc(ft_strlen(data->env[i]), sizeof(char));
 				ft_strcpy(data->order_var, data->env[i]);
-				free (data->env[i]);
-				data->env[i] = ft_calloc (ft_strlen(data->env[i + 1]), sizeof(char));
-				ft_strcpy(data->env[i], data->env[i + 1]);
-				free (data->env[i + 1]);
-				data->env[i + 1] = ft_calloc(ft_strlen(data->order_var), sizeof(char));
-				ft_strcpy(data->env[i + 1], data->order_var);
+				data->env_order[i] = ft_calloc (ft_strlen(data->env[j]), sizeof(char));
+				ft_strcpy(data->env_order[i], data->env[i + 1]);
+				data->env_order[j] = ft_calloc(ft_strlen(data->order_var), sizeof(char));
+				ft_strcpy(data->env_order[j], data->order_var);
 			}
+			else
+				data->env_order[i] = ft_strdup(data->env[i]);
 			j++;
 		}
 		i++;
 	}
+	ft_env(data, 2);
 	return ;
 }

@@ -14,6 +14,7 @@ AR = ar rcs
 HEADER = includes/libft.h
 D_SRC = src/
 D_OBJ = obj/
+OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 SRCS = \
 		src/ft_isalpha.c \
 		src/ft_isdigit.c \
@@ -26,6 +27,7 @@ SRCS = \
 		src/ft_memcpy.c \
 		src/ft_memmove.c \
 		src/ft_strlcpy.c \
+		src/ft_strcpy.c \
 		src/ft_strlcat.c \
 		src/ft_tolower.c \
 		src/ft_toupper.c \
@@ -63,7 +65,6 @@ SRCS = \
 		src/get_next_line_utils.c \
 		src/free_dbl_ptr.c \
 		src/ft_atolong.c
-OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 
 #------------------------------------------------------------------------------#
 #									 RULES									   #

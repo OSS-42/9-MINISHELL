@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 20:01:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 23:05:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,28 @@ void	ft_exit(t_vault *data)
 	exit (0);
 }
 
-void	ft_env(t_vault *data)
+void	ft_env(t_vault *data, int env)
 {
 	int	i;
 
 	i = 0;
-	while (data->env[i])
+	if (env == 1)
 	{
-		ft_putstr_fd(data->env[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
+		while (data->env[i])
+		{
+			ft_putstr_fd(data->env[i], 1);
+			ft_putstr_fd("\n", 1);
+			i++;
+		}
+	}
+	else if (env == 2)
+	{
+		while (data->env_order[i])
+		{
+			ft_putstr_fd(data->env_order[i], 1);
+			ft_putstr_fd("\n", 1);
+			i++;
+		}
 	}
 	return ;
 }
-
-
-
