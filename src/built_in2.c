@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 09:23:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 11:53:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_unset(t_vault *data)
 
 void	add_line_env(t_vault *data, int i)
 {
+	printf("coucou\n");
 	if (data->env_export)
 		free_dbl_ptr((void **)data->env_export);
 	data->env_export = ft_calloc(i + 2, sizeof(char *));
@@ -101,7 +102,8 @@ void	ft_export(t_vault *data)
 		}
 		else
 		{
-			len = ft_strlen(data->rl_decomp[1]) - ft_strlen(ft_strchr(data->rl_decomp[1], '='));
+			len = ft_strlen(data->rl_decomp[1])
+				- ft_strlen(ft_strchr(data->rl_decomp[1], '='));
 			data->export_var = ft_substr(data->rl_decomp[1], 0, len + 1);
 		}
 		while (data->env[i])
@@ -133,27 +135,23 @@ void	order_env(t_vault *data)
 	if (data->env_order)
 		free_dbl_ptr((void **)data->env_order);
 	data->env_order = ft_calloc(rows + 1, sizeof(char *));
+	while (data->env[i])
+	{
+		data->env_order[i] = data->env[i];
+		i++;
+	}
+	i = 0;
 	while (i < rows)
 	{
 		j = i + 1;
 		while (j < rows)
 		{
-			if (ft_strcmp(data->env[i], data->env[j]) > 0)
+			if (ft_strcmp(data->env_order[i], data->env_order[j]) > 0)
 			{
-				if (data->order_var)
-					free(data->order_var);
-				data->order_var = ft_calloc(ft_strlen(data->env[i]), sizeof(char));
-				ft_strcpy(data->order_var, data->env[i]);
-				printf("%s\n", data->order_var);
-				data->env_order[i] = ft_calloc (ft_strlen(data->env[j]), sizeof(char));
-				ft_strcpy(data->env_order[i], data->env[j]);
-				printf("%s\n", data->env_order[i]);
-				data->env_order[j] = ft_calloc(ft_strlen(data->order_var), sizeof(char));
-				ft_strcpy(data->env_order[j], data->order_var);
-				printf("%s\n", data->env_order[j]);
+				data->order_var = ft_strdup(data->env_order[i]);
+				data->env_order[i] = ft_strdup(data->env_order[j]);
+				data->env_order[j] = ft_strdup(data->order_var);
 			}
-			else
-				data->env_order[i] = ft_strdup(data->env[i]);
 			j++;
 		}
 		i++;
