@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:41:57 by momo              #+#    #+#             */
-/*   Updated: 2022/11/23 11:15:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/25 09:12:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,10 @@
 
 int	ft_strcmp(char *str, char *cmp)
 {
-	int	i;
-	int	j;
+	unsigned int	i;
 
 	i = 0;
-	j = 0;
-	while (str[i])
+	while (str[i] == cmp[i] && str[i] && cmp[i])
 		i++;
-	while (cmp[j])
-		j++;
-	if (j != i)
-		return (0);
-	while (i >= 0)
-	{
-		if (str[i] != cmp[j])
-			return (0);
-		i--;
-		j--;
-	}
-	return (1);
+	return ((unsigned char)str[i] - (unsigned char)cmp[i]);
 }

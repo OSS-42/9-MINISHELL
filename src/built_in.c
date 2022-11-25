@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/24 23:05:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 09:14:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_echo(t_vault *data)
 	flag_n = 0;
 	if (!(data->rl_decomp[1]))
 		return ;
-	else if (ft_strcmp(data->rl_decomp[1], "-n") == 1)
+	else if (ft_strcmp(data->rl_decomp[1], "-n") == 0)
 	{
 		i = 2;
 		flag_n = 1;

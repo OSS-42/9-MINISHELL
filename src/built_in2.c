@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 23:19:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 09:23:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,13 @@ void	order_env(t_vault *data)
 					free(data->order_var);
 				data->order_var = ft_calloc(ft_strlen(data->env[i]), sizeof(char));
 				ft_strcpy(data->order_var, data->env[i]);
+				printf("%s\n", data->order_var);
 				data->env_order[i] = ft_calloc (ft_strlen(data->env[j]), sizeof(char));
-				ft_strcpy(data->env_order[i], data->env[i + 1]);
+				ft_strcpy(data->env_order[i], data->env[j]);
+				printf("%s\n", data->env_order[i]);
 				data->env_order[j] = ft_calloc(ft_strlen(data->order_var), sizeof(char));
 				ft_strcpy(data->env_order[j], data->order_var);
+				printf("%s\n", data->env_order[j]);
 			}
 			else
 				data->env_order[i] = ft_strdup(data->env[i]);
