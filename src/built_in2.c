@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 11:51:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/24 21:59:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ void	remove_line_env(t_vault *data, int i)
 	{
 		if (rows == i)
 			rows++;
-		data->env_unset[j] = ft_strdup(data->env[rows]);
-//segfault si derniere ligne rows +1 cherche a lire en dehors de la memoire.
+		if (data->env[rows])
+			data->env_unset[j] = ft_strdup(data->env[rows]);
+		else
+			break ;
 		rows++;
 		j++;
 	}
