@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 09:17:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:40:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 extern char	**environ;
 
+#define INTRO "\
+#/bin/bash \n\
+bash pretty/intro_minishell.sh \n\
+"
+
 int	main(void)
 {
 	t_vault	data;
 
+	system(INTRO);
 	data.env = environ;
 	while (1)
 	{
