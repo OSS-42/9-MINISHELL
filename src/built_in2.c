@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 13:18:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:26:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,15 @@ void	remove_line_env(t_vault *data, int i)
 
 void	ft_unset(t_vault *data)
 {
+//reste a gerer les multiples arguments.
 	int	i;
 
 	i = 0;
 	if (!(data->rl_decomp[1]) || ft_strchr(data->rl_decomp[1], '=') != NULL)
+	{
 		ft_putstr_fd("unset : argument error\n", 2);
+		return ;
+	}
 	else
 	{
 		data->unset_arg = ft_join(data->rl_decomp[1], "=");
@@ -79,6 +83,7 @@ void	add_line_env(t_vault *data, int i)
 
 void	ft_export(t_vault *data)
 {
+//reste a gerer les multiples arguments.
 	int	i;
 	int	len;
 
@@ -88,6 +93,11 @@ void	ft_export(t_vault *data)
 		order_env(data);
 	else
 	{
+		if (ft_strisalnum(data->rl_decomp[1]) == 0)
+		{
+			printf("export : bad argument\n");
+			return ;
+		}
 		data->export_arg = ft_strdup(data->rl_decomp[1]);
 		if (ft_strchr(data->export_arg, '=') == NULL)
 		{

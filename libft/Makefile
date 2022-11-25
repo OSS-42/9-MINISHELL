@@ -42,6 +42,7 @@ SRCS = \
 		src/ft_calloc.c \
 		src/ft_strdup.c \
 		src/ft_substr.c \
+		src/ft_strisalnum.c\
 		src/ft_strjoin.c \
 		src/ft_strtrim.c \
 		src/ft_split.c \
@@ -91,7 +92,7 @@ re: fclean all
 .PHONY: all clean fclean re
 
 #=================== DONE BUT NOT ASKED FOR ==================#
-# ft_strmap.c ft_strstr.c ft_strcat.c  ft_strcmp.c ft_strcpy.c
+# ft_strmap.c ft_strstr.c ft_strcat.c 
 # ft_strncat.c  ft_strncpy.c
 # ft_putchar.c ft_putnbr.c ft_putstr.c
 #======================== NOT ASK FOR ========================#
