@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 13:48:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 14:58:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern char	**environ;
 
+//system(INTRO) pour l'image au lancement de Minishell
 int	main(void)
 {
 	t_vault	data;

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 14:26:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 15:55:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_unset(t_vault *data)
 	int	i;
 
 	i = 0;
-	if (!(data->rl_decomp[1]) || ft_strchr(data->rl_decomp[1], '=') != NULL)
+	if (!(data->rl_decomp[1]) || ft_is_env_var(data->rl_decomp[1], 0) == 0)
 	{
 		ft_putstr_fd("unset : argument error\n", 2);
 		return ;
@@ -93,7 +93,7 @@ void	ft_export(t_vault *data)
 		order_env(data);
 	else
 	{
-		if (ft_strisalnum(data->rl_decomp[1]) == 0)
+		if (ft_is_env_var(data->rl_decomp[1], '=') == 0)
 		{
 			printf("export : bad argument\n");
 			return ;
