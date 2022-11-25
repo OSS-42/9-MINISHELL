@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 11:53:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:18:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	remove_line_env(t_vault *data, int i)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-	if (data->env_unset)
-		free_dbl_ptr((void **) data->env_unset);
 	data->env_unset = ft_calloc(rows, sizeof(char *));
 	j = 0;
 	rows = 0;
@@ -50,7 +48,6 @@ void	ft_unset(t_vault *data)
 	else
 	{
 		data->unset_arg = ft_join(data->rl_decomp[1], "=");
-		printf("%s\n", data->unset_arg);
 		while (data->env[i])
 		{
 			if (ft_strnstr(data->env[i], data->unset_arg,
@@ -68,9 +65,6 @@ void	ft_unset(t_vault *data)
 
 void	add_line_env(t_vault *data, int i)
 {
-	printf("coucou\n");
-	if (data->env_export)
-		free_dbl_ptr((void **)data->env_export);
 	data->env_export = ft_calloc(i + 2, sizeof(char *));
 	i = 0;
 	while (data->env[i])

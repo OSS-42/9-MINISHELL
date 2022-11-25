@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/25 11:57:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:19:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	ft_exit(t_vault *data)
 {
 	//prevoir les free en fonction d'ou on est dans le programme lors de exit
 	(void) data;
-	if (data->rl_decomp)
-		free_dbl_ptr((void **)data->rl_decomp);
 	exit (0);
 }
 
