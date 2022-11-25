@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 15:55:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:05:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	remove_line_env(t_vault *data, int i)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-	data->env_unset = ft_calloc(rows, sizeof(char *));
+	data->b_in->env_unset = ft_calloc(rows, sizeof(char *));
 	j = 0;
 	rows = 0;
 	while (data->env[rows])
@@ -28,19 +28,19 @@ void	remove_line_env(t_vault *data, int i)
 		if (rows == i)
 			rows++;
 		if (data->env[rows])
-			data->env_unset[j] = ft_strdup(data->env[rows]);
+			data->b_in->env_unset[j] = ft_strdup(data->env[rows]);
 		else
 			break ;
 		rows++;
 		j++;
 	}
-	data->env = &data->env_unset[0];
+	data->env = &data->b_in->env_unset[0];
 	return ;
 }
 
+//reste a gerer les multiples arguments.
 void	ft_unset(t_vault *data)
 {
-//reste a gerer les multiples arguments.
 	int	i;
 
 	i = 0;
@@ -51,11 +51,11 @@ void	ft_unset(t_vault *data)
 	}
 	else
 	{
-		data->unset_arg = ft_join(data->rl_decomp[1], "=");
+		data->b_in->unset_arg = ft_join(data->rl_decomp[1], "=");
 		while (data->env[i])
 		{
-			if (ft_strnstr(data->env[i], data->unset_arg,
-					ft_strlen(data->unset_arg)) == NULL)
+			if (ft_strnstr(data->env[i], data->b_in->unset_arg,
+					ft_strlen(data->b_in->unset_arg)) == NULL)
 				i++;
 			else
 			{
@@ -69,21 +69,21 @@ void	ft_unset(t_vault *data)
 
 void	add_line_env(t_vault *data, int i)
 {
-	data->env_export = ft_calloc(i + 2, sizeof(char *));
+	data->b_in->env_export = ft_calloc(i + 2, sizeof(char *));
 	i = 0;
 	while (data->env[i])
 	{
-		data->env_export[i] = ft_strdup(data->env[i]);
+		data->b_in->env_export[i] = ft_strdup(data->env[i]);
 		i++;
 	}
-	data->env_export[i] = ft_strdup(data->export_arg);
-	data->env = &data->env_export[0];
+	data->b_in->env_export[i] = ft_strdup(data->b_in->export_arg);
+	data->env = &data->b_in->env_export[0];
 	return ;
 }
 
+//reste a gerer les multiples arguments.
 void	ft_export(t_vault *data)
 {
-//reste a gerer les multiples arguments.
 	int	i;
 	int	len;
 
@@ -98,26 +98,26 @@ void	ft_export(t_vault *data)
 			printf("export : bad argument\n");
 			return ;
 		}
-		data->export_arg = ft_strdup(data->rl_decomp[1]);
-		if (ft_strchr(data->export_arg, '=') == NULL)
+		data->b_in->export_arg = ft_strdup(data->rl_decomp[1]);
+		if (ft_strchr(data->b_in->export_arg, '=') == NULL)
 		{
-			data->export_arg = ft_strjoin(data->rl_decomp[1], "=\"\"");
-			data->export_var = ft_strjoin(data->rl_decomp[1], "=");
+			data->b_in->export_arg = ft_strjoin(data->rl_decomp[1], "=\"\"");
+			data->b_in->export_var = ft_strjoin(data->rl_decomp[1], "=");
 		}
 		else
 		{
 			len = ft_strlen(data->rl_decomp[1])
 				- ft_strlen(ft_strchr(data->rl_decomp[1], '='));
-			data->export_var = ft_substr(data->rl_decomp[1], 0, len + 1);
+			data->b_in->export_var = ft_substr(data->rl_decomp[1], 0, len + 1);
 		}
 		while (data->env[i])
 		{
-			if (ft_strnstr(data->env[i], data->export_var,
-					ft_strlen(data->export_var)) == NULL)
+			if (ft_strnstr(data->env[i], data->b_in->export_var,
+					ft_strlen(data->b_in->export_var)) == NULL)
 				i++;
 			else
 			{
-				data->env[i] = ft_strdup(data->export_arg);
+				data->env[i] = ft_strdup(data->b_in->export_arg);
 				return ;
 			}
 		}
@@ -136,12 +136,12 @@ void	order_env(t_vault *data)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-	if (data->env_order)
-		free_dbl_ptr((void **)data->env_order);
-	data->env_order = ft_calloc(rows + 1, sizeof(char *));
+	if (data->b_in->env_order)
+		free_dbl_ptr((void **)data->b_in->env_order);
+	data->b_in->env_order = ft_calloc(rows + 1, sizeof(char *));
 	while (data->env[i])
 	{
-		data->env_order[i] = data->env[i];
+		data->b_in->env_order[i] = data->env[i];
 		i++;
 	}
 	i = 0;
@@ -150,11 +150,12 @@ void	order_env(t_vault *data)
 		j = i + 1;
 		while (j < rows)
 		{
-			if (ft_strcmp(data->env_order[i], data->env_order[j]) > 0)
+			if (ft_strcmp(data->b_in->env_order[i],
+					data->b_in->env_order[j]) > 0)
 			{
-				data->order_var = ft_strdup(data->env_order[i]);
-				data->env_order[i] = ft_strdup(data->env_order[j]);
-				data->env_order[j] = ft_strdup(data->order_var);
+				data->b_in->order_var = ft_strdup(data->b_in->env_order[i]);
+				data->b_in->env_order[i] = ft_strdup(data->b_in->env_order[j]);
+				data->b_in->env_order[j] = ft_strdup(data->b_in->order_var);
 			}
 			j++;
 		}

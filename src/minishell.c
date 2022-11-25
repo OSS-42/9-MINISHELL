@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 14:58:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:51:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(void)
 	t_vault	data;
 
 	system(INTRO);
+	data.b_in = malloc(sizeof(t_builtins));
 	data.env = environ;
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/25 13:19:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 16:59:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ void	ft_exit(t_vault *data)
 {
 	//prevoir les free en fonction d'ou on est dans le programme lors de exit
 	(void) data;
+	// if (data->b_in->env_unset)
+	// 	free_dbl_ptr((void **)data->b_in->env_unset);
+	// if (data->b_in->env_export)
+	// 	free_dbl_ptr((void **)data->b_in->env_export);
+	// if (data->b_in->env_order)
+	// 	free_dbl_ptr((void **)data->b_in->env_order);
+//	free_dbl_ptr((void **)data->rl_decomp);
 	exit (0);
 }
 
@@ -93,9 +100,9 @@ void	ft_env(t_vault *data, int env)
 	}
 	else if (env == 2)
 	{
-		while (data->env_order[i])
+		while (data->b_in->env_order[i])
 		{
-			ft_putstr_fd(data->env_order[i], 1);
+			ft_putstr_fd(data->b_in->env_order[i], 1);
 			ft_putstr_fd("\n", 1);
 			i++;
 		}
