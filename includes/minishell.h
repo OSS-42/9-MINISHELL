@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 23:02:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/25 13:48:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@
 
 # define TRUE 1
 # define FALSE 0
+
+#define INTRO "\
+#/bin/bash \n\
+bash pretty/intro_minishell.sh \n\
+"
 
 /***** STRUTURE *****/
 
