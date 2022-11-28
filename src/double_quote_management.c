@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/28 12:35:54 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 12:43:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,22 +109,27 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 			if (data->rl_decomp[next_array][j] == '\"')
 			{
 				next_array++;
-				while (data->rl_decomp[next_array])
-				{
-					data->rl_decomp[actual_array] = data->rl_decomp[next_array];
-					next_array++;
-					actual_array++;
-				}
-				while (data->rl_decomp[actual_array])
-				{
-					data->rl_decomp[actual_array] = "\0";
-					actual_array++;
-				}
+				switch_decomposer(data, &next_array, &actual_array);
 				return ;
 			}
 			j++;
 		}
 		j = 0;
 		next_array++;
+	}
+}
+
+void	switch_decomposer(t_vault *data, int *next_array, int *actual_array)
+{
+	while (data->rl_decomp[*next_array])
+	{
+		data->rl_decomp[*actual_array] = data->rl_decomp[*next_array];
+		(*next_array)++;
+		(*actual_array)++;
+	}
+	while (data->rl_decomp[*actual_array])
+	{
+		data->rl_decomp[*actual_array] = "\0";
+		(*actual_array)++;
 	}
 }

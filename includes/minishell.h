@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 11:02:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 12:43:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	find_decomposer_to_switch(t_vault *data, int i);
 void	malloc_clean_decomposer(t_vault *data);
 // void	reduce_space(t_vault *data);
 int		double_quote_analyzis(t_vault *data);
+void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
 void	built_in(t_vault *data);
 
 /***** built_in.c *****/
