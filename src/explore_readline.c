@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 12:03:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 12:36:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	explore_readline(t_vault *data)
 	{
 		data->rl_decomp_i = 0;
 		find_str_doublequote(data);
-		// print_double_array(data->rl_decomp);
+		print_double_array(data->rl_decomp);
 		built_in(data);
 	}
 	return ;
