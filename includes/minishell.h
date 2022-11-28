@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 10:24:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 10:28:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,15 @@
 # define TRUE 1
 # define FALSE 0
 
-#define INTRO "\
+# define INTRO "\
 #/bin/bash \n\
 bash pretty/intro_minishell.sh \n\
 "
 
 /***** STRUTURE *****/
 
-typedef struct s_vault
+typedef struct s_builtins
 {
-	int		rl_decomp_i;
-	int		double_quote_count;
-	char	*env_path;
-	char	**env;
-	char	*read_line;
-	char	**rl_decomp;
 	char	**env_unset;
 	char	**env_export;
 	char	**env_order;
@@ -49,17 +43,24 @@ typedef struct s_vault
 	char	*export_arg;
 	char	*export_var;
 	char	*order_var;
-	char	*test;
-	char	**rl_decomp;
-	char	**clean_decomposer;
+}	t_builtins;
+
+typedef struct s_vault
+{
+	char		*read_line;
+	char		*env_path;
+	char		**env;
+	char		**clean_decomposer;
+	int			rl_decomp_i;
+	int			double_quote_count;
+	char		**rl_decomp;
+	char		*test;
+	t_builtins	*b_in;
 }	t_vault;
 
 /***** minishell.c *****/
 
-void	init_struct(t_vault **data);
-
 /***** explore_readline.c *****/
-
 void	explore_readline(t_vault *data);
 void	explore_readline(t_vault	*data);
 void	find_str_doublequote(t_vault *data);
@@ -71,7 +72,6 @@ int		double_quote_analyzis(t_vault *data);
 void	built_in(t_vault *data);
 
 /***** built_in.c *****/
-
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
@@ -86,7 +86,6 @@ void	add_line_env(t_vault *data, int i);
 void	order_env(t_vault *data);
 
 /***** POUR DEBUG *****/
-
 void	print_double_array(char **array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 10:24:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 10:28:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 extern char	**environ;
 
+//system(INTRO) pour l'image au lancement de Minishell
 int	main(void)
 {
 	t_vault	data;
 
 	system(INTRO);
+	data.b_in = malloc(sizeof(t_builtins));
 	data.env = environ;
 	while (1)
 	{
