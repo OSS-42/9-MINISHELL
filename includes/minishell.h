@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 12:43:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 13:36:41 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ typedef struct s_builtins
 	int		flag_clean_echo;
 }	t_builtins;
 
+typedef struct s_dbl_quote
+{
+	int		double_quote_count;
+	int		len;
+	int		begin;
+}	t_dbl_quote;
+
 typedef struct s_vault
 {
 	char		*read_line;
@@ -54,25 +61,27 @@ typedef struct s_vault
 	char		**env;
 	char		**clean_decomposer;
 	int			rl_decomp_i;
-	int			double_quote_count;
 	char		**rl_decomp;
 	char		*test;
 	t_builtins	*b_in;
+	t_dbl_quote	*dbl_in;
 }	t_vault;
 
 /***** minishell.c *****/
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
-void	explore_readline(t_vault	*data);
-void	find_str_doublequote(t_vault *data);
-void	replace_decomposer_array(t_vault *data, int len, int begin, int end);
-void	find_decomposer_to_switch(t_vault *data, int i);
 void	malloc_clean_decomposer(t_vault *data);
 // void	reduce_space(t_vault *data);
 int		double_quote_analyzis(t_vault *data);
-void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
 void	built_in(t_vault *data);
+
+/***** double_quote_management.c *****/
+void	find_str_doublequote(t_vault *data);
+void	decomposer_array_to_replace(t_vault *data, int end);
+void	replace_decomposer_array(t_vault *data, int end, int *i);
+void	find_decomposer_to_switch(t_vault *data, int to_switch);
+void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
 
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);
