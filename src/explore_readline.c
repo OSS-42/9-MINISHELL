@@ -6,7 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/28 15:25:14 by ewurstei         ###   ########.fr       */
+=======
+/*   Updated: 2022/11/28 16:14:26 by mbertin          ###   ########.fr       */
+>>>>>>> 7181432071a194b7f805d19d2fe14762c5066259
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,9 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
-	double_quote_analyzis(data);
+	quote_analyzis(data);
+	print_double_array(data->rl_decomp);
+	write(1, "\n", 1);
 	if (data->dbl_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
@@ -26,16 +32,19 @@ void	explore_readline(t_vault *data)
 	return ;
 }
 
-int	double_quote_analyzis(t_vault *data)
+int	quote_analyzis(t_vault *data)
 {
 	int	i;
 
 	i = 0;
 	data->dbl_in->double_quote_count = 0;
+	data->dbl_in->simple_quote_count = 0;
 	while (data->read_line[i])
 	{
 		if (data->read_line[i] == '\"')
 			data->dbl_in->double_quote_count++;
+		else if (data->read_line[i] == '\'')
+			data->dbl_in->simple_quote_count++;
 		i++;
 	}
 	if (data->dbl_in->double_quote_count % 2 != 0)

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 13:36:41 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:39:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_builtins
 typedef struct s_dbl_quote
 {
 	int		double_quote_count;
+	int		simple_quote_count;
 	int		len;
 	int		begin;
 }	t_dbl_quote;
@@ -73,7 +74,7 @@ typedef struct s_vault
 void	explore_readline(t_vault *data);
 void	malloc_clean_decomposer(t_vault *data);
 // void	reduce_space(t_vault *data);
-int		double_quote_analyzis(t_vault *data);
+int		quote_analyzis(t_vault *data);
 void	built_in(t_vault *data);
 
 /***** double_quote_management.c *****/
