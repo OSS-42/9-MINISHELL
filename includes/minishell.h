@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 15:36:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:39:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_vault
 void	explore_readline(t_vault *data);
 void	malloc_clean_decomposer(t_vault *data);
 // void	reduce_space(t_vault *data);
-int		double_quote_analyzis(t_vault *data);
+int		quote_analyzis(t_vault *data);
 void	built_in(t_vault *data);
 
 /***** double_quote_management.c *****/
