@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 13:19:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:37:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ int	double_quote_analyzis(t_vault *data)
 
 	i = 0;
 	data->dbl_in->double_quote_count = 0;
+	data->dbl_in->simple_quote_count = 0;
 	while (data->read_line[i])
 	{
 		if (data->read_line[i] == '\"')
 			data->dbl_in->double_quote_count++;
+		else if (data->read_line[i] == '\'')
+			data->dbl_in->simple_quote_count++;
 		i++;
 	}
 	if (data->dbl_in->double_quote_count % 2 != 0)
