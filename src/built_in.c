@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/25 16:59:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 11:36:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,50 @@ void	ft_echo(t_vault *data)
 {
 	int		i;
 	int		flag_n;
+	int		len;
+	int		j;
+	int		k;
 
 	i = 1;
 	flag_n = 0;
-	if (!(data->rl_decomp[1]))
+	len = 0;
+	if (!(data->rl_decomp[i]))
 		return ;
-	else if (ft_strcmp(data->rl_decomp[1], "-n") == 0)
+	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
 	{
 		i = 2;
 		flag_n = 1;
 	}
 	while (data->rl_decomp[i])
 	{
+		data->b_in->flag_clean_echo = 0;
 		if (data->rl_decomp[i])
+		{
+			j = 0;
+			k = 0;
+			len = ft_strlen(data->rl_decomp[i]);
+			data->b_in->echo_clean = ft_calloc(len, sizeof(char));
+			while (data->rl_decomp[i][j])
+			{
+				if (data->rl_decomp[i][j] == '\"')
+				{
+					data->b_in->flag_clean_echo = 1;
+					j++;
+				}
+				data->b_in->echo_clean[k] = data->rl_decomp[i][j];
+				j++;
+				k++;
+			}
+			if (data->b_in->flag_clean_echo == 1)
+			{
+				free (data->rl_decomp[i]);
+				data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
+				free (data->b_in->echo_clean);
+			}
 			ft_putstr_fd(data->rl_decomp[i], 1);
+			if (data->rl_decomp[i + 1])
+				ft_putstr_fd(" ", 1);
+		}
 		else
 			break ;
 		i++;
