@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/24 14:19:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 10:16:30 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 typedef struct s_vault
 {
+	int		rl_decomp_i;
+	int		double_quote_count;
 	char	*env_path;
 	char	*read_line;
 	char	**readline_decomposer;
@@ -49,6 +51,7 @@ void	replace_decomposer_array(t_vault *data, int len, int begin, int end);
 void	find_decomposer_to_switch(t_vault *data, int i);
 void	malloc_clean_decomposer(t_vault *data);
 // void	reduce_space(t_vault *data);
+int		double_quote_analyzis(t_vault *data);
 void	built_in(t_vault *data);
 
 /**** built_in.c ****/

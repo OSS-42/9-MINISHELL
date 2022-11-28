@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/24 14:56:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 10:17:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 void	explore_readline(t_vault *data)
 {
 	data->readline_decomposer = ft_split(data->read_line, ' ');
-	find_str_doublequote(data);
-	print_double_array(data->readline_decomposer);
-	// reduce_space(data);
-	built_in(data);
+	data->rl_decomp_i = 0;
+	double_quote_analyzis(data);
+	if (data->double_quote_count % 2 == 0)
+	{
+		find_str_doublequote(data);
+		print_double_array(data->readline_decomposer);
+		// reduce_space(data);
+		built_in(data);
+	}
 }
 
 void	built_in(t_vault *data)
@@ -31,6 +36,23 @@ void	built_in(t_vault *data)
 		ft_echo(data);
 	if (ft_strcmp("exit", data->readline_decomposer[0]) == 1)
 		ft_exit (0);
+}
+
+int	double_quote_analyzis(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	data->double_quote_count = 0;
+	while (data->read_line[i])
+	{
+		if (data->read_line[i] == '\"')
+			data->double_quote_count++;
+		i++;
+	}
+	if (data->double_quote_count % 2 != 0)
+		printf("Wrong argument\n");
+	return (data->double_quote_count);
 }
 
 void	find_str_doublequote(t_vault *data)
@@ -48,7 +70,7 @@ void	find_str_doublequote(t_vault *data)
 		{
 			begin = i;
 			i++;
-			while (data->read_line[i] != '\"')
+			while ((data->read_line[i] != '\"' || data->read_line[i + 1] > 32) && data->read_line[i])
 			{
 				len++;
 				i++;
@@ -65,10 +87,13 @@ void	replace_decomposer_array(t_vault *data, int len, int begin, int end)
 	int		i;
 	int		j;
 
-	i = 0;
-	j = 0;
+	if (data->rl_decomp_i != 0)
+		i = data->rl_decomp_i;
+	else
+		i = 0;
 	while (data->readline_decomposer[i])
 	{
+		j = 0;
 		while (data->readline_decomposer[i][j])
 		{
 			if (data->readline_decomposer[i][j] == '\"')
@@ -83,48 +108,50 @@ void	replace_decomposer_array(t_vault *data, int len, int begin, int end)
 					j++;
 				}
 				i++;
+				data->rl_decomp_i = i;
 				find_decomposer_to_switch(data, i);
 				return ;
 			}
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 }
 
 void	find_decomposer_to_switch(t_vault *data, int to_switch)
 {
-	int	i;
+	int	next_array;
+	int	actual_array;
 	int	j;
 
-	i = to_switch;
+	next_array = to_switch;
+	actual_array = to_switch;
 	j = 0;
-	while (data->readline_decomposer[i])
+	while (data->readline_decomposer[next_array])
 	{
-		while (data->readline_decomposer[i][j])
+		while (data->readline_decomposer[next_array][j])
 		{
-			if (data->readline_decomposer[i][j] == '\"')
+			if (data->readline_decomposer[next_array][j] == '\"')
 			{
-				i++;
-				while (data->readline_decomposer[i])
+				next_array++;
+				while (data->readline_decomposer[next_array])
 				{
-					data->readline_decomposer[to_switch] = data->readline_decomposer[i];
-					i++;
-					to_switch++;
+					data->readline_decomposer[actual_array] = data->readline_decomposer[next_array];
+					next_array++;
+					actual_array++;
 				}
-				while (data->readline_decomposer[to_switch])
+				while (data->readline_decomposer[actual_array])
 				{
-					data->readline_decomposer[to_switch] = "\0";
-					to_switch++;
+					data->readline_decomposer[actual_array] = "\0";
+					actual_array++;
 				}
 				return ;
 			}
 			j++;
 		}
-		free(data->readline_decomposer[i]);
+		free(data->readline_decomposer[next_array]);
 		j = 0;
-		i++;
+		next_array++;
 	}
 }
 
