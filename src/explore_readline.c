@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 12:36:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 13:19:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	double_quote_analyzis(data);
-	if (data->double_quote_count % 2 == 0)
+	if (data->dbl_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
 		find_str_doublequote(data);
@@ -24,6 +24,23 @@ void	explore_readline(t_vault *data)
 		built_in(data);
 	}
 	return ;
+}
+
+int	double_quote_analyzis(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	data->dbl_in->double_quote_count = 0;
+	while (data->read_line[i])
+	{
+		if (data->read_line[i] == '\"')
+			data->dbl_in->double_quote_count++;
+		i++;
+	}
+	if (data->dbl_in->double_quote_count % 2 != 0)
+		printf("Wrong argument\n");
+	return (data->dbl_in->double_quote_count);
 }
 
 void	built_in(t_vault *data)

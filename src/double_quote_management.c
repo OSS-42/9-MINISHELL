@@ -6,58 +6,39 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/28 12:43:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 13:19:52 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	double_quote_analyzis(t_vault *data)
-{
-	int	i;
-
-	i = 0;
-	data->double_quote_count = 0;
-	while (data->read_line[i])
-	{
-		if (data->read_line[i] == '\"')
-			data->double_quote_count++;
-		i++;
-	}
-	if (data->double_quote_count % 2 != 0)
-		printf("Wrong argument\n");
-	return (data->double_quote_count);
-}
-
 void	find_str_doublequote(t_vault *data)
 {
 	int		i;
-	int		begin;
-	int		len;
 
 	i = 0;
-	begin = 0;
-	len = 1;
+	data->dbl_in->begin = 0;
+	data->dbl_in->len = 1;
 	while (data->read_line[i])
 	{
 		if (data->read_line[i] == '\"')
 		{
-			begin = i;
+			data->dbl_in->begin = i;
 			i++;
 			while ((data->read_line[i] != '\"' || data->read_line[i + 1] > 32)
 				&& data->read_line[i])
 			{
-				len++;
+				data->dbl_in->len++;
 				i++;
 			}
-			len++;
-			replace_decomposer_array(data, len, begin, i);
+			data->dbl_in->len++;
+			decomposer_array_to_replace(data, i);
 		}
 		i++;
 	}
 }
 
-void	replace_decomposer_array(t_vault *data, int len, int begin, int end)
+void	decomposer_array_to_replace(t_vault *data, int end)
 {
 	int		i;
 	int		j;
@@ -73,17 +54,7 @@ void	replace_decomposer_array(t_vault *data, int len, int begin, int end)
 		{
 			if (data->rl_decomp[i][j] == '\"')
 			{
-				free(data->rl_decomp[i]);
-				data->rl_decomp[i] = ft_calloc(sizeof(char), len + 1);
-				j = 0;
-				while (begin <= end)
-				{
-					data->rl_decomp[i][j] = data->read_line[begin];
-					begin++;
-					j++;
-				}
-				i++;
-				data->rl_decomp_i = i;
+				replace_decomposer_array(data, end, &i);
 				find_decomposer_to_switch(data, i);
 				return ;
 			}
@@ -91,6 +62,25 @@ void	replace_decomposer_array(t_vault *data, int len, int begin, int end)
 		}
 		i++;
 	}
+}
+
+void	replace_decomposer_array(t_vault *data, int end, int *i)
+{
+	int	j;
+
+	j = 0;
+	free(data->rl_decomp[*i]);
+	data->rl_decomp[*i]
+		= ft_calloc(sizeof(char), data->dbl_in->len + 1);
+	while (data->dbl_in->begin <= end)
+	{
+		data->rl_decomp[*i][j]
+			= data->read_line[data->dbl_in->begin];
+		data->dbl_in->begin++;
+		j++;
+	}
+	(*i)++;
+	data->rl_decomp_i = *i;
 }
 
 void	find_decomposer_to_switch(t_vault *data, int to_switch)
