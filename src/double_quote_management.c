@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/28 16:33:44 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:51:27 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ void	find_str_doublequote(t_vault *data)
 			while ((data->read_line[i] != '\"' || data->read_line[i + 1] > 32)
 				&& data->read_line[i])
 			{
+				if (data->read_line[i] == '\"')
+				{
+					while (data->read_line[i] != ' ')
+					{
+						data->dbl_in->len++;
+						i++;
+					}
+					break ;
+				}
 				data->dbl_in->len++;
 				i++;
 			}
