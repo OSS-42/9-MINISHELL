@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 15:40:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:14:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	quote_analyzis(data);
+	print_double_array(data->rl_decomp);
+	write(1, "\n", 1);
 	if (data->dbl_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
