@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 20:58:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:16:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,45 @@ void	ft_echo(t_vault *data)
 	int		j;
 	int		k;
 	int		first;
+	int		l;
+	int		len2;
+	int		m;
 
 	i = 1;
 	flag_n = 0;
 	len = 0;
 	first = 1;
+	l = 0;
 	if (!(data->rl_decomp[i]))
 		return ;
 	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
 	{
 		i = 2;
 		flag_n = 1;
+	}
+// Gestion du $ pour variables d'environnement
+// Attention :
+// echo "$HOME" doit afficher la valeur de la variable,
+// echo '$HOME' doit effectuer un echo normal.
+// echo bonjour au revoir$HOME ==> bonjour au revoir/home/ewurstei
+// echo bonjour au 'revoir$HOME' ==> bonjour au revoir$HOME
+// echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
+	while (data->rl_decomp[i][l])
+	{
+		if (data->rl_decomp[i][l] && data->rl_decomp[i][l] == "$")
+		{
+			len2 = l;
+			while (data->rl_decomp[i][len2] != " " && data->rl_decomp[i][len2])
+				len2++;
+			data->b_in->echo_var = ft_calloc(sizeof(char), len2 - l + 1);
+			m = 0;
+			while (l < len2 && data->rl_decomp[i][l])
+			{
+				data->b_in->echo_var[m] = data->rl_decomp[i][l];
+				m++;
+				l++;
+			}
+		}
 	}
 	while (data->rl_decomp[i])
 	{
