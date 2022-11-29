@@ -54,3 +54,5 @@ dkms.conf
 # Other
 .vscode
 .venv
+minishell
+.DS_Store
