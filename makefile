@@ -5,7 +5,7 @@ NAME = minishell
 #NAME_BONUS = minishell_bonus
 
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 
 #------------------------------------------------------------------------------#
@@ -34,7 +34,8 @@ SRCS =	src/minishell.c \
 		src/built_in.c \
 		src/built_in2.c \
 		src/explore_readline.c \
-		src/quote_management.c
+		src/quote_management.c \
+		src/meta_analyzis.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/

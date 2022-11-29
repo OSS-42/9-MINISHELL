@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 09:49:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:21:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
-	quote_analyzis(data);
+	meta_analyzis(data);
 	// print_double_array(data->rl_decomp);
-//	write(1, "\n", 1);
+	// write(1, "\n", 1);
 	if (data->quote_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
@@ -26,27 +26,6 @@ void	explore_readline(t_vault *data)
 		built_in(data);
 	}
 	return ;
-}
-
-int	quote_analyzis(t_vault *data)
-{
-	int	i;
-
-	i = 0;
-	data->quote_in->double_quote_count = 0;
-	data->quote_in->simple_quote_count = 0;
-	while (data->read_line[i])
-	{
-		if (data->read_line[i] == '\"')
-			data->quote_in->double_quote_count++;
-		else if (data->read_line[i] == '\'')
-			data->quote_in->simple_quote_count++;
-		i++;
-	}
-// savoir lequel vient en premier pour valider la paire
-	if (data->quote_in->double_quote_count % 2 != 0)
-		printf("Wrong argument\n");
-	return (data->quote_in->double_quote_count);
 }
 
 void	built_in(t_vault *data)

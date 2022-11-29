@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_quote_management.c                          :+:      :+:    :+:   */
+/*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/29 09:47:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 16:24:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	find_str_quote(t_vault *data)
 	data->quote_in->len = 1;
 	while (data->read_line[i])
 	{
+		data->quote_in->spc_count = 0;
 		if (data->read_line[i] == ' ')
 		{
 			while (data->read_line[i] == ' ')
@@ -44,6 +45,8 @@ void	find_str_quote(t_vault *data)
 					}
 					break ;
 				}
+				if (data->read_line[i] == ' ')
+					data->quote_in->spc_count++;
 				data->quote_in->len++;
 				i++;
 			}
@@ -71,7 +74,6 @@ void	decomposer_array_to_replace(t_vault *data, int end)
 			if (data->rl_decomp[i][j] == data->quote_in->quote)
 			{
 				replace_decomposer_array(data, end, &i);
-				find_decomposer_to_switch(data, i);
 				return ;
 			}
 			j++;
@@ -97,45 +99,22 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	}
 	(*i)++;
 	data->rl_decomp_i = *i;
+	if (ft_strchr(data->rl_decomp[*i - 1], ' ') != NULL)
+		find_decomposer_to_switch(data, *i);
 }
 
 void	find_decomposer_to_switch(t_vault *data, int to_switch)
 {
 	int	next_array;
 	int	actual_array;
-	int	j;
 
-	next_array = to_switch;
+	next_array = to_switch + data->quote_in->spc_count;
 	actual_array = to_switch;
-	j = 0;
 	while (data->rl_decomp[next_array])
 	{
-		while (data->rl_decomp[next_array][j])
-		{
-			if (data->rl_decomp[next_array][j] == data->quote_in->quote)
-			{
-				next_array++;
-				switch_decomposer(data, &next_array, &actual_array);
-				return ;
-			}
-			j++;
-		}
-		j = 0;
+		data->rl_decomp[actual_array] = data->rl_decomp[next_array];
 		next_array++;
+		actual_array++;
 	}
-}
-
-void	switch_decomposer(t_vault *data, int *next_array, int *actual_array)
-{
-	while (data->rl_decomp[*next_array])
-	{
-		data->rl_decomp[*actual_array] = data->rl_decomp[*next_array];
-		(*next_array)++;
-		(*actual_array)++;
-	}
-	while (data->rl_decomp[*actual_array])
-	{
-		data->rl_decomp[*actual_array] = "\0";
-		(*actual_array)++;
-	}
+	data->rl_decomp[actual_array] = "\0";
 }
