@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 20:43:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:58:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	ft_echo(t_vault *data)
 	int		len;
 	int		j;
 	int		k;
+	int		first;
 
 	i = 1;
 	flag_n = 0;
 	len = 0;
+	first = 1;
 	if (!(data->rl_decomp[i]))
 		return ;
 	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
@@ -68,7 +70,7 @@ void	ft_echo(t_vault *data)
 			j = 0;
 			k = 0;
 			len = ft_strlen(data->rl_decomp[i]);
-			data->b_in->echo_clean = ft_calloc(len, sizeof(char));
+			data->b_in->echo_clean = ft_calloc(len + 1, sizeof(char));
 			while (data->rl_decomp[i][j])
 			{
 				if (data->rl_decomp[i][j] == '\"')
@@ -85,9 +87,21 @@ void	ft_echo(t_vault *data)
 				free (data->rl_decomp[i]);
 				data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
 				free (data->b_in->echo_clean);
+				ft_putstr_fd(data->rl_decomp[i], 1);
 			}
-			ft_putstr_fd(data->rl_decomp[i], 1);
-			ft_putstr_fd(" ", 1);
+			else
+			{
+				if (first == 1)
+				{
+					ft_putstr_fd(data->rl_decomp[i], 1);
+					first = 0;
+				}
+				else
+				{
+					ft_putstr_fd(" ", 1);
+					ft_putstr_fd(data->rl_decomp[i], 1);
+				}
+			}
 		}
 		else
 			break ;
