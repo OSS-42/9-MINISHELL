@@ -6,13 +6,13 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/29 09:26:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:47:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	find_str_doublequote(t_vault *data)
+void	find_str_quote(t_vault *data)
 {
 	int		i;
 
