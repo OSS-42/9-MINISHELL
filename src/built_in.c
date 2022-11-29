@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 09:16:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:39:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	ft_echo(t_vault *data)
 // echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
 	while (data->rl_decomp[i][l])
 	{
-		if (data->rl_decomp[i][l] && data->rl_decomp[i][l] == "$")
+		if (data->rl_decomp[i][l] && data->rl_decomp[i][l] == '$')
 		{
 			len2 = l;
-			while (data->rl_decomp[i][len2] != " " && data->rl_decomp[i][len2])
+			while (data->rl_decomp[i][len2] != ' ' && data->rl_decomp[i][len2])
 				len2++;
 			data->b_in->echo_var = ft_calloc(sizeof(char), len2 - l + 1);
 			m = 0;
