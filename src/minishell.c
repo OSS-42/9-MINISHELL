@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 20:12:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:20:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ extern char	**environ;
 void	init_data(t_vault *data)
 {
 	data->env = environ;
-	data->b_in = malloc(sizeof(t_builtins));
+	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	if (!data->b_in)
 		return ;
-	data->dbl_in = ft_calloc(sizeof(t_dbl_quote), 0);
+	data->dbl_in = ft_calloc(sizeof(t_dbl_quote), 1);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 14:15:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/25 15:39:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 21:32:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_is_env_var(char *str, char delimiter)
 		return (0);
 	while (str[i] && str[i] != delimiter)
 	{
-		if (str[i] != '_' && ft_isalpha(str[i]) == 0)
+		if (str[i] != '_' && ft_isalpha(str[0]) == 0)
 			return (0);
 		i++;
 	}
