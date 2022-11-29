@@ -6,7 +6,11 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/29 09:18:47 by mbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/11/29 09:10:03 by ewurstei         ###   ########.fr       */
+>>>>>>> fb44b27b20d7be5190353dcdc56cdc7fb435e4c9
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +47,7 @@ typedef struct s_builtins
 	char	*export_arg;
 	char	*export_var;
 	char	*order_var;
+	char	*echo_var;
 	char	*echo_clean;
 	int		flag_clean_echo;
 }	t_builtins;
