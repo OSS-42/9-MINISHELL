@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/28 10:28:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 20:12:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 
 extern char	**environ;
 
+void	init_data(t_vault *data)
+{
+	data->env = environ;
+	data->b_in = malloc(sizeof(t_builtins));
+	if (!data->b_in)
+		return ;
+	data->dbl_in = ft_calloc(sizeof(t_dbl_quote), 0);
+	return ;
+}
+
 //system(INTRO) pour l'image au lancement de Minishell
 int	main(void)
 {
 	t_vault	data;
 
+	init_data(&data);
 	system(INTRO);
-	data.b_in = malloc(sizeof(t_builtins));
-	data.env = environ;
+//	data.b_in = malloc(sizeof(t_builtins));
+//	data.env = environ;
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");

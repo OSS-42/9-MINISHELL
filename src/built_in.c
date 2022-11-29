@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 11:36:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:43:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ void	ft_echo(t_vault *data)
 				free (data->b_in->echo_clean);
 			}
 			ft_putstr_fd(data->rl_decomp[i], 1);
-			if (data->rl_decomp[i + 1])
-				ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", 1);
 		}
 		else
 			break ;

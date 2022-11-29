@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 16:55:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/28 20:30:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	explore_readline(t_vault *data)
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	quote_analyzis(data);
 	print_double_array(data->rl_decomp);
-	write(1, "\n", 1);
+//	write(1, "\n", 1);
 	if (data->dbl_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
 		find_str_doublequote(data);
-		print_double_array(data->rl_decomp);
+//		print_double_array(data->rl_decomp);
 		built_in(data);
 	}
 	return ;
@@ -43,6 +43,7 @@ int	quote_analyzis(t_vault *data)
 			data->dbl_in->simple_quote_count++;
 		i++;
 	}
+// savoir lequel vient en premier pour valider la paire
 	if (data->dbl_in->double_quote_count % 2 != 0)
 		printf("Wrong argument\n");
 	return (data->dbl_in->double_quote_count);
