@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/28 21:02:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/29 09:25:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	quote_analyzis(data);
-//	print_double_array(data->rl_decomp);
+	// print_double_array(data->rl_decomp);
 //	write(1, "\n", 1);
-	if (data->dbl_in->double_quote_count % 2 == 0)
+	if (data->quote_in->double_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
 		find_str_doublequote(data);
-//		print_double_array(data->rl_decomp);
+		print_double_array(data->rl_decomp);
 		built_in(data);
 	}
 	return ;
@@ -33,20 +33,20 @@ int	quote_analyzis(t_vault *data)
 	int	i;
 
 	i = 0;
-	data->dbl_in->double_quote_count = 0;
-	data->dbl_in->simple_quote_count = 0;
+	data->quote_in->double_quote_count = 0;
+	data->quote_in->simple_quote_count = 0;
 	while (data->read_line[i])
 	{
 		if (data->read_line[i] == '\"')
-			data->dbl_in->double_quote_count++;
+			data->quote_in->double_quote_count++;
 		else if (data->read_line[i] == '\'')
-			data->dbl_in->simple_quote_count++;
+			data->quote_in->simple_quote_count++;
 		i++;
 	}
 // savoir lequel vient en premier pour valider la paire
-	if (data->dbl_in->double_quote_count % 2 != 0)
+	if (data->quote_in->double_quote_count % 2 != 0)
 		printf("Wrong argument\n");
-	return (data->dbl_in->double_quote_count);
+	return (data->quote_in->double_quote_count);
 }
 
 void	built_in(t_vault *data)
