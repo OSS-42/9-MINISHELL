@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 21:51:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:00:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ void	ft_echo(t_vault *data)
 	int		len;
 	int		j;
 	int		k;
-	int		first;
 
 	i = 1;
 	len = 0;
-	first = 1;
+	data->b_in->first_word = 1;
 	if (!(data->rl_decomp[i]))
 		return ;
 	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
@@ -69,31 +68,30 @@ void	ft_echo(t_vault *data)
 // echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
 
 	j = 0;
-	while (data->rl_decomp[i][j])
-	{
-		if (data->rl_decomp[i][j] == '\"')
-		{
-			data->b_in->echo_dble_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 2;
-			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-				data->b_in->echo_priority = 34;
-		}
-		else if (data->rl_decomp[i][j] == '\'')
-		{
-			data->b_in->echo_sgle_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 1;
-			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-				data->b_in->echo_priority = 39;
-		}
-		else if (data->rl_decomp[i][j] == '$')
-			data->b_in->echo_dollar = 1;
-		j++;			
-	}
-	data->b_in->echo_first = 0;
 	while (data->rl_decomp[i])
 	{
+		while (data->rl_decomp[i][j])
+		{
+			if (data->rl_decomp[i][j] == '\"')
+			{
+				data->b_in->echo_dble_q++;
+				if (data->b_in->echo_first == 0)
+					data->b_in->echo_first = 2;
+				if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
+					data->b_in->echo_priority = 34;
+			}
+			else if (data->rl_decomp[i][j] == '\'')
+			{
+				data->b_in->echo_sgle_q++;
+				if (data->b_in->echo_first == 0)
+					data->b_in->echo_first = 1;
+				if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
+					data->b_in->echo_priority = 39;
+			}
+			else if (data->rl_decomp[i][j] == '$')
+				data->b_in->echo_dollar = 1;
+			j++;			
+		}
 		if (data->b_in->echo_priority != 0)
 		{
 			j = 0;
@@ -111,29 +109,38 @@ void	ft_echo(t_vault *data)
 			free (data->rl_decomp[i]);
 			data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
 			free (data->b_in->echo_clean);
-			ft_putstr_fd(data->rl_decomp[i], 1);
-			break ;
-		}
-		else if (data->b_in->echo_priority == 0)
-		{
-			if (first == 1)
-			{
-				ft_putstr_fd(data->rl_decomp[i], 1);
-				first = 0;
-			}
-			else
-			{
-				ft_putstr_fd(" ", 1);
-				ft_putstr_fd(data->rl_decomp[i], 1);
-			}
 		}
 		data->b_in->echo_priority = 0;
-		i++;
+		data->b_in->echo_first = 0;
+		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
+		{
+			print_row(data, i);
+			i++;
+		}
+		else
+		{
+			print_row(data, i);
+			break ;
+		}
 	}
 	if (data->b_in->echo_flag_n == 0)
 		ft_putstr_fd("\n", 1);
+	return ;
+}
+
+void	print_row(t_vault *data, int row)
+{	
+	if (data->b_in->first_word == 1)
+	{
+		ft_putstr_fd(data->rl_decomp[row], 1);
+		data->b_in->first_word  = 0;
+	}
 	else
-		return ;
+	{
+		ft_putstr_fd(" ", 1);
+		ft_putstr_fd(data->rl_decomp[row], 1);
+	}
+	return ;
 }
 
 void	ft_exit(t_vault *data)
