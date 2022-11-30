@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 09:20:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:16:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,33 @@ void	print_double_array(char **array)
 		printf("%s\n", array[i]);
 		i++;
 	}
+}
+
+int	check_if_inside_quote(char *str, char c)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	quote = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"' || str[i] == '\'')
+		{
+			quote = str[i];
+			i++;
+			while (str[i] != quote)
+			{
+				if (str[i] == c)
+				{
+					printf("%c est dans des quotes\n", c);
+					return (TRUE);
+				}
+				i++;
+			}
+		}
+		i++;
+	}
+	printf("%c n'est pas dans des quotes\n", c);
+	return (FALSE);
 }

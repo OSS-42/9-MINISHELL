@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/30 08:53:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:37:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,3 +121,4 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 
 
 // 'je"tu"'il
+// "coucou">'toi'

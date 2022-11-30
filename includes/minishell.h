@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/29 22:08:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:14:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ typedef struct s_builtins
 	int		first_word;
 }	t_builtins;
 
+typedef struct s_flag
+{
+	int	output;
+}	t_flag;
+
 typedef struct s_quote
 {
 	int		double_quote_count;
@@ -68,6 +73,7 @@ typedef struct s_quote
 typedef struct s_vault
 {
 	char		*read_line;
+	char		*output;
 	char		*env_path;
 	char		**env;
 	char		**clean_decomposer;
@@ -76,6 +82,7 @@ typedef struct s_vault
 	char		*test;
 	t_builtins	*b_in;
 	t_quote		*quote_in;
+	t_flag		*flag;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -89,7 +96,8 @@ void	built_in(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		meta_analyzis(t_vault *data);
-
+char	*output_to_redirect(t_vault *data, int i, int j);
+void	redirection_analysiz(t_vault *data);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
@@ -115,5 +123,8 @@ void	order_env(t_vault *data);
 
 /***** POUR DEBUG *****/
 void	print_double_array(char **array);
+
+/***** personnal_fonction.c *****/
+int		check_if_inside_quote(char *str, char c);
 
 #endif
