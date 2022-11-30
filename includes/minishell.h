@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/29 22:08:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 09:50:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_builtins
 	int		echo_first;
 	int		echo_dble_q;
 	int		echo_sgle_q;
-	int		echo_dollar;
 	int		flag_clean_echo;
 	int		first_word;
 }	t_builtins;
@@ -76,6 +75,9 @@ typedef struct s_vault
 	char		*test;
 	t_builtins	*b_in;
 	t_quote		*quote_in;
+	int			dollar;
+	int			activate_var;
+	char		*dollar_var;
 }	t_vault;
 
 /***** minishell.c *****/

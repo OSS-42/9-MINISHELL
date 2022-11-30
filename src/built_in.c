@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 23:00:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 10:00:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_echo(t_vault *data)
 	int		len;
 	int		j;
 	int		k;
+	int		len2;
 
 	i = 1;
 	len = 0;
@@ -89,7 +90,7 @@ void	ft_echo(t_vault *data)
 					data->b_in->echo_priority = 39;
 			}
 			else if (data->rl_decomp[i][j] == '$')
-				data->b_in->echo_dollar = 1;
+				data->dollar = 1;
 			j++;			
 		}
 		if (data->b_in->echo_priority != 0)
@@ -110,8 +111,36 @@ void	ft_echo(t_vault *data)
 			data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
 			free (data->b_in->echo_clean);
 		}
-		data->b_in->echo_priority = 0;
-		data->b_in->echo_first = 0;
+		if (data->dollar == 1)
+		{
+			if (data->b_in->echo_priority == 2)
+			{
+				data->activate_var = 1;
+				j = 0;
+				while (data->rl_decomp[i][j])
+				{
+					if (data->rl_decomp[i][j] == '$')
+					{
+						len2 = 0;
+						k = j;
+						while (data->rl_decomp[i][k] != ' ' && data->rl_decomp[i][k] != '\0')
+						{
+							len2++;
+							k++;
+						}
+					}
+					data->dollar_var = ft_calloc(sizeof(char), len2 + 1);
+					k = 0;
+					while (j < len2)
+					{
+						data->dollar_var[k] = data->rl_decomp[i][j];
+						j++;
+						k++;
+					}
+				}
+			}
+			
+		}
 		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
 		{
 			print_row(data, i);
@@ -122,6 +151,8 @@ void	ft_echo(t_vault *data)
 			print_row(data, i);
 			break ;
 		}
+		data->b_in->echo_priority = 0;
+		data->b_in->echo_first = 0;
 	}
 	if (data->b_in->echo_flag_n == 0)
 		ft_putstr_fd("\n", 1);
