@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 08:51:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/30 09:22:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ extern char	**environ;
 void	init_data(t_vault *data)
 {
 	data->env = environ;
+	data->read_line = NULL;
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	if (!data->b_in)
 		return ;
