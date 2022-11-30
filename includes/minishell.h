@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/29 15:58:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 22:08:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,14 @@ typedef struct s_builtins
 	char	*order_var;
 	char	*echo_var;
 	char	*echo_clean;
+	int		echo_flag_n;
+	char	echo_priority;
+	int		echo_first;
+	int		echo_dble_q;
+	int		echo_sgle_q;
+	int		echo_dollar;
 	int		flag_clean_echo;
+	int		first_word;
 }	t_builtins;
 
 typedef struct s_quote
@@ -97,6 +104,7 @@ void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
+void	print_row(t_vault *data, int row);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data);
