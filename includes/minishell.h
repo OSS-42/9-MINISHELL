@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/29 15:58:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:07:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_builtins
 	char	*order_var;
 	char	*echo_var;
 	char	*echo_clean;
+	int		echo_flag_n;
+	char	echo_priority;
+	int		echo_first;
+	int		echo_dble_q;
+	int		echo_sgle_q;
+	int		echo_dollar;
 	int		flag_clean_echo;
 }	t_builtins;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 09:39:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/29 21:51:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,20 @@ void	ft_pwd(t_vault *data)
 void	ft_echo(t_vault *data)
 {
 	int		i;
-	int		flag_n;
 	int		len;
 	int		j;
 	int		k;
 	int		first;
-	int		l;
-	int		len2;
-	int		m;
 
 	i = 1;
-	flag_n = 0;
 	len = 0;
 	first = 1;
-	l = 0;
 	if (!(data->rl_decomp[i]))
 		return ;
 	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
 	{
-		i = 2;
-		flag_n = 1;
+		i++;
+		data->b_in->echo_flag_n = 1;
 	}
 // Gestion du $ pour variables d'environnement
 // Attention :
@@ -73,69 +67,70 @@ void	ft_echo(t_vault *data)
 // echo bonjour au revoir$HOME ==> bonjour au revoir/home/ewurstei
 // echo bonjour au 'revoir$HOME' ==> bonjour au revoir$HOME
 // echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
-	while (data->rl_decomp[i][l])
+
+	j = 0;
+	while (data->rl_decomp[i][j])
 	{
-		if (data->rl_decomp[i][l] && data->rl_decomp[i][l] == '$')
+		if (data->rl_decomp[i][j] == '\"')
 		{
-			len2 = l;
-			while (data->rl_decomp[i][len2] != ' ' && data->rl_decomp[i][len2])
-				len2++;
-			data->b_in->echo_var = ft_calloc(sizeof(char), len2 - l + 1);
-			m = 0;
-			while (l < len2 && data->rl_decomp[i][l])
-			{
-				data->b_in->echo_var[m] = data->rl_decomp[i][l];
-				m++;
-				l++;
-			}
+			data->b_in->echo_dble_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 2;
+			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
+				data->b_in->echo_priority = 34;
 		}
+		else if (data->rl_decomp[i][j] == '\'')
+		{
+			data->b_in->echo_sgle_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 1;
+			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
+				data->b_in->echo_priority = 39;
+		}
+		else if (data->rl_decomp[i][j] == '$')
+			data->b_in->echo_dollar = 1;
+		j++;			
 	}
+	data->b_in->echo_first = 0;
 	while (data->rl_decomp[i])
 	{
-		data->b_in->flag_clean_echo = 0;
-		if (data->rl_decomp[i])
+		if (data->b_in->echo_priority != 0)
 		{
 			j = 0;
 			k = 0;
 			len = ft_strlen(data->rl_decomp[i]);
 			data->b_in->echo_clean = ft_calloc(len + 1, sizeof(char));
-			while (data->rl_decomp[i][j])
+			while (j < len)
 			{
-				if (data->rl_decomp[i][j] == '\"')
-				{
-					data->b_in->flag_clean_echo = 1;
+				if (data->rl_decomp[i][j] == data->b_in->echo_priority)
 					j++;
-				}
 				data->b_in->echo_clean[k] = data->rl_decomp[i][j];
 				j++;
 				k++;
 			}
-			if (data->b_in->flag_clean_echo == 1)
+			free (data->rl_decomp[i]);
+			data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
+			free (data->b_in->echo_clean);
+			ft_putstr_fd(data->rl_decomp[i], 1);
+			break ;
+		}
+		else if (data->b_in->echo_priority == 0)
+		{
+			if (first == 1)
 			{
-				free (data->rl_decomp[i]);
-				data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
-				free (data->b_in->echo_clean);
 				ft_putstr_fd(data->rl_decomp[i], 1);
+				first = 0;
 			}
 			else
 			{
-				if (first == 1)
-				{
-					ft_putstr_fd(data->rl_decomp[i], 1);
-					first = 0;
-				}
-				else
-				{
-					ft_putstr_fd(" ", 1);
-					ft_putstr_fd(data->rl_decomp[i], 1);
-				}
+				ft_putstr_fd(" ", 1);
+				ft_putstr_fd(data->rl_decomp[i], 1);
 			}
 		}
-		else
-			break ;
+		data->b_in->echo_priority = 0;
 		i++;
 	}
-	if (flag_n == 0)
+	if (data->b_in->echo_flag_n == 0)
 		ft_putstr_fd("\n", 1);
 	else
 		return ;
