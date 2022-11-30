@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/29 16:24:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/30 08:53:18 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	find_str_quote(t_vault *data)
 			{
 				if (data->read_line[i] == data->quote_in->quote)
 				{
-					while (data->read_line[i] != ' ')
+					while (data->read_line[i] && data->read_line[i] != ' ')
 					{
 						data->quote_in->len++;
 						i++;
@@ -118,3 +118,6 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	}
 	data->rl_decomp[actual_array] = "\0";
 }
+
+
+// 'je"tu"'il
