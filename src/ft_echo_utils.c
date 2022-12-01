@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 15:49:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:53:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	quote_priority(t_vault *data, int row)
 				data->b_in->echo_priority = 39;
 		}
 		else if (data->rl_decomp[row][j] == '$')
-			data->dollar++;
+			data->flag->dollar_count++;
 		j++;
 	}
 	return (data->b_in->echo_priority);
