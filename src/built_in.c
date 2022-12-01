@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 21:23:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:07:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,19 +98,15 @@ void	ft_echo(t_vault *data)
 	data->b_in->first_word = 1;
 	if (!(data->rl_decomp[i]))
 		return ;
-	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
-	{
-		i++;
+	else if (ft_strcmp(data->rl_decomp[i++], "-n") == 0)
 		data->b_in->echo_flag_n = 1;
-	}
 	while (data->rl_decomp[i])
 	{
 		data->b_in->echo_priority = quote_priority(data, i);
-		printf("%c\n", data->b_in->echo_priority);
 		if (data->b_in->echo_priority != 0)
 			clean_quote(data, i);
 		if (data->dollar == 1 && data->b_in->echo_priority != 39)
-			find_var_value(data, i);	
+			find_var_value(data, i);
 		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
 		{
 			print_row(data, i);

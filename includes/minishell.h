@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 21:09:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 21:53:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 void	find_var_value(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
-void	put_var_in_plain(t_vault *data, int row_var, int row, int len2);
+void	put_var_in_plain(t_vault *data, int row_var, int row, int len);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data);
