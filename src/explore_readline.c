@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 14:08:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:56:29 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		redirection_analysiz(data);
 		spe_char(data);
-//		print_double_array(data->rl_decomp);
+		print_double_array(data->rl_decomp);
 //		printf("%s\n", data->output);
 		built_in(data);
 	}
