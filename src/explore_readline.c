@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 22:20:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:08:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	meta_analyzis(data);
-	// print_double_array(data->rl_decomp);
-	// write(1, "\n", 1);
-	if (data->quote_in->double_quote_count % 2 == 0)
+	print_double_array(data->rl_decomp);
+	write(1, "\n", 1);
+	if (data->quote_in->double_quote_count % 2 == 0
+		&& data->quote_in->simple_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
 		print_double_array(data->rl_decomp);
 		redirection_analysiz(data);
-		printf("%s\n", data->output);
+		printf("%s\n", data->flag->output);
+		printf("%d\n", data->flag->output_count);
 		built_in(data);
 	}
 	return ;
@@ -48,35 +50,6 @@ void	built_in(t_vault *data)
 		ft_exit (0);
 	return ;
 }
-
-// void	malloc_clean_decomposer(t_vault *data)
-// {
-// 	int	i;
-// 	int	len_array;
-
-// 	i = 0;
-// 	len_array = 0;
-// 	while (data->read_line[i])
-// 	{
-// 		if (data->read_line[i] == '\"')
-// 		{
-// 			i++;
-// 			while (data->read_line[i] != '\"')
-// 				i++;
-// 			len_array++;
-// 		}
-// 		else if (data->read_line[i] == ' ')
-// 			len_array++;
-// 		i++;
-// 	}
-// 	data->clean_decomposer = ft_calloc(sizeof(char *), len_array + 1);
-// 	if (!data->clean_decomposer)
-// 	{
-// 		free (data->clean_decomposer);
-// 		//ajouter des free
-// 		exit (EXIT_FAILURE);
-// 	}
-// }
 
 // void	reduce_space(t_vault *data)
 // {

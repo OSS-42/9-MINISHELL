@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 22:20:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 09:49:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ typedef struct s_builtins
 
 typedef struct s_flag
 {
-	int	output;
+	char	*output;
+	int		output_count;
+	int		input_count;
+	int		pipe_count;
 }	t_flag;
 
 typedef struct s_quote
@@ -72,7 +75,6 @@ typedef struct s_quote
 typedef struct s_vault
 {
 	char		*read_line;
-	char		*output;
 	char		*env_path;
 	char		**env;
 	char		**clean_decomposer;
@@ -97,7 +99,7 @@ void	built_in(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
-int		meta_analyzis(t_vault *data);
+void	meta_analyzis(t_vault *data);
 char	*output_to_redirect(t_vault *data, int i, int j);
 void	redirection_analysiz(t_vault *data);
 

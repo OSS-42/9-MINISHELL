@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:22:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/21 13:31:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:59:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	lexer(t_vault *data)
 	{
 		if (data->line_decomposer[i])
 			pour chaque ligne du tableau, check pour quotes ('', "")
-				si double quote, re spliter.
+				si simple ou double quote, re spliter.
 				si single quote, ....(a definir)
 			pour chaque ligne du tableau, check pour les redirections (>>, <, >, <<, $?)
 				si redirection, mettre des flags a "ON" car elles seront faites plus tard dans le cas de multiples commandes (pipes)
+			pour chaque ligne du tableau, trouver la premiere occurence avec '' ou "" et les enlever
 			pour chaque ligne du table, check pour multiples commandes (|)
 				si multiples commandes --> pipex
 			pour chaque ligne du tableau, check pour commande built-in (voir liste)

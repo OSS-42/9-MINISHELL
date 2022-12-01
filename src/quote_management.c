@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/11/30 11:37:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 10:03:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	find_str_quote(t_vault *data)
 		{
 			data->quote_in->quote = data->read_line[i];
 			i++;
-			while ((data->read_line[i] != data->quote_in->quote
-					|| data->read_line[i + 1] > 32)
+			while ((data->read_line[i] != data->quote_in->quote || data->read_line[i + 1] > 32)
 				&& data->read_line[i])
 			{
 				if (data->read_line[i] == data->quote_in->quote)
