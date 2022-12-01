@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 22:18:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:39:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	clean_quote(t_vault *data, int row)
 	j = 0;
 	k = 0;
 	len = ft_strlen(data->rl_decomp[row]);
-	data->b_in->echo_clean = ft_calloc(len + 1, sizeof(char));
+	data->b_in->echo_clean = ft_calloc(len, sizeof(char));
 	while (j < len)
 	{
 		if (data->rl_decomp[row][j] == data->b_in->echo_priority)
@@ -61,8 +61,14 @@ void	clean_quote(t_vault *data, int row)
 		k++;
 	}
 	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = ft_strdup(data->b_in->echo_clean);
-	free (data->b_in->echo_clean);
+	data->rl_decomp[row] = data->b_in->echo_clean;
+}
+
+int	ft_char_env_var(char c)
+{
+	if (c == '_' || ft_isalnum(c) == 1)
+		return (1);
+	return (0);
 }
 
 void	find_var_value(t_vault *data, int row)
@@ -70,21 +76,20 @@ void	find_var_value(t_vault *data, int row)
 	int j;
 	int k;
 	int len;
-	
+
 	j = 0;
 	while (data->rl_decomp[row][j])
 	{
-		if (data->rl_decomp[row][j] == '$')
+		while (data->rl_decomp[row][j] != '$')
+			j++;
+		len = 0;
+		k = j + 1;
+		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k] != '\0' && ft_char_env_var(data->rl_decomp[row][k]) == 1)
 		{
-			len = 0;
-			k = j;
-			while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k] != '\0')
-			{
-				len++;
-				k++;
-			}
+			len++;
+			k++;
 		}
-		data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len - 1);
+		data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len);
 		data->dollar_var = ft_strjoin(data->dollar_var, "=");
 		k = 0;
 		while (data->env[k])
@@ -92,34 +97,51 @@ void	find_var_value(t_vault *data, int row)
 			if (ft_strnstr(data->env[k], data->dollar_var, ft_strlen(data->dollar_var)) == NULL)
 				k++;							
 			else
-				put_var_in_plain(data, k, row, len);
+			{
+				expand_var(data, k, row, len);
+				break ;
+			}
 		}
 		j++;
 	}
 }
 
-void	put_var_in_plain(t_vault *data, int row_var, int row, int len)
+void	expand_var(t_vault *data, int row_var, int row, int len)
 {
 	int		len_var;
+	int		i;
 	int		j;
+	int		k;
 	char	*temp;
 
-	j = 0;
 	len_var = ft_strlen(data->env[row_var]) - len;
 	temp = ft_calloc(sizeof(char), (ft_strlen(data->rl_decomp[row]) + len_var + 1));
 	free (data->dollar_var);
-	data->dollar_var = ft_substr(data->env[row_var], len, len_var);
+	data->dollar_var = ft_substr(data->env[row_var], len + 1, len_var);
+	j = 0;
+	i = 0;
 	while (data->rl_decomp[row][j])
 	{
+		k = 0;
 		if (data->rl_decomp[row][j] == '$')
 		{
-			if (j != 0)
-				temp = ft_substr(data->rl_decomp[row], 0, j);
-			data->rl_decomp[row] = ft_strjoin(temp, data->dollar_var);
-			free (temp);
+			while (data->dollar_var[k])
+			{
+				temp[i] = data->dollar_var[k];
+				k++;
+				i++;
+			}
+			j = j + len;
+		}
+		else
+		{
+			temp[i] = data->rl_decomp[row][j];
+			i++;
 		}
 		j++;
 	}
+	free (data->rl_decomp[row]);
+	data->rl_decomp[row] = temp;
 	return ;
 }
 

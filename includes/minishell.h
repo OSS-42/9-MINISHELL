@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 22:20:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:24:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,14 @@ void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
+void	spe_char(t_vault *data);
 
 /***** ft_echo_utils ******/
 int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 void	find_var_value(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
-void	put_var_in_plain(t_vault *data, int row_var, int row, int len);
+void	expand_var(t_vault *data, int row_var, int row, int len);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data);

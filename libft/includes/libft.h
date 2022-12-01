@@ -76,7 +76,7 @@ void		ft_lstclear(t_list **lst, void (*del)(void*));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void		free_dbl_ptr(void **ptr);
-int			ft_is_env_var(char *str, char delimiter);
+int			ft_str_env_var(char *str, char delimiter);
 
 /***********************	Not asked for	****************************/
 
