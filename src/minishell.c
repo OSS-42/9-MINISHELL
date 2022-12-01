@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 09:50:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:49:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_data(t_vault *data)
 	data->flag->output_count = 0;
 	data->flag->input_count = 0;
 	data->flag->pipe_count = 0;
+	data->quote_in->spc_count = 1;
 	return ;
 }
 

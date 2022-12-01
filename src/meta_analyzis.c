@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/01 16:13:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:51:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	redirection_analysiz(t_vault *data)
 
 	i = 0;
 	j = 0;
-	flag_count(data);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
 		if (ft_strchr(data->rl_decomp[i], '>') != NULL
@@ -73,7 +72,10 @@ void	redirection_analysiz(t_vault *data)
 				data->flag->output = output_to_redirect(data, i, j);
 			else if (data->rl_decomp[i][j + 1] == '\0'
 				&& data->rl_decomp[i + 1])
+			{
 				data->flag->output = ft_strdup(data->rl_decomp[i + 1]);
+				find_decomposer_to_switch(data, i);
+			}
 			else
 				printf("alive: syntax error near unexpected token `newline'\n");
 		}

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/01 10:03:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:46:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,5 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 		actual_array++;
 	}
 	data->rl_decomp[actual_array] = "\0";
+	data->quote_in->spc_count = 1;
 }
-
-
-// 'je"tu"'il
-// "coucou">'toi'
