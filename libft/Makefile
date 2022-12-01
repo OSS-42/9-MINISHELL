@@ -42,7 +42,7 @@ SRCS = \
 		src/ft_calloc.c \
 		src/ft_strdup.c \
 		src/ft_substr.c \
-		src/ft_is_env_var.c\
+		src/ft_str_env_var.c\
 		src/ft_strjoin.c \
 		src/ft_strtrim.c \
 		src/ft_split.c \

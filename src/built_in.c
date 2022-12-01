@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 22:16:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:01:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,6 @@ void	ft_echo(t_vault *data)
 	}
 	while (data->rl_decomp[i])
 	{
-		data->b_in->echo_priority = quote_priority(data, i);
-		if (data->b_in->echo_priority != 0)
-			clean_quote(data, i);
-		if (data->dollar == 1 && data->b_in->echo_priority != 39)
-			find_var_value(data, i);
 		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
 		{
 			print_row(data, i);
@@ -124,4 +119,20 @@ void	ft_echo(t_vault *data)
 	if (data->b_in->echo_flag_n == 0)
 		ft_putstr_fd("\n", 1);
 	return ;
+}
+
+void	spe_char(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
+	{
+		data->b_in->echo_priority = quote_priority(data, i);
+		if (data->b_in->echo_priority != 0)
+			clean_quote(data, i);
+		if (data->dollar == 1 && data->b_in->echo_priority != 39)
+			find_var_value(data, i);
+		i++;
+	}
 }
