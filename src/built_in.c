@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/29 23:00:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:16:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,107 +40,6 @@ void	ft_pwd(t_vault *data)
 		write(1, "\n", 1);
 		free (pwd);
 	}
-}
-
-void	ft_echo(t_vault *data)
-{
-	int		i;
-	int		len;
-	int		j;
-	int		k;
-
-	i = 1;
-	len = 0;
-	data->b_in->first_word = 1;
-	if (!(data->rl_decomp[i]))
-		return ;
-	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
-	{
-		i++;
-		data->b_in->echo_flag_n = 1;
-	}
-// Gestion du $ pour variables d'environnement
-// Attention :
-// echo "$HOME" doit afficher la valeur de la variable,
-// echo '$HOME' doit effectuer un echo normal.
-// echo bonjour au revoir$HOME ==> bonjour au revoir/home/ewurstei
-// echo bonjour au 'revoir$HOME' ==> bonjour au revoir$HOME
-// echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
-
-	j = 0;
-	while (data->rl_decomp[i])
-	{
-		while (data->rl_decomp[i][j])
-		{
-			if (data->rl_decomp[i][j] == '\"')
-			{
-				data->b_in->echo_dble_q++;
-				if (data->b_in->echo_first == 0)
-					data->b_in->echo_first = 2;
-				if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-					data->b_in->echo_priority = 34;
-			}
-			else if (data->rl_decomp[i][j] == '\'')
-			{
-				data->b_in->echo_sgle_q++;
-				if (data->b_in->echo_first == 0)
-					data->b_in->echo_first = 1;
-				if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-					data->b_in->echo_priority = 39;
-			}
-			else if (data->rl_decomp[i][j] == '$')
-				data->b_in->echo_dollar = 1;
-			j++;			
-		}
-		if (data->b_in->echo_priority != 0)
-		{
-			j = 0;
-			k = 0;
-			len = ft_strlen(data->rl_decomp[i]);
-			data->b_in->echo_clean = ft_calloc(len + 1, sizeof(char));
-			while (j < len)
-			{
-				if (data->rl_decomp[i][j] == data->b_in->echo_priority)
-					j++;
-				data->b_in->echo_clean[k] = data->rl_decomp[i][j];
-				j++;
-				k++;
-			}
-			free (data->rl_decomp[i]);
-			data->rl_decomp[i] = ft_strdup(data->b_in->echo_clean);
-			free (data->b_in->echo_clean);
-		}
-		data->b_in->echo_priority = 0;
-		data->b_in->echo_first = 0;
-		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
-		{
-			print_row(data, i);
-			i++;
-		}
-		else
-		{
-			print_row(data, i);
-			break ;
-		}
-	}
-	if (data->b_in->echo_flag_n == 0)
-		ft_putstr_fd("\n", 1);
-	return ;
-}
-
-void	print_row(t_vault *data, int row)
-{	
-	if (data->b_in->first_word == 1)
-	{
-		ft_putstr_fd(data->rl_decomp[row], 1);
-		data->b_in->first_word  = 0;
-	}
-	else
-	{
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->rl_decomp[row], 1);
-	}
-	return ;
 }
 
 void	ft_exit(t_vault *data)
@@ -180,5 +79,49 @@ void	ft_env(t_vault *data, int env)
 			i++;
 		}
 	}
+	return ;
+}
+
+// Gestion du $ pour variables d'environnement
+// Attention :
+// echo "$HOME" doit afficher la valeur de la variable,
+// echo '$HOME' doit effectuer un echo normal.
+// echo bonjour au revoir$HOME ==> bonjour au revoir/home/ewurstei
+// echo bonjour au 'revoir$HOME' ==> bonjour au revoir$HOME
+// echo bonjour au "revoir$HOME" ==> bonjour au revoir/home/ewurstei
+
+void	ft_echo(t_vault *data)
+{
+	int		i;
+
+	i = 1;
+	data->b_in->first_word = 1;
+	if (!(data->rl_decomp[i]))
+		return ;
+	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
+	{
+		i++;
+		data->b_in->echo_flag_n = 1;
+	}
+	while (data->rl_decomp[i])
+	{
+		data->b_in->echo_priority = quote_priority(data, i);
+		if (data->b_in->echo_priority != 0)
+			clean_quote(data, i);
+		if (data->dollar == 1 && data->b_in->echo_priority != 39)
+			find_var_value(data, i);
+		if (data->rl_decomp[i + 1] && data->rl_decomp[i + 1][0] != '\0')
+		{
+			print_row(data, i);
+			i++;
+		}
+		else
+		{
+			print_row(data, i);
+			break ;
+		}
+	}
+	if (data->b_in->echo_flag_n == 0)
+		ft_putstr_fd("\n", 1);
 	return ;
 }

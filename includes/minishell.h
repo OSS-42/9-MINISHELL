@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 14:14:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/11/30 22:20:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_builtins
 	int		echo_first;
 	int		echo_dble_q;
 	int		echo_sgle_q;
-	int		echo_dollar;
 	int		flag_clean_echo;
 	int		first_word;
 }	t_builtins;
@@ -83,6 +82,9 @@ typedef struct s_vault
 	t_builtins	*b_in;
 	t_quote		*quote_in;
 	t_flag		*flag;
+	int			dollar;
+	int			activate_var;
+	char		*dollar_var;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -112,7 +114,13 @@ void	ft_pwd(t_vault *data);
 void	ft_echo(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
+
+/***** ft_echo_utils ******/
+int		quote_priority(t_vault *data, int row);
+void	clean_quote(t_vault *data, int row);
+void	find_var_value(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
+void	put_var_in_plain(t_vault *data, int row_var, int row, int len);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data);
