@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 13:39:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:58:18 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	quote_priority(t_vault *data, int row)
 		}
 		else if (data->rl_decomp[row][j] == '$')
 			data->dollar = 1;
-		j++;			
+		j++;
 	}
 	return (data->b_in->echo_priority);
 }
@@ -47,7 +47,7 @@ void	clean_quote(t_vault *data, int row)
 	int	j;
 	int	k;
 	int	len;
-	
+
 	j = 0;
 	k = 0;
 	len = ft_strlen(data->rl_decomp[row]);
@@ -80,7 +80,7 @@ void	find_var_value(t_vault *data, int row)
 	j = 0;
 	while (data->rl_decomp[row][j])
 	{
-		while (data->rl_decomp[row][j] != '$')
+		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
 		len = 0;
 		k = j + 1;
@@ -95,7 +95,7 @@ void	find_var_value(t_vault *data, int row)
 		while (data->env[k])
 		{
 			if (ft_strnstr(data->env[k], data->dollar_var, ft_strlen(data->dollar_var)) == NULL)
-				k++;							
+				k++;
 			else
 			{
 				expand_var(data, k, row, len);
@@ -146,7 +146,7 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 }
 
 void	print_row(t_vault *data, int row)
-{	
+{
 	if (data->b_in->first_word == 1)
 	{
 		ft_putstr_fd(data->rl_decomp[row], 1);

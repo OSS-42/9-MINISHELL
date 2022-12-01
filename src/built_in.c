@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 10:58:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:01:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	spe_char(t_vault *data)
 	int	i;
 
 	i = 0;
-	while (data->rl_decomp[i])
+	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
 		data->b_in->echo_priority = quote_priority(data, i);
 		if (data->b_in->echo_priority != 0)
