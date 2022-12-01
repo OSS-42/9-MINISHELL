@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 14:33:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:55:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_builtins
 	char	*export_var;
 	char	*order_var;
 	char	*echo_var;
-	char	*echo_clean;
 	int		echo_flag_n;
 	char	echo_priority;
 	int		echo_first;
