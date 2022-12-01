@@ -36,7 +36,8 @@ SRCS =	src/minishell.c \
 		src/built_in2.c \
 		src/explore_readline.c \
 		src/quote_management.c \
-		src/meta_analyzis.c
+		src/meta_analyzis.c \
+		src/ft_echo_utils.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
