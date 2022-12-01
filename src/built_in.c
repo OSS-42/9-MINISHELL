@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 14:01:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:48:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,11 @@ void	spe_char(t_vault *data)
 		data->b_in->echo_priority = quote_priority(data, i);
 		if (data->b_in->echo_priority != 0)
 			clean_quote(data, i);
-		if (data->dollar == 1 && data->b_in->echo_priority != 39)
+		if (data->dollar != 0 && data->b_in->echo_priority != 39)
 			find_var_value(data, i);
 		i++;
+		data->b_in->echo_first = 0;
+		data->b_in->echo_priority = 0;
+		data->dollar = 0;
 	}
 }

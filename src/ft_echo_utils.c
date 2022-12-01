@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 13:58:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:52:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	quote_priority(t_vault *data, int row)
 				data->b_in->echo_priority = 39;
 		}
 		else if (data->rl_decomp[row][j] == '$')
-			data->dollar = 1;
+			data->dollar++;
 		j++;
 	}
 	return (data->b_in->echo_priority);
@@ -44,24 +44,25 @@ int	quote_priority(t_vault *data, int row)
 
 void	clean_quote(t_vault *data, int row)
 {
-	int	j;
-	int	k;
-	int	len;
+	int		j;
+	int		k;
+	int		len;
+	char	*temp;
 
 	j = 0;
 	k = 0;
 	len = ft_strlen(data->rl_decomp[row]);
-	data->b_in->echo_clean = ft_calloc(len, sizeof(char));
+	temp = ft_calloc(len, sizeof(char));
 	while (j < len)
 	{
 		if (data->rl_decomp[row][j] == data->b_in->echo_priority)
 			j++;
-		data->b_in->echo_clean[k] = data->rl_decomp[row][j];
+		temp[k] = data->rl_decomp[row][j];
 		j++;
 		k++;
 	}
 	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = data->b_in->echo_clean;
+	data->rl_decomp[row] = temp;
 }
 
 int	ft_char_env_var(char c)
@@ -112,8 +113,10 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 	int		i;
 	int		j;
 	int		k;
+	int		use;
 	char	*temp;
 
+	use = 0;
 	len_var = ft_strlen(data->env[row_var]) - len;
 	temp = ft_calloc(sizeof(char), (ft_strlen(data->rl_decomp[row]) + len_var + 1));
 	free (data->dollar_var);
@@ -123,7 +126,7 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 	while (data->rl_decomp[row][j])
 	{
 		k = 0;
-		if (data->rl_decomp[row][j] == '$')
+		if (data->rl_decomp[row][j] == '$' && use != 1)
 		{
 			while (data->dollar_var[k])
 			{
@@ -131,6 +134,7 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 				k++;
 				i++;
 			}
+			use = 1;
 			j = j + len;
 		}
 		else
@@ -141,7 +145,9 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 		j++;
 	}
 	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = temp;
+	data->rl_decomp[row] = ft_strdup(temp);
+	free (temp);
+	free (data->dollar_var);
 	return ;
 }
 
@@ -157,8 +163,8 @@ void	print_row(t_vault *data, int row)
 		ft_putstr_fd(" ", 1);
 		ft_putstr_fd(data->rl_decomp[row], 1);
 	}
-	data->b_in->echo_first = 0;
-	data->b_in->echo_priority = 0;
-	data->dollar = 0;
+//	data->b_in->echo_first = 0;
+//	data->b_in->echo_priority = 0;
+//	data->dollar = 0;
 	return ;
 }

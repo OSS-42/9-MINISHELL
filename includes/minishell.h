@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 11:24:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:53:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_builtins
 	char	*export_var;
 	char	*order_var;
 	char	*echo_var;
-	char	*echo_clean;
 	int		echo_flag_n;
 	char	echo_priority;
 	int		echo_first;
