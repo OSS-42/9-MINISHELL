@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 14:56:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:49:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,6 @@ void	clean_quote(t_vault *data, int row)
 	}
 	free (data->rl_decomp[row]);
 	data->rl_decomp[row] = temp;
-}
-
-int	ft_char_env_var(char c)
-{
-	if (c == '_' || ft_isalnum(c) == 1)
-		return (1);
-	return (0);
 }
 
 void	find_var_value(t_vault *data, int row)
@@ -163,8 +156,5 @@ void	print_row(t_vault *data, int row)
 		ft_putstr_fd(" ", 1);
 		ft_putstr_fd(data->rl_decomp[row], 1);
 	}
-//	data->b_in->echo_first = 0;
-//	data->b_in->echo_priority = 0;
-//	data->dollar = 0;
 	return ;
 }
