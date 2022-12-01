@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/01 11:01:10 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:13:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	flag_count(t_vault *data)
 
 }
 
+// commande parametre > fichier
+// < fichier commande parametre > fichier
 void	redirection_analysiz(t_vault *data)
 {
 	int		i;
@@ -59,6 +61,7 @@ void	redirection_analysiz(t_vault *data)
 
 	i = 0;
 	j = 0;
+	flag_count(data);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
 		if (ft_strchr(data->rl_decomp[i], '>') != NULL

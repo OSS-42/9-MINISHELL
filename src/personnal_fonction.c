@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 14:16:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:17:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_if_inside_quote(char *str, char c)
 			{
 				if (str[i] == c)
 				{
-					printf("%c est dans des quotes\n", c);
+					// printf("%c est dans des quotes\n", c);
 					return (TRUE);
 				}
 				i++;
@@ -49,6 +49,6 @@ int	check_if_inside_quote(char *str, char c)
 		}
 		i++;
 	}
-	printf("%c n'est pas dans des quotes\n", c);
+	// printf("%c n'est pas dans des quotes\n", c);
 	return (FALSE);
 }
