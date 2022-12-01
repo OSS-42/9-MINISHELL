@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 22:07:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:16:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,11 @@ void	ft_echo(t_vault *data)
 	data->b_in->first_word = 1;
 	if (!(data->rl_decomp[i]))
 		return ;
-	else if (ft_strcmp(data->rl_decomp[i++], "-n") == 0)
+	else if (ft_strcmp(data->rl_decomp[i], "-n") == 0)
+	{
+		i++;
 		data->b_in->echo_flag_n = 1;
+	}
 	while (data->rl_decomp[i])
 	{
 		data->b_in->echo_priority = quote_priority(data, i);

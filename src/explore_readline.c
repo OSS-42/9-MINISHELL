@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/11/30 20:46:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:15:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	explore_readline(t_vault *data)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
-		print_double_array(data->rl_decomp);
+//		print_double_array(data->rl_decomp);
 		built_in(data);
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/11/30 22:06:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/11/30 22:18:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	find_var_value(t_vault *data, int row)
 				len++;
 				k++;
 			}
-			data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len - 1);
-			data->dollar_var = ft_strjoin(data->dollar_var, "=");
 		}
+		data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len - 1);
+		data->dollar_var = ft_strjoin(data->dollar_var, "=");
 		k = 0;
 		while (data->env[k])
 		{
