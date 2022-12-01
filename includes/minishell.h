@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 14:55:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:52:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_flag
 	int		output_count;
 	int		input_count;
 	int		pipe_count;
+	int		dollar_count;
 }	t_flag;
 
 typedef struct s_quote
@@ -83,7 +84,6 @@ typedef struct s_vault
 	t_builtins	*b_in;
 	t_quote		*quote_in;
 	t_flag		*flag;
-	int			dollar;
 	int			activate_var;
 	char		*dollar_var;
 }	t_vault;
@@ -101,6 +101,7 @@ void	built_in(t_vault *data);
 void	meta_analyzis(t_vault *data);
 char	*output_to_redirect(t_vault *data, int i, int j);
 void	redirection_analysiz(t_vault *data);
+void	flag_count(t_vault *data);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
