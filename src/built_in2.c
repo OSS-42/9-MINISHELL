@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 08:35:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:23:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,37 @@ void	ft_unset(t_vault *data, int row)
 	return ;
 }
 
-void	add_line_env(t_vault *data, int i)
+void	add_line_env(t_vault *data)
 {
-	data->b_in->env_export = ft_calloc(i + 2, sizeof(char *));
-	i = 0;
-	while (data->env[i])
+	int	j;
+
+	j = 0;
+	while (data->env[j])
 	{
-		data->b_in->env_export[i] = ft_strdup(data->env[i]);
-		i++;
+		if (ft_strnstr(data->env[j], data->b_in->export_var,
+				ft_strlen(data->b_in->export_var)) == NULL)
+			j++;
+		else
+		{
+			data->env[j] = ft_strdup(data->b_in->exp_arg);
+			free(data->b_in->exp_arg);
+			return ;
+		}
 	}
-	data->b_in->env_export[i] = ft_strdup(data->b_in->export_arg);
+	data->b_in->env_export = ft_calloc(j + 2, sizeof(char *));
+	j = 0;
+	while (data->env[j])
+	{
+		data->b_in->env_export[j] = ft_strdup(data->env[j]);
+		j++;
+	}
+	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
 	data->env = &data->b_in->env_export[0];
 	return ;
 }
 
 void	ft_export(t_vault *data, int row)
 {
-	int	j;
-	int	len;
-
-	len = 0;
 	if (!(data->rl_decomp[row]))
 		order_env(data);
 	else
@@ -101,35 +112,19 @@ void	ft_export(t_vault *data, int row)
 				printf("export : bad argument\n");
 				return ;
 			}
-			data->b_in->export_arg = ft_strdup(data->rl_decomp[row]);
-			if (ft_strchr(data->b_in->export_arg, '=') == NULL)
+			data->b_in->exp_arg = ft_strdup(data->rl_decomp[row]);
+			if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
 			{
-				data->b_in->export_arg = ft_strjoin(data->rl_decomp[row], "=\"\"");
+				data->b_in->exp_arg = ft_strjoin(data->rl_decomp[row], "=\"\"");
 				data->b_in->export_var = ft_strjoin(data->rl_decomp[row], "=");
 			}
 			else
-			{
-				len = ft_strlen(data->rl_decomp[row])
-					- ft_strlen(ft_strchr(data->rl_decomp[row], '=')) + 1;
-				data->b_in->export_var = ft_substr(data->rl_decomp[row], 0, len);
-			}
-			j = 0;
-			while (data->env[j])
-			{
-				if (ft_strnstr(data->env[j], data->b_in->export_var,
-						ft_strlen(data->b_in->export_var)) == NULL)
-					j++;
-				else
-				{
-					data->env[j] = ft_strdup(data->b_in->export_arg);
-					free(data->b_in->export_arg);
-					return ;
-				}
-			}
-			add_line_env(data, j);
+				data->b_in->export_var = ft_substr(data->rl_decomp[row], 0,
+						ft_strlen(data->rl_decomp[row])
+						- ft_strlen(ft_strchr(data->rl_decomp[row], '=')) + 1);
+			add_line_env(data);
 			row++;
 		}	
-		return ;
 	}
 }
 
