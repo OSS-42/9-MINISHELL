@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 16:58:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 08:28:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	meta_analyzis(data);
-	print_double_array(data->rl_decomp);
-	write(1, "\n", 1);
+//	print_double_array(data->rl_decomp);
+//	write(1, "\n", 1);
 	if (data->quote_in->double_quote_count % 2 == 0
 		&& data->quote_in->simple_quote_count % 2 == 0)
 	{
@@ -25,9 +25,9 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data);
 		redirection_analysiz(data);
-		spe_char(data);
-		print_double_array(data->rl_decomp);
-		printf("%s\n", data->flag->output);
+		spe_char(data, 0);
+//		print_double_array(data->rl_decomp);
+//		printf("%s\n", data->flag->output);
 		built_in(data);
 	}
 	return ;
@@ -35,18 +35,21 @@ void	explore_readline(t_vault *data)
 
 void	built_in(t_vault *data)
 {
+	int	i;
+
+	i = 1;
 	if (ft_strcmp("cd", data->rl_decomp[0]) == 0)
-		ft_cd(data);
+		ft_cd(data, i);
 	if (ft_strcmp("pwd", data->rl_decomp[0]) == 0)
-		ft_pwd(data);
+		ft_pwd(data, i);
 	if (ft_strcmp("echo", data->rl_decomp[0]) == 0)
-		ft_echo(data);
+		ft_echo(data, i);
 	if (ft_strcmp("env", data->rl_decomp[0]) == 0)
 		ft_env (data, 1);
 	if (ft_strcmp("export", data->rl_decomp[0]) == 0)
-		ft_export (data);
+		ft_export (data, i);
 	if (ft_strcmp("unset", data->rl_decomp[0]) == 0)
-		ft_unset (data);
+		ft_unset (data, i);
 	if (ft_strcmp("exit", data->rl_decomp[0]) == 0)
 		ft_exit (0);
 	return ;

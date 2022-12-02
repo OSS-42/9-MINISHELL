@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 11:51:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:00:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,15 @@ void	remove_line_env(t_vault *data, int i)
 	return ;
 }
 
-void	ft_unset(t_vault *data)
+void	ft_unset(t_vault *data, int row)
 {
-	int	i;
 	int	j;
 
-	i = 1;
-	while (data->rl_decomp[i])
+	while (data->rl_decomp[row])
 	{
-		if (!(data->rl_decomp[i]) || ft_str_env_var(data->rl_decomp[i], 0) == 0)
+		if (check_error(data, row) == 1)
 		{
-			ft_putstr_fd("unset : argument error\n", 2);
-			return ;
-		}
-		else
-		{
-			data->b_in->unset_arg = ft_join(data->rl_decomp[i], "=");
+			data->b_in->unset_arg = ft_join(data->rl_decomp[row], "=");
 			j = 0;
 			while (data->env[j])
 			{
@@ -67,7 +60,12 @@ void	ft_unset(t_vault *data)
 				}
 			}
 		}
-		i++;
+		else
+		{
+			ft_putstr_fd("unset : argument error\n", 2);
+			return ;
+		}
+		row++;
 	}
 	return ;
 }
@@ -86,36 +84,34 @@ void	add_line_env(t_vault *data, int i)
 	return ;
 }
 
-void	ft_export(t_vault *data)
+void	ft_export(t_vault *data, int row)
 {
-	int	i;
 	int	j;
 	int	len;
 
-	i = 1;
 	len = 0;
-	if (!(data->rl_decomp[i]))
+	if (!(data->rl_decomp[row]))
 		order_env(data);
 	else
 	{
-		while (data->rl_decomp[i])
+		while (data->rl_decomp[row])
 		{
-			if (ft_str_env_var(data->rl_decomp[i], '=') == 0)
+			if (ft_str_env_var(data->rl_decomp[row], '=') == 0)
 			{
 				printf("export : bad argument\n");
 				return ;
 			}
-			data->b_in->export_arg = ft_strdup(data->rl_decomp[i]);
+			data->b_in->export_arg = ft_strdup(data->rl_decomp[row]);
 			if (ft_strchr(data->b_in->export_arg, '=') == NULL)
 			{
-				data->b_in->export_arg = ft_strjoin(data->rl_decomp[i], "=\"\"");
-				data->b_in->export_var = ft_strjoin(data->rl_decomp[i], "=");
+				data->b_in->export_arg = ft_strjoin(data->rl_decomp[row], "=\"\"");
+				data->b_in->export_var = ft_strjoin(data->rl_decomp[row], "=");
 			}
 			else
 			{
-				len = ft_strlen(data->rl_decomp[i])
-					- ft_strlen(ft_strchr(data->rl_decomp[i], '='));
-				data->b_in->export_var = ft_substr(data->rl_decomp[i], 0, len + 1);
+				len = ft_strlen(data->rl_decomp[row])
+					- ft_strlen(ft_strchr(data->rl_decomp[row], '=')) + 1;
+				data->b_in->export_var = ft_substr(data->rl_decomp[row], 0, len);
 			}
 			j = 0;
 			while (data->env[j])
@@ -131,7 +127,7 @@ void	ft_export(t_vault *data)
 				}
 			}
 			add_line_env(data, j);
-			i++;
+			row++;
 		}	
 		return ;
 	}
@@ -143,35 +139,27 @@ void	order_env(t_vault *data)
 	int		i;
 	int		j;
 
-	i = 0;
-	rows = 0;
-	while (data->env[rows])
-		rows++;
-	if (data->b_in->env_order)
-		free_dbl_ptr((void **)data->b_in->env_order);
-	data->b_in->env_order = ft_calloc(rows + 1, sizeof(char *));
-	while (data->env[i])
+	rows = ft_dbl_ptr_len(data->env);
+	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
+	i = -1;
+	while (++i < rows)
+		data->b_in->env_ord[i] = data->env[i];
+	i = -1;
+	while (++i < rows)
 	{
-		data->b_in->env_order[i] = data->env[i];
-		i++;
-	}
-	i = 0;
-	while (i < rows)
-	{
-		j = i + 1;
-		while (j < rows)
+		j = i;
+		while (++j < rows)
 		{
-			if (ft_strcmp(data->b_in->env_order[i],
-					data->b_in->env_order[j]) > 0)
+			if (ft_strcmp(data->b_in->env_ord[i], data->b_in->env_ord[j]) > 0)
 			{
-				data->b_in->order_var = ft_strdup(data->b_in->env_order[i]);
-				data->b_in->env_order[i] = ft_strdup(data->b_in->env_order[j]);
-				data->b_in->env_order[j] = ft_strdup(data->b_in->order_var);
+				data->b_in->order_var = ft_strdup(data->b_in->env_ord[i]);
+				data->b_in->env_ord[i] = ft_strdup(data->b_in->env_ord[j]);
+				data->b_in->env_ord[j] = ft_strdup(data->b_in->order_var);
 			}
-			j++;
 		}
-		i++;
 	}
 	ft_env(data, 2);
 	return ;
 }
+
+//bizarrement ft_dbl_ptr_realloc n'aime pas le free si la table existe deja...

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 16:52:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 23:11:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_builtins
 {
 	char	**env_unset;
 	char	**env_export;
-	char	**env_order;
+	char	**env_ord;
 	char	*unset_arg;
 	char	*export_arg;
 	char	*export_var;
@@ -111,12 +111,11 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
 
 /***** built_in.c *****/
-void	ft_cd(t_vault *data);
-void	ft_pwd(t_vault *data);
-void	ft_echo(t_vault *data);
+void	ft_cd(t_vault *data, int row);
+void	ft_pwd(t_vault *data, int row);
+void	ft_echo(t_vault *data, int row);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
-void	spe_char(t_vault *data);
 
 /***** ft_echo_utils ******/
 int		quote_priority(t_vault *data, int row);
@@ -126,9 +125,9 @@ void	print_row(t_vault *data, int row);
 void	expand_var(t_vault *data, int row_var, int row, int len);
 
 /***** built_in2.c *****/
-void	ft_unset(t_vault *data);
+void	ft_unset(t_vault *data, int row);
 void	remove_line(t_vault *data, int i);
-void	ft_export(t_vault *data);
+void	ft_export(t_vault *data, int row);
 void	add_line_env(t_vault *data, int i);
 void	order_env(t_vault *data);
 
@@ -137,5 +136,11 @@ void	print_double_array(char **array);
 
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
+
+/***** error_mgmnt.c *****/
+int		check_error(t_vault *data, int row);
+
+/***** minishell_utils.c *****/
+void	spe_char(t_vault *data, int row);
 
 #endif

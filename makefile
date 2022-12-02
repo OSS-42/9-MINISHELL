@@ -37,7 +37,9 @@ SRCS =	src/minishell.c \
 		src/explore_readline.c \
 		src/quote_management.c \
 		src/meta_analyzis.c \
-		src/ft_echo_utils.c
+		src/ft_echo_utils.c \
+		src/error_mgmnt.c\
+		src/minishell_utils.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
@@ -54,12 +56,8 @@ all:	deadpool $(NAME)
 $(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
-#automatic launch
 	@sleep 2
 	@clear
-#	@$(call intro_minishell)
-#	@./minishell
-# À changer au moment du rendu
 
 deadpool:
 	@$(call intro_mandatory)
@@ -80,6 +78,10 @@ $(D_OBJ):
 
 $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
+
+#norm a checker
+norm:
+	@includes/ norminette
 
 clean:
 	@$(call cleaning, $(RM) $(D_OBJ))

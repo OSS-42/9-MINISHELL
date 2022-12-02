@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/01 17:00:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 08:27:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	meta_analyzis(t_vault *data)
 void	flag_count(t_vault *data)
 {
 	int	i;
-	// int	j;
+	int	j;
 
 	i = 0;
 	while (data->rl_decomp[i])
@@ -48,13 +48,13 @@ void	flag_count(t_vault *data)
 			data->flag->input_count++;
 		if (check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
 			data->flag->pipe_count++;
-		// j = 0;
-		// while (data->rl_decomp[i][j])
-		// {
-		// 	if (data->rl_decomp[i][j] == '$')
-		// 		data->flag->dollar_count++;
-		// 	j++;
-		// }
+		j = 0;
+		while (data->rl_decomp[i][j])
+		{
+			if (data->rl_decomp[i][j] == '$')
+				data->flag->dollar_count++;
+			j++;
+		}
 		i++;
 	}
 }
