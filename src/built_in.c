@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 14:27:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:49:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	ft_pwd(t_vault *data, int row)
 void	ft_exit(t_vault *data)
 {
 	free_dbl_ptr((void **)data->rl_decomp);
+	free (data->b_in->export_var);
+	if (data->b_in->env_export)
+		free_dbl_ptr((void **)data->b_in->env_export);
+	if (data->b_in->env_unset)
+		free_dbl_ptr((void **)data->b_in->env_unset);
+	if (data->b_in->env_ord)
+		free(data->b_in->env_ord);
 	free(data->read_line);
 	free(data->b_in);
 	free(data->quote_in);
@@ -72,6 +79,7 @@ void	ft_env(t_vault *data, int env)
 		{
 			ft_putstr_fd(data->b_in->env_ord[i], 1);
 			ft_putstr_fd("\n", 1);
+			free (data->b_in->env_ord[i]);
 			i++;
 		}
 	}

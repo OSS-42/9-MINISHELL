@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 14:34:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:47:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_unset(t_vault *data, int row)
 	{
 		if (check_error(data, row) == 1)
 		{
-			data->b_in->unset_arg = ft_join(data->rl_decomp[row], "=");
+			data->b_in->unset_arg = ft_strjoin(data->rl_decomp[row], "=");
 			j = 0;
 			while (data->env[j])
 			{
@@ -56,6 +56,7 @@ void	ft_unset(t_vault *data, int row)
 				else
 				{
 					remove_line_env(data, j);
+					free (data->b_in->unset_arg);
 					break ;
 				}
 			}
@@ -127,8 +128,6 @@ void	ft_export(t_vault *data, int row)
 			row++;
 		}
 	}
-	free (data->b_in->export_var);
-	free_dbl_ptr((void **)data->b_in->env_export);
 }
 
 void	order_env(t_vault *data)
@@ -140,11 +139,7 @@ void	order_env(t_vault *data)
 	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
 	i = -1;
 	while (++i < rows)
-	{
-		data->b_in->env_ord[i] = ft_calloc(sizeof(char),
-				ft_strlen(data->env[i]) + 11 + 1);
 		data->b_in->env_ord[i] = ft_strjoin("declare -x ", data->env[i]);
-	}
 	swap_lines(data, rows);
 	ft_env(data, 2);
 	return ;
