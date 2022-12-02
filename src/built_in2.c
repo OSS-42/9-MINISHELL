@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 23:00:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:35:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,27 +137,17 @@ void	order_env(t_vault *data)
 {
 	int		rows;
 	int		i;
-	int		j;
 
 	rows = ft_dbl_ptr_len(data->env);
 	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
 	i = -1;
 	while (++i < rows)
-		data->b_in->env_ord[i] = data->env[i];
-	i = -1;
-	while (++i < rows)
 	{
-		j = i;
-		while (++j < rows)
-		{
-			if (ft_strcmp(data->b_in->env_ord[i], data->b_in->env_ord[j]) > 0)
-			{
-				data->b_in->order_var = ft_strdup(data->b_in->env_ord[i]);
-				data->b_in->env_ord[i] = ft_strdup(data->b_in->env_ord[j]);
-				data->b_in->env_ord[j] = ft_strdup(data->b_in->order_var);
-			}
-		}
+		data->b_in->env_ord[i] = ft_calloc(sizeof(char),
+				ft_strlen(data->env[i]) + 11 + 1);
+		data->b_in->env_ord[i] = ft_strjoin("declare -x ", data->env[i]);
 	}
+	swap_lines(data, rows);
 	ft_env(data, 2);
 	return ;
 }

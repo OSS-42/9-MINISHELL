@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 23:11:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 08:36:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,6 @@ int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
 void	spe_char(t_vault *data, int row);
+void	swap_lines(t_vault *data, int rows);
 
 #endif
