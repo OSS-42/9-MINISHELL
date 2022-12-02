@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/02 10:07:56 by mbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/12/02 10:20:20 by ewurstei         ###   ########.fr       */
+>>>>>>> 82f708966d1e5c575471c83fa0561a3f67007f26
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +73,28 @@ void	find_var_value(t_vault *data, int row)
 	int	k;
 	int	len;
 
+<<<<<<< HEAD
 	j = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
+=======
+	j = -1;
+	while (data->rl_decomp[row][++j])
+>>>>>>> 82f708966d1e5c575471c83fa0561a3f67007f26
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
 		len = 0;
+<<<<<<< HEAD
 		k = j + 1;
 		while (data->rl_decomp[row] && data->rl_decomp[row][k] != '\0'
 				&& data->rl_decomp[row][k] != ' ' && ft_char_env_var(data->rl_decomp[row][k]) == 1)
 		{
+=======
+		k = j;
+		while (data->rl_decomp[row][++k] != ' ' && data->rl_decomp[row][k]
+			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+>>>>>>> 82f708966d1e5c575471c83fa0561a3f67007f26
 			len++;
-			k++;
-		}
 		data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len);
 		data->dollar_var = ft_strjoin(data->dollar_var, "=");
 		k = 0;
@@ -96,7 +109,6 @@ void	find_var_value(t_vault *data, int row)
 				break ;
 			}
 		}
-		j++;
 	}
 }
 
