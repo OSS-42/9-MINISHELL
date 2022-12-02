@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 20:18:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 21:52:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	clean_quote(t_vault *data, int row)
 
 void	find_var_value(t_vault *data, int row)
 {
-	int j;
-	int k;
-	int len;
+	int	j;
+	int	k;
+	int	len;
 
 	j = 0;
 	while (data->rl_decomp[row][j])
@@ -76,7 +76,8 @@ void	find_var_value(t_vault *data, int row)
 			j++;
 		len = 0;
 		k = j + 1;
-		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k] != '\0' && ft_char_env_var(data->rl_decomp[row][k]) == 1)
+		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k] != '\0'
+			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
 		{
 			len++;
 			k++;
@@ -86,7 +87,8 @@ void	find_var_value(t_vault *data, int row)
 		k = 0;
 		while (data->env[k])
 		{
-			if (ft_strnstr(data->env[k], data->dollar_var, ft_strlen(data->dollar_var)) == NULL)
+			if (ft_strnstr(data->env[k], data->dollar_var,
+					ft_strlen(data->dollar_var)) == NULL)
 				k++;
 			else
 			{
@@ -109,7 +111,8 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 
 	use = 0;
 	len_var = ft_strlen(data->env[row_var]) - len;
-	temp = ft_calloc(sizeof(char), (ft_strlen(data->rl_decomp[row]) + len_var + 1));
+	temp = ft_calloc(sizeof(char),
+			(ft_strlen(data->rl_decomp[row]) + len_var + 1));
 	free (data->dollar_var);
 	data->dollar_var = ft_substr(data->env[row_var], len + 1, len_var);
 	j = 0;
@@ -147,7 +150,7 @@ void	print_row(t_vault *data, int row)
 	if (data->b_in->first_word == 1)
 	{
 		ft_putstr_fd(data->rl_decomp[row], 1);
-		data->b_in->first_word  = 0;
+		data->b_in->first_word = 0;
 	}
 	else
 	{

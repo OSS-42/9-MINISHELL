@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 20:19:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 22:49:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data);
 		redirection_analysiz(data);
-		spe_char(data);
+		spe_char(data, 0);
 		redirection_analysiz(data);
 //		print_double_array(data->rl_decomp);
 //		printf("%s\n", data->flag->output);
@@ -36,18 +36,21 @@ void	explore_readline(t_vault *data)
 
 void	built_in(t_vault *data)
 {
+	int	i;
+
+	i = 1;
 	if (ft_strcmp("cd", data->rl_decomp[0]) == 0)
-		ft_cd(data);
+		ft_cd(data, i);
 	if (ft_strcmp("pwd", data->rl_decomp[0]) == 0)
-		ft_pwd(data);
+		ft_pwd(data, i);
 	if (ft_strcmp("echo", data->rl_decomp[0]) == 0)
-		ft_echo(data);
+		ft_echo(data, i);
 	if (ft_strcmp("env", data->rl_decomp[0]) == 0)
 		ft_env (data, 1);
 	if (ft_strcmp("export", data->rl_decomp[0]) == 0)
-		ft_export (data);
+		ft_export (data, i);
 	if (ft_strcmp("unset", data->rl_decomp[0]) == 0)
-		ft_unset (data);
+		ft_unset (data, i);
 	if (ft_strcmp("exit", data->rl_decomp[0]) == 0)
 		ft_exit (0);
 	return ;

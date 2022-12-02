@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dbl_ptr_realloc.c                               :+:      :+:    :+:   */
+/*   error_mgmnt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 21:18:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 22:05:44 by ewurstei         ###   ########.fr       */
+/*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
+/*   Updated: 2022/12/01 23:08:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
-//	if (tab)
-//		free_dbl_ptr((void **)tab);
-
-char	**ft_dbl_ptr_realloc(char **tab, int size)
+int	check_error(t_vault *data, int row)
 {
-	tab = ft_calloc(size, sizeof(char *));
-	return (tab);
+	if (!(data->rl_decomp[row]) || ft_str_env_var(data->rl_decomp[row], 0) == 0)
+		return (0);
+	return (1);
 }
