@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 09:23:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:34:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	decomposer_array_to_replace(t_vault *data, int end);
 void	replace_decomposer_array(t_vault *data, int end, int *i);
 void	find_decomposer_to_switch(t_vault *data, int to_switch);
 void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
+void	len_of_replacement(t_vault *data, int *i);
 
 /***** built_in.c *****/
 void	ft_cd(t_vault *data, int row);

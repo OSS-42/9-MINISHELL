@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/01 20:21:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:25:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
-//ajouter la verification de la premiere occurence
+//TODO ajouter la verification de la premiere occurence VOIR AVEC ERIC
 void	meta_analyzis(t_vault *data)
 {
 	int	i;
@@ -29,8 +28,8 @@ void	meta_analyzis(t_vault *data)
 			data->quote_in->simple_quote_count++;
 		i++;
 	}
-	if (data->quote_in->double_quote_count % 2 != 0 ||
-		data->quote_in->simple_quote_count % 2 != 0)
+	if (data->quote_in->double_quote_count % 2 != 0
+		|| data->quote_in->simple_quote_count % 2 != 0)
 		printf("Wrong argument\n");
 }
 
@@ -79,7 +78,10 @@ void	redirection_analysiz(t_vault *data)
 				data->flag->output = output_to_redirect(data, i, j);
 			else if (data->rl_decomp[i][j + 1] == '\0'
 				&& data->rl_decomp[i + 1])
+			{
 				data->flag->output = ft_strdup(data->rl_decomp[i + 1]);
+				find_decomposer_to_switch(data, i);
+			}
 			else
 				printf("alive: syntax error near unexpected token `newline'\n");
 		}
