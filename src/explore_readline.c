@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 09:00:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:20:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	built_in(t_vault *data)
 	if (ft_strcmp("unset", data->rl_decomp[0]) == 0)
 		ft_unset (data, i);
 	if (ft_strcmp("exit", data->rl_decomp[0]) == 0)
-		ft_exit (0);
+		ft_exit (data);
 	return ;
 }
 

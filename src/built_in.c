@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 10:23:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:21:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	ft_pwd(t_vault *data, int row)
 	}
 }
 
-//	prevoir les free en fonction d'ou on est dans le programme lors de exit
+//	TODO prevoir les free
+//	TODO Pourquoi free_dbl_ptr prend un void ?
 void	ft_exit(t_vault *data)
 {
-	// (void) data;
 	free_dbl_ptr((void **)data->rl_decomp);
 	exit (0);
 }

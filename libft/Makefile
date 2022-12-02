@@ -95,7 +95,7 @@ re: fclean all
 .PHONY: all clean fclean re
 
 #=================== DONE BUT NOT ASKED FOR ==================#
-# ft_strmap.c ft_strstr.c ft_strcat.c 
+# ft_strmap.c ft_strstr.c ft_strcat.c
 # ft_strncat.c  ft_strncpy.c
 # ft_putchar.c ft_putnbr.c ft_putstr.c
 #======================== NOT ASK FOR ========================#
