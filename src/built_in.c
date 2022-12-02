@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 11:29:10 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:03:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_pwd(t_vault *data, int row)
 void	ft_exit(t_vault *data)
 {
 	free_dbl_ptr((void **)data->rl_decomp);
+	free(data->read_line);
 	free(data->b_in);
 	free(data->quote_in);
 	free(data->flag);

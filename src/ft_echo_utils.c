@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 11:03:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:40:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	clean_quote(t_vault *data, int row)
 	data->rl_decomp[row] = temp;
 }
 
+// TODO Si on veut corriger le invalid read il faut changer la condition des boucles
 void	find_var_value(t_vault *data, int row)
 {
 	int	j;

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 11:26:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:04:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	main(void)
 			add_history(data.read_line);
 			explore_readline(&data);
 			free(data.read_line);
+			free_dbl_ptr((void **)data.rl_decomp);
 		}
 	}
 	return (0);
 }
 
-// valgrind --leak-check=full  --show-reachable=yes --suppressions=./minishell.sup ./minishell 
+// valgrind --leak-check=full  --show-reachable=yes --suppressions=./minishell.sup ./minishell
