@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 12:24:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:36:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 			}
 			use = 1;
 			j = j + len;
+			free (data->dollar_var);
 		}
 		else
 		{
@@ -143,7 +144,6 @@ void	expand_var(t_vault *data, int row_var, int row, int len)
 	free (data->rl_decomp[row]);
 	data->rl_decomp[row] = ft_strdup(temp);
 	free (temp);
-	free (data->dollar_var);
 	return ;
 }
 

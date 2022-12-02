@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 12:51:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:34:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	add_line_env(t_vault *data)
 		j++;
 	}
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
+	free (data->b_in->exp_arg);
 	data->env = &data->b_in->env_export[0];
 	return ;
 }
@@ -127,6 +128,7 @@ void	ft_export(t_vault *data, int row)
 		}
 	}
 	free (data->b_in->export_var);
+	free_dbl_ptr((void **)data->b_in->env_export);
 }
 
 void	order_env(t_vault *data)
