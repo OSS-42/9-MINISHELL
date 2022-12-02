@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/01 23:10:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 10:23:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_pwd(t_vault *data, int row)
 //	prevoir les free en fonction d'ou on est dans le programme lors de exit
 void	ft_exit(t_vault *data)
 {
-	(void) data;
+	// (void) data;
+	free_dbl_ptr((void **)data->rl_decomp);
 	exit (0);
 }
 

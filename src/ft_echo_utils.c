@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 09:54:54 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 10:07:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ void	find_var_value(t_vault *data, int row)
 	int	len;
 
 	j = 0;
-	while (data->rl_decomp[row][j])
+	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
 		len = 0;
 		k = j + 1;
-		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k] != '\0'
-			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+		while (data->rl_decomp[row] && data->rl_decomp[row][k] != '\0'
+				&& data->rl_decomp[row][k] != ' ' && ft_char_env_var(data->rl_decomp[row][k]) == 1)
 		{
 			len++;
 			k++;
