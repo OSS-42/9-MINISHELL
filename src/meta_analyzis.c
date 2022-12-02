@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/02 09:25:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 09:41:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	flag_count(t_vault *data)
 	int	j;
 
 	i = 0;
-	while (data->rl_decomp[i])
+	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
 		if (check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
 			data->flag->output_count++;
