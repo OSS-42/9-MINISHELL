@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 08:36:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:23:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_builtins
 	char	**env_export;
 	char	**env_ord;
 	char	*unset_arg;
-	char	*export_arg;
+	char	*exp_arg;
 	char	*export_var;
 	char	*order_var;
 	char	*echo_var;
@@ -128,7 +128,7 @@ void	expand_var(t_vault *data, int row_var, int row, int len);
 void	ft_unset(t_vault *data, int row);
 void	remove_line(t_vault *data, int i);
 void	ft_export(t_vault *data, int row);
-void	add_line_env(t_vault *data, int i);
+void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
 
 /***** POUR DEBUG *****/
