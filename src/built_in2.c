@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 09:23:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 12:51:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,9 @@ void	ft_export(t_vault *data, int row)
 						- ft_strlen(ft_strchr(data->rl_decomp[row], '=')) + 1);
 			add_line_env(data);
 			row++;
-		}	
+		}
 	}
+	free (data->b_in->export_var);
 }
 
 void	order_env(t_vault *data)
