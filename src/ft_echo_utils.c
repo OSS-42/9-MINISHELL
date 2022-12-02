@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 14:36:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:38:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,19 @@ void	find_var_value(t_vault *data, int row)
 	int		len;
 	char	*temp;
 
-	j = -1;
-	while (data->rl_decomp[row][++j])
+	j = 0;
+	while (data->rl_decomp[row][j])
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
 		len = 0;
-		k = j;
-		while (data->rl_decomp[row][++k] != ' ' && data->rl_decomp[row][k]
+		k = j + 1;
+		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k]
 			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+		{
 			len++;
+			k++;
+		}
 		temp = ft_substr(data->rl_decomp[row], j + 1, len);
 		data->dollar_var = ft_strjoin(temp, "=");
 		free (temp);
@@ -97,6 +100,7 @@ void	find_var_value(t_vault *data, int row)
 				break ;
 			}
 		}
+		j++;
 	}
 	if (data->dollar_var)
 		free (data->dollar_var);
