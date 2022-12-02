@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 11:40:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:15:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ void	clean_quote(t_vault *data, int row)
 }
 
 // TODO Si on veut corriger le invalid read il faut changer la condition des boucles
+//TODO J'ai dollar_var par temp pour pouvoir free temp à la ligne 87
 void	find_var_value(t_vault *data, int row)
 {
-	int	j;
-	int	k;
-	int	len;
+	int		j;
+	int		k;
+	int		len;
+	char	*temp;
 
 	j = -1;
 	while (data->rl_decomp[row][++j])
@@ -80,8 +82,9 @@ void	find_var_value(t_vault *data, int row)
 		while (data->rl_decomp[row][++k] != ' ' && data->rl_decomp[row][k]
 			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
 			len++;
-		data->dollar_var = ft_substr(data->rl_decomp[row], j + 1, len);
-		data->dollar_var = ft_strjoin(data->dollar_var, "=");
+		temp = ft_substr(data->rl_decomp[row], j + 1, len);
+		data->dollar_var = ft_strjoin(temp, "=");
+		free (temp);
 		k = 0;
 		while (data->env[k])
 		{
