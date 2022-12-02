@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 12:15:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:24:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	clean_quote(t_vault *data, int row)
 }
 
 // TODO Si on veut corriger le invalid read il faut changer la condition des boucles
-//TODO J'ai dollar_var par temp pour pouvoir free temp à la ligne 87
+//TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
 void	find_var_value(t_vault *data, int row)
 {
 	int		j;
@@ -98,6 +98,8 @@ void	find_var_value(t_vault *data, int row)
 			}
 		}
 	}
+	if (data->dollar_var)
+		free (data->dollar_var);
 }
 
 void	expand_var(t_vault *data, int row_var, int row, int len)
