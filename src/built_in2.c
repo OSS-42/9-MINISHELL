@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 11:51:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 21:37:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,9 @@ void	order_env(t_vault *data)
 	int		i;
 	int		j;
 
+	rows = ft_dbl_ptr_len(data->env);
+	data->b_in->env_order = ft_dbl_ptr_realloc(data->b_in->env_order, rows + 1);
 	i = 0;
-	rows = 0;
-	while (data->env[rows])
-		rows++;
-	if (data->b_in->env_order)
-		free_dbl_ptr((void **)data->b_in->env_order);
-	data->b_in->env_order = ft_calloc(rows + 1, sizeof(char *));
 	while (data->env[i])
 	{
 		data->b_in->env_order[i] = data->env[i];

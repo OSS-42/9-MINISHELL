@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 16:45:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/01 20:44:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ void	init_data(t_vault *data)
 	data->env = environ;
 	data->read_line = NULL;
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
-	if (!data->b_in)
-		return ;
 	data->quote_in = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
 	data->activate_var = 0;
-	data->flag->output_count = 0;
-	data->flag->input_count = 0;
-	data->flag->pipe_count = 0;
 	return ;
 }
 
@@ -37,8 +32,6 @@ int	main(void)
 
 	init_data(&data);
 	system(INTRO);
-//	data.b_in = malloc(sizeof(t_builtins));
-//	data.env = environ;
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
