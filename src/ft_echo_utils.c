@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 15:52:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 23:26:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,20 @@ void	clean_quote(t_vault *data, int row)
 	data->rl_decomp[row] = temp;
 }
 
-// TODO Si on veut corriger le invalid read il faut changer la condition des boucles
+//TODO Si on veut corriger le invalid R il faut changer la condition des boucles
 //TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
+
 void	find_var_value(t_vault *data, int row)
 {
-	int		j;
-	int		k;
-	int		len;
-	char	*temp;
+	int	j;
+	int	k;
 
 	j = 0;
 	while (data->rl_decomp[row][j])
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
-		len = 0;
-		k = j + 1;
-		while (data->rl_decomp[row][k] != ' ' && data->rl_decomp[row][k]
-			&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
-		{
-			len++;
-			k++;
-		}
-		temp = ft_substr(data->rl_decomp[row], j + 1, len);
-		data->dollar_var = ft_strjoin(temp, "=");
-		free (temp);
+		var_extract(data, row, j);
 		k = 0;
 		while (data->env[k])
 		{
@@ -96,7 +85,7 @@ void	find_var_value(t_vault *data, int row)
 				k++;
 			else
 			{
-				expand_var(data, k, row, len);
+				expand_var(data, k, row);
 				break ;
 			}
 		}
@@ -106,45 +95,19 @@ void	find_var_value(t_vault *data, int row)
 		free (data->dollar_var);
 }
 
-void	expand_var(t_vault *data, int row_var, int row, int len)
+// leak ligne 110 + segfault (echo bonjour $HOME '$USER' x3-4)
+void	expand_var(t_vault *data, int row_var, int row)
 {
 	int		len_var;
-	int		i;
-	int		j;
-	int		k;
-	int		use;
 	char	*temp;
 
-	use = 0;
-	len_var = ft_strlen(data->env[row_var]) - len;
+	len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
 	temp = ft_calloc(sizeof(char),
 			(ft_strlen(data->rl_decomp[row]) + len_var + 1));
 	free (data->dollar_var);
-	data->dollar_var = ft_substr(data->env[row_var], len + 1, len_var);
-	j = 0;
-	i = 0;
-	while (data->rl_decomp[row][j])
-	{
-		k = 0;
-		if (data->rl_decomp[row][j] == '$' && use != 1)
-		{
-			while (data->dollar_var[k])
-			{
-				temp[i] = data->dollar_var[k];
-				k++;
-				i++;
-			}
-			use = 1;
-			j = j + len;
-			free (data->dollar_var);
-		}
-		else
-		{
-			temp[i] = data->rl_decomp[row][j];
-			i++;
-		}
-		j++;
-	}
+	data->dollar_var = ft_substr(data->env[row_var],
+			data->dollar_var_len + 1, len_var);
+	var_to_value(data, row, temp);
 	free (data->rl_decomp[row]);
 	data->rl_decomp[row] = ft_strdup(temp);
 	free (temp);

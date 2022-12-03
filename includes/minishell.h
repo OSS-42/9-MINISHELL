@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 09:34:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 23:18:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_flag
 	int		input_count;
 	int		pipe_count;
 	int		dollar_count;
+	int		runs;
 }	t_flag;
 
 typedef struct s_quote
@@ -86,6 +87,7 @@ typedef struct s_vault
 	t_flag		*flag;
 	int			activate_var;
 	char		*dollar_var;
+	int			dollar_var_len;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -123,17 +125,14 @@ int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 void	find_var_value(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
-void	expand_var(t_vault *data, int row_var, int row, int len);
+void	expand_var(t_vault *data, int row_var, int row);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
-void	remove_line(t_vault *data, int i);
+void	remove_line_env(t_vault *data, int i);
 void	ft_export(t_vault *data, int row);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
-
-/***** POUR DEBUG *****/
-void	print_double_array(char **array);
 
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
@@ -143,6 +142,16 @@ int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
 void	spe_char(t_vault *data, int row);
+void	var_to_value(t_vault *data, int row, char *temp);
+
+/***** built_in_utils.c *****/
+void	join_unset(t_vault *data, int row);
 void	swap_lines(t_vault *data, int rows);
+void	dup_env(t_vault *data);
+void	var_prep(t_vault *data, int row);
+void	var_extract(t_vault *data, int row, int position);
+
+/***** POUR DEBUG *****/
+void	print_double_array(char **array);
 
 #endif

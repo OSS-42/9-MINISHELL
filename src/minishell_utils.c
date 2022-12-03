@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 15:39:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/02 23:24:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,29 @@ void	spe_char(t_vault *data, int row)
 	}
 }
 
-void	swap_lines(t_vault *data, int rows)
+void	var_to_value(t_vault *data, int row, char *temp)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		k;
 
+	j = -1;
 	i = -1;
-	while (++i < rows)
+	while (data->rl_decomp[row][++j])
 	{
-		j = i;
-		while (++j < rows)
+		k = -1;
+		if (data->rl_decomp[row][j] == '$' && data->flag->runs != 1)
 		{
-			if (ft_strcmp(data->b_in->env_ord[i], data->b_in->env_ord[j]) > 0)
-			{
-				data->b_in->order_var = ft_strdup(data->b_in->env_ord[i]);
-				free (data->b_in->env_ord[i]);
-				data->b_in->env_ord[i] = ft_strdup(data->b_in->env_ord[j]);
-				free (data->b_in->env_ord[j]);
-				data->b_in->env_ord[j] = ft_strdup(data->b_in->order_var);
-				free (data->b_in->order_var);
-			}
+			while (data->dollar_var[++k])
+				temp[++i] = data->dollar_var[k];
+			data->flag->runs = 1;
+			j = j + data->dollar_var_len;
+			free (data->dollar_var);
+		}
+		else
+		{
+			temp[i] = data->rl_decomp[row][j];
+			i++;
 		}
 	}
-	return ;
 }
