@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/02 09:41:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/04 10:22:07 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	flag_count(t_vault *data)
 	i = 0;
 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
-		if (check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
+		if (ft_strchr(data->rl_decomp[i], '>') != NULL && check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
 			data->flag->output_count++;
-		if (check_if_inside_quote(data->rl_decomp[i], '<') == FALSE)
+		if (ft_strchr(data->rl_decomp[i], '<') != NULL && check_if_inside_quote(data->rl_decomp[i], '<') == FALSE)
 			data->flag->input_count++;
-		if (check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
+		if (ft_strchr(data->rl_decomp[i], '|') != NULL && check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
 			data->flag->pipe_count++;
 		j = 0;
 		while (data->rl_decomp[i][j])
@@ -79,7 +79,9 @@ void	redirection_analysiz(t_vault *data)
 			else if (data->rl_decomp[i][j + 1] == '\0'
 				&& data->rl_decomp[i + 1])
 			{
-				data->flag->output = ft_strdup(data->rl_decomp[i + 1]);
+				i++;
+				data->flag->output = ft_strdup(data->rl_decomp[i]);
+				data->quote_in->spc_count = 1;
 				find_decomposer_to_switch(data, i);
 			}
 			else

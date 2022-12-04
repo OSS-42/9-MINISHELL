@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 22:47:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/04 10:24:05 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	init_data(t_vault *data)
 	data->flag->output_count = 0;
 	data->flag->input_count = 0;
 	data->flag->pipe_count = 0;
-	data->quote_in->spc_count = 1;
 	data->dollar_var_len = 0;
 	return ;
 }
@@ -45,7 +44,7 @@ int	main(void)
 			add_history(data.read_line);
 			explore_readline(&data);
 			free(data.read_line);
-			free_dbl_ptr((void **)data.rl_decomp);
+			// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
 		}
 	}
 	return (0);

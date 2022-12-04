@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 11:25:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/04 10:09:52 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	meta_analyzis(data);
-//	print_double_array(data->rl_decomp);
-//	write(1, "\n", 1);
+	print_double_array(data->rl_decomp);
+	write(1, "\n", 1);
 	if (data->quote_in->double_quote_count % 2 == 0
 		&& data->quote_in->simple_quote_count % 2 == 0)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
 		print_double_array(data->rl_decomp);
+		write(1, "\n", 1);
 		flag_count(data);
 		redirection_analysiz(data);
+		print_double_array(data->rl_decomp);
+		write(1, "\n", 1);
+		printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
-//		printf("%s\n", data->flag->output);
 		built_in(data);
 	}
 	return ;
