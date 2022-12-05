@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 11:50:35 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:00:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	spe_char(t_vault *data, int row)
 
 	j = 0;
 	row += 1;
-	while (data->rl_decomp[row][j] != '\0')
+	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
 	{
 		printf("%d\n", j);
 		if (data->rl_decomp[row][j] == '$')
