@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/05 10:01:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 11:01:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	redirection_analysiz(t_vault *data)
 		}
 		i++;
 	}
+	data->quote_in->spc_count = 0;
 }
 
 char	*output_to_redirect(t_vault *data, int i, int j)
