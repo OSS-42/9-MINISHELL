@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 23:24:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:39:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ void	var_to_value(t_vault *data, int row, char *temp)
 	int		j;
 	int		k;
 
-	j = -1;
-	i = -1;
-	while (data->rl_decomp[row][++j])
+	j = 0;
+	i = 0;
+	while (data->rl_decomp[row][j])
 	{
-		k = -1;
+		k = 0;
 		if (data->rl_decomp[row][j] == '$' && data->flag->runs != 1)
 		{
-			while (data->dollar_var[++k])
-				temp[++i] = data->dollar_var[k];
+			while (data->dollar_var[k])
+			{
+				temp[i] = data->dollar_var[k];
+				k++;
+				i++;
+			}
 			data->flag->runs = 1;
 			j = j + data->dollar_var_len;
 			free (data->dollar_var);
@@ -51,5 +55,6 @@ void	var_to_value(t_vault *data, int row, char *temp)
 			temp[i] = data->rl_decomp[row][j];
 			i++;
 		}
+		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 23:26:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/04 22:51:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,11 @@ void	find_var_value(t_vault *data, int row)
 	}
 	if (data->dollar_var)
 		free (data->dollar_var);
+	data->dollar_var_len = 0;
+	data->flag->runs = 0;
 }
 
-// leak ligne 110 + segfault (echo bonjour $HOME '$USER' x3-4)
+//$a$b toujours en erreur.
 void	expand_var(t_vault *data, int row_var, int row)
 {
 	int		len_var;
@@ -103,7 +105,7 @@ void	expand_var(t_vault *data, int row_var, int row)
 
 	len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
 	temp = ft_calloc(sizeof(char),
-			(ft_strlen(data->rl_decomp[row]) + len_var + 1));
+			(ft_strlen(data->rl_decomp[row]) + len_var + 2));
 	free (data->dollar_var);
 	data->dollar_var = ft_substr(data->env[row_var],
 			data->dollar_var_len + 1, len_var);
