@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/02 23:18:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 09:06:00 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_builtins
 
 typedef struct s_flag
 {
-	char	*output;
+	char	**output;
 	int		output_count;
 	int		input_count;
 	int		pipe_count;
@@ -92,6 +92,7 @@ typedef struct s_vault
 
 /***** minishell.c *****/
 void	init_data(t_vault *data);
+void	reinit_data(t_vault *data);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);

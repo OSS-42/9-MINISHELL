@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/04 10:01:19 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/05 09:53:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,13 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	actual_array = to_switch;
 	while (data->rl_decomp[next_array])
 	{
-		data->rl_decomp[actual_array] = data->rl_decomp[next_array];
+		free (data->rl_decomp[actual_array]);
+		data->rl_decomp[actual_array] = ft_strdup(data->rl_decomp[next_array]);
 		next_array++;
 		actual_array++;
 	}
-	data->rl_decomp[actual_array] = "\0";
-	data->quote_in->spc_count = 1;
+	data->rl_decomp[actual_array][0] = '\0';
+	data->quote_in->spc_count = 0;
 }
 
 // 'je"tu"'il

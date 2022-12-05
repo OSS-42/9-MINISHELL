@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/04 10:24:05 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/05 09:02:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	init_data(t_vault *data)
 	return ;
 }
 
+
+void	reinit_data(t_vault *data)
+{
+	data->flag->output_count = 0;
+	data->flag->input_count = 0;
+	data->flag->pipe_count = 0;
+	data->flag->dollar_count = 0;
+}
+
 //system(INTRO) pour l'image au lancement de Minishell
 int	main(void)
 {
@@ -44,6 +53,7 @@ int	main(void)
 			add_history(data.read_line);
 			explore_readline(&data);
 			free(data.read_line);
+			reinit_data(&data);
 			// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
 		}
 	}

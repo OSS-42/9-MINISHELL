@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/04 10:22:07 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/05 10:01:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void	redirection_analysiz(t_vault *data)
 {
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;
+	k = 0;
+	data->flag->output = ft_calloc(sizeof (char *), data->flag->output_count + 1);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
 		if (ft_strchr(data->rl_decomp[i], '>') != NULL
@@ -75,14 +78,16 @@ void	redirection_analysiz(t_vault *data)
 			while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '>')
 				j++;
 			if (data->rl_decomp[i][j + 1] != '\0')
-				data->flag->output = output_to_redirect(data, i, j);
-			else if (data->rl_decomp[i][j + 1] == '\0'
-				&& data->rl_decomp[i + 1])
 			{
-				i++;
-				data->flag->output = ft_strdup(data->rl_decomp[i]);
-				data->quote_in->spc_count = 1;
-				find_decomposer_to_switch(data, i);
+				data->flag->output[k] = output_to_redirect(data, i, j);
+				k++;
+			}
+			else if (data->rl_decomp[i][j + 1] == '\0' && data->rl_decomp[i + 1])
+			{
+				data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
+				data->quote_in->spc_count++;
+				find_decomposer_to_switch(data, i + 1);
+				k++;
 			}
 			else
 				printf("alive: syntax error near unexpected token `newline'\n");
