@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 09:02:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 11:23:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_data(t_vault *data)
 	data->flag->input_count = 0;
 	data->flag->pipe_count = 0;
 	data->dollar_var_len = 0;
+	data->quote_in->double_quote_count = 0;
+	data->quote_in->simple_quote_count = 0;
 	return ;
 }
 
@@ -36,6 +38,8 @@ void	reinit_data(t_vault *data)
 	data->flag->input_count = 0;
 	data->flag->pipe_count = 0;
 	data->flag->dollar_count = 0;
+	data->quote_in->double_quote_count = 0;
+	data->quote_in->simple_quote_count = 0;
 }
 
 //system(INTRO) pour l'image au lancement de Minishell

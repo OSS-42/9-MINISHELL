@@ -6,33 +6,46 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/05 11:01:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 //TODO ajouter la verification de la premiere occurence VOIR AVEC ERIC
-void	meta_analyzis(t_vault *data)
+int		readline_quote_priority(t_vault *data)
 {
-	int	i;
+	int		i;
+	char	c;
 
 	i = 0;
-	data->quote_in->double_quote_count = 0;
-	data->quote_in->simple_quote_count = 0;
+	c = '\0';
 	while (data->read_line[i])
 	{
-		if (data->read_line[i] == '\"')
-			data->quote_in->double_quote_count++;
-		else if (data->read_line[i] == '\'')
-			data->quote_in->simple_quote_count++;
+		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
+		{
+			c = data->read_line[i];
+			if (c == '\"')
+				data->quote_in->double_quote_count++;
+			else if (c == '\'')
+				data->quote_in->simple_quote_count++;
+			while (data->read_line[i] && data->read_line[i] != c)
+				i++;
+			if (!data->read_line[i])
+			{
+				printf("Wrong argument\n");
+				return (FALSE);
+			}
+			else if (c == '\"')
+				data->quote_in->double_quote_count++;
+			else if (c == '\'')
+				data->quote_in->simple_quote_count++;
+		}
 		i++;
 	}
-	if (data->quote_in->double_quote_count % 2 != 0
-		|| data->quote_in->simple_quote_count % 2 != 0)
-		printf("Wrong argument\n");
+	return (TRUE);
 }
-
+//
 void	flag_count(t_vault *data)
 {
 	int	i;
