@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 10:36:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	built_in(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
-void	meta_analyzis(t_vault *data);
+int		readline_quote_priority(t_vault *data);
 char	*output_to_redirect(t_vault *data, int i, int j);
 void	redirection_analysiz(t_vault *data);
 void	flag_count(t_vault *data);
