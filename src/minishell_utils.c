@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/04 22:39:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 10:32:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	spe_char(t_vault *data, int row)
 			clean_quote(data, row);
 		if (data->flag->dollar_count != 0 && data->b_in->echo_priority != 39)
 			find_var_value(data, row);
+		if (data->flag->dollar_count > 1)
+			split_on_dollar(data, row);
 		data->b_in->echo_first = 0;
 		data->b_in->echo_priority = 0;
 		row++;
@@ -56,5 +58,24 @@ void	var_to_value(t_vault *data, int row, char *temp)
 			i++;
 		}
 		j++;
+	}
+}
+
+void	split_on_dollar(t_vault *data, int row)
+{
+	int		i;
+	int		j;
+	char	**split_dollar;
+
+	i = 0;
+	while (data->rl_decomp[i])
+	{
+		if (ft_strchr(data->rl_decomp[i], "$") == 1)
+		{
+			if (data->flag->dollar_count > 1)
+				data->split_dollar = ft_split(data->rl_decomp[i], '$');
+			print_double_array(data->split_dollar);
+		}
+		i++;
 	}
 }

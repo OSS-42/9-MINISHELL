@@ -6,7 +6,11 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/05 09:06:00 by mbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/12/05 10:32:20 by ewurstei         ###   ########.fr       */
+>>>>>>> e2f43e5 (split on dollar)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +92,7 @@ typedef struct s_vault
 	int			activate_var;
 	char		*dollar_var;
 	int			dollar_var_len;
+	char		**split_dollar;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -144,6 +149,7 @@ int		check_error(t_vault *data, int row);
 /***** minishell_utils.c *****/
 void	spe_char(t_vault *data, int row);
 void	var_to_value(t_vault *data, int row, char *temp);
+void	split_on_dollar(t_vault *data, int row);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);
