@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/05 09:06:00 by mbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/05 10:32:20 by ewurstei         ###   ########.fr       */
->>>>>>> e2f43e5 (split on dollar)
+/*   Updated: 2022/12/05 10:36:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
