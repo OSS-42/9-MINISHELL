@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/05 12:47:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:18:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	explore_readline(t_vault *data)
 	return ;
 }
 
+//echo bonjour > test > test1
 void	execute_redirection(t_vault *data)
 {
 	int	i;
@@ -48,7 +49,8 @@ void	execute_redirection(t_vault *data)
 	{
 		if (ft_strcmp(data->rl_decomp[i], ">") == 0)
 		{
-			data->flag->fd_out[j] = open(data->flag->output[j], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			data->flag->fd_out[j] = open(data->flag->output[j],
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (data->flag->fd_out[j] == -1)
 			{
 				printf("Probleme avec open sur fd_out\n");
@@ -60,6 +62,10 @@ void	execute_redirection(t_vault *data)
 				printf("Probleme avec dup2 sur fd_out\n");
 				// TODO Voir quel sécurité il faudra mettre en place. Exit ? Free ?
 			}
+			data->quote_in->spc_count++;
+			find_decomposer_to_switch(data, i);
+			j++;
+
 		}
 		i++;
 	}
