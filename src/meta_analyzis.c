@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/05 11:56:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:56:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ void	flag_count(t_vault *data)
 	}
 }
 
-// commande parametre > fichier
-// < fichier commande parametre > fichier
+//echo bonjour >test
+//echo bonjour> test
+//echo bonjour>test
 void	redirection_analysiz(t_vault *data)
 {
 	int		i;
