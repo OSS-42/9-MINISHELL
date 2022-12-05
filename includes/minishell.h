@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 12:45:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 17:31:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 void	find_var_value(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
-void	expand_var(t_vault *data, int row_var, int row);
+//void	expand_var(t_vault *data, int row_var, int row);
+void	expand_var(t_vault *data, int row_var, int row, char **array);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -156,7 +157,8 @@ void	join_unset(t_vault *data, int row);
 void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int row);
-void	var_extract(t_vault *data, int row, int position);
+//void	var_extract(t_vault *data, int row, int position);
+void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** POUR DEBUG *****/
 void	print_double_array(char **array);

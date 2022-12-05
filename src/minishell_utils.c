@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 14:16:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:40:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	spe_char(t_vault *data, int row)
 	while (data->rl_decomp[row] && data->rl_decomp[row][0] != '\0')
 	{
 		j = 0;
+		data->flag->dollar_count = 0;
 		while (data->rl_decomp[row][j] != '\0')
 		{
 			if (data->rl_decomp[row][j] == '$')
@@ -28,10 +29,10 @@ void	spe_char(t_vault *data, int row)
 		data->b_in->echo_priority = quote_priority(data, row);
 		if (data->b_in->echo_priority != 0)
 			clean_quote(data, row);
-		if (data->flag->dollar_count != 0 && data->b_in->echo_priority != 39)
-			find_var_value(data, row);
 		if (data->flag->dollar_count > 1)
 			split_on_dollar(data, row);
+		if (data->flag->dollar_count != 0 && data->b_in->echo_priority != 39)
+			find_var_value(data, row);
 		data->b_in->echo_first = 0;
 		data->b_in->echo_priority = 0;
 		row++;
@@ -72,9 +73,17 @@ void	var_to_value(t_vault *data, int row, char *temp)
 
 void	split_on_dollar(t_vault *data, int row)
 {
-	if (ft_strchr(data->rl_decomp[row], '$') == NULL && data->flag->dollar_count > 1)
+	int	i;
+
+	i = 0;
+	if (ft_strchr(data->rl_decomp[row], '$') != NULL && data->flag->dollar_count > 1)
 	{
 		data->split_dollar = ft_split(data->rl_decomp[row], '$');
-		print_double_array(data->split_dollar);
+		while (data->split_dollar[i])
+		{
+			data->split_dollar[i] = ft_strjoin("$", data->split_dollar[i]);
+			printf("#%d : %s\n", i, data->split_dollar[i]);
+			i++;
+		}
 	}
 }

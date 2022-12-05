@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 14:11:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:03:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	remove_line_env(t_vault *data, int i)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-	if (data->b_in->env_unset)
-		free_dbl_ptr((void **)data->b_in->env_unset);
+//	if (data->b_in->env_unset)
+//		free_dbl_ptr((void **)data->b_in->env_unset);
 	data->b_in->env_unset = ft_calloc(rows, sizeof(char *));
 	j = 0;
 	rows = 0;
