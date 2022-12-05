@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/05 11:37:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:47:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,47 @@ void	explore_readline(t_vault *data)
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
 		// print_double_array(data->rl_decomp);
-		write(1, "\n", 1);
+		// write(1, "\n", 1);
 		flag_count(data);
 		redirection_analysiz(data);
-		print_double_array(data->rl_decomp);
-		write(1, "\n", 1);
+		execute_redirection(data);
+		// print_double_array(data->rl_decomp);
+		// write(1, "\n", 1);
 		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
 		built_in(data);
+		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}
 	return ;
+}
+
+void	execute_redirection(t_vault *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	data->flag->fd_out = malloc(sizeof(int) * data->flag->output_count);
+	while (data->rl_decomp[i])
+	{
+		if (ft_strcmp(data->rl_decomp[i], ">") == 0)
+		{
+			data->flag->fd_out[j] = open(data->flag->output[j], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (data->flag->fd_out[j] == -1)
+			{
+				printf("Probleme avec open sur fd_out\n");
+				// TODO Voir quel sécurité il faudra mettre en place. Exit ? Free ?
+			}
+			data->flag->stdout_backup = dup(STDOUT_FILENO);
+			if (dup2(data->flag->fd_out[j], STDOUT_FILENO) == -1)
+			{
+				printf("Probleme avec dup2 sur fd_out\n");
+				// TODO Voir quel sécurité il faudra mettre en place. Exit ? Free ?
+			}
+		}
+		i++;
+	}
 }
 
 void	built_in(t_vault *data)
