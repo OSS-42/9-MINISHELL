@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 11:45:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:47:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	var_to_value(t_vault *data, int row, char *temp)
 
 void	split_on_dollar(t_vault *data, int row)
 {
-	if (ft_strchr(data->rl_decomp[row], '$') == 1 && data->flag->dollar_count > 1)
+	if (ft_strchr(data->rl_decomp[row], '$') == NULL && data->flag->dollar_count > 1)
 		data->split_dollar = ft_split(data->rl_decomp[row], '$');
 	print_double_array(data->split_dollar);
 }
