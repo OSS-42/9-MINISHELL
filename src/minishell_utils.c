@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/04 22:39:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 11:31:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 void	spe_char(t_vault *data, int row)
 {
+	int	j;
+
+	j = 0;
+	row += 1;
+	while (data->rl_decomp[row][j] != '\0')
+	{
+		printf("%d\n", j);
+		if (data->rl_decomp[row][j] == '$')
+			data->flag->dollar_count++;
+		j++;
+	}
+	printf("%d\n", data->flag->dollar_count);
 	while (data->rl_decomp[row] && data->rl_decomp[row][0] != '\0')
 	{
 		data->b_in->echo_priority = quote_priority(data, row);

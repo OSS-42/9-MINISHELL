@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/04 10:22:07 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/05 11:09:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	meta_analyzis(t_vault *data)
 void	flag_count(t_vault *data)
 {
 	int	i;
-	int	j;
+//	int	j;
 
 	i = 0;
 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
@@ -47,13 +47,6 @@ void	flag_count(t_vault *data)
 			data->flag->input_count++;
 		if (ft_strchr(data->rl_decomp[i], '|') != NULL && check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
 			data->flag->pipe_count++;
-		j = 0;
-		while (data->rl_decomp[i][j])
-		{
-			if (data->rl_decomp[i][j] == '$')
-				data->flag->dollar_count++;
-			j++;
-		}
 		i++;
 	}
 }

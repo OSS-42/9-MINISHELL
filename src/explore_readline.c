@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/04 10:09:52 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/05 11:04:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	explore_readline(t_vault *data)
 		redirection_analysiz(data);
 		print_double_array(data->rl_decomp);
 		write(1, "\n", 1);
-		printf("%d\n", data->flag->output_count);
+		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
 		built_in(data);
 	}
