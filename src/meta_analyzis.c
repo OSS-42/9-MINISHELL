@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/06 14:30:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/06 15:52:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,19 @@ void	flag_count(t_vault *data)
 	}
 }
 
-//echo bonjour> test
+//echo bonjour >test
+//echo bonjour > test
 //echo bonjour>test
+//echo bonjour> test
 //echo 'bonjour'>'test'
+//echo bonjour >test>test1
+
 void	redirection_analysiz(t_vault *data)
 {
 	int		i;
 	int		j;
 	int		k;
+	int		len;
 
 	i = 0;
 	j = 0;
@@ -94,10 +99,26 @@ void	redirection_analysiz(t_vault *data)
 			}
 			else if (data->rl_decomp[i][j + 1] == '\0' && data->rl_decomp[i + 1])
 			{
-				data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
-				data->quote_in->spc_count++;
-				find_decomposer_to_switch(data, i + 1);
-				k++;
+				if (ft_strchr(data->rl_decomp[i + 1], '>') == NULL)
+				{
+					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
+					data->quote_in->spc_count++;
+					find_decomposer_to_switch(data, i + 1);
+					k++;
+				}
+				else
+				{
+					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
+					len = ft_strlen(data->flag->output[k]);
+					if (data->flag->output[k][len - 1] == '>'
+					&& check_if_inside_quote(data->rl_decomp[i], '>') != TRUE)
+					{
+						data->flag->output[k][len - 1] = '\0';
+						free (data->rl_decomp[i + 1]);
+						data->rl_decomp[i + 1] = ft_strdup(">\0");
+					}
+					k++;
+				}
 			}
 			else
 				printf("alive: syntax error near unexpected token `newline'\n");
