@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 22:31:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:38:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,7 @@ int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
 void	spe_char(t_vault *data, int row);
-void	var_to_value(t_vault *data, int row, char *temp);
-void	split_on_dollar(t_vault *data, int row);
+void	reset_counters(t_vault *data);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);
@@ -160,6 +159,13 @@ void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int row);
 void	var_extract(t_vault *data, int row, int position);
 //void	var_extract(t_vault *data, int row, int position, char **array);
+
+/***** dollar_utils.c *****/
+void	var_to_value(t_vault *data, int row, char *temp);
+void	split_on_dollar(t_vault *data, int row);
+int		insert_row(int pos, int count, char **dest, char **source);
+void	change_tab(t_vault *data, char **dest, int row);
+int		copy_var(char *dest, char *source, int pos);
 
 /***** POUR DEBUG *****/
 void	print_double_array(char **array);
