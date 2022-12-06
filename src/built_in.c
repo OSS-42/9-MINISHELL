@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/02 15:49:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:33:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	ft_env(t_vault *data, int env)
 	return ;
 }
 
-// error avec $a$b
 void	ft_echo(t_vault *data, int row)
 {
 	data->b_in->first_word = 1;

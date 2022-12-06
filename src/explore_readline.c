@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/05 14:59:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/06 12:21:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	explore_readline(t_vault *data)
 		execute_redirection(data);
 		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
+		print_double_array(data->rl_decomp);
+		write(1, "\n", 1);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 14:09:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/05 21:27:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,21 @@ void	var_extract(t_vault *data, int row, int position)
 	free (temp);
 	return ;
 }
+
+// void	var_extract(t_vault *data, int row, int position, char **array)
+// {
+// 	int		k;
+// 	char	*temp;
+
+// 	k = position + 1;
+// 	while (array[row][k] != ' ' && array[row][k]
+// 			&& ft_char_env_var(array[row][k]) == 1)
+// 	{
+// 		data->dollar_var_len++;
+// 		k++;
+// 	}
+// 	temp = ft_substr(array[row], position + 1, data->dollar_var_len);
+// 	data->dollar_var = ft_strjoin(temp, "=");
+// 	free (temp);
+// 	return ;
+// }
