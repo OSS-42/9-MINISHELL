@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 11:25:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 12:41:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_data(t_vault *data)
 	data->dollar_var_len = 0;
 	data->quote_in->double_quote_count = 0;
 	data->quote_in->simple_quote_count = 0;
+	data->flag->stdout_backup = 0;
 	return ;
 }
 

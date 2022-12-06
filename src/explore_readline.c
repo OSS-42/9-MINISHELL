@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/06 12:21:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/06 13:50:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,21 @@ void	explore_readline(t_vault *data)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
-		print_double_array(data->rl_decomp);
-		write(1, "\n", 1);
 		flag_count(data);
 		redirection_analysiz(data);
+		write(1, "\n", 1);
 		print_double_array(data->flag->output);
 		write(1, "\n", 1);
 		execute_redirection(data);
 		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
-		print_double_array(data->rl_decomp);
-		write(1, "\n", 1);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}
 	return ;
 }
 
+//TODO Rajouter des free et autres dans les if de sécurité
 void	execute_redirection(t_vault *data)
 {
 	int	i;
@@ -46,7 +44,8 @@ void	execute_redirection(t_vault *data)
 	i = 0;
 	j = 0;
 	data->flag->fd_out = malloc(sizeof(int) * data->flag->output_count);
-	while (data->rl_decomp[i])
+	data->flag->stdout_backup = dup(STDOUT_FILENO);
+	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
 		if (ft_strcmp(data->rl_decomp[i], ">") == 0)
 		{
@@ -55,18 +54,15 @@ void	execute_redirection(t_vault *data)
 			if (data->flag->fd_out[j] == -1)
 			{
 				printf("Probleme avec open sur fd_out\n");
-				// TODO Voir quel sécurité il faudra mettre en place. Exit ? Free ?
 			}
-			data->flag->stdout_backup = dup(STDOUT_FILENO);
 			if (dup2(data->flag->fd_out[j], STDOUT_FILENO) == -1)
 			{
 				printf("Probleme avec dup2 sur fd_out\n");
-				// TODO Voir quel sécurité il faudra mettre en place. Exit ? Free ?
 			}
-			data->quote_in->spc_count++;
-			find_decomposer_to_switch(data, i);
 			j++;
-
+			data->quote_in->spc_count = 1;
+			find_decomposer_to_switch(data, i);
+			i--;
 		}
 		i++;
 	}
