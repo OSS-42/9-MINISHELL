@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/06 12:33:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:30:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	flag_count(t_vault *data)
 	}
 }
 
-//echo bonjour >test
 //echo bonjour> test
 //echo bonjour>test
+//echo 'bonjour'>'test'
 void	redirection_analysiz(t_vault *data)
 {
 	int		i;
@@ -88,6 +88,8 @@ void	redirection_analysiz(t_vault *data)
 			if (data->rl_decomp[i][j + 1] != '\0')
 			{
 				data->flag->output[k] = output_to_redirect(data, i, j);
+				if (j == 0)
+					data->rl_decomp[i][j + 1] = '\0';
 				k++;
 			}
 			else if (data->rl_decomp[i][j + 1] == '\0' && data->rl_decomp[i + 1])
