@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/05 22:34:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 08:08:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	explore_readline(t_vault *data)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
-//		print_double_array(data->rl_decomp);
-//		write(1, "\n", 1);
+		print_double_array(data->rl_decomp);
+		write(1, "\n", 1);
 		flag_count(data);
 		redirection_analysiz(data);
 		execute_redirection(data);
@@ -30,8 +30,8 @@ void	explore_readline(t_vault *data)
 		// write(1, "\n", 1);
 		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
-//		print_double_array(data->rl_decomp);
-//		write(1, "\n", 1);
+		print_double_array(data->rl_decomp);
+		write(1, "\n", 1);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 22:32:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:37:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,13 @@ void	find_var_value(t_vault *data, int row)
 	int	j;
 	int	k;
 
-	j = 0;
-	while (data->rl_decomp[row][j])
+	j = -1;
+	while (data->rl_decomp[row][++j])
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
-		// printf("d_count:%d\n", data->flag->dollar_count);
 		if (data->flag->dollar_count >= 1)
 			var_extract(data, row, j);
-		// printf("rel_decomp[%d] : %s\n", row, data->rl_decomp[row]);
 		k = 0;
 		while (data->env[k])
 		{
@@ -92,12 +90,7 @@ void	find_var_value(t_vault *data, int row)
 				break ;
 			}
 		}
-		j++;
 	}
-	if (data->dollar_var)
-		free (data->dollar_var);
-	data->dollar_var_len = 0;
-	data->flag->runs = 0;
 }
 
 void	expand_var(t_vault *data, int row_var, int row)
