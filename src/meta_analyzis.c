@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/06 15:52:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:18:43 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,17 @@ void	flag_count(t_vault *data)
 	}
 }
 
-//echo bonjour >test
-//echo bonjour > test
+// A faire :
 //echo bonjour>test
-//echo bonjour> test
 //echo 'bonjour'>'test'
 //echo bonjour >test>test1
+//echo bonjour >test >test1> test2
+
+//Fait :
+// echo bonjour >test
+// echo bonjour> test> test1> test2
+// echo bonjour > test > test1 > test2
+// echo bonjour > test1> test2 > test3> test4
 
 void	redirection_analysiz(t_vault *data)
 {
