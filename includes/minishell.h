@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 11:38:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:53:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	ft_env(t_vault *data, int env);
 int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 void	find_var_value(t_vault *data, int row);
-void	print_row(t_vault *data, int row);
+void	var_extract(t_vault *data, int row, int position);
 void	expand_var(t_vault *data, int row_var, int row);
 //void	expand_var(t_vault *data, int row_var, int row, char **array);
 
@@ -149,6 +149,7 @@ int		check_if_inside_quote(char *str, char c);
 int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
+void	print_row(t_vault *data, int row);
 void	spe_char(t_vault *data, int row);
 void	reset_counters(t_vault *data);
 
@@ -157,7 +158,7 @@ void	join_unset(t_vault *data, int row);
 void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int row);
-void	var_extract(t_vault *data, int row, int position);
+
 //void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** dollar_utils.c *****/

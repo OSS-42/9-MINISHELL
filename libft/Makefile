@@ -96,7 +96,7 @@ re: fclean all
 
 #=================== DONE BUT NOT ASKED FOR ==================#
 # ft_strmap.c ft_strstr.c ft_strcat.c
-# ft_strncat.c  ft_strncpy.c
+# ft_strncat.c
 # ft_putchar.c ft_putnbr.c ft_putstr.c
 #======================== NOT ASK FOR ========================#
 # ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 11:37:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:52:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	clean_quote(t_vault *data, int row)
 //TODO Si on veut corriger le invalid R il faut changer la condition des boucles
 //TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
 
+//attention : si la var n'existe pas, echo ne doit rien afficher
 void	find_var_value(t_vault *data, int row)
 {
 	int	j;
@@ -76,8 +77,7 @@ void	find_var_value(t_vault *data, int row)
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
-		if (data->flag->dollar_count >= 1)
-			var_extract(data, row, j);
+		var_extract(data, row, j);
 		k = 0;
 		while (data->env[k])
 		{
@@ -91,6 +91,24 @@ void	find_var_value(t_vault *data, int row)
 			}
 		}
 	}
+}
+
+void	var_extract(t_vault *data, int row, int position)
+{
+	int		k;
+	char	*temp;
+
+	k = position + 1;
+	while (data->rl_decomp[row][k] && data->rl_decomp[row][k] != ' '
+		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+	{
+		data->dollar_var_len++;
+		k++;
+	}
+	temp = ft_substr(data->rl_decomp[row], position + 1, data->dollar_var_len);
+	data->dollar_var = ft_strjoin(temp, "=");
+	free (temp);
+	return ;
 }
 
 void	expand_var(t_vault *data, int row_var, int row)
@@ -111,22 +129,4 @@ void	expand_var(t_vault *data, int row_var, int row)
 	return ;
 }
 
-void	print_row(t_vault *data, int row)
-{
-	if (data->b_in->first_word == 1)
-	{
-		ft_putstr_fd(data->rl_decomp[row], 1);
-		data->b_in->first_word = 0;
-	}
-	else if (data->flag->dollar_split == 1)
-	{
-		ft_putstr_fd(data->rl_decomp[row], 1);
-		data->flag->dollar_split = 0;
-	}
-	else
-	{
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->rl_decomp[row], 1);
-	}
-	return ;
-}
+

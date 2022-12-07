@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/05 16:03:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:52:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,31 @@ void	order_env(t_vault *data)
 {
 	int		rows;
 	int		i;
+	int		j;
+	char	**temp;
 
 	rows = ft_dbl_ptr_len(data->env);
-//	if (data->b_in->env_ord)
-//		free (data->b_in->env_ord);
+	temp = NULL;
+	temp = ft_dbl_ptr_realloc(temp, rows + 1);
 	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
 	i = -1;
 	while (++i < rows)
 	{
+		j = -1;
+		temp[i] = ft_calloc(sizeof(char), ft_strlen(data->env[i]) + 14);
+		while (data->env[i][++j] != '\0' && data->env[i][j] != '=')
+			temp[i][j] = data->env[i][j];
+		temp[i][j] = data->env[i][j];
+		temp[i] = ft_strjoin("declare -x ", temp[i]);
+		temp[i] = ft_strjoin(temp[i], "\"");
+		temp[i] = ft_strjoin(temp[i], ft_strtrim(ft_strchr(data->env[i], '='), "="));
+		temp[i] = ft_strjoin(temp[i], "\"");
 		free (data->b_in->env_ord[i]);
-		data->b_in->env_ord[i] = ft_strjoin("declare -x ", data->env[i]);
+		data->b_in->env_ord[i] = ft_strdup(temp[i]);
+		free(temp[i]);
 	}
+	free (temp);
 	swap_lines(data, rows);
 	ft_env(data, 2);
 	return ;
 }
-
-//bizarrement ft_dbl_ptr_realloc n'aime pas le free si la table existe deja...

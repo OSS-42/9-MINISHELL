@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/06 16:18:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 08:26:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	redirection_analysiz(t_vault *data)
 	i = 0;
 	j = 0;
 	k = 0;
-	data->flag->output = ft_calloc(sizeof (char *), data->flag->output_count + 1);
+	data->flag->output = ft_calloc(sizeof(char *), data->flag->output_count + 1);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
 		if (ft_strchr(data->rl_decomp[i], '>') != NULL
