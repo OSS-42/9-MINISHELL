@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 23:52:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 10:38:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,25 +117,19 @@ void	order_env(t_vault *data)
 {
 	int		rows;
 	int		i;
-	int		j;
 	char	**temp;
+	char	*buff2;
 
 	rows = ft_dbl_ptr_len(data->env);
 	temp = NULL;
 	temp = ft_dbl_ptr_realloc(temp, rows + 1);
 	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
+	buff2 = NULL;
 	i = -1;
 	while (++i < rows)
 	{
-		j = -1;
-		temp[i] = ft_calloc(sizeof(char), ft_strlen(data->env[i]) + 14);
-		while (data->env[i][++j] != '\0' && data->env[i][j] != '=')
-			temp[i][j] = data->env[i][j];
-		temp[i][j] = data->env[i][j];
-		temp[i] = ft_strjoin("declare -x ", temp[i]);
-		temp[i] = ft_strjoin(temp[i], "\"");
-		temp[i] = ft_strjoin(temp[i], ft_strtrim(ft_strchr(data->env[i], '='), "="));
-		temp[i] = ft_strjoin(temp[i], "\"");
+		copy_env(data, temp, i);
+		export_only_format(data, buff2, temp, i);
 		free (data->b_in->env_ord[i]);
 		data->b_in->env_ord[i] = ft_strdup(temp[i]);
 		free(temp[i]);
@@ -144,4 +138,37 @@ void	order_env(t_vault *data)
 	swap_lines(data, rows);
 	ft_env(data, 2);
 	return ;
+}
+
+void	export_only_format(t_vault *data, char *buff2, char **temp, int i)
+{
+	data->buffer = ft_strjoin("declare -x ", temp[i]);
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = ft_strjoin(temp[i], "\"");
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	buff2 = ft_strtrim(ft_strchr(data->env[i], '='), "=");
+	data->buffer = ft_strjoin(temp[i], buff2);
+	free (buff2);
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = ft_strjoin(temp[i], "\"");
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+}
+
+void	copy_env(t_vault *data, char **temp, int i)
+{
+	int	j;
+
+	j = -1;
+	temp[i] = ft_calloc(sizeof(char), ft_strlen(data->env[i]) + 14);
+	while (data->env[i][++j] != '\0' && data->env[i][j] != '=')
+		temp[i][j] = data->env[i][j];
+	temp[i][j] = data->env[i][j];
 }
