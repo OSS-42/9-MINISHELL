@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 11:40:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:14:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	spe_char(t_vault *data, int row)
 
 void	reset_counters(t_vault *data)
 {
-	if (data->dollar_var)
-		free (data->dollar_var);
+//	if (data->dollar_var)
+//		free (data->dollar_var);
 	data->dollar_var_len = 0;
 	data->flag->runs = 0;
 	data->b_in->echo_first = 0;
