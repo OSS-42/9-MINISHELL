@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 09:21:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:15:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	var_to_value(t_vault *data, int row, char *temp)
 	}
 }
 
-void	split_on_dollar(t_vault *data, int row)
+void	split_on_char(t_vault *data, int row, char c)
 {
 	int		i;
 	char	**temp;
@@ -59,19 +59,19 @@ void	split_on_dollar(t_vault *data, int row)
 
 	i = 0;
 	temp = NULL;
-	data->split_dollar = ft_split(data->rl_decomp[row], '$');
+	data->split = ft_split(data->rl_decomp[row], c);
 	free (data->rl_decomp[row]);
-	data->flag->dollar_split = 1;
-	while (data->split_dollar[i])
+	data->flag->split_count = 1;
+	while (data->split[i])
 	{
-		buffer = ft_strjoin("$", data->split_dollar[i]);
-		free(data->split_dollar[i]);
-		data->split_dollar[i] = ft_strdup(buffer);
+		buffer = ft_strjoin("$", data->split[i]);
+		free(data->split[i]);
+		data->split[i] = ft_strdup(buffer);
 		free(buffer);
 		i++;
 	}
 	temp = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->rl_decomp)
-			+ ft_dbl_ptr_len(data->split_dollar));
+			+ ft_dbl_ptr_len(data->split));
 	change_tab(data, temp, row);
 	return ;
 }
@@ -103,7 +103,7 @@ void	change_tab(t_vault *data, char **dest, int row)
 		free (data->rl_decomp[i]);
 		i++;
 	}
-	i = insert_row(i, data->flag->dollar_count, dest, data->split_dollar);
+	i = insert_row(i, data->flag->dollar_count, dest, data->split);
 	while (i < ft_dbl_ptr_len(data->rl_decomp) && data->rl_decomp[i + 1])
 	{
 		dest[i] = ft_strdup(data->rl_decomp[i + 1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 09:25:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 11:45:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	find_var_value(t_vault *data, int row)
 			}
 		}
 	}
-	free(data->dollar_var);
 }
 
 void	var_extract(t_vault *data, int row, int position)
@@ -99,6 +98,7 @@ void	var_extract(t_vault *data, int row, int position)
 	int		k;
 	char	*temp;
 
+	temp = NULL;
 	k = position + 1;
 	while (data->rl_decomp[row][k] && data->rl_decomp[row][k] != ' '
 		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
@@ -119,7 +119,7 @@ void	expand_var(t_vault *data, int row_var, int row)
 
 	len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
 	temp = ft_calloc(sizeof(char),
-			(ft_strlen(data->rl_decomp[row]) + len_var + 2));
+			(ft_strlen(data->rl_decomp[row]) + len_var + 3));
 	free (data->dollar_var);
 	data->dollar_var = ft_substr(data->env[row_var],
 			data->dollar_var_len + 1, len_var);

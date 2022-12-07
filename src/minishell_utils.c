@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:52:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:26:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	print_row(t_vault *data, int row)
 		ft_putstr_fd(data->rl_decomp[row], 1);
 		data->b_in->first_word = 0;
 	}
-	else if (data->flag->dollar_split == 1)
+	else if (data->flag->split_count == 1)
 	{
 		ft_putstr_fd(data->rl_decomp[row], 1);
-		data->flag->dollar_split = 0;
+		data->flag->split_count = 0;
 	}
 	else
 	{
@@ -48,7 +48,7 @@ void	spe_char(t_vault *data, int row)
 		}
 		if (data->flag->dollar_count > 1
 			&& ft_strchr(data->rl_decomp[row], '$') != NULL)
-			split_on_dollar(data, row);
+			split_on_char(data, row, '$');
 		data->b_in->echo_priority = quote_priority(data, row);
 		if (data->b_in->echo_priority != 0)
 			clean_quote(data, row);
