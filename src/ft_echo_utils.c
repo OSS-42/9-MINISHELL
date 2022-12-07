@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 09:25:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 09:44:29 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	find_var_value(t_vault *data, int row)
 			}
 		}
 	}
-	free(data->dollar_var);
 }
 
 void	var_extract(t_vault *data, int row, int position)

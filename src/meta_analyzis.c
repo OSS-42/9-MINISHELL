@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/07 08:26:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:51:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,72 +66,77 @@ void	flag_count(t_vault *data)
 }
 
 // A faire :
-//echo bonjour>test
 //echo 'bonjour'>'test'
 //echo bonjour >test>test1
 //echo bonjour >test >test1> test2
 
 //Fait :
+// echo bonjour>test
 // echo bonjour >test
 // echo bonjour> test> test1> test2
 // echo bonjour > test > test1 > test2
 // echo bonjour > test1> test2 > test3> test4
 
-void	redirection_analysiz(t_vault *data)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		len;
+/*
+	C'est pas un probleme d'avoir des chevrons collé et du coup ne plus savoir si c'est un happend ou une redirection. L'important c'est de savoir le quel à était appelé en dernier
+	car c'est dans celui-ci que j'écrirais le contenu et que je s'aurais si il s'agit d'un tronc ou d'un happend. Donc créé un flag de priorité.
+*/
 
-	i = 0;
-	j = 0;
-	k = 0;
-	data->flag->output = ft_calloc(sizeof(char *), data->flag->output_count + 1);
-	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
-	{
-		if (ft_strchr(data->rl_decomp[i], '>') != NULL
-			&& check_if_inside_quote(data->rl_decomp[i], '>') != TRUE)
-		{
-			while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '>')
-				j++;
-			if (data->rl_decomp[i][j + 1] != '\0')
-			{
-				data->flag->output[k] = output_to_redirect(data, i, j);
-				if (j == 0)
-					data->rl_decomp[i][j + 1] = '\0';
-				k++;
-			}
-			else if (data->rl_decomp[i][j + 1] == '\0' && data->rl_decomp[i + 1])
-			{
-				if (ft_strchr(data->rl_decomp[i + 1], '>') == NULL)
-				{
-					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
-					data->quote_in->spc_count++;
-					find_decomposer_to_switch(data, i + 1);
-					k++;
-				}
-				else
-				{
-					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
-					len = ft_strlen(data->flag->output[k]);
-					if (data->flag->output[k][len - 1] == '>'
-					&& check_if_inside_quote(data->rl_decomp[i], '>') != TRUE)
-					{
-						data->flag->output[k][len - 1] = '\0';
-						free (data->rl_decomp[i + 1]);
-						data->rl_decomp[i + 1] = ft_strdup(">\0");
-					}
-					k++;
-				}
-			}
-			else
-				printf("alive: syntax error near unexpected token `newline'\n");
-		}
-		i++;
-	}
-	data->quote_in->spc_count = 0;
-}
+//echo bonjour>file
+// void	redirection_analysiz(t_vault *data)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		k;
+// 	int		len;
+
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	data->flag->output = ft_calloc(sizeof(char *), data->flag->output_count + 1);
+// 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
+// 	{
+// 		if (ft_strchr(data->rl_decomp[i], '>') != NULL
+// 			&& check_if_inside_quote(data->rl_decomp[i], '>') != TRUE)
+// 		{
+// 			while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '>')
+// 				j++;
+// 			if (data->rl_decomp[i][j + 1] != '\0')
+// 			{
+// 				data->flag->output[k] = output_to_redirect(data, i, j);
+// 				data->rl_decomp[i][j + 1] = '\0';
+// 				k++;
+// 			}
+// 			else if (data->rl_decomp[i][j + 1] == '\0' && data->rl_decomp[i + 1])
+// 			{
+// 				if (ft_strchr(data->rl_decomp[i + 1], '>') == NULL)
+// 				{
+// 					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
+// 					data->quote_in->spc_count++;
+// 					find_decomposer_to_switch(data, i + 1);
+// 					k++;
+// 				}
+// 				else
+// 				{
+// 					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
+// 					len = ft_strlen(data->flag->output[k]);
+// 					if (data->flag->output[k][len - 1] == '>'
+// 					&& check_if_inside_quote(data->rl_decomp[i], '>') != TRUE)
+// 					{
+// 						data->flag->output[k][len - 1] = '\0';
+// 						free (data->rl_decomp[i + 1]);
+// 						data->rl_decomp[i + 1] = ft_strdup(">\0");
+// 					}
+// 					k++;
+// 				}
+// 			}
+// 			else
+// 				printf("alive: syntax error near unexpected token `newline'\n");
+// 		}
+// 		i++;
+// 	}
+// 	data->quote_in->spc_count = 0;
+// }
 
 char	*output_to_redirect(t_vault *data, int i, int j)
 {
@@ -159,16 +164,24 @@ char	*output_to_redirect(t_vault *data, int i, int j)
 	return (temp);
 }
 
-// void	redirection(int output)
-// {
-// 	if (dup2(input, STDIN_FILENO) == -1)
-// 	{
-// 		write(2, "Error dup\n", 6);
-// 		exit (1);
-// 	}
-// 	if (dup2(output, STDOUT_FILENO) == -1)
-// 	{
-// 		write(2, "Error dup\n", 10);
-// 		exit (1);
-// 	}
-// }
+void	redirection_analysiz(t_vault *data)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
+	{
+		count = 0;
+		j = 0;
+		while(data->rl_decomp[i][j])
+		{
+			if (data->rl_decomp[i][j] == '>' && check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
+				count++;
+			j++;
+		}
+		spli
+		i++;
+	}
+}

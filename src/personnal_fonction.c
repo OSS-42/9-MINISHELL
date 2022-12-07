@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/05 09:31:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 11:34:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,4 @@ int	check_if_inside_quote(char *str, char c)
 	}
 	return (FALSE);
 }
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:53:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:34:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ void	order_env(t_vault *data);
 
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
+void	print_double_array(char **array);
+int		dbl_array_len(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
@@ -169,6 +171,5 @@ void	change_tab(t_vault *data, char **dest, int row);
 int		copy_var(char *dest, char *source, int pos);
 
 /***** POUR DEBUG *****/
-void	print_double_array(char **array);
 
 #endif

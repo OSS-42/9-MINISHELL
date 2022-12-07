@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 09:02:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 09:38:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_data(t_vault *data)
 	data->quote_in->double_quote_count = 0;
 	data->quote_in->simple_quote_count = 0;
 	data->flag->stdout_backup = 0;
+	data->rl_decomp = NULL;
 	return ;
 }
 
