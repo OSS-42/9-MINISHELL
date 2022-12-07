@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/07 13:51:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:09:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,20 +168,24 @@ void	redirection_analysiz(t_vault *data)
 {
 	int	i;
 	int	j;
-	int	count;
 
 	i = 0;
 	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
 	{
-		count = 0;
+		data->flag->chevron_count = 0;
 		j = 0;
 		while(data->rl_decomp[i][j])
 		{
 			if (data->rl_decomp[i][j] == '>' && check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
-				count++;
+				data->flag->chevron_count++;
 			j++;
 		}
-		spli
+		if (data->flag->chevron_count != 0)
+		{
+			data->flag->split_char = '>';
+			split_on_char(data, i, data->flag->split_char);
+			i = i + data->flag->chevron_count;
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 13:52:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:14:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ typedef struct s_flag
 {
 	char	**output;
 	int		output_count;
+	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
 	int		dollar_count;
 	int		split_count;
+	char	split_char;
 	int		*fd_out;
 	int		runs;
 	int		stdout_backup;
-
+	int		chevron_with_space;
 }	t_flag;
 
 typedef struct s_quote
@@ -104,6 +106,7 @@ void	reinit_data(t_vault *data);
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
 void	execute_redirection(t_vault *data);
+void	count_meta_with_space(t_vault *data);
 // void	reduce_space(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 

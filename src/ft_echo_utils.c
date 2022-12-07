@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 13:52:36 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:09:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	quote_priority(t_vault *data, int row)
 	int	j;
 
 	j = 0;
-	while (data->rl_decomp[row][j])
+	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
 	{
 		if (data->rl_decomp[row][j] == '\"')
 		{
