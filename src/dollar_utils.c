@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 21:48:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:21:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	split_on_dollar(t_vault *data, int row)
 {
 	int		i;
 	char	**temp;
+	char	*buffer;
 
 	i = 0;
 	temp = NULL;
@@ -63,7 +64,10 @@ void	split_on_dollar(t_vault *data, int row)
 	data->flag->dollar_split = 1;
 	while (data->split_dollar[i])
 	{
-		data->split_dollar[i] = ft_strjoin("$", data->split_dollar[i]);
+		buffer = ft_strjoin("$", data->split_dollar[i]);
+		free(data->split_dollar[i]);
+		data->split_dollar[i] = ft_strdup(buffer);
+		free(buffer);
 		i++;
 	}
 	temp = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->rl_decomp)

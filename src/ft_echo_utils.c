@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:52:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 09:25:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	find_var_value(t_vault *data, int row)
 			}
 		}
 	}
+	free(data->dollar_var);
 }
 
 void	var_extract(t_vault *data, int row, int position)
