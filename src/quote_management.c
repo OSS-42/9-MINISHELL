@@ -6,12 +6,18 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/05 09:53:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 08:51:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+	Je passe dans readline pour trouver une premiere quote.
+	Quand je trouve une quote, je rentre dans la fonction len_of_replacement
+	et je lui donne un pointeur sur mon index (car je vais avoir besoin qu'il continu
+	de ce balader dans readline)
+*/
 void	find_str_quote(t_vault *data)
 {
 	int		i;
@@ -29,38 +35,45 @@ void	find_str_quote(t_vault *data)
 			data->quote_in->begin = i;
 		}
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
+		{
 			len_of_replacement(data, &i);
+			find_decomposer_array_to_replace(data, i);
+		}
 		i++;
 	}
 }
 
-void	len_of_replacement(t_vault *data, int *i)
+/*
+	Je continue d'avancer dans readline pour trouver la quote de fermeture
+	et calculer la longueur de la string qui va remplacer la ligne de rl_decomp.
+*/
+void	len_of_replacement(t_vault *data, int *rl_index)
 {
-	data->quote_in->quote = data->read_line[*i];
-	(*i)++;
-	while ((data->read_line[*i] != data->quote_in->quote
-			|| data->read_line[*i + 1] > 32)
-		&& data->read_line[*i])
+	data->quote_in->quote = data->read_line[*rl_index];
+	(*rl_index)++;
+	while ((data->read_line[*rl_index] != data->quote_in->quote
+			|| data->read_line[*rl_index + 1] > 32)
+		&& data->read_line[*rl_index])
 	{
-		if (data->read_line[*i] == data->quote_in->quote)
+		if (data->read_line[*rl_index] == data->quote_in->quote)
 		{
-			while (data->read_line[*i] && data->read_line[*i] != ' ')
+			while (data->read_line[*rl_index]
+				&& data->read_line[*rl_index] != ' ')
 			{
 				data->quote_in->len++;
-				(*i)++;
+				(*rl_index)++;
 			}
 			break ;
 		}
-		if (data->read_line[*i] == ' ')
+		if (data->read_line[*rl_index] == ' ')
 			data->quote_in->spc_count++;
 		data->quote_in->len++;
-		(*i)++;
+		(*rl_index)++;
 	}
 	data->quote_in->len++;
-	decomposer_array_to_replace(data, *i);
 }
 
-void	decomposer_array_to_replace(t_vault *data, int end)
+void	find_decomposer_array_to_replace(t_vault *data, int end)
 {
 	int		i;
 	int		j;
@@ -123,6 +136,3 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	data->rl_decomp[actual_array][0] = '\0';
 	data->quote_in->spc_count = 0;
 }
-
-// 'je"tu"'il
-// "coucou">'toi'

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 22:37:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 08:51:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	flag_count(t_vault *data);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
-void	decomposer_array_to_replace(t_vault *data, int end);
+void	find_decomposer_array_to_replace(t_vault *data, int end);
 void	replace_decomposer_array(t_vault *data, int end, int *i);
 void	find_decomposer_to_switch(t_vault *data, int to_switch);
 void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
