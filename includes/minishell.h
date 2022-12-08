@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 20:42:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:37:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	count_meta_with_space(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
-int		readline_quote_priority(t_vault *data);
+int		rl_prio_n_qty(t_vault *data);
 char	*output_to_redirect(t_vault *data, int i, int j);
 void	redirection_analysiz(t_vault *data);
 void	flag_count(t_vault *data);
@@ -161,6 +161,7 @@ int		check_error(t_vault *data, int row);
 void	print_row(t_vault *data, int row);
 void	spe_char(t_vault *data, int row);
 void	reset_counters(t_vault *data);
+void	rl_decomp_char_count(t_vault *data, int row, char c);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);

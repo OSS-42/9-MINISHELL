@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/07 16:31:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:22:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	explore_readline(t_vault *data)
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	// print_double_array(data->rl_decomp);
 	// write(1, "\n", 1);
-	if (readline_quote_priority(data) == TRUE)
+	if (rl_prio_n_qty(data) == TRUE)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
