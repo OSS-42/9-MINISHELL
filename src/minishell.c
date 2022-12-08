@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/06 21:13:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:16:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	init_data(t_vault *data)
 	data->quote_in = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
 	data->activate_var = 0;
-	data->flag->output_count = 0;
-	data->flag->input_count = 0;
-	data->flag->pipe_count = 0;
+	// data->flag->output_count = 0;
+	// data->flag->input_count = 0;
+	// data->flag->pipe_count = 0;
+	// data->quote_in->double_quote_count = 0;
+	// data->quote_in->simple_quote_count = 0;
+	// data->flag->stdout_backup = 0;
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
-	data->quote_in->double_quote_count = 0;
-	data->quote_in->simple_quote_count = 0;
-	data->flag->stdout_backup = 0;
+	data->rl_decomp = NULL;
 	return ;
 }
 
@@ -59,6 +60,7 @@ int	main(void)
 			explore_readline(&data);
 			free(data.read_line);
 			reinit_data(&data);
+			free_dbl_ptr((void **)data.rl_decomp);
 			// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
 		}
 	}

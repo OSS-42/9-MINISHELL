@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:53:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:14:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,16 @@ typedef struct s_flag
 {
 	char	**output;
 	int		output_count;
+	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
 	int		dollar_count;
-	int		dollar_split;
+	int		split_count;
+	char	split_char;
 	int		*fd_out;
 	int		runs;
 	int		stdout_backup;
-
+	int		chevron_with_space;
 }	t_flag;
 
 typedef struct s_quote
@@ -92,7 +94,8 @@ typedef struct s_vault
 	int			activate_var;
 	char		*dollar_var;
 	int			dollar_var_len;
-	char		**split_dollar;
+	char		**split;
+	char		*buffer;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -103,6 +106,7 @@ void	reinit_data(t_vault *data);
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
 void	execute_redirection(t_vault *data);
+void	count_meta_with_space(t_vault *data);
 // void	reduce_space(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 
@@ -141,9 +145,13 @@ void	remove_line_env(t_vault *data, int i);
 void	ft_export(t_vault *data, int row);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
+void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
+void	copy_env(t_vault *data, char **temp, int i);
 
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
+void	print_double_array(char **array);
+int		dbl_array_len(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
@@ -163,12 +171,11 @@ void	var_prep(t_vault *data, int row);
 
 /***** dollar_utils.c *****/
 void	var_to_value(t_vault *data, int row, char *temp);
-void	split_on_dollar(t_vault *data, int row);
+void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);
 void	change_tab(t_vault *data, char **dest, int row);
 int		copy_var(char *dest, char *source, int pos);
 
 /***** POUR DEBUG *****/
-void	print_double_array(char **array);
 
 #endif

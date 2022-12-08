@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/06 21:29:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:31:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	explore_readline(t_vault *data)
 {
+	// count_meta_with_space(data);
 	data->rl_decomp = ft_split(data->read_line, ' ');
 	// print_double_array(data->rl_decomp);
 	// write(1, "\n", 1);
@@ -22,14 +23,20 @@ void	explore_readline(t_vault *data)
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
 		flag_count(data);
-		redirection_analysiz(data);
 		print_double_array(data->rl_decomp);
 		write(1, "\n", 1);
-		print_double_array(data->flag->output);
+		if (data->flag->output_count > 0)
+			redirection_analysiz(data);
+		print_double_array(data->rl_decomp);
 		write(1, "\n", 1);
-		execute_redirection(data);
+		// if (data->flag->output_count > 0)
+		// 	execute_redirection(data);
+		// print_double_array(data->rl_decomp);
+		// write(1, "\n", 1);
 		//printf("%d\n", data->flag->output_count);
 		spe_char(data, 0);
+		// print_double_array(data->rl_decomp);
+		// write(1, "\n", 1);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}
@@ -75,6 +82,7 @@ void	execute_redirection(t_vault *data)
 		}
 		i++;
 	}
+	free(data->flag->fd_out);
 }
 
 void	built_in(t_vault *data)
@@ -97,6 +105,20 @@ void	built_in(t_vault *data)
 	if (ft_strcmp("exit", data->rl_decomp[0]) == 0)
 		ft_exit (data);
 	return ;
+}
+
+void	count_meta_with_space(t_vault *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->read_line[i])
+	{
+		if (data->read_line[i] == '>' && data->read_line[i + 1] == ' ')
+			data->flag->chevron_with_space++;
+		i++;
+	}
+
 }
 
 // void	reduce_space(t_vault *data)
