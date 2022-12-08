@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 16:38:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 20:47:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	split_on_char(t_vault *data, int row, char c)
 	data->flag->split_count = 1;
 	if (c == '$')
 	{
+		data->flag->same_line = ft_dbl_ptr_len(data->split);
 		while (data->split[i])
 		{
 			buffer = ft_strjoin("$", data->split[i]);
