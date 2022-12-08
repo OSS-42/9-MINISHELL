@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/07 22:01:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:59:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int		rl_prio_n_qty(t_vault *data)
 		{
 			c = data->read_line[i];
 			if (c == '\"')
-				data->quote_in->double_quote_count++;
+				data->quote->double_quote_count++;
 			else if (c == '\'')
-				data->quote_in->simple_quote_count++;
+				data->quote->simple_quote_count++;
 			i++;
 			while (data->read_line[i] && data->read_line[i] != c)
 				i++;
@@ -38,9 +38,9 @@ int		rl_prio_n_qty(t_vault *data)
 				return (FALSE);
 			}
 			else if (c == '\"')
-				data->quote_in->double_quote_count++;
+				data->quote->double_quote_count++;
 			else if (c == '\'')
-				data->quote_in->simple_quote_count++;
+				data->quote->simple_quote_count++;
 		}
 		i++;
 	}
@@ -112,7 +112,7 @@ void	flag_count(t_vault *data)
 // 				if (ft_strchr(data->rl_decomp[i + 1], '>') == NULL)
 // 				{
 // 					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
-// 					data->quote_in->spc_count++;
+// 					data->quote->spc_count++;
 // 					find_decomposer_to_switch(data, i + 1);
 // 					k++;
 // 				}
@@ -135,7 +135,7 @@ void	flag_count(t_vault *data)
 // 		}
 // 		i++;
 // 	}
-// 	data->quote_in->spc_count = 0;
+// 	data->quote->spc_count = 0;
 // }
 
 char	*output_to_redirect(t_vault *data, int i, int j)

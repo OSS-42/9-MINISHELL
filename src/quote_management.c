@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 08:51:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 10:01:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	find_str_quote(t_vault *data)
 	int		i;
 
 	i = 0;
-	data->quote_in->begin = 0;
-	data->quote_in->len = 1;
+	data->quote->begin = 0;
+	data->quote->len = 1;
 	while (data->read_line[i])
 	{
-		data->quote_in->spc_count = 0;
+		data->quote->spc_count = 0;
 		if (data->read_line[i] == ' ')
 		{
 			while (data->read_line[i] == ' ')
 				i++;
-			data->quote_in->begin = i;
+			data->quote->begin = i;
 		}
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
 		{
@@ -49,30 +49,33 @@ void	find_str_quote(t_vault *data)
 */
 void	len_of_replacement(t_vault *data, int *rl_index)
 {
-	data->quote_in->quote = data->read_line[*rl_index];
+	data->quote->quote_priority = data->read_line[*rl_index];
 	(*rl_index)++;
-	while ((data->read_line[*rl_index] != data->quote_in->quote
+	while ((data->read_line[*rl_index] != data->quote->quote_priority
 			|| data->read_line[*rl_index + 1] > 32)
 		&& data->read_line[*rl_index])
 	{
-		if (data->read_line[*rl_index] == data->quote_in->quote)
+		if (data->read_line[*rl_index] == data->quote->quote_priority)
 		{
 			while (data->read_line[*rl_index]
 				&& data->read_line[*rl_index] != ' ')
 			{
-				data->quote_in->len++;
+				data->quote->len++;
 				(*rl_index)++;
 			}
 			break ;
 		}
 		if (data->read_line[*rl_index] == ' ')
-			data->quote_in->spc_count++;
-		data->quote_in->len++;
+			data->quote->spc_count++;
+		data->quote->len++;
 		(*rl_index)++;
 	}
-	data->quote_in->len++;
+	data->quote->len++;
 }
 
+/*
+	Je cherche la ligne à remplacer dans rl_decomp en trouvant la quote que j'ai trouvé dans readline
+*/
 void	find_decomposer_array_to_replace(t_vault *data, int end)
 {
 	int		i;
@@ -87,7 +90,7 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 		j = 0;
 		while (data->rl_decomp[i][j])
 		{
-			if (data->rl_decomp[i][j] == data->quote_in->quote)
+			if (data->rl_decomp[i][j] == data->quote->quote_priority)
 			{
 				replace_decomposer_array(data, end, &i);
 				return ;
@@ -98,6 +101,10 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 	}
 }
 
+/*
+	Je free la ligne de rl_decomp à remplacer, je la calloc de la taille de la nouvelle ligne
+	qui va la remplacer et je me balade dans readline de begin jusqu'a end pour remplir la nouvelle ligne
+*/
 void	replace_decomposer_array(t_vault *data, int end, int *i)
 {
 	int	j;
@@ -105,12 +112,12 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	j = 0;
 	free(data->rl_decomp[*i]);
 	data->rl_decomp[*i]
-		= ft_calloc(sizeof(char), data->quote_in->len + 1);
-	while (data->quote_in->begin <= end)
+		= ft_calloc(sizeof(char), data->quote->len + 1);
+	while (data->quote->begin <= end)
 	{
 		data->rl_decomp[*i][j]
-			= data->read_line[data->quote_in->begin];
-		data->quote_in->begin++;
+			= data->read_line[data->quote->begin];
+		data->quote->begin++;
 		j++;
 	}
 	(*i)++;
@@ -119,12 +126,16 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 		find_decomposer_to_switch(data, *i);
 }
 
+/*
+	Je décalle les éléments du tableau. spc_count va me servir à savoir combien de ligne
+	je vais devoir sauter dans rl_decomp pour commencer mon remplacement.
+*/
 void	find_decomposer_to_switch(t_vault *data, int to_switch)
 {
 	int	next_array;
 	int	actual_array;
 
-	next_array = to_switch + data->quote_in->spc_count;
+	next_array = to_switch + data->quote->spc_count;
 	actual_array = to_switch;
 	while (data->rl_decomp[next_array])
 	{
@@ -134,5 +145,5 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 		actual_array++;
 	}
 	data->rl_decomp[actual_array][0] = '\0';
-	data->quote_in->spc_count = 0;
+	data->quote->spc_count = 0;
 }

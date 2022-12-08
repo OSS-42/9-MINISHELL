@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/08 08:53:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 09:59:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	execute_redirection(t_vault *data)
 // 				data->rl_decomp[i][len - 1] = '\0';
 // 			else
 // 			{
-// 				data->quote_in->spc_count = 1;
+// 				data->quote->spc_count = 1;
 // 				find_decomposer_to_switch(data, i);
 // 				i--;
 // 			}

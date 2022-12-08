@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/07 11:32:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 09:59:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_exit(t_vault *data)
 		free(data->b_in->env_ord);
 	free(data->read_line);
 	free(data->b_in);
-	free(data->quote_in);
+	free(data->quote);
 	free(data->flag);
 	free(data->dollar_var);
 	exit (0);

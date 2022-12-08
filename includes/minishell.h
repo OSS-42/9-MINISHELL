@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 08:51:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 10:00:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_quote
 	int		simple_quote_count;
 	int		len;
 	int		begin;
-	char	quote;
+	char	quote_priority;
 	int		spc_count;
 }	t_quote;
 
@@ -90,7 +90,7 @@ typedef struct s_vault
 	char		**rl_decomp;
 	char		*test;
 	t_builtins	*b_in;
-	t_quote		*quote_in;
+	t_quote		*quote;
 	t_flag		*flag;
 	int			activate_var;
 	char		*dollar_var;
