@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 20:48:11 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:55:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,20 @@ void	print_row(t_vault *data, int row)
 
 void	spe_char(t_vault *data, int row)
 {
-	int	j;
 
+// voir a splitter sur le char qui vient en premier (echo->first)
 	while (data->rl_decomp[row] && data->rl_decomp[row][0] != '\0')
 	{
-		j = 0;
-		data->flag->dollar_count = 0;
-		while (data->rl_decomp[row][j] != '\0')
-		{
-			if (data->rl_decomp[row][j] == '$')
-				data->flag->dollar_count++;
-			j++;
-		}
-		if (data->flag->dollar_count > 1
-			&& ft_strchr(data->rl_decomp[row], '$') != NULL)
-			split_on_char(data, row, '$');
+//		rl_decomp_char_count(data, row, '$');
 		if (data->rl_decomp[row])
 		{
+			print_double_array(data->rl_decomp);
 			data->b_in->echo_priority = quote_priority(data, row);
+			printf("%d\n", data->b_in->echo_priority);
+			printf("%d\n", data->b_in->echo_first);
+			printf("%d\n", data->flag->dollar_count);
+			if (data->flag->dollar_count > 1)
+				split_on_char(data, row, '$');
 			if (data->b_in->echo_priority != 0)
 				clean_quote(data, row);
 			if (data->flag->dollar_count != 0 && data->b_in->echo_priority != 39)
@@ -70,4 +66,20 @@ void	reset_counters(t_vault *data)
 	data->flag->runs = 0;
 	data->b_in->echo_first = 0;
 	data->b_in->echo_priority = 0;
+	data->flag->dollar_count = 0;
+}
+
+void	rl_decomp_char_count(t_vault *data, int row, char c)
+{
+	int	i;
+
+	i = 0;
+	data->flag->dollar_count = 0;
+	while (data->rl_decomp[row][i] != '\0')
+	{
+		if (data->rl_decomp[row][i] == c)
+			data->flag->dollar_count++;
+		i++;
+	}
+	return ;
 }

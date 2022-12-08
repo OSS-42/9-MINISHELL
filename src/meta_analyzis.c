@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/07 16:09:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 22:01:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 //TODO ajouter la verification de la premiere occurence VOIR AVEC ERIC
-int		readline_quote_priority(t_vault *data)
+int		rl_prio_n_qty(t_vault *data)
 {
 	int		i;
 	char	c;
@@ -46,7 +46,7 @@ int		readline_quote_priority(t_vault *data)
 	}
 	return (TRUE);
 }
-//
+
 void	flag_count(t_vault *data)
 {
 	int	i;

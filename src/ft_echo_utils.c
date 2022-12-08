@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 20:30:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 22:43:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ int	quote_priority(t_vault *data, int row)
 				data->b_in->echo_first = 1;
 			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
 				data->b_in->echo_priority = 39;
+		}
+		else if (data->rl_decomp[row][j] == '$')
+		{
+			data->flag->dollar_count++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 3;
 		}
 		j++;
 	}
