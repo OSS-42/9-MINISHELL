@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 16:31:48 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:45:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ void	print_row(t_vault *data, int row)
 
 void	spe_char(t_vault *data, int row)
 {
-
-// voir a splitter sur le char qui vient en premier (echo->first)
 	while (data->rl_decomp[row] && data->rl_decomp[row][0] != '\0')
 	{
-//		rl_decomp_char_count(data, row, '$');
+		print_double_array(data->rl_decomp);
 		if (data->rl_decomp[row])
 		{
 			data->b_in->echo_priority = quote_priority(data, row);

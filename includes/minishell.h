@@ -6,7 +6,11 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/12/08 16:31:20 by mbertin          ###   ########.fr       */
+=======
+/*   Updated: 2022/12/08 15:57:25 by ewurstei         ###   ########.fr       */
+>>>>>>> 03ab3e2 (not printing wrong var)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +72,7 @@ typedef struct s_flag
 	int		runs;
 	int		stdout_backup;
 	int		chevron_with_space;
+	int		var_not_found;
 }	t_flag;
 
 typedef struct s_quote

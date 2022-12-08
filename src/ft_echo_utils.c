@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 11:30:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:38:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,16 @@ void	find_var_value(t_vault *data, int row)
 		k = 0;
 		while (data->env[k])
 		{
+			data->flag->var_not_found = 0;
 			if (ft_strnstr(data->env[k], data->dollar_var,
 					ft_strlen(data->dollar_var)) == NULL)
-				k++;
-			else
-			{
-				expand_var(data, k, row);
-				break ;
-			}
+				data->flag->var_not_found = 1;
+			k++;
 		}
+		expand_var(data, k, row);
 	}
 }
+
 
 void	var_extract(t_vault *data, int row, int position)
 {
@@ -123,15 +122,25 @@ void	expand_var(t_vault *data, int row_var, int row)
 	int		len_var;
 	char	*temp;
 
-	len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
-	temp = ft_calloc(sizeof(char),
-			(ft_strlen(data->rl_decomp[row]) + len_var + 3));
-	free (data->dollar_var);
-	data->dollar_var = ft_substr(data->env[row_var],
-			data->dollar_var_len + 1, len_var);
-	var_to_value(data, row, temp);
-	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = ft_strdup(temp);
-	free (temp);
+	if (data->flag->var_not_found == 1)
+	{
+		free (data->rl_decomp[row]);
+		data->rl_decomp[row] = ft_calloc(sizeof(char), 2);
+		data->rl_decomp[row] = ft_strdup(" ");
+		return ;
+	}
+	else
+	{
+		len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
+		temp = ft_calloc(sizeof(char),
+				(ft_strlen(data->rl_decomp[row]) + len_var + 3));
+		free (data->dollar_var);
+		data->dollar_var = ft_substr(data->env[row_var],
+				data->dollar_var_len + 1, len_var);
+		var_to_value(data, row, temp);
+		free (data->rl_decomp[row]);
+		data->rl_decomp[row] = ft_strdup(temp);
+		free (temp);
+	}
 	return ;
 }

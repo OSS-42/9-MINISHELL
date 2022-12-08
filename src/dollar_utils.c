@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 13:44:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:34:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	split_on_char(t_vault *data, int row, char c)
 			}
 			data->flag->split_char = '\'';
 			data->flag->split_count = ft_dbl_ptr_len(data->split);
+			data->flag->same_line = ft_dbl_ptr_len(data->split) - 1;
 			change_tab(data, row);
 			return ;
 		}
@@ -110,7 +111,7 @@ void	split_on_char(t_vault *data, int row, char c)
 		}
 		data->flag->split_char = '\'';
 		data->flag->split_count = ft_dbl_ptr_len(data->split);
-		data->flag->same_line = ft_dbl_ptr_len(data->split);
+		data->flag->same_line = ft_dbl_ptr_len(data->split) - 1;
 		change_tab(data, row);
 		return ;
 	}
@@ -118,10 +119,10 @@ void	split_on_char(t_vault *data, int row, char c)
 	data->split = ft_split(data->rl_decomp[row], c);
 	free (data->rl_decomp[row]);
 	data->flag->split_count = ft_dbl_ptr_len(data->split);
-	data->flag->same_line = ft_dbl_ptr_len(data->split);
+	data->flag->same_line = ft_dbl_ptr_len(data->split) - 1;
 	if (c == '$')
 	{
-		data->flag->same_line = ft_dbl_ptr_len(data->split);
+		data->flag->same_line = ft_dbl_ptr_len(data->split) - 1;
 		i = 0;
 		while (data->split[i])
 		{
@@ -132,6 +133,9 @@ void	split_on_char(t_vault *data, int row, char c)
 			i++;
 		}
 	}
+	change_tab(data, row);
+	return ;
+}
 	// else if (c == '>')
 	// {
 	// 	if (ft_dbl_ptr_len(data->split) > data->flag->chevron_count)
@@ -164,9 +168,6 @@ void	split_on_char(t_vault *data, int row, char c)
 		// 	}
 		// }
 //	}
-	change_tab(data, row);
-	return ;
-}
 
 int	insert_row(int pos, int count, char **dest, char **source)
 {
