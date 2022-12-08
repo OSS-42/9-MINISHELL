@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 10:05:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:06:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	find_str_quote(t_vault *data)
 
 	i = 0;
 	data->quote->begin = 0;
-	data->quote->len = 1;
+	data->quote->len_of_replacement = 1;
 	while (data->read_line[i])
 	{
-		data->quote->spc_count = 0;
+		data->spc_count = 0;
 		if (data->read_line[i] == ' ')
 		{
 			while (data->read_line[i] == ' ')
@@ -60,17 +60,17 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 			while (data->read_line[*rl_index]
 				&& data->read_line[*rl_index] != ' ')
 			{
-				data->quote->len++;
+				data->quote->len_of_replacement++;
 				(*rl_index)++;
 			}
 			break ;
 		}
 		if (data->read_line[*rl_index] == ' ')
-			data->quote->spc_count++;
-		data->quote->len++;
+			data->spc_count++;
+		data->quote->len_of_replacement++;
 		(*rl_index)++;
 	}
-	data->quote->len++;
+	data->quote->len_of_replacement++;
 }
 
 /*
@@ -114,7 +114,7 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	j = 0;
 	free(data->rl_decomp[*i]);
 	data->rl_decomp[*i]
-		= ft_calloc(sizeof(char), data->quote->len + 1);
+		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1);
 	while (data->quote->begin <= end)
 	{
 		data->rl_decomp[*i][j]
@@ -138,7 +138,7 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	int	next_array;
 	int	actual_array;
 
-	next_array = to_switch + data->quote->spc_count;
+	next_array = to_switch + data->spc_count;
 	actual_array = to_switch;
 	while (data->rl_decomp[next_array])
 	{
@@ -148,5 +148,5 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 		actual_array++;
 	}
 	data->rl_decomp[actual_array][0] = '\0';
-	data->quote->spc_count = 0;
+	data->spc_count = 0;
 }

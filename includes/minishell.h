@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 10:00:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:05:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ typedef struct s_quote
 {
 	int		double_quote_count;
 	int		simple_quote_count;
-	int		len;
+	int		len_of_replacement;
 	int		begin;
 	char	quote_priority;
-	int		spc_count;
 }	t_quote;
 
 typedef struct s_vault
 {
+	int			spc_count;
 	char		*read_line;
 	char		*env_path;
 	char		**env;

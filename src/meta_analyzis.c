@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 09:59:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:06:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	flag_count(t_vault *data)
 // 				if (ft_strchr(data->rl_decomp[i + 1], '>') == NULL)
 // 				{
 // 					data->flag->output[k] = ft_strdup(data->rl_decomp[i + 1]);
-// 					data->quote->spc_count++;
+// 					data->spc_count++;
 // 					find_decomposer_to_switch(data, i + 1);
 // 					k++;
 // 				}
@@ -135,7 +135,7 @@ void	flag_count(t_vault *data)
 // 		}
 // 		i++;
 // 	}
-// 	data->quote->spc_count = 0;
+// 	data->spc_count = 0;
 // }
 
 char	*output_to_redirect(t_vault *data, int i, int j)
