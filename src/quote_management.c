@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 10:01:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 10:05:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*
 	Je passe dans readline pour trouver une premiere quote.
 	Quand je trouve une quote, je rentre dans la fonction len_of_replacement
-	et je lui donne un pointeur sur mon index (car je vais avoir besoin qu'il continu
-	de ce balader dans readline)
+	et je lui donne un pointeur sur mon index (car je vais avoir besoin
+	qu'il continu de ce balader dans readline)
 */
 void	find_str_quote(t_vault *data)
 {
@@ -74,7 +74,8 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 }
 
 /*
-	Je cherche la ligne à remplacer dans rl_decomp en trouvant la quote que j'ai trouvé dans readline
+	Je cherche la ligne à remplacer dans rl_decomp en trouvant la quote
+	prioritaire que j'ai trouvé dans readline
 */
 void	find_decomposer_array_to_replace(t_vault *data, int end)
 {
@@ -102,8 +103,9 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 }
 
 /*
-	Je free la ligne de rl_decomp à remplacer, je la calloc de la taille de la nouvelle ligne
-	qui va la remplacer et je me balade dans readline de begin jusqu'a end pour remplir la nouvelle ligne
+	Je free la ligne de rl_decomp à remplacer, je la calloc de la taille de
+	la nouvelle ligne qui va la remplacer et je me balade dans readline de
+	begin jusqu'a end pour remplir la nouvelle ligne
 */
 void	replace_decomposer_array(t_vault *data, int end, int *i)
 {
@@ -127,8 +129,9 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 }
 
 /*
-	Je décalle les éléments du tableau. spc_count va me servir à savoir combien de ligne
-	je vais devoir sauter dans rl_decomp pour commencer mon remplacement.
+	Je décalle les éléments du tableau. spc_count va me servir à savoir
+	combien de ligne je vais devoir sauter dans rl_decomp pour commencer
+	mon remplacement.
 */
 void	find_decomposer_to_switch(t_vault *data, int to_switch)
 {
