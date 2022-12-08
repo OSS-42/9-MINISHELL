@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 11:06:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:44:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	find_str_quote(t_vault *data)
 		}
 		i++;
 	}
+	data->spc_count = 1;
 }
 
 /*
@@ -147,6 +148,6 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 		next_array++;
 		actual_array++;
 	}
-	data->rl_decomp[actual_array][0] = '\0';
-	data->spc_count = 0;
+	if (data->rl_decomp[actual_array])
+		data->rl_decomp[actual_array][0] = '\0';
 }

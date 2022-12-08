@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 11:05:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:46:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_builtins
 
 typedef struct s_flag
 {
-	char	**output;
+	char	*output;
 	int		output_count;
 	int		chevron_count;
 	int		input_count;
@@ -106,7 +106,6 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-void	execute_redirection(t_vault *data);
 void	count_meta_with_space(t_vault *data);
 // void	reduce_space(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
@@ -116,6 +115,12 @@ int		rl_prio_n_qty(t_vault *data);
 char	*output_to_redirect(t_vault *data, int i, int j);
 void	redirection_analysiz(t_vault *data);
 void	flag_count(t_vault *data);
+
+/***** redirection_management.c *****/
+void	execute_redirection(t_vault *data);
+char	*output_in_next_array(t_vault *data, char *rl_decomp_array,
+			char c, int rl_decomp_index);
+void	do_redirection(char *redirection);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
