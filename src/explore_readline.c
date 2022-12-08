@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/07 16:31:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:39:24 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,11 @@ void	explore_readline(t_vault *data)
 		flag_count(data);
 		print_double_array(data->rl_decomp);
 		write(1, "\n", 1);
-		if (data->flag->output_count > 0)
-			redirection_analysiz(data);
-		print_double_array(data->rl_decomp);
-		write(1, "\n", 1);
 		// if (data->flag->output_count > 0)
-		// 	execute_redirection(data);
-		// print_double_array(data->rl_decomp);
-		// write(1, "\n", 1);
-		//printf("%d\n", data->flag->output_count);
+		// 	redirection_analysiz(data);
+		// if (data->flag->output_count > 0)
+			execute_redirection(data);
 		spe_char(data, 0);
-		// print_double_array(data->rl_decomp);
-		// write(1, "\n", 1);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}
@@ -57,8 +50,13 @@ void	execute_redirection(t_vault *data)
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
-		if (ft_strchr(data->rl_decomp[i], '>') != NULL)
+		if (ft_strchr(data->rl_decomp[i], '>') != NULL && check_if_inside_quote(data->rl_decomp[i], '>'))
 		{
+			while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '>')
+			{
+
+				j++;
+			}
 			data->flag->fd_out[j] = open(data->flag->output[j],
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (data->flag->fd_out[j] == -1)
@@ -69,21 +67,53 @@ void	execute_redirection(t_vault *data)
 			{
 				printf("Probleme avec dup2 sur fd_out\n");
 			}
-			j++;
 			len = ft_strlen(data->rl_decomp[i]);
-			if (data->rl_decomp[i][len - 1] == '>' && len != 1)
-				data->rl_decomp[i][len - 1] = '\0';
-			else
-			{
-				data->quote_in->spc_count = 1;
-				find_decomposer_to_switch(data, i);
-				i--;
-			}
 		}
 		i++;
 	}
 	free(data->flag->fd_out);
 }
+
+// void	execute_redirection(t_vault *data)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	len;
+
+// 	i = 0;
+// 	j = 0;
+// 	len = 0;
+// 	data->flag->fd_out = malloc(sizeof(int) * data->flag->output_count);
+// 	data->flag->stdout_backup = dup(STDOUT_FILENO);
+// 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
+// 	{
+// 		if (ft_strchr(data->rl_decomp[i], '>') != NULL)
+// 		{
+// 			data->flag->fd_out[j] = open(data->flag->output[j],
+// 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 			if (data->flag->fd_out[j] == -1)
+// 			{
+// 				printf("Probleme avec open sur fd_out\n");
+// 			}
+// 			if (dup2(data->flag->fd_out[j], STDOUT_FILENO) == -1)
+// 			{
+// 				printf("Probleme avec dup2 sur fd_out\n");
+// 			}
+// 			j++;
+// 			len = ft_strlen(data->rl_decomp[i]);
+// 			if (data->rl_decomp[i][len - 1] == '>' && len != 1)
+// 				data->rl_decomp[i][len - 1] = '\0';
+// 			else
+// 			{
+// 				data->quote_in->spc_count = 1;
+// 				find_decomposer_to_switch(data, i);
+// 				i--;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	free(data->flag->fd_out);
+// }
 
 void	built_in(t_vault *data)
 {

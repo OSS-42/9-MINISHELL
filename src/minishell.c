@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 16:16:48 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:26:32 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ void	init_data(t_vault *data)
 	data->quote_in = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
 	data->activate_var = 0;
-	// data->flag->output_count = 0;
-	// data->flag->input_count = 0;
-	// data->flag->pipe_count = 0;
-	// data->quote_in->double_quote_count = 0;
-	// data->quote_in->simple_quote_count = 0;
-	// data->flag->stdout_backup = 0;
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
 	data->rl_decomp = NULL;
