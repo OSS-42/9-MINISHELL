@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 16:27:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:31:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ void	var_prep(t_vault *data, int row);
 void	var_to_value(t_vault *data, int row, char *temp);
 void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);
-void	change_tab(t_vault *data, char **dest, int row);
+void	change_tab(t_vault *data, int row);
 int		copy_var(char *dest, char *source, int pos);
 
 /***** POUR DEBUG *****/

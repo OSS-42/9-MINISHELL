@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 22:43:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:30:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	find_var_value(t_vault *data, int row)
 	int	k;
 
 	j = -1;
-	while (data->rl_decomp[row][++j])
+	while (data->rl_decomp[row] && data->rl_decomp[row][++j])
 	{
 		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
 			j++;
