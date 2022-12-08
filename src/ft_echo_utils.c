@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:52:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:26:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,3 @@ void	expand_var(t_vault *data, int row_var, int row)
 	free (temp);
 	return ;
 }
-
-
