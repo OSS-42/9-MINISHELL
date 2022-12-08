@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 15:31:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 16:27:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,7 @@ void	execute_redirection(t_vault *data)
 			while (data->rl_decomp[i][j])
 			{
 				if (data->rl_decomp[i][j] == '>' && !data->rl_decomp[i][j + 1])
-				{
-					data->flag->output = output_in_next_array(data,
-							data->rl_decomp[i + 1], '>', i);
-					if (!data->rl_decomp[i][j - 1])
-						find_decomposer_to_switch(data, i);
-					find_decomposer_to_switch(data, i);
-					do_redirection(data->flag->output);
-					j = -1;
-				}
+					output_in_next_array(data, i, &j, '>');
 				j++;
 			}
 		}
@@ -48,18 +40,23 @@ void	execute_redirection(t_vault *data)
 	}
 }
 
-char	*output_in_next_array(t_vault *data, char *rl_decomp_array,
-	char c, int rl_decomp_index)
+void	output_in_next_array(t_vault *data, int i, int *j, char c)
+{
+	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
+	if (*j == 0)
+		find_decomposer_to_switch(data, i);
+	find_decomposer_to_switch(data, i);
+	stdout_redirection(data->flag->output);
+	*j = -1;
+}
+
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 {
 	int		i;
-	char	*output;
 	int		len;
 
 	i = 0;
 	len = 0;
-	output = NULL;
-	(void)rl_decomp_index;
-	(void)data;
 	while (rl_decomp_array[i] && rl_decomp_array[i] != c
 		&& rl_decomp_array[i] != '|')
 	{
@@ -67,16 +64,10 @@ char	*output_in_next_array(t_vault *data, char *rl_decomp_array,
 		len++;
 	}
 	i = 0;
-	output = ft_substr(rl_decomp_array, i, len);
-	// if (rl_decomp_array[len] == '\0')
-	// {
-	// 	data->spc_count = 1;
-	// 	find_decomposer_to_switch(data, rl_decomp_index);
-	// }
-	return (output);
+	data->flag->output = ft_substr(rl_decomp_array, i, len);
 }
 
-void	do_redirection(char *redirection)
+void	stdout_redirection(char *redirection)
 {
 	int	fd;
 
@@ -90,4 +81,5 @@ void	do_redirection(char *redirection)
 	{
 		printf("Probleme avec dup2 sur fd_out\n");
 	}
+	free (redirection);
 }
