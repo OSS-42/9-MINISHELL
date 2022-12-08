@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/08 16:31:20 by mbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/08 15:57:25 by ewurstei         ###   ########.fr       */
->>>>>>> 03ab3e2 (not printing wrong var)
+/*   Updated: 2022/12/08 16:46:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
