@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 09:54:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:49:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,32 +158,31 @@ void	echo_parse_row(t_vault *data, int row)
 	i = 0;
 	temp = ft_calloc(sizeof(char), 500);
 	data->b_in->echo_priority = quote_priority(data, row);
-	print_double_array(data->rl_decomp);
+//	print_double_array(data->rl_decomp);
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 //a checker si priorite toujours valides 
-		printf("%d\n", ft_isinset(data->rl_decomp[row][i]));
+		data->dollar_var_len = 0;
 		if (ft_isinset(data->rl_decomp[row][i]) == 0)
 			data->buffer[i] = data->rl_decomp[row][i];
 		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
 		{
-			printf("coucou\n");
 			while (data->rl_decomp[row][++i] && data->rl_decomp[row][i] != '\'')
 				data->buffer[i - 1] = data->rl_decomp[row][i];
 			data->b_in->echo_priority = 0;
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
 		{
-			printf("ciao\n");
+//			printf("ciao\n");
 			while (data->rl_decomp[row][++i] && data->rl_decomp[row][i] != '\"')
 			{
 				if (data->rl_decomp[row][i] == '$')
 				{
-					temp = var_extract(data, row, i);
+					temp = var_extract(data, row, i + 1);
 					k = 0;
 					while (temp[k])
 					{
-						data->buffer[i] = temp[k];
+						data->buffer[i - 1] = temp[k];
 						i++;
 						k++;
 					}
@@ -193,10 +192,10 @@ void	echo_parse_row(t_vault *data, int row)
 					data->buffer[i - 1] = data->rl_decomp[row][i];
 			}
 		}
-		else if (ft_isinset(data->rl_decomp[row][i] == 3))
+		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
 		{
-			printf("hello\n");
-			temp = var_extract(data, row, i);
+//			printf("hello\n");
+			temp = var_extract(data, row, i + 1);
 			k = 0;
 			while (temp[k])
 			{
