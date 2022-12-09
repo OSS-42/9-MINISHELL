@@ -15,19 +15,19 @@ NC="\e[0;39m"
 
 #*****INTRO*****
 printf " \n \
-	${LGRAY}            █████${DGRAY}█████\n \
-	${LGRAY}         ████████${DGRAY}█████████\n \
-	${LGRAY}       ██████████${DGRAY}███████████\n \
-	${LGRAY}      ███████████${DGRAY}████████████${LYELLOW}█${NC}\n \
+	${LGRAY}             ▄▄▄▄${DGRAY}▄▄▄▄▄\n \
+	${LGRAY}         ▄███████${DGRAY}████████▄\n \
+	${LGRAY}       ▄█████████${DGRAY}██████████▄\n \
+	${LGRAY}     ▄███████████${DGRAY}████████████${LYELLOW}▄${NC}\n \
 	${LGRAY}    █████████████${DGRAY}████████████${LYELLOW}██${NC}\n \
 	${LGRAY}   ██████████████${DGRAY}████████████${LYELLOW}████${NC}\n \
 	${LGRAY} ███             ${DGRAY}████████████${LYELLOW}████${NC}\n \
 	${LGRAY} ███             ${DGRAY}████████████${LYELLOW}████${NC}\n \
-	${LGRAY}   ██████████████${DGRAY}████████████${LYELLOW}██${NC}\n \
+	${LGRAY}   ██████████████${DGRAY}████████████${LYELLOW}██▀${NC}\n \
 	${LGRAY}      ███████████${DGRAY}████████████${LYELLOW}██${NC}\n \
-	${LGRAY}       ██████████${DGRAY}██████████${LYELLOW}███${NC}\n \
-	${LGRAY}        ████     ${LYELLOW}████████████${NC}\n \
-	${LGRAY}          ███████${LYELLOW}██████████${NC}\n \
-	${LGRAY}             ████${LYELLOW}███████${NC}\n \
+	${LGRAY}       ██████████${DGRAY}███████████${LYELLOW}██${NC}\n \
+	${LGRAY}        ████     ${LYELLOW}████████████▀${NC}\n \
+	${LGRAY}          ███████${LYELLOW}██████████▀${NC}\n \
+	${LGRAY}             ▀▀▀▀${LYELLOW}▀▀▀▀▀▀▀${NC}\n \
 	_________________________________\n
 \n"

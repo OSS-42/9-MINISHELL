@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 00:12:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 09:54:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,9 @@ void	ft_echo(t_vault *data, int row)
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		echo_parse_row(data, row);
+//		printf("%s\n", data->buffer);
 		print_row(data);
+		free(data->buffer);
 		row++;
 	}
 	if (data->b_in->echo_flag_n == 0)
@@ -156,29 +158,26 @@ void	echo_parse_row(t_vault *data, int row)
 	i = 0;
 	temp = ft_calloc(sizeof(char), 500);
 	data->b_in->echo_priority = quote_priority(data, row);
+	print_double_array(data->rl_decomp);
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 //a checker si priorite toujours valides 
+		printf("%d\n", ft_isinset(data->rl_decomp[row][i]));
 		if (ft_isinset(data->rl_decomp[row][i]) == 0)
-		{
 			data->buffer[i] = data->rl_decomp[row][i];
-//			i++;
-		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
 		{
-			while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\'')
-			{
-				data->buffer[i] = data->rl_decomp[row][i + 1];
-				i++;
-			}
+			printf("coucou\n");
+			while (data->rl_decomp[row][++i] && data->rl_decomp[row][i] != '\'')
+				data->buffer[i - 1] = data->rl_decomp[row][i];
 			data->b_in->echo_priority = 0;
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
 		{
-			while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\"')
+			printf("ciao\n");
+			while (data->rl_decomp[row][++i] && data->rl_decomp[row][i] != '\"')
 			{
-				data->buffer[i] = data->rl_decomp[row][i + 1];
-				if (data->rl_decomp[row][i] != '$')
+				if (data->rl_decomp[row][i] == '$')
 				{
 					temp = var_extract(data, row, i);
 					k = 0;
@@ -190,11 +189,13 @@ void	echo_parse_row(t_vault *data, int row)
 					}
 					free (temp);
 				}
-				i++;
+				else
+					data->buffer[i - 1] = data->rl_decomp[row][i];
 			}
 		}
 		else if (ft_isinset(data->rl_decomp[row][i] == 3))
 		{
+			printf("hello\n");
 			temp = var_extract(data, row, i);
 			k = 0;
 			while (temp[k])
@@ -207,5 +208,4 @@ void	echo_parse_row(t_vault *data, int row)
 		}
 		i++;
 	}
-
 }
