@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 11:52:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:26:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c);
 void	find_output_in_next_array(t_vault *data,
 			char *rl_decomp_array, char c);
 void	stdout_redirection(char *redirection);
-void	clean_the_chevron(char *str);
+char	*clean_the_chevron(char *str);
+void	output_in_same_array(t_vault *data, int i, int *j, char c);
+int		while_is_not_flag(char *str, int i);
+int		flag_in_str(char *str);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);

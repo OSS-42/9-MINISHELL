@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/09 11:55:44 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:27:43 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,43 @@ void	execute_redirection(t_vault *data)
 			{
 				if (data->rl_decomp[i][j] == '>' && !data->rl_decomp[i][j + 1])
 					output_in_next_array(data, i, &j, '>');
+				else
+					output_in_same_array(data, i, &j, '>');
 				j++;
 			}
 		}
 		j = 0;
 		i++;
 	}
+}
+
+void	output_in_same_array(t_vault *data, int i, int *j, char c)
+{
+	(void)c;
+	(void)j;
+	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
+	if (flag_in_str(data->rl_decomp[i] == TRUE)
+		*j = while_is_not_flag(data->rl_decomp[i], *j);
+		// Maintenant recuperer stdout
+	//Sinon juste recuperer stdout
+
+}
+
+int	while_is_not_flag(char *str, int i)
+{
+	while (str[i] && str[i] != '\'' && str[i] != '\"' && str[i] != '|'
+		&& str[i] != '>' && str[i] != '<')
+		i++;
+	return (i);
+}
+
+int	flag_in_str(char *str)
+{
+	if (ft_strchr(str, '\'') != NULL && ft_strchr(str, '\"') != NULL
+		&& ft_strchr(str, '>') != NULL && ft_strchr(str, '<') != NULL
+		&& ft_strchr(str, '|') != NULL)
+		return (TRUE);
+	return(FALSE);
 }
 
 /*
@@ -67,21 +98,20 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 		if (ft_strlen(data->rl_decomp[i]) == 1)
 			find_decomposer_to_switch(data, i);
 		else
-			clean_the_chevron(data->rl_decomp[i]);
+			data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
 	}
 	else
 	{
 		data->rl_decomp[i][*j] = '\0';
 		if (ft_strchr(data->rl_decomp[i + 1], c) != NULL
 			&& check_if_inside_quote(data->rl_decomp[i + 1], c) == FALSE)
-			clean_the_chevron(data->rl_decomp[i + 1]);
+			data->rl_decomp[i + 1] = clean_the_chevron(data->rl_decomp[i + 1]);
 		else
 			find_decomposer_to_switch(data, i + 1);
 	}
 	stdout_redirection(data->flag->output);
 	*j = -1;
 }
-
 
 void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 {
@@ -104,7 +134,7 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 	Dans le cas ou la case qui contient > ce trouve dans un string qui contient
 	d'autre éléments cette fonction va retirer le > de cette string.
 */
-void	clean_the_chevron(char *str)
+char	*clean_the_chevron(char *str)
 {
 	int		begin;
 	int		temp_count;
@@ -113,19 +143,17 @@ void	clean_the_chevron(char *str)
 
 	begin = 0;
 	len = 0;
-	temp_count = 0;
-	temp = NULL;
-
 	while (str[begin] != '>' && str[begin] != '<' && str[begin] != '|'
 		&& str[begin] != '\'' && str[begin] != '\"')
+		begin++;
+	if (begin == 0)
 		begin++;
 	temp_count = begin;
 	while (str[temp_count++])
 		len++;
 	temp = ft_substr(str, begin, len);
 	free (str);
-	str = ft_strdup(temp);
-	free (temp);
+	return (temp);
 }
 
 void	stdout_redirection(char *redirection)
