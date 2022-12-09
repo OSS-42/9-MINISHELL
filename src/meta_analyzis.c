@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 22:31:40 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/09 09:52:16 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 //TODO ajouter la verification de la premiere occurence VOIR AVEC ERIC
-int		rl_prio_n_qty(t_vault *data)
+int	rl_prio_n_qty(t_vault *data, int i, char c)
 {
-	int		i;
-	char	c;
-
-	i = 0;
-	c = '\0';
 	while (data->read_line[i])
 	{
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
@@ -47,74 +42,31 @@ int		rl_prio_n_qty(t_vault *data)
 	return (TRUE);
 }
 
-// La fonction ne fait pas bien son travail.
-// Si le flag recherché est écris de cette facon : >"coucou">
-// Ca ne va compter que pour un, alors qu'il y en a deux.
-void	flag_count(t_vault *data)
+void	flag_count(t_vault *data, int i, int j)
 {
-	int	i;
+	char	c;
 
-	i = 0;
+	c = '\0';
 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
-		if (ft_strchr(data->rl_decomp[i], '>') != NULL && check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
-			data->flag->output_count++;
-		if (ft_strchr(data->rl_decomp[i], '<') != NULL && check_if_inside_quote(data->rl_decomp[i], '<') == FALSE)
-			data->flag->input_count++;
-		if (ft_strchr(data->rl_decomp[i], '|') != NULL && check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
-			data->flag->pipe_count++;
-		i++;
-	}
-}
-
-char	*output_to_redirect(t_vault *data, int i, int j)
-{
-	char	*temp;
-	int		len;
-	int		temp_index;
-
-	temp = NULL;
-	temp_index = j;
-	len = 0;
-	j++;
-	while (data->rl_decomp[i][temp_index])
-	{
-		len++;
-		temp_index++;
-	}
-	temp = ft_calloc(sizeof(char), len + 1);
-	temp_index = 0;
-	while (data->rl_decomp[i][j])
-	{
-		temp[temp_index] = data->rl_decomp[i][j];
-		j++;
-		temp_index++;
-	}
-	return (temp);
-}
-
-void	redirection_analysiz(t_vault *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (data->rl_decomp[i] && data->rl_decomp[i][0] != '\0')
-	{
-		data->flag->chevron_count = 0;
-		j = 0;
-		while(data->rl_decomp[i][j])
+		while (data->rl_decomp[i][j])
 		{
-			if (data->rl_decomp[i][j] == '>' && check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
-				data->flag->chevron_count++;
+			if (data->rl_decomp[i][j] == '\'' || data->rl_decomp[i][j] == '\"')
+			{
+				c = data->rl_decomp[i][j];
+				j++;
+				while (data->rl_decomp[i][j] != c)
+					j++;
+			}
+			if (data->rl_decomp[i][j] == '>')
+				data->flag->output_count++;
+			if (data->rl_decomp[i][j] == '<')
+				data->flag->input_count++;
+			if (data->rl_decomp[i][j] == '|')
+				data->flag->pipe_count++;
 			j++;
 		}
-		if (data->flag->chevron_count != 0)
-		{
-			data->flag->split_char = '>';
-			split_on_char(data, i, data->flag->split_char);
-			i = i + data->flag->chevron_count;
-		}
+		j = 0;
 		i++;
 	}
 }

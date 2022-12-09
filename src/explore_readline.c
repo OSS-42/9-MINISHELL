@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 00:15:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:51:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	explore_readline(t_vault *data)
 {
-	// count_meta_with_space(data);
 	data->rl_decomp = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data) == TRUE)
+	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
 		data->rl_decomp_i = 0;
 		find_str_quote(data);
-		flag_count(data);
+		flag_count(data, 0, 0);
+		printf("%d\n", data->flag->output_count);
 		execute_redirection(data);
 //		spe_char(data, 0);
 		built_in(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 22:50:24 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/09 11:55:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /*
 	echo bonjour > test OK
-	echo coucou> 1> 2> 3> 4 a continuer
+	echo coucou> 1> 2> 3> 4 OK
 */
+
 /*
 	Je vais chercher un chevon qui n'est pas entre quote et le nom du
 	fichier qui suit. Si le nom du fichier est dans le prochain array de
@@ -53,47 +54,34 @@ void	execute_redirection(t_vault *data)
 	Je vais chercher le nom du output dans le prochain array.
 	Quand je l'ai trouvé, si l'array en question ne contient que l'output
 	je décalle d'un rang le tableau. Même chose si l'array ou ce trouve le
-	chevron ne contient rien d'autre. Enfin je m'est j = -1 car j'ai déplacé
+	chevron ne contient rien d'autre. Enfin je m'est j = -1 car si j'ai déplacé
 	des éléments du tableau et donc je veux repasser dans la ligne actuel qui
-	n'est plus la même. (à changer quand je testerais des cas qui ne
-	décaleront pas le tableau)
+	n'est plus la même.
 */
 void	output_in_next_array(t_vault *data, int i, int *j, char c)
 {
-	int		begin;
-	int		temp_count;
-	int		len;
-	char	*temp;
-
-	begin = 0;
-	len = 0;
-	temp_count = 0;
-	temp = NULL;
 	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
 	if (*j == 0)
 	{
 		find_decomposer_to_switch(data, i);
-		find_decomposer_to_switch(data, i); // A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output
+		if (ft_strlen(data->rl_decomp[i]) == 1)
+			find_decomposer_to_switch(data, i);
+		else
+			clean_the_chevron(data->rl_decomp[i]);
 	}
 	else
 	{
 		data->rl_decomp[i][*j] = '\0';
 		if (ft_strchr(data->rl_decomp[i + 1], c) != NULL
-			&& check_if_inside_quote(data->rl_decomp[i + 1], c) == FALSE)//A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output de l'array
-		{
-			while (data->rl_decomp[i + 1][begin] != '>')//Il va falloir que je créé un asset des caractere qui vont délimiter la fin du fichier ('"><|)
-				begin++;
-			temp_count = begin;
-			while (data->rl_decomp[i + 1][temp_count++])
-				len++;
-			temp = ft_substr(data->rl_decomp[i + 1], begin, len);
-		}
+			&& check_if_inside_quote(data->rl_decomp[i + 1], c) == FALSE)
+			clean_the_chevron(data->rl_decomp[i + 1]);
 		else
 			find_decomposer_to_switch(data, i + 1);
 	}
 	stdout_redirection(data->flag->output);
 	*j = -1;
 }
+
 
 void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 {
@@ -110,6 +98,34 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 	}
 	i = 0;
 	data->flag->output = ft_substr(rl_decomp_array, i, len);
+}
+
+/*
+	Dans le cas ou la case qui contient > ce trouve dans un string qui contient
+	d'autre éléments cette fonction va retirer le > de cette string.
+*/
+void	clean_the_chevron(char *str)
+{
+	int		begin;
+	int		temp_count;
+	int		len;
+	char	*temp;
+
+	begin = 0;
+	len = 0;
+	temp_count = 0;
+	temp = NULL;
+
+	while (str[begin] != '>' && str[begin] != '<' && str[begin] != '|'
+		&& str[begin] != '\'' && str[begin] != '\"')
+		begin++;
+	temp_count = begin;
+	while (str[temp_count++])
+		len++;
+	temp = ft_substr(str, begin, len);
+	free (str);
+	str = ft_strdup(temp);
+	free (temp);
 }
 
 void	stdout_redirection(char *redirection)
