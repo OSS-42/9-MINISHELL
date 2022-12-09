@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 00:07:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 11:52:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,12 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-void	count_meta_with_space(t_vault *data);
 // void	reduce_space(t_vault *data);
 // void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
-int		rl_prio_n_qty(t_vault *data);
-char	*output_to_redirect(t_vault *data, int i, int j);
-void	redirection_analysiz(t_vault *data);
-void	flag_count(t_vault *data);
+int		rl_prio_n_qty(t_vault *data, int i, char c);
+void	flag_count(t_vault *data, int i, int j);
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data);
@@ -123,6 +120,7 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c);
 void	find_output_in_next_array(t_vault *data,
 			char *rl_decomp_array, char c);
 void	stdout_redirection(char *redirection);
+void	clean_the_chevron(char *str);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);

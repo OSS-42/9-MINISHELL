@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/09 08:57:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/09 09:36:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /*
 	echo bonjour > test OK
-	echo coucou> 1> 2> 3> 4 a continuer
+	echo coucou> 1> 2> 3> 4 OK
 */
+
 /*
 	Je vais chercher un chevon qui n'est pas entre quote et le nom du
 	fichier qui suit. Si le nom du fichier est dans le prochain array de
@@ -53,12 +54,36 @@ void	execute_redirection(t_vault *data)
 	Je vais chercher le nom du output dans le prochain array.
 	Quand je l'ai trouvé, si l'array en question ne contient que l'output
 	je décalle d'un rang le tableau. Même chose si l'array ou ce trouve le
-	chevron ne contient rien d'autre. Enfin je m'est j = -1 car j'ai déplacé
+	chevron ne contient rien d'autre. Enfin je m'est j = -1 car si j'ai déplacé
 	des éléments du tableau et donc je veux repasser dans la ligne actuel qui
-	n'est plus la même. (à changer quand je testerais des cas qui ne
-	décaleront pas le tableau)
+	n'est plus la même.
 */
 void	output_in_next_array(t_vault *data, int i, int *j, char c)
+{
+	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
+	if (*j == 0)
+	{
+		find_decomposer_to_switch(data, i);
+		if (ft_strlen(data->rl_decomp[i]) == 1)
+			find_decomposer_to_switch(data, i);
+		else
+			clean_the_chevron(data->rl_decomp[i]);
+	}
+	else
+	{
+		data->rl_decomp[i][*j] = '\0';
+		if (ft_strchr(data->rl_decomp[i + 1], c) != NULL
+			&& check_if_inside_quote(data->rl_decomp[i + 1], c) == FALSE)
+			clean_the_chevron(data->rl_decomp[i + 1]);
+		else
+			find_decomposer_to_switch(data, i + 1);
+	}
+	stdout_redirection(data->flag->output);
+	*j = -1;
+}
+
+
+void	clean_the_chevron(char *str)
 {
 	int		begin;
 	int		temp_count;
@@ -69,44 +94,17 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 	len = 0;
 	temp_count = 0;
 	temp = NULL;
-	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
-	if (*j == 0)
-	{
-		find_decomposer_to_switch(data, i);
-		if (ft_strlen(data->rl_decomp[i]) == 1)
-			find_decomposer_to_switch(data, i); // A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output
-		else
-		{
-			while (data->rl_decomp[i][begin] != '>')//Il va falloir que je créé un asset des caractere qui vont délimiter la fin du fichier ('"><|)
-				begin++;
-			temp_count = begin;
-			while (data->rl_decomp[i][temp_count++])
-				len++;
-			temp = ft_substr(data->rl_decomp[i], begin, len);
-			free (data->rl_decomp[i]);
-			data->rl_decomp[i] = temp;
-		}
-	}
-	else
-	{
-		data->rl_decomp[i][*j] = '\0';
-		if (ft_strchr(data->rl_decomp[i + 1], c) != NULL
-			&& check_if_inside_quote(data->rl_decomp[i + 1], c) == FALSE)//A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output de l'array
-		{
-			while (data->rl_decomp[i + 1][begin] != '>')//Il va falloir que je créé un asset des caractere qui vont délimiter la fin du fichier ('"><|)
-				begin++;
-			temp_count = begin;
-			while (data->rl_decomp[i + 1][temp_count++])
-				len++;
-			temp = ft_substr(data->rl_decomp[i + 1], begin, len);
-			// free (data->rl_decomp[i + 1]);
-			data->rl_decomp[i + 1] = temp;
-		}
-		else
-			find_decomposer_to_switch(data, i + 1);
-	}
-	stdout_redirection(data->flag->output);
-	*j = -1;
+
+	while (str[begin] != '>' && str[begin] != '<' && str[begin] != '|'
+		&& str[begin] != '\'' && str[begin] != '\"')
+		begin++;
+	temp_count = begin;
+	while (str[temp_count++])
+		len++;
+	temp = ft_substr(str, begin, len);
+	free (str);
+	str = ft_strdup(temp);
+	free (temp);
 }
 
 void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
