@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 22:50:24 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/09 08:57:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,19 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 	if (*j == 0)
 	{
 		find_decomposer_to_switch(data, i);
-		find_decomposer_to_switch(data, i); // A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output
+		if (ft_strlen(data->rl_decomp[i]) == 1)
+			find_decomposer_to_switch(data, i); // A changer pour s'assurer que je ne tombe pas sur ('"><|) en enlevant le output
+		else
+		{
+			while (data->rl_decomp[i][begin] != '>')//Il va falloir que je créé un asset des caractere qui vont délimiter la fin du fichier ('"><|)
+				begin++;
+			temp_count = begin;
+			while (data->rl_decomp[i][temp_count++])
+				len++;
+			temp = ft_substr(data->rl_decomp[i], begin, len);
+			free (data->rl_decomp[i]);
+			data->rl_decomp[i] = temp;
+		}
 	}
 	else
 	{
@@ -87,6 +99,8 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 			while (data->rl_decomp[i + 1][temp_count++])
 				len++;
 			temp = ft_substr(data->rl_decomp[i + 1], begin, len);
+			// free (data->rl_decomp[i + 1]);
+			data->rl_decomp[i + 1] = temp;
 		}
 		else
 			find_decomposer_to_switch(data, i + 1);
