@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/09 09:36:44 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:55:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,27 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 }
 
 
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = 0;
+	while (rl_decomp_array[i] && rl_decomp_array[i] != c
+		&& rl_decomp_array[i] != '|')
+	{
+		i++;
+		len++;
+	}
+	i = 0;
+	data->flag->output = ft_substr(rl_decomp_array, i, len);
+}
+
+/*
+	Dans le cas ou la case qui contient > ce trouve dans un string qui contient
+	d'autre éléments cette fonction va retirer le > de cette string.
+*/
 void	clean_the_chevron(char *str)
 {
 	int		begin;
@@ -105,23 +126,6 @@ void	clean_the_chevron(char *str)
 	free (str);
 	str = ft_strdup(temp);
 	free (temp);
-}
-
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
-{
-	int		i;
-	int		len;
-
-	i = 0;
-	len = 0;
-	while (rl_decomp_array[i] && rl_decomp_array[i] != c
-		&& rl_decomp_array[i] != '|')
-	{
-		i++;
-		len++;
-	}
-	i = 0;
-	data->flag->output = ft_substr(rl_decomp_array, i, len);
 }
 
 void	stdout_redirection(char *redirection)
