@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 11:49:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:32:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,11 @@ void	echo_parse_row(t_vault *data, int row)
 	int		i;
 	char	*temp;
 	int		k;
+	int		j;
+	int		l;
 
 	i = 0;
+	l = 0;
 	temp = ft_calloc(sizeof(char), 500);
 	data->b_in->echo_priority = quote_priority(data, row);
 //	print_double_array(data->rl_decomp);
@@ -173,24 +176,28 @@ void	echo_parse_row(t_vault *data, int row)
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
 		{
-//			printf("ciao\n");
+			printf("ciao\n");
 			while (data->rl_decomp[row][++i] && data->rl_decomp[row][i] != '\"')
 			{
 				if (data->rl_decomp[row][i] == '$')
 				{
 					temp = var_extract(data, row, i + 1);
 					k = 0;
+					j = i;
 					while (temp[k])
 					{
-						data->buffer[i - 1] = temp[k];
-						i++;
+						data->buffer[j - 1] = temp[k];
+						j++;
 						k++;
 					}
+					l = l + k;
+					i = i + data->dollar_var_len;
 					free (temp);
 				}
 				else
-					data->buffer[i - 1] = data->rl_decomp[row][i];
+					data->buffer[i + l - 1] = data->rl_decomp[row][i];
 			}
+			data->b_in->echo_priority = 0;
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
 		{
