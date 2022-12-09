@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 21:45:17 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/08 22:31:40 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int		rl_prio_n_qty(t_vault *data)
 	return (TRUE);
 }
 
+// La fonction ne fait pas bien son travail.
+// Si le flag recherché est écris de cette facon : >"coucou">
+// Ca ne va compter que pour un, alors qu'il y en a deux.
 void	flag_count(t_vault *data)
 {
 	int	i;
