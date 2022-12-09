@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/07 11:34:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 22:30:25 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	print_double_array(char **array)
 	}
 }
 
+// La fonction ne vérifie pas si le char est avant ou apres les quotes.
 int	check_if_inside_quote(char *str, char c)
 {
 	int		i;

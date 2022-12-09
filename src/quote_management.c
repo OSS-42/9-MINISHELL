@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 16:10:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 22:10:18 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	find_str_quote(t_vault *data)
 	int		i;
 
 	i = 0;
-	data->quote->begin = 0;
 	data->quote->len_of_replacement = 1;
 	while (data->read_line[i])
 	{
@@ -105,8 +104,8 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 
 /*
 	Je free la ligne de rl_decomp à remplacer, je la calloc de la taille de
-	la nouvelle ligne qui va la remplacer et je me balade dans readline de
-	begin jusqu'a end pour remplir la nouvelle ligne
+	la nouvelle ligne qui va la remplacer et je me balade dans readline, de
+	begin jusqu'a end, pour remplir la nouvelle ligne.
 */
 void	replace_decomposer_array(t_vault *data, int end, int *i)
 {

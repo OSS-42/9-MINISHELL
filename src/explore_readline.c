@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/08 16:34:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/08 21:44:06 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,47 +50,3 @@ void	built_in(t_vault *data)
 		ft_exit (data);
 	return ;
 }
-
-// void	count_meta_with_space(t_vault *data)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (data->read_line[i])
-// 	{
-// 		if (data->read_line[i] == '>' && data->read_line[i + 1] == ' ')
-// 			data->flag->chevron_with_space++;
-// 		i++;
-// 	}
-
-// }
-
-// void	reduce_space(t_vault *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		k;
-// 	char	*temp;
-
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	while (data->rl_decomp[i])
-// 	{
-// 		temp = data->rl_decomp[i];
-// 		printf("%s\n", temp);
-// 		while (data->rl_decomp[i][j])
-// 		{
-// 			if (data->rl_decomp[i][j] == ' ')
-// 				while (data->rl_decomp[i][j + 1] == ' ')
-// 					j++;
-// 			temp[k] = data->rl_decomp[i][j];
-// 			k++;
-// 			j++;
-// 		}
-// 		printf("%s\n", temp);
-// 		k = 0;
-// 		j = 0;
-// 		i++;
-// 	}
-// }
