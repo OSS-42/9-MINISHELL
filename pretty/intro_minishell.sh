@@ -19,17 +19,17 @@ printf " \n \
 	${LCYAN}                  /  \ ${NC}\n \
 	${LCYAN}                 / /\ \ ${NC}\n \
 	${LCYAN}              /\/ /  \ \/\ ${NC}\n \
-	${LRED}     /-------${LCYAN}/ / /    \ \ \ ${LRED}-------\ ${NC}\n \
+	${LRED}     /¯¯¯¯¯¯¯${LCYAN}/ / /    \ \ \ ${LRED}¯¯¯¯¯¯¯\ ${NC}\n \
 	${LRED}    / \   / ${LCYAN}/ / /      \ \ \ ${LRED} \   / \ ${NC}\n \
 	${LRED}   /   \/  ${LCYAN}/ / /        \ \ \ ${LRED}  \/   \ ${NC}\n \
 	${LRED}  / \ / \ ${LCYAN}/ / /__________\ \ \ ${LRED} / \ / \ ${NC}\n \
 	${LRED} /___/___${LCYAN}/_/ /            \ \_\ ${LRED}___\___\ ${NC}\n \
-	${LCYAN}    ________/              \__${YELLOW}|${LCYAN}___${YELLOW}|${LCYAN}_ ${NC}\n \
-	${LCYAN}    \            ${YELLOW} ___ | | --- |   |${LCYAN}/ ${NC}\n \
-	${LCYAN}       \        ${YELLOW}| |_  |-| |-  |__ |__ ${NC}\n \
-	${LCYAN}   ${YELLOW}|\  /| | \ | | __| | | |__${LCYAN}/${NC}\n \
-	${LCYAN}   ${YELLOW}||\/|| | |\| |         ${LCYAN}/ ${NC}\n \
-	${LCYAN}   ${YELLOW}||  || | | \ ${LCYAN}\      / ${NC}\n \
-	${LCYAN}   ${YELLOW}||  ||          ${LCYAN}\/ ${NC}\n \
+	${LCYAN}    ________/              \__${YELLOW}║${LCYAN}___${YELLOW}║${LCYAN}_ ${NC}\n \
+	${LCYAN}    \            ${YELLOW}         ╔══ ║   ║${LCYAN}/ ${NC}\n \
+	${LCYAN}       \        ${YELLOW}▀ ╔══ ║ ║ ╠═  ╚══ ╚══ ${NC}\n \
+	${LCYAN}    ${YELLOW}█▄ ▄█ ▀ █■■ █ ╚═╗ ╠═╣ ╚══${LCYAN}/${NC}\n \
+	${LCYAN}    ${YELLOW}█ ▀ █ █ █ █ █ ══╝ ║ ║ ${LCYAN}/ ${NC}\n \
+	${LCYAN}    ${YELLOW}█   █ █     ${LCYAN}\      / ${NC}\n \
+	${LCYAN}    ${YELLOW}█   █          ${LCYAN}\/ ${NC}\n \
 	________________________________________\n
 	\n"

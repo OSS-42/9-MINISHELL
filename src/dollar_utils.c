@@ -6,49 +6,67 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 15:34:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/08 23:35:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	copy_var(char *dest, char *source, int pos)
+int	quote_priority(t_vault *data, int row)
 {
-	int		k;
-
-	k = 0;
-	while (source[k])
-	{
-		dest[pos] = source[k];
-		k++;
-		pos++;
-	}
-	return (pos);
-}
-
-void	var_to_value(t_vault *data, int row, char *temp)
-{
-	int		i;
-	int		j;
+	int	j;
 
 	j = 0;
-	i = 0;
-	while (data->rl_decomp[row][j])
+	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
 	{
-		if (data->rl_decomp[row][j] == '$' && data->flag->runs != 1)
+		if (data->rl_decomp[row][j] == '\"')
 		{
-			i = copy_var(temp, data->dollar_var, i);
-			data->flag->runs = 1;
-			j = j + data->dollar_var_len;
-			free (data->dollar_var);
+			data->b_in->echo_dble_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 2;
+			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
+				data->b_in->echo_priority = 34;
 		}
-		else
+		else if (data->rl_decomp[row][j] == '\'')
 		{
-			temp[i] = data->rl_decomp[row][j];
-			i++;
+			data->b_in->echo_sgle_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 1;
+			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
+				data->b_in->echo_priority = 39;
+		}
+		else if (data->rl_decomp[row][j] == '$')
+		{
+			data->flag->dollar_count++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 3;
 		}
 		j++;
 	}
+	return (data->b_in->echo_priority);
+}
+
+void	clean_quote(t_vault *data, int row)
+{
+	int		j;
+	int		k;
+	int		len;
+	char	*temp;
+
+	j = 0;
+	k = 0;
+	len = ft_strlen(data->rl_decomp[row]);
+	temp = ft_calloc(len, sizeof(char));
+	while (j < len)
+	{
+		if (data->rl_decomp[row][j] == data->b_in->echo_priority)
+			j++;
+		temp[k] = data->rl_decomp[row][j];
+		j++;
+		k++;
+	}
+	free (data->rl_decomp[row]);
+	data->rl_decomp[row] = temp;
 }
 
 void	split_on_char(t_vault *data, int row, char c)
@@ -136,38 +154,6 @@ void	split_on_char(t_vault *data, int row, char c)
 	change_tab(data, row);
 	return ;
 }
-	// else if (c == '>')
-	// {
-	// 	if (ft_dbl_ptr_len(data->split) > data->flag->chevron_count)
-	// 		i = i + 1;
-	// 	if (data->flag->chevron_with_space == 0)
-	// 	{
-	// 		while (data->split[i])
-	// 		{
-	// 			buffer = ft_strjoin(">", data->split[i]);
-	// 			free(data->split[i]);
-	// 			data->split[i] = ft_strdup(buffer);
-	// 			free(buffer);
-	// 			i++;
-	// 		}
-	// 	}
-	// 	// else
-		// {
-		// 	while (data->flag->chevron_with_space != 0)
-		// 	{
-		// 		i = i + 1;
-		// 		while (data->split[i])
-		// 		{
-		// 			buffer = ft_strjoin(">", data->split[i]);
-		// 			free(data->split[i]);
-		// 			data->split[i] = ft_strdup(buffer);
-		// 			free (buffer);
-		// 			i++;
-		// 		}
-		// 		data->flag->chevron_with_space--;
-		// 	}
-		// }
-//	}
 
 int	insert_row(int pos, int count, char **dest, char **source)
 {
@@ -200,9 +186,7 @@ void	change_tab(t_vault *data, int row)
 		free (data->rl_decomp[i]);
 		i++;
 	}
-		i = insert_row(i, data->flag->split_count + 1, temp, data->split);
-	// else if (data->flag->split_char == '>')
-	// 	i = insert_row(i, data->flag->chevron_count + 1, dest, data->split);
+	i = insert_row(i, data->flag->split_count + 1, temp, data->split);
 	while (i < ft_dbl_ptr_len(data->rl_decomp) && data->rl_decomp[i + 1])
 	{
 		temp[i] = ft_strdup(data->rl_decomp[i + 1]);

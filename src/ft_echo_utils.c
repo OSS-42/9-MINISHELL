@@ -6,141 +6,119 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 16:38:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:08:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	quote_priority(t_vault *data, int row)
-{
-	int	j;
-
-	j = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
-	{
-		if (data->rl_decomp[row][j] == '\"')
-		{
-			data->b_in->echo_dble_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 2;
-			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-				data->b_in->echo_priority = 34;
-		}
-		else if (data->rl_decomp[row][j] == '\'')
-		{
-			data->b_in->echo_sgle_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 1;
-			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-				data->b_in->echo_priority = 39;
-		}
-		else if (data->rl_decomp[row][j] == '$')
-		{
-			data->flag->dollar_count++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 3;
-		}
-		j++;
-	}
-	return (data->b_in->echo_priority);
-}
-
-void	clean_quote(t_vault *data, int row)
-{
-	int		j;
-	int		k;
-	int		len;
-	char	*temp;
-
-	j = 0;
-	k = 0;
-	len = ft_strlen(data->rl_decomp[row]);
-	temp = ft_calloc(len, sizeof(char));
-	while (j < len)
-	{
-		if (data->rl_decomp[row][j] == data->b_in->echo_priority)
-			j++;
-		temp[k] = data->rl_decomp[row][j];
-		j++;
-		k++;
-	}
-	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = temp;
-}
-
 //TODO Si on veut corriger le invalid R il faut changer la condition des boucles
 //TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
 
 //attention : si la var n'existe pas, echo ne doit rien afficher
-void	find_var_value(t_vault *data, int row)
-{
-	int	j;
-	int	k;
-
-	j = -1;
-	while (data->rl_decomp[row] && data->rl_decomp[row][++j])
-	{
-		while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != '$')
-			j++;
-		var_extract(data, row, j);
-		k = 0;
-		while (data->env[k])
-		{
-			data->flag->var_not_found = 0;
-			if (ft_strnstr(data->env[k], data->dollar_var,
-					ft_strlen(data->dollar_var)) == NULL)
-				data->flag->var_not_found = 1;
-			k++;
-		}
-		expand_var(data, k, row);
-	}
-}
-
-
-void	var_extract(t_vault *data, int row, int position)
+char	*var_extract(t_vault *data, int row, int position)
 {
 	int		k;
 	char	*temp;
 
 	temp = NULL;
 	k = position + 1;
-	while (data->rl_decomp[row][k] && data->rl_decomp[row][k] != ' '
-		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+	while (data->rl_decomp[row][k] && ft_char_env_var(data->rl_decomp[row][k] == 1))
 	{
 		data->dollar_var_len++;
 		k++;
 	}
-	temp = ft_substr(data->rl_decomp[row], position + 1, data->dollar_var_len);
-	data->dollar_var = ft_strjoin(temp, "=");
-	free (temp);
-	return ;
+	if (data->dollar_var_len > 0)
+	{
+		temp = ft_substr(data->rl_decomp[row], position + 1, data->dollar_var_len);
+		data->dollar_var = ft_strjoin(temp, "=");
+		free (temp);
+	}
+	temp =	does_var_exist(data, row);
+	return (temp);
 }
 
-void	expand_var(t_vault *data, int row_var, int row)
+char	*does_var_exist(t_vault *data, int row)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	temp = ft_calloc(sizeof(char), 500);
+	while (data->env[i])
+	{
+		if (ft_strnstr(data->env[i], data->dollar_var,
+				ft_strlen(data->dollar_var) + 1) == NULL)
+			data->flag->var_not_found = 1;
+		else
+		{
+			data->flag->var_not_found = 0;
+			break ;
+		}
+		i++;
+	}
+	temp = expand_var(data, i, row);
+	return (temp);
+}
+
+char	*expand_var(t_vault *data, int row_var, int row)
 {
 	int		len_var;
 	char	*temp;
 
+	temp = NULL;
 	if (data->flag->var_not_found == 1)
 	{
-		free (data->rl_decomp[row]);
-		data->rl_decomp[row] = ft_calloc(sizeof(char), 2);
-		data->rl_decomp[row] = ft_strdup(" ");
-		return ;
+		temp = ft_calloc(sizeof(char), 2);
+		temp = " ";
+		return (temp);
 	}
 	else
 	{
 		len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
 		temp = ft_calloc(sizeof(char),
 				(ft_strlen(data->rl_decomp[row]) + len_var + 3));
-		free (data->dollar_var);
-		data->dollar_var = ft_substr(data->env[row_var],
+		temp = ft_substr(data->env[row_var],
 				data->dollar_var_len + 1, len_var);
-		var_to_value(data, row, temp);
-		free (data->rl_decomp[row]);
-		data->rl_decomp[row] = ft_strdup(temp);
-		free (temp);
 	}
-	return ;
+	return (temp);
 }
+
+// void	var_to_value(t_vault *data, int row, char *temp)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	j = 0;
+// 	i = 0;
+// 	while (data->rl_decomp[row][j])
+// 	{
+// 		if (data->rl_decomp[row][j] == '$' && data->flag->runs != 1)
+// 		{
+// 			i = copy_var(temp, data->dollar_var, i);
+// 			data->flag->runs = 1;
+// 			j = j + data->dollar_var_len;
+// 			free (data->dollar_var);
+// 		}
+// 		else
+// 		{
+// 			temp[i] = data->rl_decomp[row][j];
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// }
+
+// int	copy_var(char *dest, char *source, int pos)
+// {
+// 	int		k;
+
+// 	k = 0;
+// 	while (source[k])
+// 	{
+// 		dest[pos] = source[k];
+// 		k++;
+// 		pos++;
+// 	}
+// 	return (pos);
+// }

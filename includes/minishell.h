@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/08 16:46:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 00:07:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,19 @@ void	len_of_replacement(t_vault *data, int *i);
 /***** built_in.c *****/
 void	ft_cd(t_vault *data, int row);
 void	ft_pwd(t_vault *data, int row);
-void	ft_echo(t_vault *data, int row);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
+//void	ft_echo(t_vault *data, int row);
+void	ft_echo(t_vault *data, int row);
+int		ft_isinset(char c);
+void	echo_parse_row(t_vault *data, int row);
 
 /***** ft_echo_utils ******/
-int		quote_priority(t_vault *data, int row);
-void	clean_quote(t_vault *data, int row);
-void	find_var_value(t_vault *data, int row);
-void	var_extract(t_vault *data, int row, int position);
-void	expand_var(t_vault *data, int row_var, int row);
-//void	expand_var(t_vault *data, int row_var, int row, char **array);
+char	*var_extract(t_vault *data, int row, int position);
+char	*does_var_exist(t_vault *data, int row);
+char	*expand_var(t_vault *data, int row_var, int row);
+// int		copy_var(char *dest, char *source, int pos);
+// void	var_to_value(t_vault *data, int row, char *temp);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -165,7 +167,7 @@ int		dbl_array_len(char **array);
 int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
-void	print_row(t_vault *data, int row);
+void	print_row(t_vault *data);
 void	spe_char(t_vault *data, int row);
 void	reset_counters(t_vault *data);
 void	rl_decomp_char_count(t_vault *data, int row, char c);
@@ -179,11 +181,12 @@ void	var_prep(t_vault *data, int row);
 //void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** dollar_utils.c *****/
-void	var_to_value(t_vault *data, int row, char *temp);
+int		quote_priority(t_vault *data, int row);
+void	clean_quote(t_vault *data, int row);
 void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);
 void	change_tab(t_vault *data, int row);
-int		copy_var(char *dest, char *source, int pos);
+
 
 /***** POUR DEBUG *****/
 

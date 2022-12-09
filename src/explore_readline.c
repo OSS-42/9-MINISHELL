@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/08 21:44:06 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/09 00:15:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data);
 		execute_redirection(data);
-		spe_char(data, 0);
+//		spe_char(data, 0);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	}
