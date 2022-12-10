@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 11:42:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:56:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*var_extract(t_vault *data, int row, int position)
 
 	temp = NULL;
 	k = position;
+	data->dollar_var_len = 0;
 	while (data->rl_decomp[row][k]
 		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
 	{
@@ -35,11 +36,13 @@ char	*var_extract(t_vault *data, int row, int position)
 		temp = ft_substr(data->rl_decomp[row], position,
 				data->dollar_var_len);
 		data->dollar_var = ft_strjoin(temp, "=");
+		printf("%s\n", data->dollar_var);
 		free (temp);
 	}
 	else
 		return (NULL);
 	temp = does_var_exist(data, row);
+	printf("%s\n", temp);
 	return (temp);
 }
 

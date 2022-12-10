@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 16:32:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:56:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ void	echo_parse_row(t_vault *data, int row)
 
 	i = 0;
 	l = 0;
-	temp = ft_calloc(sizeof(char), 500);
 	data->b_in->echo_priority = quote_priority(data, row);
 //	print_double_array(data->rl_decomp);
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
@@ -181,21 +180,22 @@ void	echo_parse_row(t_vault *data, int row)
 			{
 				if (data->rl_decomp[row][i] == '$')
 				{
+					j = i - 1;
+					temp = ft_calloc(sizeof(char), 500);
 					temp = var_extract(data, row, i + 1);
 					k = 0;
-					j = i;
 					while (temp[k])
 					{
-						data->buffer[j - 1] = temp[k];
+						data->buffer[j] = temp[k];
 						j++;
 						k++;
 					}
-					l = l + k;
 					i = i + data->dollar_var_len;
+					l = k;
 					free (temp);
 				}
 				else
-					data->buffer[i + l - 1] = data->rl_decomp[row][i];
+					data->buffer[i + l] = data->rl_decomp[row][i];
 			}
 			data->b_in->echo_priority = 0;
 		}
@@ -215,3 +215,4 @@ void	echo_parse_row(t_vault *data, int row)
 		i++;
 	}
 }
+
