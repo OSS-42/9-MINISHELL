@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 11:49:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/09 23:49:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,22 @@ void	reinit_data(t_vault *data)
 	data->quote->begin = 0;
 }
 
+void	sig_handler(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	return ;
+}
+
 //system(INTRO) pour l'image au lancement de Minishell
 int	main(void)
 {
 	t_vault	data;
 
+	signal(SIGINT, sig_handler);
 	init_data(&data);
 	system(INTRO);
 	while (1)
