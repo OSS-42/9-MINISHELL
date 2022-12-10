@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/08 22:30:25 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/10 11:37:11 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	print_double_array(char **array)
 		printf("%s\n", array[i]);
 		i++;
 	}
+	printf("\n");
 }
 
 // La fonction ne vérifie pas si le char est avant ou apres les quotes.

@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/08 22:10:18 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/10 11:34:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,5 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 		actual_array++;
 	}
 	if (data->rl_decomp[actual_array])
-		data->rl_decomp[actual_array][0] = '\0';
+		data->rl_decomp[actual_array] = NULL;
 }

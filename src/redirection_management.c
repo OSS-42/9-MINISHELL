@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/09 13:27:43 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/10 11:34:06 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 	echo bonjour > test OK
 	echo coucou> 1> 2> 3> 4 OK
+	echo coucou >1
 */
 
 /*
@@ -42,7 +43,7 @@ void	execute_redirection(t_vault *data)
 			{
 				if (data->rl_decomp[i][j] == '>' && !data->rl_decomp[i][j + 1])
 					output_in_next_array(data, i, &j, '>');
-				else
+				else if (data->rl_decomp[i][j] == '>')
 					output_in_same_array(data, i, &j, '>');
 				j++;
 			}
@@ -57,11 +58,17 @@ void	output_in_same_array(t_vault *data, int i, int *j, char c)
 	(void)c;
 	(void)j;
 	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
-	if (flag_in_str(data->rl_decomp[i] == TRUE)
+	if (flag_in_str(data->rl_decomp[i]) == TRUE)
+	{
 		*j = while_is_not_flag(data->rl_decomp[i], *j);
-		// Maintenant recuperer stdout
-	//Sinon juste recuperer stdout
-
+		data->flag->output = ft_substr(data->rl_decomp[i], 0, *j);
+	}
+	else
+	{
+		data->flag->output = ft_substr(data->rl_decomp[i], 0, ft_strlen(data->rl_decomp[i]));
+		find_decomposer_to_switch(data, i);
+	}
+	stdout_redirection(data->flag->output);
 }
 
 int	while_is_not_flag(char *str, int i)
