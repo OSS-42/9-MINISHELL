@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 13:26:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/10 23:19:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,8 @@ void	echo_parse_row(t_vault *data, int row);
 
 /***** ft_echo_utils ******/
 char	*var_extract(t_vault *data, int row, int position);
-char	*does_var_exist(t_vault *data, int row);
-char	*expand_var(t_vault *data, int row_var, int row);
+char	*does_var_exist(t_vault *data);
+char	*expand_var(t_vault *data, int row_var);
 // int		copy_var(char *dest, char *source, int pos);
 // void	var_to_value(t_vault *data, int row, char *temp);
 

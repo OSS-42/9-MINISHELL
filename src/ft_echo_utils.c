@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 22:56:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/10 23:23:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*var_extract(t_vault *data, int row, int position)
 		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
 	{
 		data->dollar_var_len++;
-//		printf("%d\n", data->dollar_var_len);
 		k++;
 	}
 	if (data->dollar_var_len > 0)
@@ -36,17 +35,15 @@ char	*var_extract(t_vault *data, int row, int position)
 		temp = ft_substr(data->rl_decomp[row], position,
 				data->dollar_var_len);
 		data->dollar_var = ft_strjoin(temp, "=");
-		printf("%s\n", data->dollar_var);
 		free (temp);
 	}
 	else
 		return (NULL);
-	temp = does_var_exist(data, row);
-	printf("%s\n", temp);
+	temp = does_var_exist(data);
 	return (temp);
 }
 
-char	*does_var_exist(t_vault *data, int row)
+char	*does_var_exist(t_vault *data)
 {
 	int		i;
 	char	*temp;
@@ -61,15 +58,16 @@ char	*does_var_exist(t_vault *data, int row)
 		else
 		{
 			data->flag->var_not_found = 0;
+			free (temp);
 			break ;
 		}
 		i++;
 	}
-	temp = expand_var(data, i, row);
+	temp = expand_var(data, i);
 	return (temp);
 }
 
-char	*expand_var(t_vault *data, int row_var, int row)
+char	*expand_var(t_vault *data, int row_var)
 {
 	int		len_var;
 	char	*temp;
@@ -78,55 +76,16 @@ char	*expand_var(t_vault *data, int row_var, int row)
 	if (data->flag->var_not_found == 1)
 	{
 		temp = ft_calloc(sizeof(char), 2);
-		temp = " ";
+		temp = " \0";
+		free (data->dollar_var);
 		return (temp);
 	}
 	else
 	{
 		len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
-		temp = ft_calloc(sizeof(char),
-				(ft_strlen(data->rl_decomp[row]) + len_var + 3));
 		temp = ft_substr(data->env[row_var],
 				data->dollar_var_len + 1, len_var);
+		free (data->dollar_var);
 	}
 	return (temp);
 }
-
-// void	var_to_value(t_vault *data, int row, char *temp)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	j = 0;
-// 	i = 0;
-// 	while (data->rl_decomp[row][j])
-// 	{
-// 		if (data->rl_decomp[row][j] == '$' && data->flag->runs != 1)
-// 		{
-// 			i = copy_var(temp, data->dollar_var, i);
-// 			data->flag->runs = 1;
-// 			j = j + data->dollar_var_len;
-// 			free (data->dollar_var);
-// 		}
-// 		else
-// 		{
-// 			temp[i] = data->rl_decomp[row][j];
-// 			i++;
-// 		}
-// 		j++;
-// 	}
-// }
-
-// int	copy_var(char *dest, char *source, int pos)
-// {
-// 	int		k;
-
-// 	k = 0;
-// 	while (source[k])
-// 	{
-// 		dest[pos] = source[k];
-// 		k++;
-// 		pos++;
-// 	}
-// 	return (pos);
-// }
