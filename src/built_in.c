@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/10 23:55:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/10 23:57:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void	echo_parse_row(t_vault *data, int row)
 					i = i + data->dollar_var_len;
 					pos = pos;
 					free (temp);
+// toujours le probleme echo "$USER $TERM" a regler : manque 1 espace
 				}
 				else
 					data->buffer[pos] = data->rl_decomp[row][i];
