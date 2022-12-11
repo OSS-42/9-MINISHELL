@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/09 22:56:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/10 21:47:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int row)
 {
-	data->buffer = ft_calloc(sizeof(char), 500);
 	if (!(data->rl_decomp[row]) || data->rl_decomp[row][0] == '\0')
 		return ;
 	data->b_in->first_word = 1;
@@ -125,6 +124,7 @@ void	ft_echo(t_vault *data, int row)
 	}
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
+		data->buffer = ft_calloc(sizeof(char), 500);
 		echo_parse_row(data, row);
 //		printf("%s\n", data->buffer);
 		print_row(data);
