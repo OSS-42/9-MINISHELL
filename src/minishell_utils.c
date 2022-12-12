@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 00:09:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:14:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	print_row(t_vault *data)
 		ft_putstr_fd(data->buffer, 1);
 		data->b_in->first_word = 0;
 	}
-	// else if (data->flag->same_line >= 1)
-	// {
-	// 	ft_putstr_fd(data->rl_decomp[row], 1);
-	// 	data->flag->same_line--;
-	// }
 	else
 	{
 		ft_putstr_fd(" ", 1);
@@ -32,47 +27,88 @@ void	print_row(t_vault *data)
 	return ;
 }
 
-// void	spe_char(t_vault *data, int row)
-// {
-// 	while (data->rl_decomp[row] && data->rl_decomp[row][0] != '\0')
-// 	{
-// 		if (data->rl_decomp[row])
-// 		{
-// 			data->b_in->echo_priority = quote_priority(data, row);
-// 			if (data->flag->dollar_count > 1)
-// 				split_on_char(data, row, '$');
-// 			if (data->b_in->echo_priority != 0)
-// 				clean_quote(data, row);
-// 			if (data->flag->dollar_count != 0 && data->b_in->echo_priority != 39)
-// 				find_var_value(data, row);
-// 			row++;
-// 		}
-// 		reset_counters(data);
-// 	}
-// }
-
-// void	reset_counters(t_vault *data)
-// {
-// //	if (data->dollar_var)
-// //		free (data->dollar_var);
-// 	data->dollar_var_len = 0;
-// 	data->flag->runs = 0;
-// 	data->b_in->echo_first = 0;
-// 	data->b_in->echo_priority = 0;
-// 	data->flag->dollar_count = 0;
-// }
-
-void	rl_decomp_char_count(t_vault *data, int row, char c)
+int	ft_isinset(char c)
 {
-	int	i;
+	if (c == '\'')
+		return (1);
+	else if (c == '\"')
+		return (2);
+	else if (c == '$')
+		return (3);
+	else
+		return (0);
+}
 
-	i = 0;
-	data->flag->dollar_count = 0;
-	while (data->rl_decomp[row][i] != '\0')
+// void	rl_decomp_char_count(t_vault *data, int row, char c)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	data->flag->dollar_count = 0;
+// 	while (data->rl_decomp[row][i] != '\0')
+// 	{
+// 		if (data->rl_decomp[row][i] == c)
+// 			data->flag->dollar_count++;
+// 		i++;
+// 	}
+// 	return ;
+// }
+
+int	echo_sgle_quote(t_vault *data, int row, int i)
+{
+	i++;
+	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\'')
 	{
-		if (data->rl_decomp[row][i] == c)
-			data->flag->dollar_count++;
+		data->buffer[data->pos] = data->rl_decomp[row][i];
+		data->pos++;
 		i++;
 	}
-	return ;
+	data->pos = data->pos - 1;
+	return (i);
+}
+
+int	echo_dble_quote(t_vault *data, int row, int i)
+{
+	i++;
+	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\"')
+	{
+		if (data->rl_decomp[row][i] == '$')
+		{
+			dollar_var_to_extract(data, row, i);
+			i = i + data->dollar_var_len;
+			data->pos--;
+		}
+		else
+			data->buffer[data->pos] = data->rl_decomp[row][i];
+		data->pos++;
+		i++;
+	}
+	data->pos--;
+	return (i);
+}
+
+void	echo_parse_row(t_vault *data, int row)
+{
+	int		i;
+
+	i = 0;
+	data->pos = 0;
+	while (data->rl_decomp[row] && data->rl_decomp[row][i])
+	{
+		data->dollar_var_len = 0;
+		if (ft_isinset(data->rl_decomp[row][i]) == 0)
+			data->buffer[data->pos] = data->rl_decomp[row][i];
+		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
+			i = echo_sgle_quote(data, row, i);
+		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
+			i = echo_dble_quote(data, row, i);
+		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
+		{
+			dollar_var_to_extract(data, row, i);
+			i = i + data->dollar_var_len;
+			data->pos--;
+		}
+		i++;
+		data->pos++;
+	}
 }
