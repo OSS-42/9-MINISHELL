@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/12 00:05:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:42:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,24 @@ void	ft_pwd(t_vault *data, int row)
 
 void	ft_exit(t_vault *data)
 {
-	free_dbl_ptr((void **)data->rl_decomp);
-	free (data->b_in->export_var);
+	if (data->rl_decomp)
+		free_dbl_ptr((void **)data->rl_decomp);
+	if (data->b_in->export_var)
+		free (data->b_in->export_var);
 	if (data->b_in->env_export)
 		free_dbl_ptr((void **)data->b_in->env_export);
 	if (data->b_in->env_unset)
 		free_dbl_ptr((void **)data->b_in->env_unset);
 	if (data->b_in->env_ord)
 		free(data->b_in->env_ord);
-	free(data->read_line);
-	free(data->b_in);
-	free(data->quote);
-	free(data->flag);
+	if (data->read_line)
+		free(data->read_line);
+	if (data->b_in)
+		free(data->b_in);
+	if (data->quote)
+		free(data->quote);
+	if (data->flag)
+		free(data->flag);
 	exit (0);
 }
 
@@ -110,4 +116,4 @@ void	ft_echo(t_vault *data, int row)
 	return ;
 }
 
-//echo $$ ou echo $!, etc pas gerer.
+//echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).

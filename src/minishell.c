@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/09 23:49:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:51:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,22 @@ int	main(void)
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
-		if (ft_strcmp(data.read_line, "") != 0)
+		if (data.read_line != NULL)
 		{
-			add_history(data.read_line);
-			explore_readline(&data);
-			free(data.read_line);
-			reinit_data(&data);
-			free_dbl_ptr((void **)data.rl_decomp);
-			// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
+			if (ft_strcmp(data.read_line, "") != 0)
+			{
+				add_history(data.read_line);
+				explore_readline(&data);
+				free(data.read_line);
+				reinit_data(&data);
+				free_dbl_ptr((void **)data.rl_decomp);
+				// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
+			}
+		}
+		else
+		{
+			printf("exit\n");
+			ft_exit(&data);
 		}
 	}
 	return (0);
