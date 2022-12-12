@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/10 12:19:41 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/11 22:51:43 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 			break ;
 		}
 		if (data->read_line[*rl_index] == ' ')
+		{
+			while (data->read_line[*rl_index] == ' ')
+			{
+				data->quote->len_of_replacement++;
+				(*rl_index)++;
+			}
 			data->spc_count++;
+		}
 		data->quote->len_of_replacement++;
 		(*rl_index)++;
 	}

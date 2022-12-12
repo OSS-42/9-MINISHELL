@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/10 23:19:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:35:31 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ char	*clean_the_chevron(char *str);
 void	output_in_same_array(t_vault *data, int i, int *j, char c);
 int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
+void	clean_output(t_vault *data, int i, int j);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);

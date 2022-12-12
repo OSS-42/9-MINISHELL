@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/10 11:34:06 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/11 22:37:55 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,41 @@ void	output_in_same_array(t_vault *data, int i, int *j, char c)
 	{
 		*j = while_is_not_flag(data->rl_decomp[i], *j);
 		data->flag->output = ft_substr(data->rl_decomp[i], 0, *j);
+		clean_output(data, i, *j);
 	}
 	else
 	{
 		data->flag->output = ft_substr(data->rl_decomp[i], 0, ft_strlen(data->rl_decomp[i]));
 		find_decomposer_to_switch(data, i);
 	}
+	*j = -1;
 	stdout_redirection(data->flag->output);
+}
+
+void	clean_output(t_vault *data, int i, int j)
+{
+	int		len;
+	int		temp;
+	char	*str;
+
+	len = 0;
+	temp = j;
+	str = NULL;
+	while (data->rl_decomp[i][temp])
+	{
+		temp++;
+		len++;
+	}
+	str = ft_calloc(sizeof(char), len + 1);
+	temp = 0;
+	while (data->rl_decomp[i][j])
+	{
+		str[temp] = data->rl_decomp[i][j];
+		temp++;
+		j++;
+	}
+	free (data->rl_decomp[i]);
+	data->rl_decomp[i] = str;
 }
 
 int	while_is_not_flag(char *str, int i)
@@ -81,9 +109,9 @@ int	while_is_not_flag(char *str, int i)
 
 int	flag_in_str(char *str)
 {
-	if (ft_strchr(str, '\'') != NULL && ft_strchr(str, '\"') != NULL
-		&& ft_strchr(str, '>') != NULL && ft_strchr(str, '<') != NULL
-		&& ft_strchr(str, '|') != NULL)
+	if (ft_strchr(str, '\'') != NULL || ft_strchr(str, '\"') != NULL
+		|| ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
+		|| ft_strchr(str, '|') != NULL)
 		return (TRUE);
 	return(FALSE);
 }
