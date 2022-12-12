@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/11 23:28:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:37:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,15 @@ void	flag_count(t_vault *data, int i, int j);
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data);
 void	output_in_next_array(t_vault *data, int i, int *j, char c);
-void	find_output_in_next_array(t_vault *data,
-			char *rl_decomp_array, char c);
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c);
+void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c);
 void	stdout_redirection(char *redirection);
 char	*clean_the_chevron(char *str);
 void	output_in_same_array(t_vault *data, int i, int *j, char c);
 int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
 void	clean_output(t_vault *data, int i, int j);
+void	clean_output_next_array(t_vault *data, int i);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
