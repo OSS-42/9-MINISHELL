@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/10 23:57:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/11 22:11:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,8 @@ void	echo_parse_row(t_vault *data, int row)
 
 	i = 0;
 	pos = 0;
-//	data->b_in->echo_priority = quote_priority(data, row);
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
-//a checker si priorite toujours valides 
 		data->dollar_var_len = 0;
 		if (ft_isinset(data->rl_decomp[row][i]) == 0)
 			data->buffer[pos] = data->rl_decomp[row][i];
@@ -147,7 +145,7 @@ void	echo_parse_row(t_vault *data, int row)
 				pos++;
 				i++;
 			}
-//			data->b_in->echo_priority = 0;
+			pos = pos - 1;
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
 		{
@@ -165,15 +163,15 @@ void	echo_parse_row(t_vault *data, int row)
 						k++;
 					}
 					i = i + data->dollar_var_len;
-					pos = pos;
+					pos = pos - 1;
 					free (temp);
-// toujours le probleme echo "$USER $TERM" a regler : manque 1 espace
 				}
 				else
 					data->buffer[pos] = data->rl_decomp[row][i];
+				pos++;
 				i++;
 			}
-//			data->b_in->echo_priority = 0;
+			pos = pos - 1;
 		}
 		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
 		{
@@ -185,6 +183,8 @@ void	echo_parse_row(t_vault *data, int row)
 				pos++;
 				k++;
 			}
+			i = i + data->dollar_var_len;
+			pos = pos - 1;
 			free (temp);
 		}
 		i++;
