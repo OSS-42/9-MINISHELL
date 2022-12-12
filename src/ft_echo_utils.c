@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/10 23:23:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:00:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@
 //TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
 
 //attention : si la var n'existe pas, echo ne doit rien afficher
+
+void	dollar_var_to_extract(t_vault *data, int row, int i)
+{
+	char	*temp;
+	int		k;
+
+	temp = var_extract(data, row, i + 1);
+	k = 0;
+	while (temp[k])
+	{
+		data->buffer[data->pos] = temp[k];
+		data->pos++;
+		k++;
+	}
+	free (temp);
+}
+
 char	*var_extract(t_vault *data, int row, int position)
 {
 	int		k;

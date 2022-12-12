@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/11 22:35:31 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/11 23:28:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ typedef struct s_builtins
 	char	*order_var;
 	char	*echo_var;
 	int		echo_flag_n;
-	char	echo_priority;
-	int		echo_first;
+	char	echo_priority; //suppression a confirmer
+	int		echo_first; //suppression a confirmer
 	int		echo_dble_q;
 	int		echo_sgle_q;
-	int		flag_clean_echo;
+	int		flag_clean_echo; //suppression a confirmer
 	int		first_word;
 }	t_builtins;
 
@@ -60,14 +60,14 @@ typedef struct s_flag
 	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
-	int		dollar_count;
-	int		split_count;
-	int		same_line;
-	char	split_char;
+	int		dollar_count; //suppression a confirmer
+	int		split_count; //suppression a confirmer
+	int		same_line; //suppression a confirmer
+	char	split_char; //suppression a confirmer
 	int		*fd_out;
-	int		runs;
+	int		runs; //suppression a confirmer
 	int		stdout_backup;
-	int		chevron_with_space;
+	int		chevron_with_space; //suppression a confirmer
 	int		var_not_found;
 }	t_flag;
 
@@ -93,11 +93,12 @@ typedef struct s_vault
 	t_builtins	*b_in;
 	t_quote		*quote;
 	t_flag		*flag;
-	int			activate_var;
+	int			activate_var; //suppression a confirmer
 	char		*dollar_var;
 	int			dollar_var_len;
-	char		**split;
+	char		**split; //suppression a confirmer
 	char		*buffer;
+	int			pos;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -139,17 +140,13 @@ void	ft_cd(t_vault *data, int row);
 void	ft_pwd(t_vault *data, int row);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
-//void	ft_echo(t_vault *data, int row);
 void	ft_echo(t_vault *data, int row);
-int		ft_isinset(char c);
-void	echo_parse_row(t_vault *data, int row);
 
 /***** ft_echo_utils ******/
+void	dollar_var_to_extract(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
-// int		copy_var(char *dest, char *source, int pos);
-// void	var_to_value(t_vault *data, int row, char *temp);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -170,9 +167,11 @@ int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data);
-void	spe_char(t_vault *data, int row);
-void	reset_counters(t_vault *data);
-void	rl_decomp_char_count(t_vault *data, int row, char c);
+//void	rl_decomp_char_count(t_vault *data, int row, char c);
+int		ft_isinset(char c);
+int		echo_sgle_quote(t_vault *data, int row, int i);
+int		echo_dble_quote(t_vault *data, int row, int i);
+void	echo_parse_row(t_vault *data, int row);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);
@@ -183,11 +182,11 @@ void	var_prep(t_vault *data, int row);
 //void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** dollar_utils.c *****/
-int		quote_priority(t_vault *data, int row);
+//int		quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
-void	split_on_char(t_vault *data, int row, char c);
+//void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);
-void	change_tab(t_vault *data, int row);
+//void	change_tab(t_vault *data, int row);
 
 
 /***** POUR DEBUG *****/
