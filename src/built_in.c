@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/11 23:27:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/12 00:05:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,4 @@ void	ft_echo(t_vault *data, int row)
 	return ;
 }
 
-//en erreur : echo '$USER  $TERM'  $HOME
-//en erreur : echo $USERA
-//en erreur : echo $$
+//echo $$ ou echo $!, etc pas gerer.

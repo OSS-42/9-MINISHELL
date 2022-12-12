@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/11 23:14:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/12 00:03:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	echo_dble_quote(t_vault *data, int row, int i)
 	i++;
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\"')
 	{
-		if (data->rl_decomp[row][i] == '$')
+		if (data->rl_decomp[row][i] == '$'
+			&& ft_char_env_var(data->rl_decomp[row][i + 1]) == 1)
 		{
 			dollar_var_to_extract(data, row, i);
 			i = i + data->dollar_var_len;
@@ -102,7 +103,8 @@ void	echo_parse_row(t_vault *data, int row)
 			i = echo_sgle_quote(data, row, i);
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
 			i = echo_dble_quote(data, row, i);
-		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
+		else if (ft_isinset(data->rl_decomp[row][i]) == 3
+			&& ft_char_env_var(data->rl_decomp[row][i + 1]) == 1)
 		{
 			dollar_var_to_extract(data, row, i);
 			i = i + data->dollar_var_len;
