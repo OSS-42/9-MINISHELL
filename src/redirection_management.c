@@ -6,17 +6,18 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/12 12:39:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/12 14:24:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*
-	echo bonjour > test OK
-	echo bonjour> test OK
-	echo coucou> 1> 2 OK
-	echo coucou >1 OK
+	echo bonjour > test > test1 > test2 OK
+	echo bonjour> test> test1> test2 OK
+	echo coucou >1 >2 >3 OK
+	echo coucou>test>test1>test2 OK
+	echo coucou>1 > 2> 3 >4 > 5 OK
 */
 
 /*
@@ -54,25 +55,6 @@ void	execute_redirection(t_vault *data)
 	}
 }
 
-// void	output_in_same_array(t_vault *data, int i, int *j, char c)
-// {
-// 	(void)c;
-// 	(void)j;
-// 	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
-// 	if (flag_in_str(data->rl_decomp[i]) == TRUE)
-// 	{
-// 		*j = while_is_not_flag(data->rl_decomp[i], *j);
-// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, *j);
-// 		clean_output(data, i, *j);
-// 	}
-// 	else
-// 	{
-// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, ft_strlen(data->rl_decomp[i]));
-// 		find_decomposer_to_switch(data, i);
-// 	}
-// 	*j = -1;
-// 	stdout_redirection(data->flag->output);
-// }
 
 void	output_in_same_array(t_vault *data, int i, int *j, char c)
 {
@@ -134,9 +116,6 @@ void	clean_output_next_array(t_vault *data, int i)
 	data->rl_decomp[i] = temp;
 }
 
-/*
-	Comment gérer si on me donne "echo bonjour>1" ou si on me donne "echo bonjour> 1> 2"
-*/
 void	clean_output(t_vault *data, int i, int j)
 {
 	int		len;
@@ -190,11 +169,6 @@ void	clean_output(t_vault *data, int i, int j)
 	data->rl_decomp[i] = str;
 }
 
-// int	find_meta_in_str(char *str, int i)
-// {
-
-// }
-
 int	while_is_not_flag(char *str, int i)
 {
 	while (str[i] && str[i] != '\'' && str[i] != '\"' && str[i] != '|'
@@ -203,6 +177,7 @@ int	while_is_not_flag(char *str, int i)
 	return (i);
 }
 
+// Ajouter une sécurité pour m'assurer que le flag n'Est pas entre quote
 int	flag_in_str(char *str)
 {
 	if (ft_strchr(str, '\'') != NULL || ft_strchr(str, '\"') != NULL
@@ -225,7 +200,7 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
 	if (*j == 0)
 	{
-		find_decomposer_to_switch(data, i + 1);
+		clean_output_next_array(data, i + 1);
 		if (ft_strlen(data->rl_decomp[i]) == 1)
 			find_decomposer_to_switch(data, i);
 		else
@@ -328,4 +303,24 @@ void	stdout_redirection(char *redirection)
 // 	temp = ft_substr(str, begin, len);
 // 	free (str);
 // 	return (temp);
+// }
+
+// void	output_in_same_array(t_vault *data, int i, int *j, char c)
+// {
+// 	(void)c;
+// 	(void)j;
+// 	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
+// 	if (flag_in_str(data->rl_decomp[i]) == TRUE)
+// 	{
+// 		*j = while_is_not_flag(data->rl_decomp[i], *j);
+// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, *j);
+// 		clean_output(data, i, *j);
+// 	}
+// 	else
+// 	{
+// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, ft_strlen(data->rl_decomp[i]));
+// 		find_decomposer_to_switch(data, i);
+// 	}
+// 	*j = -1;
+// 	stdout_redirection(data->flag->output);
 // }
