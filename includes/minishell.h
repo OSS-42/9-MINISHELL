@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/12 12:37:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/13 10:51:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ typedef struct s_builtins
 	char	*export_var;
 	char	*order_var;
 	char	*echo_var;
+	char	echo_priority;
 	int		echo_flag_n;
-	char	echo_priority; //suppression a confirmer
-	int		echo_first; //suppression a confirmer
 	int		echo_dble_q;
 	int		echo_sgle_q;
-	int		flag_clean_echo; //suppression a confirmer
+	int		echo_forget_minus;
 	int		first_word;
 }	t_builtins;
 
@@ -60,14 +59,8 @@ typedef struct s_flag
 	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
-	int		dollar_count; //suppression a confirmer
-	int		split_count; //suppression a confirmer
-	int		same_line; //suppression a confirmer
-	char	split_char; //suppression a confirmer
 	int		*fd_out;
-	int		runs; //suppression a confirmer
 	int		stdout_backup;
-	int		chevron_with_space; //suppression a confirmer
 	int		var_not_found;
 }	t_flag;
 
@@ -148,6 +141,7 @@ void	dollar_var_to_extract(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
+int		echo_minus(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -168,7 +162,6 @@ int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data);
-//void	rl_decomp_char_count(t_vault *data, int row, char c);
 int		ft_isinset(char c);
 int		echo_sgle_quote(t_vault *data, int row, int i);
 int		echo_dble_quote(t_vault *data, int row, int i);

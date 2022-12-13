@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/12 16:42:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:04:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,7 @@ void	ft_echo(t_vault *data, int row)
 	if (!(data->rl_decomp[row]) || data->rl_decomp[row][0] == '\0')
 		return ;
 	data->b_in->first_word = 1;
-	if (ft_strcmp(data->rl_decomp[row], "-n") == 0)
-	{
-		row++;
-		data->b_in->echo_flag_n = 1;
-	}
+	data->b_in->echo_forget_minus = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
@@ -112,8 +108,13 @@ void	ft_echo(t_vault *data, int row)
 	}
 	if (data->b_in->echo_flag_n == 0)
 		ft_putstr_fd("\n", 1);
-	data->b_in->echo_flag_n = 0;
+	// else
+	// 	data->b_in->first_word = 1;
+	// data->b_in->echo_flag_n = 0;
 	return ;
 }
 
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
+//echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
+//probleme avec echo -nn -nn bonjour.
+//tester echo "-n bonjour"
