@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/12 14:24:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/13 11:40:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 	echo coucou >1 >2 >3 OK
 	echo coucou>test>test1>test2 OK
 	echo coucou>1 > 2> 3 >4 > 5 OK
+	echo "bonjour">"test" > "test1" OK
+	echo "coucou">"test" >"test1" OK
+	echo "bonjour">"test">"test1">"test2" OK
 */
 
 /*
@@ -79,13 +82,28 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
 		i++;
 	i++;
 	len = while_is_not_flag(rl_decomp_array, i) - i;
-	data->flag->output = ft_calloc(sizeof(char), len);
+	if (rl_decomp_array[i] == '\"')
+		len = len - 2;
+	data->flag->output = ft_calloc(sizeof(char), len + 1);
 	len = 0;
-	while (i < while_is_not_flag(rl_decomp_array, i))
+	if (rl_decomp_array[i] == '\"')
 	{
-		data->flag->output[len] = rl_decomp_array[i];
-		len++;
 		i++;
+		while (rl_decomp_array[i] != '\"')
+		{
+			data->flag->output[len] = rl_decomp_array[i];
+			len++;
+			i++;
+		}
+	}
+	else
+	{
+		while (i < while_is_not_flag(rl_decomp_array, i))
+		{
+			data->flag->output[len] = rl_decomp_array[i];
+			len++;
+			i++;
+		}
 	}
 }
 
@@ -145,7 +163,7 @@ void	clean_output(t_vault *data, int i, int j)
 	}
 	str = ft_calloc(sizeof(char), len + 1);
 	temp = 0;
-	while (data->rl_decomp[i][j])
+	while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '\0')
 	{
 		if (data->rl_decomp[i][j] == '>' && clean == 0)
 		{
@@ -165,14 +183,13 @@ void	clean_output(t_vault *data, int i, int j)
 			j++;
 		}
 	}
-	free (data->rl_decomp[i]);
+	// free (data->rl_decomp[i]); pose problème avec echo "bonjour">"test">"test1" si j'execute deux fois d'affilé la commande.
 	data->rl_decomp[i] = str;
 }
 
 int	while_is_not_flag(char *str, int i)
 {
-	while (str[i] && str[i] != '\'' && str[i] != '\"' && str[i] != '|'
-		&& str[i] != '>' && str[i] != '<')
+	while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != '<')
 		i++;
 	return (i);
 }
@@ -180,8 +197,7 @@ int	while_is_not_flag(char *str, int i)
 // Ajouter une sécurité pour m'assurer que le flag n'Est pas entre quote
 int	flag_in_str(char *str)
 {
-	if (ft_strchr(str, '\'') != NULL || ft_strchr(str, '\"') != NULL
-		|| ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
+	if (ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
 		|| ft_strchr(str, '|') != NULL)
 		return (TRUE);
 	return(FALSE);
@@ -232,6 +248,11 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 		len++;
 	}
 	i = 0;
+	if (rl_decomp_array[0] == '\"')
+	{
+		i = 1;
+		len -= 2;
+	}
 	data->flag->output = ft_substr(rl_decomp_array, i, len);
 }
 
@@ -246,7 +267,7 @@ char	*clean_the_chevron(char *str)
 	j = 0;
 	clean = 0;
 	temp = ft_calloc(sizeof(char), ft_strlen(str));
-	while (str[i])
+	while (str[i] && str[i] != '\0')
 	{
 		if (str[i] == '>' && clean == 0)
 		{
