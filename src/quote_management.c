@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 12:02:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:47:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	find_str_quote(t_vault *data)
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
 		{
 			len_of_replacement(data, &i);
-			find_decomposer_array_to_replace(data, i);
+			if (data->spc_count != 0)
+				find_decomposer_array_to_replace(data, i);
 		}
 		i++;
 	}

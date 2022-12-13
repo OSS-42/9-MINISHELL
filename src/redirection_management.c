@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 11:40:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:50:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 	echo coucou>test>test1>test2 OK
 	echo coucou>1 > 2> 3 >4 > 5 OK
 	echo "bonjour">"test" > "test1" OK
-	echo "coucou">"test" >"test1" OK
-	echo "bonjour">"test">"test1">"test2" OK
+	echo "coucou">"test" >"test1"
+	echo "bonjour">"test">"test1">"test2" probleme de malloc
+	echo coucou>"test"> "test1" OK
 */
 
 /*
