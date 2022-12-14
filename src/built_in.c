@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/13 17:04:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:59:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,23 @@ void	ft_echo(t_vault *data, int row)
 		return ;
 	data->b_in->first_word = 1;
 	data->b_in->echo_forget_minus = 0;
+	data->b_in->echo_flag_n = 0;
+	data->b_in->echo_minus_n = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
 		echo_parse_row(data, row);
 		print_row(data);
 		free(data->buffer);
+		data->b_in->echo_flag_n = 0;
 		row++;
 	}
-	if (data->b_in->echo_flag_n == 0)
+	if (data->b_in->echo_minus_n == 0)
 		ft_putstr_fd("\n", 1);
-	// else
-	// 	data->b_in->first_word = 1;
-	// data->b_in->echo_flag_n = 0;
 	return ;
 }
 
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
-//probleme avec echo -nn -nn bonjour.
-//tester echo "-n bonjour"
+//tester echo "-n" salut bonjour
+//checker echo $"USER"

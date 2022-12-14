@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 17:03:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:42:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	print_row(t_vault *data)
 {
-	if (data->b_in->first_word == 1 || data->b_in->echo_flag_n == 1)
+	if ((data->b_in->echo_flag_n == 1 && data->b_in->echo_forget_minus == 0))
+		ft_putstr_fd(data->buffer, 1);
+	else if (data->b_in->first_word == 1)
 	{
 		ft_putstr_fd(data->buffer, 1);
 		data->b_in->first_word = 0;
@@ -23,11 +25,6 @@ void	print_row(t_vault *data)
 	{
 		ft_putstr_fd(" ", 1);
 		ft_putstr_fd(data->buffer, 1);
-	}
-	if (data->b_in->first_word == 0)
-	{
-		data->b_in->echo_forget_minus = 1;
-	 	data->b_in->echo_flag_n = 0;
 	}
 	return ;
 }
