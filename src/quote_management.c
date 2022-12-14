@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 16:47:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:30:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	j = 0;
 	free(data->rl_decomp[*i]);
 	data->rl_decomp[*i]
-		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1); // len_of_replacement n'Est pas bon avec : echo coucou>"test"> "test1"
+		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1); // verifier le len si je lui donne : je"suis morgan"
 	while (data->quote->begin <= end)
 	{
 		data->rl_decomp[*i][j]

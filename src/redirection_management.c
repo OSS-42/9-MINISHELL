@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 22:49:33 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 14:08:16 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@
 	echo coucou>1 > 2> 3 >4 > 5 OK
 	echo "bonjour">"test" > "test1" OK
 	echo "coucou">"test" >"test1"
-	echo "bonjour">"test">"test1">"test2" probleme de malloc
 	echo "coucou">"test"> "test1"> "test2" OK
 	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
-
 	echo "coucou" >test 4 OK
 	echo coucou > "tes>t" OK
-	echo coucou > "tes>t">test1 Probleme avec l'isolation de "tes>t" mais clean du output ok
+	echo coucou > "tes>t">test1 OK
+	echo coucou > 1> 2 OK
+
+	echo "bonjour">"test">"test1">"test2" SEGFAULT surement à cause des invalid read encore. Le segfault est dans le clean chevron du premier output
+	echo coucou >"tes>t">test1 MAUVAISE RECUPERATION DU OUTPUT test1 peut-être a cause du invalid read ?
 */
 
 /*
@@ -155,6 +157,7 @@ void	clean_output(t_vault *data, int i, int j)
 {
 	int		len;
 	int		temp;
+	int		begin;
 	char	*str;
 	int		clean;
 
@@ -162,47 +165,76 @@ void	clean_output(t_vault *data, int i, int j)
 	temp = j;
 	str = NULL;
 	clean = 0;
-	while (data->rl_decomp[i][temp] && data->rl_decomp[i][temp] != '>')
-	{
-		temp++;
-		len++;
-	}
+	begin = 0;
 	if (data->rl_decomp[i][temp] == '>')
 	{
 		temp++;
 		len++;
 	}
-	temp = while_is_not_flag(data->rl_decomp[i], temp);
-	while (data->rl_decomp[i][temp])
+	if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
 	{
+		data->quote->quote_priority = data->rl_decomp[i][temp];
 		temp++;
-		len++;
+		while (data->rl_decomp[i][temp] != data->quote->quote_priority)
+			temp++;
+		temp++;
 	}
+	else
+	{
+		temp = while_is_not_flag(data->rl_decomp[i], temp);
+		temp++;
+		len = temp;
+		temp = while_is_not_flag(data->rl_decomp[i], temp);
+		while (data->rl_decomp[i][temp])
+		{
+			temp++;
+			len++;
+		}
+	}
+	if (data->rl_decomp[i][0] == '>')
+		begin = temp;
 	str = ft_calloc(sizeof(char), len + 1);
 	temp = 0;
-	while (data->rl_decomp[i][j] && data->rl_decomp[i][j] != '\0')
+	if (data->rl_decomp[i][0] == '>')
 	{
-		if (data->rl_decomp[i][j] == '>' && clean == 0)
+		str[temp] = '>';
+		temp++;
+	}
+	if (begin != 0)
+	{
+		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
-			str[temp] = data->rl_decomp[i][j];
-			j++;
+			str[temp] = data->rl_decomp[i][begin];
 			temp++;
-			j = while_is_not_flag(data->rl_decomp[i], j);
-			str[temp] = data->rl_decomp[i][j];
-			j++;
-			temp++;
-			clean = 1;
-		}
-		else
-		{
-			str[temp] = data->rl_decomp[i][j];
-			temp++;
-			j++;
+			begin++;
 		}
 	}
+	else
+		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
+		{
+			while (data->rl_decomp[i][begin] != '>')
+			{
+				str[temp] = data->rl_decomp[i][begin];
+				temp++;
+				begin++;
+			}
+			str[temp] = data->rl_decomp[i][begin];
+			temp++;
+			begin++;
+			begin = while_is_not_flag(data->rl_decomp[i], begin);
+			if (data->rl_decomp[i][begin])
+				while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
+				{
+					str[temp] = data->rl_decomp[i][begin];
+					temp++;
+					begin++;
+				}
+		}
 	// free (data->rl_decomp[i]); pose problème avec echo "bonjour">"test">"test1" si j'execute deux fois d'affilé la commande.
 	data->rl_decomp[i] = str;
 }
+//echo coucou>test>test1 begin = 0
+// echo coucou> test>test1 begin = 4
 
 int	while_is_not_flag(char *str, int i)
 {
@@ -217,7 +249,7 @@ int	flag_in_str(char *str)
 	if (ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
 		|| ft_strchr(str, '|') != NULL)
 		return (TRUE);
-	return(FALSE);
+	return (FALSE);
 }
 
 /*
@@ -230,7 +262,7 @@ int	flag_in_str(char *str)
 */
 void	output_in_next_array(t_vault *data, int i, int *j, char c)
 {
-	find_output_in_next_array(data, data->rl_decomp[i + 1], c);
+	find_output_in_next_array(data, data->rl_decomp[i + 1], c, i + 1);
 	if (*j == 0)
 	{
 		clean_output_next_array(data, i + 1);
@@ -251,26 +283,29 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 	*j = -1;
 }
 
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c, int i)
 {
-	int		i;
+	int		j;
 	int		len;
 
-	i = 0;
+	j = 0;
 	len = 0;
 	(void)c;
-	while (rl_decomp_array[i])
+	(void)i;
+	if (rl_decomp_array[j] == '\"' || rl_decomp_array[j] == '\'')
 	{
-		i++;
-		len++;
+		data->quote->quote_priority = rl_decomp_array[j];
+		j++;
+		while (rl_decomp_array[j] != data->quote->quote_priority)
+		{
+			j++;
+			len++;
+		}
+		j = 1;
 	}
-	i = 0;
-	if (rl_decomp_array[0] == '\"' || rl_decomp_array[0] == '\'')
-	{
-		i = 1;
-		len -= 2;
-	}
-	data->flag->output = ft_substr(rl_decomp_array, i, len);
+	else
+		len = while_is_not_flag(rl_decomp_array, j);
+	data->flag->output = ft_substr(rl_decomp_array, j, len);
 }
 
 char	*clean_the_chevron(char *str)
@@ -284,6 +319,11 @@ char	*clean_the_chevron(char *str)
 	j = 0;
 	clean = 0;
 	temp = ft_calloc(sizeof(char), ft_strlen(str));
+	if (!temp)
+	{
+		free (temp);
+		exit (EXIT_FAILURE);
+	}
 	while (str[i] && str[i] != '\0')
 	{
 		if (str[i] == '>' && clean == 0)

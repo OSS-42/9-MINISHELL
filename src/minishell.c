@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 16:11:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:17:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(void)
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
+		// data.read_line[ft_strlen(data.read_line)] = '\0';
 		if (data.read_line != NULL)
 		{
 			if (ft_strcmp(data.read_line, "") != 0)

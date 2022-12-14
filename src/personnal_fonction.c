@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/10 11:37:11 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 09:27:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	print_double_array(char **array)
 	printf("\n");
 }
 
-// La fonction ne vérifie pas si le char est avant ou apres les quotes.
+// Changer la fonction pour qu'elle renvoie FALSE si le char c ce trouve
+//	en dehors des quotes puis à l'intérieur des quotes. EX : echo coucou >"tes>t">test1
 int	check_if_inside_quote(char *str, char c)
 {
 	int		i;
@@ -35,21 +36,17 @@ int	check_if_inside_quote(char *str, char c)
 	quote = 0;
 	while (str[i])
 	{
-		if (str[i] == '\"' || str[i] == '\'')
+		if (str[i] == c)
+			return (FALSE);
+		else if (str[i] == '\"' || str[i] == '\'')
 		{
 			quote = str[i];
 			i++;
 			while (str[i] && str[i] != quote)
-			{
-				if (str[i] == c)
-				{
-					return (TRUE);
-				}
 				i++;
-			}
 		}
 		i++;
 	}
-	return (FALSE);
+	return (TRUE);
 }
 
