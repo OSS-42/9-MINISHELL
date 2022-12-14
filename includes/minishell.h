@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 23:52:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:42:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int row);
 
 /***** ft_echo_utils ******/
-void	dollar_var_to_extract(t_vault *data, int row, int i);
+int		dollar_var_to_extract(t_vault *data, int row, int i);
+int		check_next_char(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);

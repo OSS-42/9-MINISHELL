@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 23:53:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:42:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,36 @@
 //TODO Si on veut corriger le invalid R il faut changer la condition des boucles
 //TODO J'ai remplacé dollar_var par temp pour pouvoir free temp à la ligne 87
 
-//attention : si la var n'existe pas, echo ne doit rien afficher
+int	check_next_char(t_vault *data, int row, int i)
+{
+	if (data->rl_decomp[row][i + 1] == '\''
+		|| data->rl_decomp[row][i + 1] == '\"')
+	{
+		i = i - 2;
+		while (data->rl_decomp[row][i])
+		{
+			if (data->rl_decomp[row][i] != '\''
+				|| data->rl_decomp[row][i] != '\"'
+					|| data->rl_decomp[row][i] != '$')
+				i++;
+			data->buffer[data->pos] = data->rl_decomp[row][i];
+			data->pos++;
+			i++;
+		}
+	}
+	return (i);
+}
 
-void	dollar_var_to_extract(t_vault *data, int row, int i)
+int	dollar_var_to_extract(t_vault *data, int row, int i)
 {
 	char	*temp;
 	int		k;
 
+	if (ft_char_env_var(data->rl_decomp[row][i + 1]) != 1)
+	{
+		i = check_next_char(data, row, i);
+		return (i);
+	}
 	temp = var_extract(data, row, i + 1);
 	k = 0;
 	while (temp[k])
@@ -31,8 +54,9 @@ void	dollar_var_to_extract(t_vault *data, int row, int i)
 		k++;
 	}
 	if (data->flag->var_not_found == 1)
-		return ;
+		return (0);
 	free (temp);
+	return (0);
 }
 
 char	*var_extract(t_vault *data, int row, int position)
