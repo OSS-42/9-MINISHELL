@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 16:50:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/13 22:45:18 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 	echo "bonjour">"test" > "test1" OK
 	echo "coucou">"test" >"test1"
 	echo "bonjour">"test">"test1">"test2" probleme de malloc
-	echo coucou>"test"> "test1" OK
+	echo "coucou">"test"> "test1"> "test2" OK
+	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
+
+	echo "coucou" >test 4 OK
 */
 
 /*
@@ -67,7 +70,8 @@ void	output_in_same_array(t_vault *data, int i, int *j, char c)
 	find_output_in_same_array(data, data->rl_decomp[i], '>');
 	clean_output(data, i, 0);
 	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
-	// Ajouter une condition : find_decomposer_to_switch(data, i);
+	if (data->rl_decomp[i][0] == '\0')
+		find_decomposer_to_switch(data, i);
 	*j = -1;
 	stdout_redirection(data->flag->output);
 }
@@ -112,23 +116,33 @@ void	clean_output_next_array(t_vault *data, int i)
 {
 	int		j;
 	int		len;
+	int		begin;
 	char	*temp;
 
 	len = 0;
-	j = while_is_not_flag(data->rl_decomp[i], 0);
 	temp = NULL;
+	j = 1;
+	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')
+	{
+		data->quote->quote_priority = data->rl_decomp[i][0];
+		while (data->rl_decomp[i][j] != data->quote->quote_priority)
+			j++;
+		j++;
+	}
+	else
+		j = while_is_not_flag(data->rl_decomp[i], 0);
+	begin = j;
 	while (data->rl_decomp[i][j])
 	{
 		j++;
 		len++;
 	}
 	temp = ft_calloc(sizeof(char), len + 1);
-	j = while_is_not_flag(data->rl_decomp[i], 0);
 	len = 0;
-	while (data->rl_decomp[i][j])
+	while (data->rl_decomp[i][begin])
 	{
-		temp[len] = data->rl_decomp[i][j];
-		j++;
+		temp[len] = data->rl_decomp[i][begin];
+		begin++;
 		len++;
 	}
 	free (data->rl_decomp[i]);
@@ -242,14 +256,14 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c)
 
 	i = 0;
 	len = 0;
-	while (rl_decomp_array[i] && rl_decomp_array[i] != c
-		&& rl_decomp_array[i] != '|')
+	(void)c;
+	while (rl_decomp_array[i])
 	{
 		i++;
 		len++;
 	}
 	i = 0;
-	if (rl_decomp_array[0] == '\"')
+	if (rl_decomp_array[0] == '\"' || rl_decomp_array[0] == '\'')
 	{
 		i = 1;
 		len -= 2;
