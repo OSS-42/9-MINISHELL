@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/13 23:59:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:27:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ft_echo(t_vault *data, int row)
 		print_row(data);
 		free(data->buffer);
 		data->b_in->echo_flag_n = 0;
+		data->b_in->echo_forget_minus = 1;
 		row++;
 	}
 	if (data->b_in->echo_minus_n == 0)
@@ -117,4 +118,3 @@ void	ft_echo(t_vault *data, int row)
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //tester echo "-n" salut bonjour
-//checker echo $"USER"
