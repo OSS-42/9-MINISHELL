@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/13 22:47:48 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/13 22:49:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
 
 	echo "coucou" >test 4 OK
+	echo coucou > "tes>t" OK
 	echo coucou > "tes>t">test1 Probleme avec l'isolation de "tes>t" mais clean du output ok
 */
 
