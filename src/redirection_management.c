@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 14:08:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/14 15:44:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,10 @@ void	clean_output(t_vault *data, int i, int j)
 	int		temp;
 	int		begin;
 	char	*str;
-	int		clean;
 
 	len = 0;
 	temp = j;
 	str = NULL;
-	clean = 0;
 	begin = 0;
 	if (data->rl_decomp[i][temp] == '>')
 	{

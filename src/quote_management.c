@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 14:30:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/14 17:40:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	find_str_quote(t_vault *data)
 	int		i;
 
 	i = 0;
-	data->quote->len_of_replacement = 1;
 	while (data->read_line[i])
 	{
 		data->spc_count = 0;
@@ -36,8 +35,10 @@ void	find_str_quote(t_vault *data)
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
 		{
 			len_of_replacement(data, &i);
+			printf("%d\n", data->quote->len_of_replacement);
 			if (data->spc_count != 0)
 				find_decomposer_array_to_replace(data, i);
+			data->quote->len_of_replacement = 0;
 		}
 		i++;
 	}
@@ -48,38 +49,70 @@ void	find_str_quote(t_vault *data)
 	Je continue d'avancer dans readline pour trouver la quote de fermeture
 	et calculer la longueur de la string qui va remplacer la ligne de rl_decomp.
 */
+// void	len_of_replacement(t_vault *data, int *rl_index)
+// {
+// 	data->quote->quote_priority = data->read_line[*rl_index];
+// 	(*rl_index)++;
+// 	while ((data->read_line[*rl_index] != data->quote->quote_priority
+// 			|| data->read_line[*rl_index + 1] > 32)
+// 		&& data->read_line[*rl_index])
+// 	{
+// 		if (data->read_line[*rl_index] == data->quote->quote_priority)
+// 		{
+// 			while (data->read_line[*rl_index]
+// 				&& data->read_line[*rl_index] != ' ')
+// 			{
+// 				data->quote->len_of_replacement++;
+// 				(*rl_index)++;
+// 			}
+// 			break ;
+// 		}
+// 		if (data->read_line[*rl_index] == ' ')
+// 		{
+// 			while (data->read_line[*rl_index] == ' ')
+// 			{
+// 				data->quote->len_of_replacement++;
+// 				(*rl_index)++;
+// 			}
+// 			data->spc_count++;
+// 		}
+// 		data->quote->len_of_replacement++;
+// 		(*rl_index)++;
+// 	}
+// 	data->quote->len_of_replacement++;
+// }
 void	len_of_replacement(t_vault *data, int *rl_index)
 {
 	data->quote->quote_priority = data->read_line[*rl_index];
-	(*rl_index)++;
-	while ((data->read_line[*rl_index] != data->quote->quote_priority
-			|| data->read_line[*rl_index + 1] > 32)
-		&& data->read_line[*rl_index])
+	while (*rl_index != 0 && data->read_line[*rl_index] != ' ')
+		(*rl_index)--;
+	if (*rl_index != 0)
+		(*rl_index)++;
+	while (data->read_line[*rl_index])
 	{
 		if (data->read_line[*rl_index] == data->quote->quote_priority)
 		{
-			while (data->read_line[*rl_index]
-				&& data->read_line[*rl_index] != ' ')
+			(*rl_index)++;
+			data->quote->len_of_replacement++;
+			while ((data->read_line[*rl_index] != data->quote->quote_priority))
 			{
-				data->quote->len_of_replacement++;
 				(*rl_index)++;
+				data->quote->len_of_replacement++;
 			}
-			break ;
-		}
-		if (data->read_line[*rl_index] == ' ')
-		{
-			while (data->read_line[*rl_index] == ' ')
+			while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
 			{
-				data->quote->len_of_replacement++;
 				(*rl_index)++;
+				data->quote->len_of_replacement++;
 			}
-			data->spc_count++;
+			data->quote->len_of_replacement--;
+			break;
 		}
 		data->quote->len_of_replacement++;
 		(*rl_index)++;
 	}
 	data->quote->len_of_replacement++;
 }
+
 
 /*
 	Je cherche la ligne à remplacer dans rl_decomp en trouvant la quote
