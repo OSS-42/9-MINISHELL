@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 10:51:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:52:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_builtins
 	char	*echo_var;
 	char	echo_priority;
 	int		echo_flag_n;
+	int		echo_minus_n;
 	int		echo_dble_q;
 	int		echo_sgle_q;
 	int		echo_forget_minus;

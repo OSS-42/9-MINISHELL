@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/13 17:08:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:53:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int	echo_minus(t_vault *data, int row, int i)
 	int	j;
 
 	j = i;
-	data->b_in->echo_flag_n = 1;
 	if (data->rl_decomp[row][j] == '-')
 		data->b_in->echo_forget_minus = 1;
 	while (data->rl_decomp[row][j] && data->rl_decomp[row][j] != ' ')
@@ -131,14 +130,13 @@ int	echo_minus(t_vault *data, int row, int i)
 			data->pos++;
 			i++;
 		}
-		data->b_in->echo_flag_n = 0;
-	}
-	if (data->rl_decomp[row + 1][0] == '-')
-	{	
-		data->b_in->echo_flag_n = 1;
-		data->b_in->first_word = 1;
 	}
 	else if (data->rl_decomp[row + 1] == NULL)
 		data->b_in->echo_flag_n = 0;
+	if (data->b_in->echo_forget_minus == 0)
+	{
+		data->b_in->echo_flag_n = 1;
+		data->b_in->echo_minus_n = 1;
+	}
 	return (i);
 }
