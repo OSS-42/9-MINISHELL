@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 10:58:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:18:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,9 @@ void	echo_parse_row(t_vault *data, int row)
 		data->pos++;
 	}
 	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
-	printf("row : %d = %s\n", row, data->rl_decomp[row]);
+//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 //	print_double_array(data->rl_decomp);
 	echo_minus(data);
 //	print_double_array(data->rl_decomp);
 //	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 }
-
-//a checker (en erreur) echo "$USER "$USER" $TERM '$PATH'"
-

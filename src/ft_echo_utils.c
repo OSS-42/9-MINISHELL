@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 11:32:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:09:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	echo_minus(t_vault *data)
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 //		printf("row : %d = %s\n", row, data->rl_decomp[row]);
-		printf("priority : %d\n", data->b_in->echo_priority);
+//		printf("priority : %d\n", data->b_in->echo_priority);
 		while (data->rl_decomp[row][i] == '-' && data->rl_decomp[row][i])
 			i++;
 		if (i > 1)
@@ -154,13 +154,16 @@ void	echo_minus(t_vault *data)
 		}
 		else if (data->b_in->echo_priority != 0)
 		{
-			while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != data->b_in->echo_priority)
+			while (data->rl_decomp[row][i])
 			{
 				if (data->rl_decomp[row][i] != 'n')
 				{
 					data->b_in->echo_forget_minus = 1;
+					data->b_in->dont_do_minus = 1;
 					break ;
 				}
+				else
+					data->b_in->echo_forget_minus = 0;
 				i++;
 			}
 		}
@@ -178,8 +181,8 @@ void	echo_minus(t_vault *data)
 				i++;
 			}
 		}
-		printf("%d\n", data->b_in->echo_forget_minus);
-		if (data->b_in->echo_forget_minus == 0)
+//		printf("%d\n", data->b_in->echo_forget_minus);
+		if (data->b_in->echo_forget_minus == 0 && data->rl_decomp[row + 1])
 		{
 			temp_swap = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->rl_decomp));
 			i = 0;
@@ -213,9 +216,9 @@ void	echo_minus(t_vault *data)
 			free (temp_swap);
 			data->b_in->echo_flag_n = 1;
 			data->b_in->echo_minus_n = 1;
-			printf("row : %d = %s\n", row, data->rl_decomp[row]);
+//			printf("row : %d = %s\n", row, data->rl_decomp[row]);
 			row = row - (line - i);
-			printf("row : %d = %s\n", row, data->rl_decomp[row]);
+//			printf("row : %d = %s\n", row, data->rl_decomp[row]);
 		}
 		row++;
 	}

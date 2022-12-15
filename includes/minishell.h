@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 10:01:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:00:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_builtins
 	int		echo_dble_q;
 	int		echo_sgle_q;
 	int		echo_forget_minus;
+	int		dont_do_minus;
 	int		first_word;
 }	t_builtins;
 
@@ -187,6 +188,16 @@ int		insert_row(int pos, int count, char **dest, char **source);
 //void	change_tab(t_vault *data, int row);
 
 
-/***** POUR DEBUG *****/
+/***** PRETTY *****/
+/***** pretty_intro_mini.c *****/
+void	intro_minishell(void);
+void	intro_minishell_p2(void);
+void	intro_minishell_p3(void);
+
+/***** pretty_colors.c *****/
+void	lred(void);
+void	lcyan(void);
+void	lyellow(void);
+void	reset(void);
 
 #endif
