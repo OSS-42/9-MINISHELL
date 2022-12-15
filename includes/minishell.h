@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 09:32:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:01:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
 void	clean_output(t_vault *data, int i, int j);
 void	clean_output_next_array(t_vault *data, int i);
+int	len_without_output(t_vault *data, int i, int temp, int *begin);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
