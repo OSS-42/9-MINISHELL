@@ -6,25 +6,25 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/14 11:14:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:18:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	print_row(t_vault *data)
+void	print_row(t_vault *data, int row)
 {
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->echo_forget_minus == 0))
-		ft_putstr_fd(data->buffer, 1);
+		ft_putstr_fd(data->rl_decomp[row], 1);
 	else if (data->b_in->first_word == 1)
 	{
-		ft_putstr_fd(data->buffer, 1);
+		ft_putstr_fd(data->rl_decomp[row], 1);
 		data->b_in->first_word = 0;
 	}
 	else
 	{
 		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->buffer, 1);
+		ft_putstr_fd(data->rl_decomp[row], 1);
 	}
 	return ;
 }
@@ -37,8 +37,6 @@ int	ft_isinset(char c)
 		return (2);
 	else if (c == '$')
 		return (3);
-	else if (c == '-')
-		return (4);
 	else
 		return (0);
 }
@@ -98,11 +96,13 @@ void	echo_parse_row(t_vault *data, int row)
 			i = i + data->dollar_var_len;
 			data->pos--;
 		}
-		else if (ft_isinset(data->rl_decomp[row][0]) == 4)
-			i = echo_minus(data, row, i + 1);
 		i++;
 		data->pos++;
 	}
+	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
+//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
+//	print_double_array(data->rl_decomp);
+	echo_minus(data);
+//	print_double_array(data->rl_decomp);
+//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 }
-
-//a checker (en erreur) echo "$USER "$USER" $TERM '$PATH'"

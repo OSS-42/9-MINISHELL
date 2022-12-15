@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/14 11:27:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:18:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,17 @@ void	ft_echo(t_vault *data, int row)
 	data->b_in->echo_forget_minus = 0;
 	data->b_in->echo_flag_n = 0;
 	data->b_in->echo_minus_n = 0;
+	data->b_in->dont_do_minus = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
+		quote_priority(data, row);
 		echo_parse_row(data, row);
-		print_row(data);
+		print_row(data, row);
 		free(data->buffer);
 		data->b_in->echo_flag_n = 0;
-		data->b_in->echo_forget_minus = 1;
+		data->b_in->echo_forget_minus = 0;
+		data->b_in->echo_first = 0;
 		row++;
 	}
 	if (data->b_in->echo_minus_n == 0)
@@ -117,4 +120,47 @@ void	ft_echo(t_vault *data, int row)
 
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
-//tester echo "-n" salut bonjour
+//			TESTS					|	RESULTS
+//-------------------------------------------------
+//echo bonjour						|		OK
+//echo salut bonjour				|		OK
+//echo -n salut						|		OK
+//echo -n salut bonjour				|		OK
+//echo salut -n						|		OK
+//echo salut bonjour -n				|		OK
+//echo -n bonjour -n				|		OK
+//echo "-n salut bonjour"			|		OK
+//echo '-n salut bonjour'			|		OK
+//echo "-n" salut bonjour			|		OK
+//echo '-n' salut bonjour			|		OK
+//echo -n -n salut bonjour			|			KO
+//echo -n4 -n salut bonjour			|		OK
+//echo -n -n4 salut bonjour			|			KO
+//echo "-n -n" salut bonjour		|			KO
+//echo -nnn -nnn salut bonjour		|			KO
+//echo --n salut bonjour			|		OK
+//echo "--n" salut bonjour			|		OK
+//echo '--n' salut bonjour			|		OK
+//echo "--n salut bonjour"			|		OK
+//echo $USER						|		OK
+//echo $"USER"						|		OK
+//echo $USERA						|		OK
+//echo $USER$TERM					|		OK
+//echo "$USER"						|		OK
+//echo '$USER'						|		OK
+//echo "'$USER'"					|		OK
+//echo '"$USER"'					|		OK
+//echo '$USER'$TERM					|		OK
+//echo "$USER"'$TERM'				|		OK
+//echo $USER'$TERM					|		OK
+//echo $USER"$TERM"					|		OK
+//echo $USER $TERM					|		OK
+//echo $USER $TERM $HOME			|		OK
+//echo $USER $TErM					|		OK
+//echo $USER $TErM $HOME			|			KO
+//echo "bonjour $USER"				|		OK
+//echo "bonjour '$USER'"			|		OK
+//echo "a"b'c'						|		OK
+//echo ""x''y						|		OK
+//echo 1' '2" "3					|			KO
+//echo "$USER "$USER" $TERM '$PATH'"|			KO

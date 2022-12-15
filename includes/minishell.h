@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 09:06:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:04:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define TRUE 1
 # define FALSE 0
 
-# define INTRO "\
-#/bin/bash \n\
-bash pretty/intro_minishell.sh \n\
-"
+// # define INTRO "\
+// #/bin/bash \n\
+// bash pretty/intro_minishell.sh \n\
+// "
 
 /***** STRUTURE *****/
 
@@ -45,11 +45,13 @@ typedef struct s_builtins
 	char	*order_var;
 	char	*echo_var;
 	char	echo_priority;
+	int		echo_first;
 	int		echo_flag_n;
 	int		echo_minus_n;
 	int		echo_dble_q;
 	int		echo_sgle_q;
 	int		echo_forget_minus;
+	int		dont_do_minus;
 	int		first_word;
 }	t_builtins;
 
@@ -144,7 +146,7 @@ int		check_next_char(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
-int		echo_minus(t_vault *data, int row, int i);
+void	echo_minus(t_vault *data);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -164,7 +166,7 @@ int		dbl_array_len(char **array);
 int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
-void	print_row(t_vault *data);
+void	print_row(t_vault *data, int row);
 int		ft_isinset(char c);
 int		echo_sgle_quote(t_vault *data, int row, int i);
 int		echo_dble_quote(t_vault *data, int row, int i);
@@ -179,13 +181,23 @@ void	var_prep(t_vault *data, int row);
 //void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** dollar_utils.c *****/
-//int		quote_priority(t_vault *data, int row);
+void	quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 //void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);
 //void	change_tab(t_vault *data, int row);
 
 
-/***** POUR DEBUG *****/
+/***** PRETTY *****/
+/***** pretty_intro_mini.c *****/
+void	intro_minishell(void);
+void	intro_minishell_p2(void);
+void	intro_minishell_p3(void);
+
+/***** pretty_colors.c *****/
+void	lred(void);
+void	lcyan(void);
+void	lyellow(void);
+void	reset(void);
 
 #endif
