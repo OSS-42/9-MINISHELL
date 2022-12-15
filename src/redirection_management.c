@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 15:44:39 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 20:04:29 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 	echo coucou>test>test1>test2 OK
 	echo coucou>1 > 2> 3 >4 > 5 OK
 	echo "bonjour">"test" > "test1" OK
-	echo "coucou">"test" >"test1"
+	echo "coucou">"test" >"test1" OK
 	echo "coucou">"test"> "test1"> "test2" OK
-	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
-	echo "coucou" >test 4 OK
-	echo coucou > "tes>t" OK
-	echo coucou > "tes>t">test1 OK
-	echo coucou > 1> 2 OK
+	echo "bonjour">"test">"test1">"test2" OK
+	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4"
+	echo "coucou" >test 4
+	echo coucou > "tes>t"
+	echo coucou > "tes>t">test1
+	echo coucou > 1> 2
 
-	echo "bonjour">"test">"test1">"test2" SEGFAULT surement à cause des invalid read encore. Le segfault est dans le clean chevron du premier output
-	echo coucou >"tes>t">test1 MAUVAISE RECUPERATION DU OUTPUT test1 peut-être a cause du invalid read ?
+	echo coucou >"tes>t">test1 test1 ne ce créé pas
 */
 
 /*
@@ -169,26 +169,34 @@ void	clean_output(t_vault *data, int i, int j)
 		temp++;
 		len++;
 	}
-	if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
+	// if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
+	// {
+	// 	data->quote->quote_priority = data->rl_decomp[i][temp];
+	// 	temp++;
+	// 	while (data->rl_decomp[i][temp] != data->quote->quote_priority)
+	// 	{
+	// 		temp++;
+	// 	}
+	// 	temp++;
+	// 	len++;
+	// }
+	// else
+	// {
+	temp = while_is_not_flag(data->rl_decomp[i], temp);
+	len = temp;
+	if (data->rl_decomp[i][temp])
 	{
-		data->quote->quote_priority = data->rl_decomp[i][temp];
 		temp++;
-		while (data->rl_decomp[i][temp] != data->quote->quote_priority)
-			temp++;
-		temp++;
-	}
-	else
-	{
+		len++;
 		temp = while_is_not_flag(data->rl_decomp[i], temp);
-		temp++;
-		len = temp;
-		temp = while_is_not_flag(data->rl_decomp[i], temp);
+		len++;
 		while (data->rl_decomp[i][temp])
 		{
 			temp++;
 			len++;
 		}
 	}
+	// }
 	if (data->rl_decomp[i][0] == '>')
 		begin = temp;
 	str = ft_calloc(sizeof(char), len + 1);

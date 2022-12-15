@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 17:40:39 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 20:02:03 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,47 +40,17 @@ void	find_str_quote(t_vault *data)
 				find_decomposer_array_to_replace(data, i);
 			data->quote->len_of_replacement = 0;
 		}
-		i++;
+		if (data->read_line[i])
+			i++;
 	}
 	data->spc_count = 1;
 }
 
 /*
-	Je continue d'avancer dans readline pour trouver la quote de fermeture
-	et calculer la longueur de la string qui va remplacer la ligne de rl_decomp.
+	Je reviens en arrière pour dans le cas ou il y aurait des caractere collé au quote.
+	Je ravance dans readline pour trouver la quote de fermeture puis je continue d'avancer
+	au cas ou il y aurait encore des caractères.
 */
-// void	len_of_replacement(t_vault *data, int *rl_index)
-// {
-// 	data->quote->quote_priority = data->read_line[*rl_index];
-// 	(*rl_index)++;
-// 	while ((data->read_line[*rl_index] != data->quote->quote_priority
-// 			|| data->read_line[*rl_index + 1] > 32)
-// 		&& data->read_line[*rl_index])
-// 	{
-// 		if (data->read_line[*rl_index] == data->quote->quote_priority)
-// 		{
-// 			while (data->read_line[*rl_index]
-// 				&& data->read_line[*rl_index] != ' ')
-// 			{
-// 				data->quote->len_of_replacement++;
-// 				(*rl_index)++;
-// 			}
-// 			break ;
-// 		}
-// 		if (data->read_line[*rl_index] == ' ')
-// 		{
-// 			while (data->read_line[*rl_index] == ' ')
-// 			{
-// 				data->quote->len_of_replacement++;
-// 				(*rl_index)++;
-// 			}
-// 			data->spc_count++;
-// 		}
-// 		data->quote->len_of_replacement++;
-// 		(*rl_index)++;
-// 	}
-// 	data->quote->len_of_replacement++;
-// }
 void	len_of_replacement(t_vault *data, int *rl_index)
 {
 	data->quote->quote_priority = data->read_line[*rl_index];
@@ -98,6 +68,8 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 			{
 				(*rl_index)++;
 				data->quote->len_of_replacement++;
+				if (data->read_line[*rl_index] == ' ')
+					data->spc_count++;
 			}
 			while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
 			{
@@ -155,7 +127,7 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	j = 0;
 	free(data->rl_decomp[*i]);
 	data->rl_decomp[*i]
-		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1); // verifier le len si je lui donne : je"suis morgan"
+		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1);
 	while (data->quote->begin <= end)
 	{
 		data->rl_decomp[*i][j]
@@ -191,13 +163,3 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	if (data->rl_decomp[actual_array])
 		data->rl_decomp[actual_array][0] = '\0';
 }
-
-// "je suis morgan"
-
-// "je
-// suis
-// morgan"
-
-// "je suis morgan"
-// '\0'
-// '\0'

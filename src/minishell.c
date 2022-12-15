@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/14 14:17:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:55:48 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_data(t_vault *data)
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
 	data->rl_decomp = NULL;
+	data->rl_decomp_i = 0;
 	return ;
 }
 
@@ -59,7 +60,6 @@ int	main(void)
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
-		// data.read_line[ft_strlen(data.read_line)] = '\0';
 		if (data.read_line != NULL)
 		{
 			if (ft_strcmp(data.read_line, "") != 0)
