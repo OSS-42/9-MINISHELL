@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 08:55:10 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/15 11:58:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ char	*clean_the_chevron(char *str)
 			i++;
 		}
 		if (str[i])
+		{
 			temp[j] = str[i];
-		i++;
-		j++;
+			i++;
+			j++;
+		}
 	}
 	free (str);
 	return (temp);

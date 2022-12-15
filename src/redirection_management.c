@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 09:34:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:49:23 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 /*
 	echo bonjour > test > test1 > test2 OK
-	echo bonjour> test> test1> test2 OK
 	echo coucou >1 >2 >3 OK
+	echo bonjour> test> test1> test2 OK
 	echo coucou>test>test1>test2 OK
 	echo coucou>1 > 2> 3 >4 > 5 OK
 	echo "bonjour">"test" > "test1" OK
 	echo "coucou">"test" >"test1" OK
 	echo "coucou">"test"> "test1"> "test2" OK
 	echo "bonjour">"test">"test1">"test2" OK
-	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" Invalid read
-	echo "coucou" >test 4
-	echo coucou > "tes>t"
-	echo coucou > "tes>t">test1
-	echo coucou > 1> 2
+	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
+	echo "coucou" >test 4 OK
+	echo coucou > "tes>t" OK
+	echo coucou > "tes>t">test1 OK
+	echo coucou > 1> 2 OK
+	echo coucou >"tes>t">test1 OK
+	echo coucou>"tes>t">test1 OK
 
-	echo coucou >"tes>t">test1 test1 ne ce créé pas
+	echo 1' '2" "3
+
 */
 
 /*
@@ -89,15 +92,29 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
 	while (rl_decomp_array[i] != c)
 		i++;
 	i++;
-	len = while_is_not_flag(rl_decomp_array, i) - i;
-	if (rl_decomp_array[i] == '\"')
-		len = len - 2;
+	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
+	{
+		data->quote->quote_priority = rl_decomp_array[i];
+		i++;
+		while (rl_decomp_array[i] != data->quote->quote_priority)
+		{
+			i++;
+			len++;
+		}
+	}
+	else
+		len = while_is_not_flag(rl_decomp_array, i) - i;
 	data->flag->output = ft_calloc(sizeof(char), len + 1);
 	len = 0;
-	if (rl_decomp_array[i] == '\"')
-	{
+	i = 0;
+	while (rl_decomp_array[i] != c)
 		i++;
-		while (rl_decomp_array[i] != '\"')
+	i++;
+	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
+	{
+		data->quote->quote_priority = rl_decomp_array[i];
+		i++;
+		while (rl_decomp_array[i] != data->quote->quote_priority)
 		{
 			data->flag->output[len] = rl_decomp_array[i];
 			len++;
@@ -131,7 +148,7 @@ void	clean_output(t_vault *data, int i, int j)
 	str = ft_calloc(sizeof(char), len + 1);
 	if (begin != 0)
 	{
-		str[temp] = '>'; //Si begin n'est pas à zero je dois quand même mettre le chevron du début >"test">"test1">"test2"
+		str[temp] = '>';
 		temp++;
 		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
@@ -153,7 +170,16 @@ void	clean_output(t_vault *data, int i, int j)
 			str[temp] = data->rl_decomp[i][begin];
 			temp++;
 			begin++;
-			begin = while_is_not_flag(data->rl_decomp[i], begin);
+			if (data->rl_decomp[i][begin] == '\"' || data->rl_decomp[i][begin] == '\'')
+			{
+				data->quote->quote_priority = data->rl_decomp[i][begin];
+				begin++;
+				while (data->rl_decomp[i][begin] != data->quote->quote_priority)
+					begin++;
+				begin++;
+			}
+			else
+				begin = while_is_not_flag(data->rl_decomp[i], begin);
 			if (data->rl_decomp[i][begin])
 			{
 				while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
@@ -165,7 +191,7 @@ void	clean_output(t_vault *data, int i, int j)
 			}
 		}
 	}
-	// free (data->rl_decomp[i]); pose problème avec echo "bonjour">"test">"test1" si j'execute deux fois d'affilé la commande.
+	free (data->rl_decomp[i]);
 	data->rl_decomp[i] = str;
 }
 
@@ -174,16 +200,25 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	int	len;
 
 	len = 0;
-	if (data->rl_decomp[i][0] == '>')
+	if (data->rl_decomp[i][temp] == '>')
 	{
 		//>"test">"test1">"test2" begin à partir du deuxieme chevron
+		// >"tes>t">test1
 		temp++;
 		len++;
-		temp = while_is_not_flag(data->rl_decomp[i], temp);
-		*begin = temp;
-		if (data->rl_decomp[i])
+		if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
 		{
-			len++;
+			data->quote->quote_priority = data->rl_decomp[i][temp];
+			temp++;
+			while (data->rl_decomp[i][temp] != data->quote->quote_priority)
+				temp++;
+			temp++;
+		}
+		else
+			temp = while_is_not_flag(data->rl_decomp[i], temp);
+		*begin = temp;
+		if (data->rl_decomp[i][temp])
+		{
 			while (data->rl_decomp[i][temp])
 			{
 				temp++;
@@ -193,7 +228,7 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	}
 	else
 	{
-		//"bonjour">"test">"test1">"test2" begin a partir du debut
+		// "bonjour">"test">"test1">"test2" begin a partir du debut
 		temp = while_is_not_flag(data->rl_decomp[i], temp);
 		len = temp;
 		if (data->rl_decomp[i][temp])
