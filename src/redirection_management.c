@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 20:04:29 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 22:36:20 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 	echo "bonjour">"test" > "test1" OK
 	echo "coucou">"test" >"test1" OK
 	echo "coucou">"test"> "test1"> "test2" OK
-	echo "bonjour">"test">"test1">"test2" OK
-	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4"
+	echo "bonjour">"test">"test1">"test2" OK comparer avec ce resultat
+	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" Probleme au moment de clean "test2"
 	echo "coucou" >test 4
 	echo coucou > "tes>t"
 	echo coucou > "tes>t">test1
@@ -276,6 +276,8 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 			find_decomposer_to_switch(data, i);
 		else
 			data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
+		if (ft_strlen(data->rl_decomp[i]) < 1)
+			find_decomposer_to_switch(data, i);
 	}
 	else
 	{
