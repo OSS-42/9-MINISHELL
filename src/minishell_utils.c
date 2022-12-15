@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 09:47:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:58:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	echo_parse_row(t_vault *data, int row)
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 		data->dollar_var_len = 0;
-		quote_priority(data, row);
 		if (ft_isinset(data->rl_decomp[row][i]) == 0)
 			data->buffer[data->pos] = data->rl_decomp[row][i];
 		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
@@ -101,10 +100,11 @@ void	echo_parse_row(t_vault *data, int row)
 		data->pos++;
 	}
 	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
+	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 //	print_double_array(data->rl_decomp);
 	echo_minus(data);
 //	print_double_array(data->rl_decomp);
-	printf("row : %d = %s\n", row, data->rl_decomp[row]);
+//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 }
 
 //a checker (en erreur) echo "$USER "$USER" $TERM '$PATH'"
