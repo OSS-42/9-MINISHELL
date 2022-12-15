@@ -6,45 +6,40 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/11 23:17:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:34:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// int	quote_priority(t_vault *data, int row)
-// {
-// 	int	j;
+void	quote_priority(t_vault *data, int row)
+{
+	int	j;
 
-// 	j = 0;
-// 	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
-// 	{
-// 		if (data->rl_decomp[row][j] == '\"')
-// 		{
-// 			data->b_in->echo_dble_q++;
-// 			if (data->b_in->echo_first == 0)
-// 				data->b_in->echo_first = 2;
-// 			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-// 				data->b_in->echo_priority = 34;
-// 		}
-// 		else if (data->rl_decomp[row][j] == '\'')
-// 		{
-// 			data->b_in->echo_sgle_q++;
-// 			if (data->b_in->echo_first == 0)
-// 				data->b_in->echo_first = 1;
-// 			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-// 				data->b_in->echo_priority = 39;
-// 		}
-// 		else if (data->rl_decomp[row][j] == '$')
-// 		{
-// 			data->flag->dollar_count++;
-// 			if (data->b_in->echo_first == 0)
-// 				data->b_in->echo_first = 3;
-// 		}
-// 		j++;
-// 	}
-// 	return (data->b_in->echo_priority);
-// }
+	j = 0;
+	data->b_in->echo_priority = 0;
+	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
+	{
+		if (data->rl_decomp[row][j] == '\"')
+		{
+			data->b_in->echo_dble_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 2;
+			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
+				data->b_in->echo_priority = 34;
+		}
+		else if (data->rl_decomp[row][j] == '\'')
+		{
+			data->b_in->echo_sgle_q++;
+			if (data->b_in->echo_first == 0)
+				data->b_in->echo_first = 1;
+			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
+				data->b_in->echo_priority = 39;
+		}
+		j++;
+	}
+	return ;
+}
 
 void	clean_quote(t_vault *data, int row)
 {

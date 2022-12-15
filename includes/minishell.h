@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/14 23:41:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:32:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_builtins
 	char	*order_var;
 	char	*echo_var;
 	char	echo_priority;
+	int		echo_first;
 	int		echo_flag_n;
 	int		echo_minus_n;
 	int		echo_dble_q;
@@ -178,7 +179,7 @@ void	var_prep(t_vault *data, int row);
 //void	var_extract(t_vault *data, int row, int position, char **array);
 
 /***** dollar_utils.c *****/
-//int		quote_priority(t_vault *data, int row);
+void	quote_priority(t_vault *data, int row);
 void	clean_quote(t_vault *data, int row);
 //void	split_on_char(t_vault *data, int row, char c);
 int		insert_row(int pos, int count, char **dest, char **source);

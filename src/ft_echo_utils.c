@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 08:36:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:50:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,14 @@ void	echo_minus(t_vault *data)
 	i = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
-//		printf("row : %d = %s\n", row, data->rl_decomp[row]);
+		printf("row : %d = %s\n", row, data->rl_decomp[row]);
+		printf("priority : %d\n", data->b_in->echo_priority);
 		while (data->rl_decomp[row][i] == '-' && data->rl_decomp[row][i])
 			i++;
-		if (i > 1)
+		if (i > 1 || data->b_in->echo_priority != 0)
 		{
 			data->b_in->echo_forget_minus = 1;
+			printf("bye bye\n");
 			return ;
 		}
 		while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != ' ')
@@ -178,7 +180,7 @@ void	echo_minus(t_vault *data)
 					temp_swap[i] = ft_strdup(data->rl_decomp[line]);
 				else
 				{
-					temp_swap[i] = '\0';
+					temp_swap[i] = NULL;
 					break ;
 				}
 				line++;
@@ -193,7 +195,7 @@ void	echo_minus(t_vault *data)
 				free (temp_swap[i]);
 				i++;
 			}
-			data->rl_decomp[i] = '\0';
+			data->rl_decomp[i] = NULL;
 //			print_double_array(data->rl_decomp);
 			free (temp_swap);
 			data->b_in->echo_flag_n = 1;
