@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/14 20:06:41 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 23:41:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		check_next_char(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
-int		echo_minus(t_vault *data, int row, int i);
+void	echo_minus(t_vault *data);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -163,7 +163,7 @@ int		dbl_array_len(char **array);
 int		check_error(t_vault *data, int row);
 
 /***** minishell_utils.c *****/
-void	print_row(t_vault *data);
+void	print_row(t_vault *data, int row);
 int		ft_isinset(char c);
 int		echo_sgle_quote(t_vault *data, int row, int i);
 int		echo_dble_quote(t_vault *data, int row, int i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 20:02:03 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/14 21:42:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	find_str_quote(t_vault *data)
 		if (data->read_line[i] == '\"' || data->read_line[i] == '\'')
 		{
 			len_of_replacement(data, &i);
-			printf("%d\n", data->quote->len_of_replacement);
+//			printf("%d\n", data->quote->len_of_replacement);
 			if (data->spc_count != 0)
 				find_decomposer_array_to_replace(data, i);
 			data->quote->len_of_replacement = 0;

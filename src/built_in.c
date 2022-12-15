@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/14 11:27:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:13:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	ft_echo(t_vault *data, int row)
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
 		echo_parse_row(data, row);
-		print_row(data);
+		print_row(data, row);
 		free(data->buffer);
 		data->b_in->echo_flag_n = 0;
 		data->b_in->echo_forget_minus = 1;
