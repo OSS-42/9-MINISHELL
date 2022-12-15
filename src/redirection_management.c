@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/14 22:36:20 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/15 09:34:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 	echo "bonjour">"test" > "test1" OK
 	echo "coucou">"test" >"test1" OK
 	echo "coucou">"test"> "test1"> "test2" OK
-	echo "bonjour">"test">"test1">"test2" OK comparer avec ce resultat
-	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" Probleme au moment de clean "test2"
+	echo "bonjour">"test">"test1">"test2" OK
+	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" Invalid read
 	echo "coucou" >test 4
 	echo coucou > "tes>t"
 	echo coucou > "tes>t">test1
@@ -65,7 +65,6 @@ void	execute_redirection(t_vault *data)
 		i++;
 	}
 }
-
 
 void	output_in_same_array(t_vault *data, int i, int *j, char c)
 {
@@ -116,43 +115,6 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
 	}
 }
 
-void	clean_output_next_array(t_vault *data, int i)
-{
-	int		j;
-	int		len;
-	int		begin;
-	char	*temp;
-
-	len = 0;
-	temp = NULL;
-	j = 1;
-	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')
-	{
-		data->quote->quote_priority = data->rl_decomp[i][0];
-		while (data->rl_decomp[i][j] != data->quote->quote_priority)
-			j++;
-		j++;
-	}
-	else
-		j = while_is_not_flag(data->rl_decomp[i], 0);
-	begin = j;
-	while (data->rl_decomp[i][j])
-	{
-		j++;
-		len++;
-	}
-	temp = ft_calloc(sizeof(char), len + 1);
-	len = 0;
-	while (data->rl_decomp[i][begin])
-	{
-		temp[len] = data->rl_decomp[i][begin];
-		begin++;
-		len++;
-	}
-	free (data->rl_decomp[i]);
-	data->rl_decomp[i] = temp;
-}
-
 void	clean_output(t_vault *data, int i, int j)
 {
 	int		len;
@@ -164,50 +126,13 @@ void	clean_output(t_vault *data, int i, int j)
 	temp = j;
 	str = NULL;
 	begin = 0;
-	if (data->rl_decomp[i][temp] == '>')
-	{
-		temp++;
-		len++;
-	}
-	// if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
-	// {
-	// 	data->quote->quote_priority = data->rl_decomp[i][temp];
-	// 	temp++;
-	// 	while (data->rl_decomp[i][temp] != data->quote->quote_priority)
-	// 	{
-	// 		temp++;
-	// 	}
-	// 	temp++;
-	// 	len++;
-	// }
-	// else
-	// {
-	temp = while_is_not_flag(data->rl_decomp[i], temp);
-	len = temp;
-	if (data->rl_decomp[i][temp])
-	{
-		temp++;
-		len++;
-		temp = while_is_not_flag(data->rl_decomp[i], temp);
-		len++;
-		while (data->rl_decomp[i][temp])
-		{
-			temp++;
-			len++;
-		}
-	}
-	// }
-	if (data->rl_decomp[i][0] == '>')
-		begin = temp;
-	str = ft_calloc(sizeof(char), len + 1);
 	temp = 0;
-	if (data->rl_decomp[i][0] == '>')
-	{
-		str[temp] = '>';
-		temp++;
-	}
+	len = len_without_output(data, i, temp, &begin);
+	str = ft_calloc(sizeof(char), len + 1);
 	if (begin != 0)
 	{
+		str[temp] = '>'; //Si begin n'est pas à zero je dois quand même mettre le chevron du début >"test">"test1">"test2"
+		temp++;
 		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
 			str[temp] = data->rl_decomp[i][begin];
@@ -216,6 +141,7 @@ void	clean_output(t_vault *data, int i, int j)
 		}
 	}
 	else
+	{
 		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
 			while (data->rl_decomp[i][begin] != '>')
@@ -229,33 +155,61 @@ void	clean_output(t_vault *data, int i, int j)
 			begin++;
 			begin = while_is_not_flag(data->rl_decomp[i], begin);
 			if (data->rl_decomp[i][begin])
+			{
 				while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 				{
 					str[temp] = data->rl_decomp[i][begin];
 					temp++;
 					begin++;
 				}
+			}
 		}
+	}
 	// free (data->rl_decomp[i]); pose problème avec echo "bonjour">"test">"test1" si j'execute deux fois d'affilé la commande.
 	data->rl_decomp[i] = str;
 }
-//echo coucou>test>test1 begin = 0
-// echo coucou> test>test1 begin = 4
 
-int	while_is_not_flag(char *str, int i)
+int	len_without_output(t_vault *data, int i, int temp, int *begin)
 {
-	while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != '<')
-		i++;
-	return (i);
-}
+	int	len;
 
-// Ajouter une sécurité pour m'assurer que le flag n'Est pas entre quote
-int	flag_in_str(char *str)
-{
-	if (ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
-		|| ft_strchr(str, '|') != NULL)
-		return (TRUE);
-	return (FALSE);
+	len = 0;
+	if (data->rl_decomp[i][0] == '>')
+	{
+		//>"test">"test1">"test2" begin à partir du deuxieme chevron
+		temp++;
+		len++;
+		temp = while_is_not_flag(data->rl_decomp[i], temp);
+		*begin = temp;
+		if (data->rl_decomp[i])
+		{
+			len++;
+			while (data->rl_decomp[i][temp])
+			{
+				temp++;
+				len++;
+			}
+		}
+	}
+	else
+	{
+		//"bonjour">"test">"test1">"test2" begin a partir du debut
+		temp = while_is_not_flag(data->rl_decomp[i], temp);
+		len = temp;
+		if (data->rl_decomp[i][temp])
+		{
+			temp++;
+			len++;
+			temp = while_is_not_flag(data->rl_decomp[i], temp);
+			len++;
+			while (data->rl_decomp[i][temp])
+			{
+				temp++;
+				len++;
+			}
+		}
+	}
+	return (len);
 }
 
 /*
@@ -316,36 +270,41 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c, int
 	data->flag->output = ft_substr(rl_decomp_array, j, len);
 }
 
-char	*clean_the_chevron(char *str)
+void	clean_output_next_array(t_vault *data, int i)
 {
-	char	*temp;
-	int		clean;
-	int		i;
 	int		j;
+	int		len;
+	int		begin;
+	char	*temp;
 
-	i = 0;
-	j = 0;
-	clean = 0;
-	temp = ft_calloc(sizeof(char), ft_strlen(str));
-	if (!temp)
+	len = 0;
+	temp = NULL;
+	j = 1;
+	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')
 	{
-		free (temp);
-		exit (EXIT_FAILURE);
-	}
-	while (str[i] && str[i] != '\0')
-	{
-		if (str[i] == '>' && clean == 0)
-		{
-			clean = 1;
-			i++;
-		}
-		if (str[i])
-			temp[j] = str[i];
-		i++;
+		data->quote->quote_priority = data->rl_decomp[i][0];
+		while (data->rl_decomp[i][j] != data->quote->quote_priority)
+			j++;
 		j++;
 	}
-	free (str);
-	return (temp);
+	else
+		j = while_is_not_flag(data->rl_decomp[i], 0);
+	begin = j;
+	while (data->rl_decomp[i][j])
+	{
+		j++;
+		len++;
+	}
+	temp = ft_calloc(sizeof(char), len + 1);
+	len = 0;
+	while (data->rl_decomp[i][begin])
+	{
+		temp[len] = data->rl_decomp[i][begin];
+		begin++;
+		len++;
+	}
+	free (data->rl_decomp[i]);
+	data->rl_decomp[i] = temp;
 }
 
 void	stdout_redirection(char *redirection)
@@ -364,49 +323,3 @@ void	stdout_redirection(char *redirection)
 	}
 	free (redirection);
 }
-
-/*
-	Dans le cas ou la case qui contient > ce trouve dans un string qui contient
-	d'autre éléments cette fonction va retirer le > de cette string.
-*/
-// char	*clean_the_chevron(char *str)
-// {
-// 	int		begin;
-// 	int		temp_count;
-// 	int		len;
-// 	char	*temp;
-
-// 	begin = 0;
-// 	len = 0;
-// 	while (str[begin] != '>' && str[begin] != '<' && str[begin] != '|'
-// 		&& str[begin] != '\'' && str[begin] != '\"')
-// 		begin++;
-// 	if (begin == 0)
-// 		begin++;
-// 	temp_count = begin;
-// 	while (str[temp_count++])
-// 		len++;
-// 	temp = ft_substr(str, begin, len);
-// 	free (str);
-// 	return (temp);
-// }
-
-// void	output_in_same_array(t_vault *data, int i, int *j, char c)
-// {
-// 	(void)c;
-// 	(void)j;
-// 	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
-// 	if (flag_in_str(data->rl_decomp[i]) == TRUE)
-// 	{
-// 		*j = while_is_not_flag(data->rl_decomp[i], *j);
-// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, *j);
-// 		clean_output(data, i, *j);
-// 	}
-// 	else
-// 	{
-// 		data->flag->output = ft_substr(data->rl_decomp[i], 0, ft_strlen(data->rl_decomp[i]));
-// 		find_decomposer_to_switch(data, i);
-// 	}
-// 	*j = -1;
-// 	stdout_redirection(data->flag->output);
-// }
