@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/14 23:57:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 08:36:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,29 +143,31 @@ void	echo_minus(t_vault *data)
 	i = 0;
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
-		printf("coucou\n");
-		printf("%s\n", data->rl_decomp[row]);
-		if (data->rl_decomp[row][i] != '-')
+//		printf("row : %d = %s\n", row, data->rl_decomp[row]);
+		while (data->rl_decomp[row][i] == '-' && data->rl_decomp[row][i])
+			i++;
+		if (i > 1)
 		{
-			printf("ciao\n");
+			data->b_in->echo_forget_minus = 1;
 			return ;
 		}
-		i++;
 		while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != ' ')
 		{
 			if (data->rl_decomp[row][i] != 'n')
 			{
 				data->b_in->echo_forget_minus = 1;
-				printf("bye\n");
+//				printf("bye\n");
 				break ;
 			}
+			else
+				data->b_in->echo_forget_minus = 0;
 			i++;
 		}
-		printf("%d\n", data->b_in->echo_forget_minus);
+//		printf("%d\n", data->b_in->echo_forget_minus);
 		if (data->b_in->echo_forget_minus == 0)
 		{
-			printf("hello\n");
-			temp_swap = ft_calloc(sizeof(char), ft_strlen(data->rl_decomp[line]));
+//			printf("hello\n");
+			temp_swap = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->rl_decomp));
 			i = 0;
 			line = 0;
 			while (data->rl_decomp[line])
@@ -175,10 +177,14 @@ void	echo_minus(t_vault *data)
 				if (data->rl_decomp[line])
 					temp_swap[i] = ft_strdup(data->rl_decomp[line]);
 				else
+				{
+					temp_swap[i] = '\0';
 					break ;
+				}
 				line++;
 				i++;
 			}
+//			print_double_array(temp_swap);
 			ft_dbl_ptr_realloc(data->rl_decomp, sizeof(temp_swap));
 			i = 0;
 			while (temp_swap[i])
@@ -187,12 +193,17 @@ void	echo_minus(t_vault *data)
 				free (temp_swap[i]);
 				i++;
 			}
+			data->rl_decomp[i] = '\0';
+//			print_double_array(data->rl_decomp);
 			free (temp_swap);
 			data->b_in->echo_flag_n = 1;
 			data->b_in->echo_minus_n = 1;
 		}
 		row++;
 	}
-	if (data->rl_decomp[row + 1] == NULL)
-		data->b_in->echo_flag_n = 0;
+	// if (data->rl_decomp[row + 1] == NULL)
+	// 	data->b_in->echo_flag_n = 0;
 }
+
+//en erreur : echo "-n salut bonjour"
+//en erreur : echo -nnnn -nnnn salut bonjour
