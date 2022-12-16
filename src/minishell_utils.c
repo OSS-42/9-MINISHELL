@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 15:18:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:39:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	echo_parse_row(t_vault *data, int row)
 		i++;
 		data->pos++;
 	}
+	free (data->rl_decomp[row]);
+	data->rl_decomp[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
 	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
 //	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 //	print_double_array(data->rl_decomp);
