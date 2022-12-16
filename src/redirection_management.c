@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 14:49:23 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:24:14 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 	echo coucou >"tes>t">test1 OK
 	echo coucou>"tes>t">test1 OK
 
-	echo 1' '2" "3
+	echo 1' '2" "3 Segfault si double execution
 
 */
 

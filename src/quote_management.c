@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 20:16:30 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/15 21:33:21 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,24 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 			{
 				(*rl_index)++;
 				data->quote->len_of_replacement++;
-			}
-			while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
-			{
-				if (data->read_line[*rl_index] == '\'' || data->read_line[*rl_index] == '\"')
+				while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
 				{
-					data->quote->temp_priority = data->read_line[*rl_index];
-					(*rl_index)++;
-					data->quote->len_of_replacement++;
-					while ((data->read_line[*rl_index] != data->quote->temp_priority))
+					if (data->read_line[*rl_index] == '\'' || data->read_line[*rl_index] == '\"')
 					{
-						if (data->read_line[*rl_index] == ' ')
-							data->spc_count++;
+						data->quote->temp_priority = data->read_line[*rl_index];
 						(*rl_index)++;
 						data->quote->len_of_replacement++;
+						while ((data->read_line[*rl_index] != data->quote->temp_priority))
+						{
+							if (data->read_line[*rl_index] == ' ')
+								data->spc_count++;
+							(*rl_index)++;
+							data->quote->len_of_replacement++;
+						}
 					}
+					data->quote->len_of_replacement++;
+					(*rl_index)++;
 				}
-				data->quote->len_of_replacement++;
-				(*rl_index)++;
 			}
 			data->quote->len_of_replacement--;
 			break;
@@ -112,10 +112,7 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 	int		i;
 	int		j;
 
-	if (data->rl_decomp_i != 0)
-		i = data->rl_decomp_i;
-	else
-		i = 0;
+	i = 0;
 	while (data->rl_decomp[i])
 	{
 		j = 0;
@@ -153,7 +150,6 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 		j++;
 	}
 	(*i)++;
-	data->rl_decomp_i = *i;
 	if (ft_strchr(data->rl_decomp[*i - 1], ' ') != NULL)
 		find_decomposer_to_switch(data, *i);
 }

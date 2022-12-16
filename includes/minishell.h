@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 20:16:05 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/15 21:33:46 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_vault
 	char		*env_path;
 	char		**env;
 	char		**clean_decomposer;
-	int			rl_decomp_i;
 	char		**rl_decomp;
 	char		*test;
 	t_builtins	*b_in;
