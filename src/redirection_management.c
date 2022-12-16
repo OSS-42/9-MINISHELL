@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 21:24:14 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/16 10:39:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /*
-	echo bonjour > test > test1 > test2 OK
-	echo coucou >1 >2 >3 OK
-	echo bonjour> test> test1> test2 OK
-	echo coucou>test>test1>test2 OK
-	echo coucou>1 > 2> 3 >4 > 5 OK
-	echo "bonjour">"test" > "test1" OK
-	echo "coucou">"test" >"test1" OK
-	echo "coucou">"test"> "test1"> "test2" OK
-	echo "bonjour">"test">"test1">"test2" OK
-	echo "coucou je suis eric" > "test"> "test1" >"test2">"test3"> "test4" OK
-	echo "coucou" >test 4 OK
-	echo coucou > "tes>t" OK
-	echo coucou > "tes>t">test1 OK
-	echo coucou > 1> 2 OK
-	echo coucou >"tes>t">test1 OK
-	echo coucou>"tes>t">test1 OK
+echo test 1 > test > test1 > test2
+echo test 2 >1 >2 >3
+echo test 3> test> test1> test2
+echo test 4>test>test1>test2
+echo test 5>1 > 2> 3 >4 > 5
+echo "test 6">"test" > "test1"
+echo "test 7">"test" >"test1"
+echo "test 8">"test"> "test1"> "test2"
+echo "test 9">"test">"test1">"test2"
+echo "test 10" > "test"> "test1" >"test2">"test3"> "test4"
+echo "test 11" >test 4
+echo test 12 > "tes>t"
+echo test 13 > "tes>t">test1
+echo test 14 > 1> 2
+echo test 15 >"tes>t">test1
+echo test 16>"tes>t">test1
 
 	echo 1' '2" "3 Segfault si double execution
 
@@ -50,17 +50,23 @@ void	execute_redirection(t_vault *data)
 	i = 0;
 	j = 0;
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
+	data->flag->stdin_backup = dup(STDIN_FILENO);
 	while (data->rl_decomp[i] && data->rl_decomp[i][0])
 	{
-		if (ft_strchr(data->rl_decomp[i], '>') != NULL
-			&& check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
+		if ((ft_strchr(data->rl_decomp[i], '>') != NULL
+				&& check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
+			|| (ft_strchr(data->rl_decomp[i], '<') != NULL
+				&& check_if_inside_quote(data->rl_decomp[i], '<') == FALSE))
 		{
 			while (data->rl_decomp[i][j])
 			{
-				if (data->rl_decomp[i][j] == '>' && !data->rl_decomp[i][j + 1])
-					output_in_next_array(data, i, &j, '>');
-				else if (data->rl_decomp[i][j] == '>')
-					output_in_same_array(data, i, &j, '>');
+				if ((data->rl_decomp[i][j] == '>'
+					|| data->rl_decomp[i][j] == '<')
+					&& !data->rl_decomp[i][j + 1])
+					output_in_next_array(data, i, &j, data->rl_decomp[i][j]);
+				else if (data->rl_decomp[i][j] == '>'
+				|| data->rl_decomp[i][j] == '<')
+					output_in_same_array(data, i, &j, data->rl_decomp[i][j]); // input ok
 				j++;
 			}
 		}
@@ -71,25 +77,26 @@ void	execute_redirection(t_vault *data)
 
 void	output_in_same_array(t_vault *data, int i, int *j, char c)
 {
-	(void)c;
-	(void)j;
-	find_output_in_same_array(data, data->rl_decomp[i], '>');
-	clean_output(data, i, 0);
-	data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
+	// (void)c;
+	// (void)j;
+	data->flag->chevron = c;
+	find_output_in_same_array(data, data->rl_decomp[i]);
+	clean_output(data, i);
+	data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i]);
 	if (data->rl_decomp[i][0] == '\0')
 		find_decomposer_to_switch(data, i);
 	*j = -1;
-	stdout_redirection(data->flag->output);
+	stdout_redirection(data, data->flag->output);
 }
 
-void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
+void	find_output_in_same_array(t_vault *data, char *rl_decomp_array)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (rl_decomp_array[i] != c)
+	while (rl_decomp_array[i] != data->flag->chevron)
 		i++;
 	i++;
 	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
@@ -107,7 +114,7 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
 	data->flag->output = ft_calloc(sizeof(char), len + 1);
 	len = 0;
 	i = 0;
-	while (rl_decomp_array[i] != c)
+	while (rl_decomp_array[i] != data->flag->chevron)
 		i++;
 	i++;
 	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
@@ -132,7 +139,7 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c)
 	}
 }
 
-void	clean_output(t_vault *data, int i, int j)
+void	clean_output(t_vault *data, int i)
 {
 	int		len;
 	int		temp;
@@ -140,7 +147,6 @@ void	clean_output(t_vault *data, int i, int j)
 	char	*str;
 
 	len = 0;
-	temp = j;
 	str = NULL;
 	begin = 0;
 	temp = 0;
@@ -148,7 +154,7 @@ void	clean_output(t_vault *data, int i, int j)
 	str = ft_calloc(sizeof(char), len + 1);
 	if (begin != 0)
 	{
-		str[temp] = '>';
+		str[temp] = data->flag->chevron;
 		temp++;
 		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
@@ -161,7 +167,7 @@ void	clean_output(t_vault *data, int i, int j)
 	{
 		while (data->rl_decomp[i][begin] && data->rl_decomp[i][begin] != '\0')
 		{
-			while (data->rl_decomp[i][begin] != '>')
+			while (data->rl_decomp[i][begin] != data->flag->chevron)
 			{
 				str[temp] = data->rl_decomp[i][begin];
 				temp++;
@@ -200,7 +206,7 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	int	len;
 
 	len = 0;
-	if (data->rl_decomp[i][temp] == '>')
+	if (data->rl_decomp[i][temp] == data->flag->chevron)
 	{
 		//>"test">"test1">"test2" begin à partir du deuxieme chevron
 		// >"tes>t">test1
@@ -257,14 +263,15 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 */
 void	output_in_next_array(t_vault *data, int i, int *j, char c)
 {
-	find_output_in_next_array(data, data->rl_decomp[i + 1], c, i + 1);
+	data->flag->chevron = c;
+	find_output_in_next_array(data, data->rl_decomp[i + 1]);
 	if (*j == 0)
 	{
 		clean_output_next_array(data, i + 1);
 		if (ft_strlen(data->rl_decomp[i]) == 1)
 			find_decomposer_to_switch(data, i);
 		else
-			data->rl_decomp[i] = clean_the_chevron(data->rl_decomp[i]);
+			data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i]);
 		if (ft_strlen(data->rl_decomp[i]) < 1)
 			find_decomposer_to_switch(data, i);
 	}
@@ -276,19 +283,17 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 		else
 			clean_output_next_array(data, i + 1);
 	}
-	stdout_redirection(data->flag->output);
+	stdout_redirection(data, data->flag->output);
 	*j = -1;
 }
 
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c, int i)
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array)
 {
 	int		j;
 	int		len;
 
 	j = 0;
 	len = 0;
-	(void)c;
-	(void)i;
 	if (rl_decomp_array[j] == '\"' || rl_decomp_array[j] == '\'')
 	{
 		data->quote->quote_priority = rl_decomp_array[j];
@@ -342,19 +347,34 @@ void	clean_output_next_array(t_vault *data, int i)
 	data->rl_decomp[i] = temp;
 }
 
-void	stdout_redirection(char *redirection)
+void	stdout_redirection(t_vault *data, char *redirection)
 {
 	int	fd;
 
 	fd = 0;
-	fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
+	if (data->flag->chevron == '>')
 	{
-		printf("Probleme avec open sur fd_out\n");
+		fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd == -1)
+		{
+			printf("Probleme avec open sur fd_out\n");
+		}
+		if (dup2(fd, STDOUT_FILENO) == -1)
+		{
+			printf("Probleme avec dup2 sur fd_out\n");
+		}
 	}
-	if (dup2(fd, STDOUT_FILENO) == -1)
+	else if (data->flag->chevron == '<')
 	{
-		printf("Probleme avec dup2 sur fd_out\n");
+		fd = open(redirection, O_RDONLY);
+		if (fd == -1)
+		{
+			printf("Probleme avec open sur fd_out\n");
+		}
+		if (dup2(fd, STDIN_FILENO) == -1)
+		{
+			printf("Probleme avec dup2 sur fd_out\n");
+		}
 	}
 	free (redirection);
 }

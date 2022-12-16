@@ -6,13 +6,13 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 11:58:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/16 09:13:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*clean_the_chevron(char *str)
+char	*clean_the_chevron(t_vault *data, char *str)
 {
 	char	*temp;
 	int		clean;
@@ -30,7 +30,7 @@ char	*clean_the_chevron(char *str)
 	}
 	while (str[i] && str[i] != '\0')
 	{
-		if (str[i] == '>' && clean == 0)
+		if (str[i] == data->flag->chevron && clean == 0)
 		{
 			clean = 1;
 			i++;

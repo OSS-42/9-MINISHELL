@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/15 21:27:23 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/16 09:26:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	explore_readline(t_vault *data)
 //		spe_char(data, 0);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
+		dup2(data->flag->stdin_backup, STDIN_FILENO);
 	}
 	return ;
 }

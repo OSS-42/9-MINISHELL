@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 21:33:46 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/16 10:34:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ typedef struct s_flag
 	int		pipe_count;
 	int		*fd_out;
 	int		stdout_backup;
+	int		stdin_backup;
 	int		var_not_found;
+	char	chevron;
 }	t_flag;
 
 typedef struct s_quote
@@ -114,16 +116,16 @@ void	flag_count(t_vault *data, int i, int j);
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data);
 void	output_in_next_array(t_vault *data, int i, int *j, char c);
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array, char c, int i);
-void	find_output_in_same_array(t_vault *data, char *rl_decomp_array, char c);
-void	stdout_redirection(char *redirection);
-char	*clean_the_chevron(char *str);
+void	find_output_in_next_array(t_vault *data, char *rl_decomp_array);
+void	find_output_in_same_array(t_vault *data, char *rl_decomp_array);
+void	stdout_redirection(t_vault *data, char *redirection);
+char	*clean_the_chevron(t_vault *data, char *str);
 void	output_in_same_array(t_vault *data, int i, int *j, char c);
 int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
-void	clean_output(t_vault *data, int i, int j);
+void	clean_output(t_vault *data, int i);
 void	clean_output_next_array(t_vault *data, int i);
-int	len_without_output(t_vault *data, int i, int temp, int *begin);
+int		len_without_output(t_vault *data, int i, int temp, int *begin);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
