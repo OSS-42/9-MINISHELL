@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/15 15:18:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:17:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ft_echo(t_vault *data, int row)
 //echo '-n salut bonjour'			|		OK
 //echo "-n" salut bonjour			|		OK
 //echo '-n' salut bonjour			|		OK
-//echo -n -n salut bonjour			|			KO
+//echo -n -n salut bonjour			|		OK
 //echo -n4 -n salut bonjour			|		OK
 //echo -n -n4 salut bonjour			|			KO
 //echo "-n -n" salut bonjour		|			KO
@@ -157,10 +157,10 @@ void	ft_echo(t_vault *data, int row)
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
 //echo $USER $TErM					|		OK
-//echo $USER $TErM $HOME			|			KO
+//echo $USER $TErM $HOME			|			KO (espace pour $TErM a supprimer)
 //echo "bonjour $USER"				|		OK
 //echo "bonjour '$USER'"			|		OK
 //echo "a"b'c'						|		OK
 //echo ""x''y						|		OK
-//echo 1' '2" "3					|			KO
-//echo "$USER "$USER" $TERM '$PATH'"|			KO
+//echo 1' '2" "3					|		OK
+//echo "$USER "$USER" $TERM '$PATH'"|			KO (on repeat)
