@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 16:04:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:16:05 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define TRUE 1
 # define FALSE 0
 
-// # define INTRO "\
-// #/bin/bash \n\
-// bash pretty/intro_minishell.sh \n\
-// "
+# define INTRO "\
+#/bin/bash \n\
+bash pretty/intro_minishell.sh \n\
+"
 
 /***** STRUTURE *****/
 
@@ -74,6 +74,7 @@ typedef struct s_quote
 	int		len_of_replacement;
 	int		begin;
 	char	quote_priority;
+	char	temp_priority;
 }	t_quote;
 
 typedef struct s_vault

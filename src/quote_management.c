@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/15 16:03:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:16:30 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,33 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 			data->quote->len_of_replacement++;
 			while ((data->read_line[*rl_index] != data->quote->quote_priority))
 			{
-				(*rl_index)++;
-				data->quote->len_of_replacement++;
 				if (data->read_line[*rl_index] == ' ')
 					data->spc_count++;
+				(*rl_index)++;
+				data->quote->len_of_replacement++;
 			}
-			while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
+			if (data->read_line[*rl_index + 1])
 			{
 				(*rl_index)++;
 				data->quote->len_of_replacement++;
+			}
+			while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
+			{
+				if (data->read_line[*rl_index] == '\'' || data->read_line[*rl_index] == '\"')
+				{
+					data->quote->temp_priority = data->read_line[*rl_index];
+					(*rl_index)++;
+					data->quote->len_of_replacement++;
+					while ((data->read_line[*rl_index] != data->quote->temp_priority))
+					{
+						if (data->read_line[*rl_index] == ' ')
+							data->spc_count++;
+						(*rl_index)++;
+						data->quote->len_of_replacement++;
+					}
+				}
+				data->quote->len_of_replacement++;
+				(*rl_index)++;
 			}
 			data->quote->len_of_replacement--;
 			break;
