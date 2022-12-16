@@ -44,6 +44,7 @@ SRCS =	src/minishell.c \
 		src/dollar_utils.c\
 		src/redirection_management.c\
 		src/redirection_utils.c\
+		src/minus_utils.c\
 		src/pretty_intro_mini.c\
 		src/pretty_colors.c
 

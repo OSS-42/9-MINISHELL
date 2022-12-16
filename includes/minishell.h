@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 10:34:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:11:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ int		check_next_char(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
-void	echo_minus(t_vault *data);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -189,6 +188,11 @@ void	clean_quote(t_vault *data, int row);
 int		insert_row(int pos, int count, char **dest, char **source);
 //void	change_tab(t_vault *data, int row);
 
+/***** minus_utils. *****/
+void	parse_minus(t_vault *data);
+void	recreate_arg_tab(t_vault *data, char **tab);
+char	**create_temp_swap(t_vault *data, int row);
+void	check_minus_validity(t_vault *data, int row, int i);
 
 /***** PRETTY *****/
 /***** pretty_intro_mini.c *****/
