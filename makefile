@@ -44,8 +44,8 @@ SRCS =	src/minishell.c \
 		src/dollar_utils.c\
 		src/redirection_management.c\
 		src/redirection_utils.c\
-		pretty/pretty_intro_mini.c\
-		pretty/pretty_colors.c
+		src/pretty_intro_mini.c\
+		src/pretty_colors.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/

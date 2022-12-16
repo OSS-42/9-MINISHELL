@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/16 11:17:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:12:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,16 +128,16 @@ void	ft_echo(t_vault *data, int row)
 //echo -n salut bonjour				|		OK
 //echo salut -n						|		OK
 //echo salut bonjour -n				|		OK
-//echo -n bonjour -n				|		OK
-//echo "-n salut bonjour"			|		OK
+//echo -n bonjour -n				|			KO (manque 1 espace)
+//echo "-n salut bonjour"			|			KO (SS)
 //echo '-n salut bonjour'			|		OK
 //echo "-n" salut bonjour			|		OK
 //echo '-n' salut bonjour			|		OK
 //echo -n -n salut bonjour			|		OK
-//echo -n4 -n salut bonjour			|		OK
-//echo -n -n4 salut bonjour			|			KO
-//echo "-n -n" salut bonjour		|			KO
-//echo -nnn -nnn salut bonjour		|			KO
+//echo -n4 -n salut bonjour			|			KO
+//echo -n -n4 salut bonjour			|		OK
+//echo "-n -n" salut bonjour		|		OK
+//echo -nnn -nnn salut bonjour		|		OK
 //echo --n salut bonjour			|		OK
 //echo "--n" salut bonjour			|		OK
 //echo '--n' salut bonjour			|		OK

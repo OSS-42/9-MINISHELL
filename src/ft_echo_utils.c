@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 11:16:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:05:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,28 +152,30 @@ void	echo_minus(t_vault *data)
 			data->b_in->echo_forget_minus = 1;
 			return ;
 		}
-		else if (data->b_in->echo_priority != 0)
+		// else if (data->b_in->echo_priority != 0)
+		// {
+		// 	while (data->rl_decomp[row][i])
+		// 	{
+		// 		if (data->rl_decomp[row][i] != 'n')
+		// 		{
+		// 			data->b_in->echo_forget_minus = 1;
+		// 			data->b_in->dont_do_minus = 1;
+		// 			break ;
+		// 		}
+		// 		else
+		// 			data->b_in->echo_forget_minus = 0;
+		// 		i++;
+		// 	}
+		// }
+		else
 		{
+		//	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != ' ')
 			while (data->rl_decomp[row][i])
 			{
 				if (data->rl_decomp[row][i] != 'n')
 				{
 					data->b_in->echo_forget_minus = 1;
 					data->b_in->dont_do_minus = 1;
-					break ;
-				}
-				else
-					data->b_in->echo_forget_minus = 0;
-				i++;
-			}
-		}
-		else
-		{
-			while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != ' ')
-			{
-				if (data->rl_decomp[row][i] != 'n')
-				{
-					data->b_in->echo_forget_minus = 1;
 					break ;
 				}
 				else
