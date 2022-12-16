@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/16 05:46:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:17:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ft_echo(t_vault *data, int row)
 //echo '-n salut bonjour'			|		OK
 //echo "-n" salut bonjour			|		OK
 //echo '-n' salut bonjour			|		OK
-//echo -n -n salut bonjour			|			KO
+//echo -n -n salut bonjour			|		OK
 //echo -n4 -n salut bonjour			|		OK
 //echo -n -n4 salut bonjour			|			KO
 //echo "-n -n" salut bonjour		|			KO

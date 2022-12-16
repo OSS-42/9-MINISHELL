@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 15:09:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:16:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,10 +217,11 @@ void	echo_minus(t_vault *data)
 			data->b_in->echo_flag_n = 1;
 			data->b_in->echo_minus_n = 1;
 //			printf("row : %d = %s\n", row, data->rl_decomp[row]);
-			row = row - (line - i);
+			row = row - 1;
 //			printf("row : %d = %s\n", row, data->rl_decomp[row]);
 		}
 		row++;
+		i = 0;
 	}
 	// if (data->rl_decomp[row + 1] == NULL)
 	// 	data->b_in->echo_flag_n = 0;
