@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 13:21:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:35:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	print_row(t_vault *data, int row)
 {
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->echo_forget_minus == 0))
+	{
 		ft_putstr_fd(data->rl_decomp[row], 1);
+		data->b_in->first_word = 0;
+	}
 	else if (data->b_in->first_word == 1)
 	{
 		ft_putstr_fd(data->rl_decomp[row], 1);
