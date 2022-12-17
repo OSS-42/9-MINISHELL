@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/17 00:34:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/17 16:47:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ typedef struct s_builtins
 typedef struct s_flag
 {
 	char	*output;
+	int		*fd_out;
 	int		output_count;
 	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
-	int		*fd_out;
 	int		stdout_backup;
 	int		stdin_backup;
 	int		var_not_found;
@@ -77,22 +77,22 @@ typedef struct s_quote
 
 typedef struct s_vault
 {
-	int			spc_count;
+	char		**env;
+	char		**rl_decomp;
+	char		**clean_decomposer;
 	char		*read_line;
 	char		*env_path;
-	char		**env;
-	char		**clean_decomposer;
-	char		**rl_decomp;
 	char		*test;
+	char		*buffer;
 	t_builtins	*b_in;
 	t_quote		*quote;
 	t_flag		*flag;
-	int			activate_var; //suppression a confirmer
 	char		*dollar_var;
 	int			dollar_var_len;
-	char		**split; //suppression a confirmer
-	char		*buffer;
+	int			spc_count;
 	int			pos;
+	char		**split; //suppression a confirmer
+	int			activate_var; //suppression a confirmer
 }	t_vault;
 
 /***** minishell.c *****/
