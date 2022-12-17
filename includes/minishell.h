@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 20:58:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/17 00:34:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@
 # include "../libft/includes/libft.h"
 # include "../librl/readline.h"
 # include "../librl/history.h"
+# include "../libpretty/includes/libpretty.h"
 
 # define TRUE 1
 # define FALSE 0
-
-# define INTRO "\
-#/bin/bash \n\
-bash pretty/intro_minishell.sh \n\
-"
 
 /***** STRUTURE *****/
 
@@ -191,17 +187,5 @@ void	parse_minus(t_vault *data);
 void	recreate_arg_tab(t_vault *data, char **tab);
 char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
-
-/***** PRETTY *****/
-/***** pretty_intro_mini.c *****/
-void	intro_minishell(void);
-void	intro_minishell_p2(void);
-void	intro_minishell_p3(void);
-
-/***** pretty_colors.c *****/
-void	lred(void);
-void	lcyan(void);
-void	lyellow(void);
-void	reset(void);
 
 #endif

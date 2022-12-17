@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:00:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 16:01:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:29:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	intro_minishell(void)
 	lred();
 	printf("  \\/   \\ \n");
 	printf("  / \\ / \\ ");
-	reset();
+	color_reset();
 	intro_minishell_p2();
 }
 
@@ -65,7 +65,7 @@ void	intro_minishell_p2(void)
 	printf("    \\            ");
 	lyellow();
 	printf("         ╔══ ║   ║");
-	reset();
+	color_reset();
 	intro_minishell_p3();
 }
 
@@ -91,7 +91,12 @@ void	intro_minishell_p3(void)
 	printf("    █   █          ");
 	lcyan();
 	printf("\\/ \n");
-	reset();
+	color_reset();
 	printf("________________________________________\n");
 	printf("\n");
+}
+
+void	color_reset(void)
+{
+	printf("\033[1;0m");
 }
