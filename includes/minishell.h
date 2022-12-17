@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 19:58:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 20:58:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-// void	reduce_space(t_vault *data);
-// void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -142,12 +140,12 @@ void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int row);
 
-/***** ft_echo_utils ******/
-int		dollar_var_to_extract(t_vault *data, int row, int i);
+/***** parsing_utils ******/
 int		check_next_char(t_vault *data, int row, int i);
-char	*var_extract(t_vault *data, int row, int position);
-char	*does_var_exist(t_vault *data);
-char	*expand_var(t_vault *data, int row_var);
+void	quote_priority(t_vault *data, int row);
+void	parse_row(t_vault *data, int row);
+int		echo_sgle_quote(t_vault *data, int row, int i);
+int		echo_dble_quote(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -169,9 +167,7 @@ int		check_error(t_vault *data, int row);
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int row);
 int		ft_isinset(char c);
-int		echo_sgle_quote(t_vault *data, int row, int i);
-int		echo_dble_quote(t_vault *data, int row, int i);
-void	echo_parse_row(t_vault *data, int row);
+void	row_parsing(t_vault *data);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);
@@ -179,13 +175,15 @@ void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int row);
 
-//void	var_extract(t_vault *data, int row, int position, char **array);
-
 /***** dollar_utils.c *****/
-void	quote_priority(t_vault *data, int row);
-void	clean_quote(t_vault *data, int row);
+int		dollar_var_to_extract(t_vault *data, int row, int i);
+char	*var_extract(t_vault *data, int row, int position);
+char	*does_var_exist(t_vault *data);
+char	*expand_var(t_vault *data, int row_var);
+
+//void	clean_quote(t_vault *data, int row);
+//int		insert_row(int pos, int count, char **dest, char **source);
 //void	split_on_char(t_vault *data, int row, char c);
-int		insert_row(int pos, int count, char **dest, char **source);
 //void	change_tab(t_vault *data, int row);
 
 /***** minus_utils. *****/
