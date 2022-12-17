@@ -6,11 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:00:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 21:29:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/17 15:17:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/libpretty.h"
 
 void	intro_minishell(void)
 {

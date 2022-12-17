@@ -17,9 +17,9 @@ D_LIBFT = libft/
 LIBFT = libft/libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
-D_LIBPRETTY = pretty/
-LIBPRETTY = pretty/pretty.a
-D_LIBPRETTYHEAD = pretty/includes/pretty.h
+D_LIBPRETTY = libpretty/
+LIBPRETTY = libpretty/libpretty.a
+D_LIBPRETTYHEAD = libpretty/includes/libpretty.h
 
 # Pour faire fonctionner readline, modification du code dans keymap.h, readline.h et history.h
 # Il faut enlever les conditions "if" autour de rlstdc.h (et les autres .h)
@@ -69,7 +69,7 @@ $(NAME):	$(LIBFT) $(LIBPRETTY) $(LIBRL) $(OBJS)
 #	@clear
 
 daftpunk:
-	@$(MAKE) intro_daftpunk -C $(D_PRETTY)
+	@$(MAKE) intro_daftpunk -C $(D_LIBPRETTY)
 
 $(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
@@ -107,7 +107,7 @@ fclean:	clean
 lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
-	@$(MAKE) -s --no-print-directory -C $(D_LIBPRETTY) dclean
+	@$(MAKE) -s --no-print-directory -C $(D_LIBPRETTY) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBRL) distclean
 
 re:	fclean all

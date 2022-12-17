@@ -158,30 +158,31 @@ RESULT=$$?; \
 endef
 
 define cleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories$(NC)\r"; \
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Objects Files & Directories" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
 	exit $$RESULT
+endef
 
 define fcleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files$(NC)\r"; \
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Filess" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Filess" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBFT Executable Files" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
