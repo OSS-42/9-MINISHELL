@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 15:10:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:58:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_row(t_vault *data, int row)
 {
-	if ((data->b_in->echo_flag_n == 1 && data->b_in->echo_forget_minus == 0))
+	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
 		ft_putstr_fd(data->rl_decomp[row], 1);
 		data->b_in->first_word = 0;
@@ -105,9 +105,4 @@ void	echo_parse_row(t_vault *data, int row)
 	free (data->rl_decomp[row]);
 	data->rl_decomp[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
 	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
-//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
-//	print_double_array(data->rl_decomp);
-	parse_minus(data);
-//	print_double_array(data->rl_decomp);
-//	printf("row : %d = %s\n", row, data->rl_decomp[row]);
 }

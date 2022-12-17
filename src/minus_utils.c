@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 15:11:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:58:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	check_minus_validity(t_vault *data, int row, int i)
 {
 	while (data->rl_decomp[row][i] == '-' && data->rl_decomp[row][i])
 			i++;
-	if (i > 1 || data->b_in->echo_forget_minus == 1)
+	if (i > 1 || data->b_in->forget_minus == 1)
 	{
-		data->b_in->echo_forget_minus = 1;
+		data->b_in->forget_minus = 1;
 		data->b_in->dont_do_minus = 1;
 		return ;
 	}
@@ -70,12 +70,12 @@ void	check_minus_validity(t_vault *data, int row, int i)
 		{
 			if (data->rl_decomp[row][i] != 'n')
 			{
-				data->b_in->echo_forget_minus = 1;
+				data->b_in->forget_minus = 1;
 				data->b_in->dont_do_minus = 1;
 				break ;
 			}
 			else
-				data->b_in->echo_forget_minus = 0;
+				data->b_in->forget_minus = 0;
 			i++;
 		}
 	}
@@ -92,13 +92,13 @@ void	parse_minus(t_vault *data)
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 		check_minus_validity(data, row, i);
-		if (data->b_in->echo_forget_minus == 0 && data->rl_decomp[row + 1])
+		if (data->b_in->forget_minus == 0 && data->rl_decomp[row + 1])
 		{
 			temp_swap = create_temp_swap(data, row);
 			ft_dbl_ptr_realloc(data->rl_decomp, ft_dbl_ptr_len(temp_swap));
 			recreate_arg_tab(data, temp_swap);
 			data->b_in->echo_flag_n = 1;
-			data->b_in->echo_minus_n = 1;
+			data->b_in->minus_n = 1;
 			row = row - 1;
 		}
 		row++;
