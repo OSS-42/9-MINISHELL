@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/16 20:00:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/17 23:14:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	ft_pwd(t_vault *data, int row)
 
 void	ft_exit(t_vault *data)
 {
-	if (data->rl_decomp)
-		free_dbl_ptr((void **)data->rl_decomp);
+	// if (data->rl_decomp)
+	// 	free_dbl_ptr((void **)data->rl_decomp);
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
 	if (data->b_in->env_export)
@@ -94,15 +94,24 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int row)
 {
+	int	line;
+	int	tab_len;
+
+	line = 1;
+	tab_len = ft_dbl_ptr_len(data->rl_decomp);
 	if (!(data->rl_decomp[row]) || data->rl_decomp[row][0] == '\0')
 		return ;
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][0])
+	while (line < tab_len)
 	{
-		print_row(data, row);
-		data->b_in->echo_flag_n = 0;
+		if (data->rl_decomp[row] && data->rl_decomp[row][0])
+		{
+			print_row(data, row);
+			data->b_in->echo_flag_n = 0;
+		}
 		row++;
+		line++;
 	}
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
