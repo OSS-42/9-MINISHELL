@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/18 20:16:26 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/19 09:07:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,19 @@ int		rl_prio_n_qty(t_vault *data, int i, char c);
 void	flag_count(t_vault *data, int i, int j);
 
 /***** redirection_management.c *****/
-void	execute_redirection(t_vault *data);
+void	execute_redirection(t_vault *data, int i, int j);
 void	redir_in_next_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array);
-void	find_output_in_same_array(t_vault *data, char *rl_decomp_array);
+void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array);
 void	stdout_redirection(t_vault *data, char *redirection);
 char	*clean_the_chevron(t_vault *data, char *str);
-void	output_in_same_array(t_vault *data, int i, int *j, char c);
+void	redir_in_same_array(t_vault *data, int i, int *j, char c);
 int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
-void	clean_output(t_vault *data, int i);
+void	clean_redir(t_vault *data, int i);
 void	clean_redir_next_array(t_vault *data, int i);
-int		len_without_output(t_vault *data, int i, int temp, int *begin);
+int		len_without_redir(t_vault *data, int i, int temp, int *begin);
+char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
 
 /***** redirection_utils.c *****/
 void	dup_from_begin(t_vault *data, int i, int j, char *temp);

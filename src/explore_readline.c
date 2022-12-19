@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/17 22:06:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 08:39:00 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	explore_readline(t_vault *data)
 	{
 		find_str_quote(data);
 		flag_count(data, 0, 0);
-		execute_redirection(data);
+		execute_redirection(data, 0, 0);
 		row_parsing(data);
 		parse_minus(data);
 		built_in(data);
