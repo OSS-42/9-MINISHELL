@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/18 19:44:28 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/18 20:19:16 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,3 +100,21 @@ void	dup_from_begin(t_vault *data, int decomp_i, int j, char *temp)
 	free (data->rl_decomp[decomp_i]);
 	data->rl_decomp[decomp_i] = temp;
 }
+
+void	token_without_redir_name(t_vault *data, int i, int begin, int len)// mettre ca dans un fichier redir_in_next_array
+{
+	int		j;
+	char	*temp;
+
+	j = 0;
+	temp = ft_calloc(sizeof(char), len + 1);
+	while (data->rl_decomp[i][begin])
+	{
+		temp[j] = data->rl_decomp[i][begin];
+		begin++;
+		j++;
+	}
+	free (data->rl_decomp[i]);
+	data->rl_decomp[i] = temp;
+}
+

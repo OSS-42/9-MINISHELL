@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/18 19:54:47 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/18 20:19:58 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	execute_redirection(t_vault *data)
 				if ((data->rl_decomp[i][j] == '>'
 					|| data->rl_decomp[i][j] == '<')
 					&& !data->rl_decomp[i][j + 1])
-					output_in_next_array(data, i, &j, data->rl_decomp[i][j]);
+					redir_in_next_array(data, i, &j, data->rl_decomp[i][j]);
 				else if (data->rl_decomp[i][j] == '>'
 				|| data->rl_decomp[i][j] == '<')
 					output_in_same_array(data, i, &j, data->rl_decomp[i][j]); // input ok
@@ -139,7 +139,7 @@ void	find_output_in_same_array(t_vault *data, char *rl_decomp_array)
 	}
 }
 
-void	clean_output(t_vault *data, int i)
+void	clean_output(t_vault *data, int i)// couper cette fonction en deux et la mettre dans un fichier redir_in_same_array
 {
 	int		len;
 	int		temp;
@@ -246,13 +246,13 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	des éléments du tableau et donc je veux repasser dans la ligne actuel qui
 	n'est plus la même.
 */
-void	output_in_next_array(t_vault *data, int i, int *j, char c)
+void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 {
 	data->flag->chevron = c;
-	find_output_in_next_array(data, data->rl_decomp[i + 1]);
+	find_redir_in_next_array(data, data->rl_decomp[i + 1]);
 	if (*j == 0)
 	{
-		clean_output_next_array(data, i + 1);
+		clean_redir_next_array(data, i + 1);
 		if (ft_strlen(data->rl_decomp[i]) == 1)
 			find_decomposer_to_switch(data, i);
 		else
@@ -266,13 +266,13 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 		if (flag_in_str(data->rl_decomp[i + 1]) == FALSE)
 			find_decomposer_to_switch(data, i + 1);
 		else
-			clean_output_next_array(data, i + 1);
+			clean_redir_next_array(data, i + 1);
 	}
 	stdout_redirection(data, data->flag->output);
 	*j = -1;
 }
 
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array)
+void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array)
 {
 	int		j;
 	int		len;
@@ -295,23 +295,16 @@ void	find_output_in_next_array(t_vault *data, char *rl_decomp_array)
 	data->flag->output = ft_substr(rl_decomp_array, j, len);
 }
 
-void	clean_output_next_array(t_vault *data, int i)
+void	clean_redir_next_array(t_vault *data, int i)
 {
 	int		j;
 	int		len;
 	int		begin;
-	char	*temp;
 
 	len = 0;
-	temp = NULL;
-	j = 1;
-	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')//voir si je peux mette en place while_quote
-	{
-		data->quote->quote_priority = data->rl_decomp[i][0];
-		while (data->rl_decomp[i][j] != data->quote->quote_priority)
-			j++;
-		j++;
-	}
+	j = 0;
+	if (data->rl_decomp[i][j] == '\'' || data->rl_decomp[i][j] == '\"')
+		j = while_quote(data, data->rl_decomp[i], j);
 	else
 		j = while_is_not_flag(data->rl_decomp[i], 0);
 	begin = j;
@@ -320,16 +313,7 @@ void	clean_output_next_array(t_vault *data, int i)
 		j++;
 		len++;
 	}
-	temp = ft_calloc(sizeof(char), len + 1);
-	len = 0;
-	while (data->rl_decomp[i][begin])
-	{
-		temp[len] = data->rl_decomp[i][begin];
-		begin++;
-		len++;
-	}
-	free (data->rl_decomp[i]);
-	data->rl_decomp[i] = temp;
+	token_without_redir_name(data, i, begin, len);
 }
 
 void	stdout_redirection(t_vault *data, char *redirection)
