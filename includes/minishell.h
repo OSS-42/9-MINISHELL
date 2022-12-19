@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/18 19:05:22 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/18 19:09:23 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_vault
 	int			dollar_var_len;
 	int			spc_count;
 	int			pos;
+	int			begin;
 	char		**split; //suppression a confirmer
 	int			activate_var; //suppression a confirmer
 }	t_vault;
