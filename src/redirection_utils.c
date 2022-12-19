@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/16 09:13:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/17 00:08:26 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,43 @@ int	while_is_not_flag(char *str, int i)
 	while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != '<')
 		i++;
 	return (i);
+}
+
+int	len_in_quote(t_vault *data, char *str, int *i)
+{
+	int	len;
+
+	len = 0;
+	data->quote->quote_priority = str[*i];
+	(*i)++;
+	while (str[*i] != data->quote->quote_priority)
+	{
+		(*i)++;
+		len++;
+	}
+	return (len);
+}
+
+int	while_quote(t_vault *data, char *str, int i)
+{
+	data->quote->quote_priority = str[i];
+	i++;
+	while (str[i] != data->quote->quote_priority)
+		i++;
+	i++;
+	return (i);
+}
+
+void	dup_from_begin(t_vault *data, int i, int j, char *temp)
+{
+	while (data->rl_decomp[i][data->begin]
+		&& data->rl_decomp[i][data->begin] != '\0')
+	{
+		temp[j] = data->rl_decomp[i][data->begin];
+		data->begin++;
+		j++;
+	}
+	data->begin = 0;
+	free (data->rl_decomp[i]);
+	data->rl_decomp[i] = temp;
 }
