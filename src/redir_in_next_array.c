@@ -6,11 +6,46 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 10:05:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:55:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+	Je vais chercher le nom du output dans le prochain array.
+	Quand je l'ai trouvé, si l'array en question ne contient que l'output
+	je décalle d'un rang le tableau. Même chose si l'array ou ce trouve le
+	chevron ne contient rien d'autre. Enfin je m'est j = -1 car si j'ai déplacé
+	des éléments du tableau et donc je veux repasser dans la ligne actuel qui
+	n'est plus la même.
+*/
+void	redir_in_next_array(t_vault *data, int i, int *j, char c)
+{
+	data->flag->chevron = c;
+	find_redir_in_next_array(data, data->rl_decomp[i + 1]);
+	if (*j == 0)
+	{
+		clean_redir_next_array(data, i + 1);
+		if (ft_strlen(data->rl_decomp[i]) == 1)
+			find_decomposer_to_switch(data, i);
+		else
+			data->rl_decomp[i]
+				= clean_the_chevron(data, data->rl_decomp[i], 0, 0);
+		if (ft_strlen(data->rl_decomp[i]) < 1)
+			find_decomposer_to_switch(data, i);
+	}
+	else
+	{
+		data->rl_decomp[i][*j] = '\0';
+		if (flag_in_str(data->rl_decomp[i + 1]) == FALSE)
+			find_decomposer_to_switch(data, i + 1);
+		else
+			clean_redir_next_array(data, i + 1);
+	}
+	stdout_redirection(data, data->flag->output);
+	*j = -1;
+}
 
 void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array)
 {

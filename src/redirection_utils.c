@@ -6,21 +6,18 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 09:58:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:54:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*clean_the_chevron(t_vault *data, char *str)
+// Ajouter des free et message d'erreur au exit
+char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 {
 	char	*temp;
 	int		clean;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	clean = 0;
 	temp = ft_calloc(sizeof(char), ft_strlen(str));
 	if (!temp)
@@ -36,17 +33,12 @@ char	*clean_the_chevron(t_vault *data, char *str)
 			i++;
 		}
 		if (str[i])
-		{
-			temp[j] = str[i];
-			i++;
-			j++;
-		}
+			temp[j++] = str[i++];
 	}
 	free (str);
 	return (temp);
 }
 
-// Ajouter une sécurité pour m'assurer que le flag n'Est pas entre quote
 int	flag_in_str(char *str)
 {
 	if (ft_strchr(str, '>') != NULL || ft_strchr(str, '<') != NULL
@@ -85,18 +77,4 @@ int	while_quote(t_vault *data, char *str, int i)
 		i++;
 	i++;
 	return (i);
-}
-
-void	dup_from_begin(t_vault *data, int decomp_i, int j, char *temp)
-{
-	while (data->rl_decomp[decomp_i][data->begin]
-		&& data->rl_decomp[decomp_i][data->begin] != '\0')
-	{
-		temp[j] = data->rl_decomp[decomp_i][data->begin];
-		data->begin++;
-		j++;
-	}
-	data->begin = 0;
-	free (data->rl_decomp[decomp_i]);
-	data->rl_decomp[decomp_i] = temp;
 }

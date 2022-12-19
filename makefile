@@ -49,7 +49,9 @@ SRCS =	src/minishell.c \
 		src/redirection_management.c\
 		src/redir_in_next_array.c\
 		src/redir_in_same_array.c\
+		src/redir_in_same_array_2.c\
 		src/redirection_utils.c\
+		src/redirection_utils_2.c\
 		src/minus_utils.c
 
 #HEADER_BONUS = includes/minishell_bonus.h

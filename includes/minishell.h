@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 11:06:12 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:54:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,9 @@ void	execute_redirection(t_vault *data, int i, int j);
 void	redir_in_next_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array);
 void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array);
+void	redirection(t_vault *data, char *redirection);
 void	stdout_redirection(t_vault *data, char *redirection);
-char	*clean_the_chevron(t_vault *data, char *str);
+void	stdin_redirection(t_vault *data, char *redirection);
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
 int		while_is_not_flag(char *str, int i);
 int		flag_in_str(char *str);
@@ -126,8 +127,10 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
 /***** redir_in_same_array.c *****/
 int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
 void	len_of_redir(t_vault *data, char *rl_decomp_array);
+int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
 
 /***** redirection_utils.c *****/
+char	*clean_the_chevron(t_vault *data, char *str, int i, int j);
 void	dup_from_begin(t_vault *data, int i, int j, char *temp);
 int		while_quote(t_vault *data, char *str, int i);
 void	token_without_redir_name(t_vault *data, int i, int begin, int len);
