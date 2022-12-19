@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 09:07:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:06:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,10 @@ void	clean_redir(t_vault *data, int i);
 void	clean_redir_next_array(t_vault *data, int i);
 int		len_without_redir(t_vault *data, int i, int temp, int *begin);
 char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
+
+/***** redir_in_same_array.c *****/
+int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
+void	len_of_redir(t_vault *data, char *rl_decomp_array);
 
 /***** redirection_utils.c *****/
 void	dup_from_begin(t_vault *data, int i, int j, char *temp);
