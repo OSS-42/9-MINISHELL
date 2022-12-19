@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 11:51:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:05:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ echo test 13 > "tes>t">test1
 echo test 14 > 1> 2
 echo test 15 >"tes>t">test1
 echo test 16>"tes>t">test1
-
-	echo 1' '2" "3 Segfault si double execution
-
 */
 
 /*
