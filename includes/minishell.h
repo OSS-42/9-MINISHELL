@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/18 19:09:23 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/19 14:02:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	ft_echo(t_vault *data, int row);
 int		check_next_char(t_vault *data, int row, int i);
 void	quote_priority(t_vault *data, int row);
 void	parse_row(t_vault *data, int row);
-int		echo_sgle_quote(t_vault *data, int row, int i);
-int		echo_dble_quote(t_vault *data, int row, int i);
+int		sgle_quote_mngmt(t_vault *data, int row, int i);
+int		dble_quote_mngmt(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);

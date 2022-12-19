@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 19:58:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:02:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parse_minus(t_vault *data)
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
 		check_minus_validity(data, row, i);
-		if (data->b_in->forget_minus == 0 && data->rl_decomp[row + 1])
+		if (data->b_in->forget_minus == 0)
 		{
 			temp_swap = create_temp_swap(data, row);
 			ft_dbl_ptr_realloc(data->rl_decomp, ft_dbl_ptr_len(temp_swap));

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/17 23:14:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:02:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,14 @@ void	ft_echo(t_vault *data, int row)
 
 	line = 1;
 	tab_len = ft_dbl_ptr_len(data->rl_decomp);
-	if (!(data->rl_decomp[row]) || data->rl_decomp[row][0] == '\0')
-		return ;
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
 	while (line < tab_len)
 	{
 		if (data->rl_decomp[row] && data->rl_decomp[row][0])
 		{
-			print_row(data, row);
-			data->b_in->echo_flag_n = 0;
+				print_row(data, row);
+				data->b_in->echo_flag_n = 0;
 		}
 		row++;
 		line++;
@@ -122,7 +120,9 @@ void	ft_echo(t_vault *data, int row)
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
 //-------------------------------------------------
+//echo								|		OK
 //echo bonjour						|		OK
+//echo -n							|			KO (ne pas afficher le -n)
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
@@ -157,7 +157,7 @@ void	ft_echo(t_vault *data, int row)
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
 //echo $USER $TErM					|		OK
-//echo $USER $TErM $HOME			|			KO (espace pour $TErM a supprimer)
+//echo $USER $TErM $HOME			|		OK
 //echo "bonjour $USER"				|		OK
 //echo "bonjour '$USER'"			|		OK
 //echo "a"b'c'						|		OK
