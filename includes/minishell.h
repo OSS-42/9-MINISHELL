@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 14:02:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:04:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ typedef struct s_vault
 	int			spc_count;
 	int			pos;
 	int			begin;
-	char		**split; //suppression a confirmer
-	int			activate_var; //suppression a confirmer
 }	t_vault;
 
 /***** minishell.c *****/
@@ -109,26 +107,48 @@ int		rl_prio_n_qty(t_vault *data, int i, char c);
 void	flag_count(t_vault *data, int i, int j);
 
 /***** redirection_management.c *****/
-void	execute_redirection(t_vault *data);
-void	output_in_next_array(t_vault *data, int i, int *j, char c);
-void	find_output_in_next_array(t_vault *data, char *rl_decomp_array);
-void	find_output_in_same_array(t_vault *data, char *rl_decomp_array);
+void	execute_redirection(t_vault *data, int i, int j);
+void	redirection(t_vault *data, char *redirection);
 void	stdout_redirection(t_vault *data, char *redirection);
-char	*clean_the_chevron(t_vault *data, char *str);
-void	output_in_same_array(t_vault *data, int i, int *j, char c);
-int		while_is_not_flag(char *str, int i);
-int		flag_in_str(char *str);
-void	clean_output(t_vault *data, int i);
-void	clean_output_next_array(t_vault *data, int i);
-int		len_without_output(t_vault *data, int i, int temp, int *begin);
+void	stdin_redirection(t_vault *data, char *redirection);
 
-/***** double_quote_management.c *****/
+/***** redir_in_same_array.c *****/
+void	redir_in_same_array(t_vault *data, int i, int *j, char c);
+void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array);
+void	len_of_redir(t_vault *data, char *rl_decomp_array);
+
+/***** redir_in_same_array_2.c *****/
+void	clean_redir(t_vault *data, int i);
+char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
+int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
+int		len_without_redir(t_vault *data, int i, int temp, int *begin);
+int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
+
+/***** redir_in_next_array.c *****/
+void	redir_in_next_array(t_vault *data, int i, int *j, char c);
+void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array);
+void	clean_redir_next_array(t_vault *data, int i);
+void	token_without_redir_name(t_vault *data, int i, int begin, int len);
+
+/***** redirection_utils.c *****/
+char	*clean_the_chevron(t_vault *data, char *str, int i, int j);
+int		flag_in_str(char *str);
+int		while_is_not_flag(char *str, int i);
+int		while_quote(t_vault *data, char *str, int i);
+
+/***** redirection_utils_2.c *****/
+void	dup_from_begin(t_vault *data, int i, int j, char *temp);
+
+/***** quote_management.c *****/
 void	find_str_quote(t_vault *data);
+void	len_of_replacement(t_vault *data, int *i);
+void	begin_of_new_replacement(t_vault *data, int *rl_index);
+void	len_after_quote(t_vault *data, int *rl_index);
+
+/***** quote_management_2.c *****/
 void	find_decomposer_array_to_replace(t_vault *data, int end);
 void	replace_decomposer_array(t_vault *data, int end, int *i);
 void	find_decomposer_to_switch(t_vault *data, int to_switch);
-void	switch_decomposer(t_vault *data, int *next_array, int *actual_array);
-void	len_of_replacement(t_vault *data, int *i);
 
 /***** built_in.c *****/
 void	ft_cd(t_vault *data, int row);

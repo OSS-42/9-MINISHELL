@@ -40,6 +40,7 @@ SRCS =	src/minishell.c \
 		src/built_in2.c \
 		src/explore_readline.c \
 		src/quote_management.c \
+		src/quote_management_2.c \
 		src/meta_analyzis.c \
 		src/parsing_utils.c \
 		src/error_mgmnt.c\
@@ -47,8 +48,12 @@ SRCS =	src/minishell.c \
 		src/built_in_utils.c\
 		src/dollar_utils.c\
 		src/redirection_management.c\
+		src/redir_in_next_array.c\
+		src/redir_in_same_array.c\
+		src/redir_in_same_array_2.c\
 		src/redirection_utils.c\
-		src/minus_utils.c\
+		src/redirection_utils_2.c\
+		src/minus_utils.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/

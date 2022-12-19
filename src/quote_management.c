@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/18 19:15:27 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/19 12:49:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,13 @@ void	find_str_quote(t_vault *data)
 }
 
 /*
-	Je reviens en arrière pour dans le cas ou il y aurait des caractere collé au quote.
-	Je ravance dans readline pour trouver la quote de fermeture puis je continue d'avancer
-	au cas ou il y aurait encore des caractères.
+	Je reviens en arrière pour dans le cas ou il y aurait des caractere
+	collé au quote. Je ravance dans readline pour trouver la quote de fermeture
+	puis je continue d'avancer au cas ou il y aurait encore des caractères.
 */
 void	len_of_replacement(t_vault *data, int *rl_index)
 {
-	data->quote->quote_priority = data->read_line[*rl_index];
-	while (*rl_index != 0 && data->read_line[*rl_index] != ' ')
-		(*rl_index)--;
-	if (*rl_index != 0)
-		(*rl_index)++;
+	begin_of_new_replacement(data, rl_index);
 	while (data->read_line[*rl_index])
 	{
 		if (data->read_line[*rl_index] == data->quote->quote_priority)
@@ -71,32 +67,10 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 				data->quote->len_of_replacement++;
 			}
 			if (data->read_line[*rl_index + 1])
-			{
-				(*rl_index)++;
-				data->quote->len_of_replacement++;
-				while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
-				{
-					if (data->read_line[*rl_index] == '\'' || data->read_line[*rl_index] == '\"')
-					{
-						data->quote->temp_priority = data->read_line[*rl_index];
-						(*rl_index)++;
-						data->quote->len_of_replacement++;
-						while ((data->read_line[*rl_index] != data->quote->temp_priority))
-						{
-							if (data->read_line[*rl_index] == ' ')
-								data->spc_count++;
-							(*rl_index)++;
-							data->quote->len_of_replacement++;
-						}
-					}
-					data->quote->len_of_replacement++;
-					(*rl_index)++;
-				}
-			}
+				len_after_quote(data, rl_index);
 			else
 				(*rl_index)++;
-			// data->quote->len_of_replacement--;
-			break;
+			break ;
 		}
 		data->quote->len_of_replacement++;
 		(*rl_index)++;
@@ -104,83 +78,36 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 	data->quote->len_of_replacement++;
 }
 
-
-/*
-	Je cherche la ligne à remplacer dans rl_decomp en trouvant la quote
-	prioritaire que j'ai trouvé dans readline
-*/
-void	find_decomposer_array_to_replace(t_vault *data, int end)
+void	begin_of_new_replacement(t_vault *data, int *rl_index)
 {
-	int		i;
-	int		j;
+	data->quote->quote_priority = data->read_line[*rl_index];
+	while (*rl_index != 0 && data->read_line[*rl_index] != ' ')
+		(*rl_index)--;
+	if (*rl_index != 0)
+		(*rl_index)++;
+}
 
-	i = 0;
-	while (data->rl_decomp[i])
+void	len_after_quote(t_vault *data, int *rl_index)
+{
+	(*rl_index)++;
+	data->quote->len_of_replacement++;
+	while (data->read_line[*rl_index] && (data->read_line[*rl_index] != ' '))
 	{
-		j = 0;
-		while (data->rl_decomp[i][j])
+		if (data->read_line[*rl_index] == '\''
+			|| data->read_line[*rl_index] == '\"')
 		{
-			if (data->rl_decomp[i][j] == data->quote->quote_priority)
+			data->quote->temp_priority = data->read_line[*rl_index];
+			(*rl_index)++;
+			data->quote->len_of_replacement++;
+			while ((data->read_line[*rl_index] != data->quote->temp_priority))
 			{
-				replace_decomposer_array(data, end, &i);
-				return ;
+				if (data->read_line[*rl_index] == ' ')
+					data->spc_count++;
+				(*rl_index)++;
+				data->quote->len_of_replacement++;
 			}
-			j++;
 		}
-		i++;
-	}
-}
-
-/*
-	Je free la ligne de rl_decomp à remplacer, je la calloc de la taille de
-	la nouvelle ligne qui va la remplacer et je me balade dans readline, de
-	begin jusqu'a end, pour remplir la nouvelle ligne.
-*/
-void	replace_decomposer_array(t_vault *data, int end, int *i)
-{
-	int	j;
-
-	j = 0;
-	free(data->rl_decomp[*i]);
-	data->rl_decomp[*i]
-		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1);
-	while (data->quote->begin < end)
-	{
-		data->rl_decomp[*i][j]
-			= data->read_line[data->quote->begin];
-		data->quote->begin++;
-		j++;
-	}
-	(*i)++;
-	if (ft_strchr(data->rl_decomp[*i - 1], ' ') != NULL)
-		find_decomposer_to_switch(data, *i);
-}
-
-/*
-	Je décalle les éléments du tableau. spc_count va me servir à savoir
-	combien de ligne je vais devoir sauter dans rl_decomp pour commencer
-	mon remplacement.
-*/
-void	find_decomposer_to_switch(t_vault *data, int to_switch)
-{
-	int	next_array;
-	int	actual_array;
-
-	next_array = to_switch + data->spc_count;
-	actual_array = to_switch;
-	while (data->rl_decomp[next_array])
-	{
-		free (data->rl_decomp[actual_array]);
-		data->rl_decomp[actual_array] = ft_strdup(data->rl_decomp[next_array]);
-		next_array++;
-		actual_array++;
-	}
-	if (data->rl_decomp[actual_array])
-	{
-		while (data->rl_decomp[actual_array])
-		{
-			data->rl_decomp[actual_array][0] = '\0';
-			actual_array++;
-		}
+		data->quote->len_of_replacement++;
+		(*rl_index)++;
 	}
 }
