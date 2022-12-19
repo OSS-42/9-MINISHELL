@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 14:04:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:32:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_vault
 	char		**env;
 	char		**rl_decomp;
 	char		**clean_decomposer;
+	char		**tab_arg;
 	char		*read_line;
 	char		*env_path;
 	char		*test;
@@ -101,6 +102,7 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
+void	create_tab_arg(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);

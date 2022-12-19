@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 12:16:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 15:21:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_data(t_vault *data)
 {
 	data->env = environ;
 	data->read_line = NULL;
+	data->tab_arg = NULL;
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	data->quote = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
