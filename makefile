@@ -17,6 +17,10 @@ D_LIBFT = libft/
 LIBFT = libft/libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
+D_LIBPRETTY = libpretty/
+LIBPRETTY = libpretty/libpretty.a
+D_LIBPRETTYHEAD = libpretty/includes/libpretty.h
+
 # Pour faire fonctionner readline, modification du code dans keymap.h, readline.h et history.h
 # Il faut enlever les conditions "if" autour de rlstdc.h (et les autres .h)
 RLCONF = librl/config.log
@@ -37,7 +41,7 @@ SRCS =	src/minishell.c \
 		src/explore_readline.c \
 		src/quote_management.c \
 		src/meta_analyzis.c \
-		src/ft_echo_utils.c \
+		src/parsing_utils.c \
 		src/error_mgmnt.c\
 		src/minishell_utils.c\
 		src/built_in_utils.c\
@@ -45,8 +49,6 @@ SRCS =	src/minishell.c \
 		src/redirection_management.c\
 		src/redirection_utils.c\
 		src/minus_utils.c\
-		src/pretty_intro_mini.c\
-		src/pretty_colors.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
@@ -57,20 +59,23 @@ SRCS =	src/minishell.c \
 #									 RULES									   #
 #------------------------------------------------------------------------------#
 
-all:	deadpool $(NAME)
+all:	daftpunk $(NAME)
 
 #-lcurses pour les signaux
-$(NAME):	$(LIBFT) $(LIBRL) $(OBJS)
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBRL) -lreadline -lcurses -o $@)
+$(NAME):	$(LIBFT) $(LIBPRETTY) $(LIBRL) $(OBJS)
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBPRETTY) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 	@sleep 2
-	@clear
+#	@clear
 
-deadpool:
-	@$(call intro_mandatory)
+daftpunk:
+	@$(MAKE) intro_daftpunk -C $(D_LIBPRETTY)
 
 $(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
+
+$(LIBPRETTY): $(D_OBJ) $(D_LIBPRETTYHEAD)
+	@$(MAKE) -C $(D_LIBPRETTY)
 
 $(LIBRL):
 	@echo "$(LGREEN)LIB READLINE Configuration started ...$(NC)"
@@ -85,6 +90,7 @@ $(D_OBJ):
 
 $(OBJS): $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
+
 
 #norm a checker
 norm:
@@ -101,6 +107,7 @@ fclean:	clean
 lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
+	@$(MAKE) -s --no-print-directory -C $(D_LIBPRETTY) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBRL) distclean
 
 re:	fclean all
@@ -113,10 +120,10 @@ re:	fclean all
 
 #SRCS_BONUS = src_bonus/...
 
-#deadpool_bonus:
+#daftpunk_bonus:
 #	@$(call intro_bonus)
 
-#$(NAME_BONUS): deadpool_bonus $(OBJS_BONUS)
+#$(NAME_BONUS): daftpunk_bonus $(OBJS_BONUS)
 #	@$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(D_LIBFT)$(LIBFT) $(D_LIBRL)$(LIBRL)
 #	@printf "%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)$(NC)\r"
 #	@echo "$(LGREEN)Software Compilation completed !$(NC)"
@@ -125,27 +132,17 @@ re:	fclean all
 #		@mkdir -p $(D_OBJ_BONUS)
 #		@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
 
-#bonus: deadpool_bonus do_libft $(NAME_BONUS)
+#bonus: daftpunk_bonus do_libft $(NAME_BONUS)
 
 #------------------------------------------------------------------------------#
 #								  MAKEUP RULES								   #
 #------------------------------------------------------------------------------#
 
 #----------------------------------- SOURCE -----------------------------------#
-D_INTRO = pretty/
+#D_PRETTY = pretty/
 
 #----------------------------------- INTROS -----------------------------------#
-define intro_mandatory
-@bash $(D_INTRO)intro_daftpunk.sh
-endef
 
-define intro_bonus
-@bash $(D_INTRO)intro_bonus.sh
-endef
-
-define intro_minishell
-@bash $(D_INTRO)intro_minishell.sh
-endef
 #----------------------------------- COLORS -----------------------------------#
 LRED = \033[91m
 RED = \033[91m

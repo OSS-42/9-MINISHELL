@@ -6,11 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:55:52 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 15:56:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/17 15:17:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/libpretty.h"
 
 void	lred(void)
 {
@@ -27,7 +27,12 @@ void	lcyan(void)
 	printf("\33[1;96m");
 }
 
-void	reset(void)
+void	lgray(void)
 {
-	printf("\033[1;0m");
+	printf("\33[1;37m");
+}
+
+void	dgray(void)
+{
+	printf("\33[1;90m");
 }

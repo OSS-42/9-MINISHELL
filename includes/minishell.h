@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/18 19:03:43 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/18 19:05:22 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@
 # include "../libft/includes/libft.h"
 # include "../librl/readline.h"
 # include "../librl/history.h"
+# include "../libpretty/includes/libpretty.h"
 
 # define TRUE 1
 # define FALSE 0
-
-# define INTRO "\
-#/bin/bash \n\
-bash pretty/intro_minishell.sh \n\
-"
 
 /***** STRUTURE *****/
 
@@ -58,11 +54,11 @@ typedef struct s_builtins
 typedef struct s_flag
 {
 	char	*output;
+	int		*fd_out;
 	int		output_count;
 	int		chevron_count;
 	int		input_count;
 	int		pipe_count;
-	int		*fd_out;
 	int		stdout_backup;
 	int		stdin_backup;
 	int		var_not_found;
@@ -81,23 +77,22 @@ typedef struct s_quote
 
 typedef struct s_vault
 {
-	int			spc_count;
-	int			begin;
+	char		**env;
+	char		**rl_decomp;
+	char		**clean_decomposer;
 	char		*read_line;
 	char		*env_path;
-	char		**env;
-	char		**clean_decomposer;
-	char		**rl_decomp;
 	char		*test;
+	char		*buffer;
 	t_builtins	*b_in;
 	t_quote		*quote;
 	t_flag		*flag;
-	int			activate_var; //suppression a confirmer
 	char		*dollar_var;
 	int			dollar_var_len;
-	char		**split; //suppression a confirmer
-	char		*buffer;
+	int			spc_count;
 	int			pos;
+	char		**split; //suppression a confirmer
+	int			activate_var; //suppression a confirmer
 }	t_vault;
 
 /***** minishell.c *****/
@@ -107,8 +102,6 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-// void	reduce_space(t_vault *data);
-// void	malloc_clean_decomposer(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -143,12 +136,12 @@ void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int row);
 
-/***** ft_echo_utils ******/
-int		dollar_var_to_extract(t_vault *data, int row, int i);
+/***** parsing_utils ******/
 int		check_next_char(t_vault *data, int row, int i);
-char	*var_extract(t_vault *data, int row, int position);
-char	*does_var_exist(t_vault *data);
-char	*expand_var(t_vault *data, int row_var);
+void	quote_priority(t_vault *data, int row);
+void	parse_row(t_vault *data, int row);
+int		echo_sgle_quote(t_vault *data, int row, int i);
+int		echo_dble_quote(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int row);
@@ -170,9 +163,7 @@ int		check_error(t_vault *data, int row);
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int row);
 int		ft_isinset(char c);
-int		echo_sgle_quote(t_vault *data, int row, int i);
-int		echo_dble_quote(t_vault *data, int row, int i);
-void	echo_parse_row(t_vault *data, int row);
+void	row_parsing(t_vault *data);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int row);
@@ -180,13 +171,15 @@ void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int row);
 
-//void	var_extract(t_vault *data, int row, int position, char **array);
-
 /***** dollar_utils.c *****/
-void	quote_priority(t_vault *data, int row);
-void	clean_quote(t_vault *data, int row);
+int		dollar_var_to_extract(t_vault *data, int row, int i);
+char	*var_extract(t_vault *data, int row, int position);
+char	*does_var_exist(t_vault *data);
+char	*expand_var(t_vault *data, int row_var);
+
+//void	clean_quote(t_vault *data, int row);
+//int		insert_row(int pos, int count, char **dest, char **source);
 //void	split_on_char(t_vault *data, int row, char c);
-int		insert_row(int pos, int count, char **dest, char **source);
 //void	change_tab(t_vault *data, int row);
 
 /***** minus_utils. *****/
@@ -194,17 +187,5 @@ void	parse_minus(t_vault *data);
 void	recreate_arg_tab(t_vault *data, char **tab);
 char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
-
-/***** PRETTY *****/
-/***** pretty_intro_mini.c *****/
-void	intro_minishell(void);
-void	intro_minishell_p2(void);
-void	intro_minishell_p3(void);
-
-/***** pretty_colors.c *****/
-void	lred(void);
-void	lcyan(void);
-void	lyellow(void);
-void	reset(void);
 
 #endif

@@ -1,0 +1,209 @@
+#------------------------------------------------------------------------------#
+#								   GENERAL									   #
+#------------------------------------------------------------------------------#
+NAME = libpretty.a
+
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -rf
+AR = ar rcs
+
+#------------------------------------------------------------------------------#
+#									SOURCES									   #
+#------------------------------------------------------------------------------#
+HEADER = includes/libpretty.h
+D_SRC = src/
+D_OBJ = obj/
+OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
+SRCS = \
+		src/pretty_colors.c\
+		src/pretty_intro_mini.c
+
+#------------------------------------------------------------------------------#
+#									 RULES									   #
+#------------------------------------------------------------------------------#
+all:	$(NAME)
+
+$(NAME): $(OBJS)
+	@$(call archiving, $(AR) $@ $(OBJS))
+	@echo "$(LGREEN)LIBPRETTY completed !$(NC)"
+
+$(OBJS) : $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
+	@mkdir -p $(D_OBJ)
+	@$(call run_and_test, $(CC) $(CFLAGS) -c $< -o $@)
+
+intro_daftpunk:
+	@printf "\n \
+		${LGRAY}             ▄▄▄▄${DGRAY}▄▄▄▄▄\n \
+		${LGRAY}         ▄███████${DGRAY}████████▄\n \
+		${LGRAY}       ▄█████████${DGRAY}██████████▄\n \
+		${LGRAY}     ▄███████████${DGRAY}████████████${LYELLOW}▄${NC}\n \
+		${LGRAY}    █████████████${DGRAY}████████████${LYELLOW}██${NC}\n \
+		${LGRAY}   ██████████████${DGRAY}████████████${LYELLOW}████${NC}\n \
+		${LGRAY} ███             ${DGRAY}████████████${LYELLOW}████${NC}\n \
+		${LGRAY} ███             ${DGRAY}████████████${LYELLOW}████${NC}\n \
+		${LGRAY}   ██████████████${DGRAY}████████████${LYELLOW}██▀${NC}\n \
+		${LGRAY}      ███████████${DGRAY}████████████${LYELLOW}██${NC}\n \
+		${LGRAY}       ██████████${DGRAY}███████████${LYELLOW}██${NC}\n \
+		${LGRAY}        ████     ${LYELLOW}████████████▀${NC}\n \
+		${LGRAY}          ███████${LYELLOW}██████████▀${NC}\n \
+		${LGRAY}             ▀▀▀▀${LYELLOW}▀▀▀▀▀▀▀${NC}\n \
+		__________________________________\n \
+		\n";
+
+intro_deadpool:
+	@printf " \n \
+		${RED}             ▄▄▄▄▄▄▄\n \
+		${RED}       ▄▄███████████████▄▄\n \
+		${RED}     ▄██▀▀     ███     ▀▀██▄\n \
+		${RED}   ▄██▀        ███        ▀██▄\n \
+		${RED} ▄██▀          ███          ▀██▄\n \
+		${RED}▄█▀            ███            ▀█▄\n \
+		██  ${NC}▄█▄${RED}        ███        ${NC}▄█▄${RED}  ██\n \
+	      ██  ${NC}▄████▄     ${RED} ███ ${NC}     ▄████▄${RED}  ██\n \
+	      ██  ${NC}▀██████▄   ${RED} ███ ${NC}   ▄██████▀${RED}  ██\n \
+		██   ${NC}▀▀█████▄  ${RED}███ ${NC} ▄█████▀▀${RED}   ██\n \
+		${RED}▀█▄       ${NC} ▀▀▀ ${RED}███ ${NC}▀▀▀        ${RED}▄█▀\n \
+		${RED} ▀██▄          ███          ▄██▀\n \
+		${RED}   ▀██▄        ███        ▄██▀\n \
+		${RED}     ▀██▄▄     ███     ▄▄██▀\n \
+		${RED}       ▀▀███████████████▀▀\n \
+		${RED}             ▀▀▀▀▀▀▀${NC}\n${NC} \
+		${NC}_________________________________\n \
+		\n"
+
+intro_minishell:
+	@printf " \n \
+		${LCYAN}                   /\ ${NC}\n \
+		${LCYAN}                  /  \ ${NC}\n \
+		${LCYAN}                 / /\ \ ${NC}\n \
+		${LCYAN}              /\/ /  \ \/\ ${NC}\n \
+		${LRED}     /¯¯¯¯¯¯¯${LCYAN}/ / /    \ \ \ ${LRED}¯¯¯¯¯¯¯\ ${NC}\n \
+		${LRED}    / \   / ${LCYAN}/ / /      \ \ \ ${LRED} \   / \ ${NC}\n \
+		${LRED}   /   \/  ${LCYAN}/ / /        \ \ \ ${LRED}  \/   \ ${NC}\n \
+		${LRED}  / \ / \ ${LCYAN}/ / /__________\ \ \ ${LRED} / \ / \ ${NC}\n \
+		${LRED} /___/___${LCYAN}/_/ /            \ \_\ ${LRED}___\___\ ${NC}\n \
+		${LCYAN}    ________/              \__${YELLOW}║${LCYAN}___${YELLOW}║${LCYAN}_ ${NC}\n \
+		${LCYAN}    \            ${YELLOW}         ╔══ ║   ║${LCYAN}/ ${NC}\n \
+		${LCYAN}       \        ${YELLOW}▀ ╔══ ║ ║ ╠═  ╚══ ╚══ ${NC}\n \
+		${LCYAN}    ${YELLOW}█▄ ▄█ ▀ █■■ █ ╚═╗ ╠═╣ ╚══${LCYAN}/${NC}\n \
+		${LCYAN}    ${YELLOW}█ ▀ █ █ █ █ █ ══╝ ║ ║ ${LCYAN}/ ${NC}\n \
+		${LCYAN}    ${YELLOW}█   █ █     ${LCYAN}\      / ${NC}\n \
+		${LCYAN}    ${YELLOW}█   █          ${LCYAN}\/ ${NC}\n \
+		________________________________________\n \
+		\n";
+
+bonus: all
+	@printf " \n \
+		    ${NC} ╔══  $(LCYAN)  ══  $(LRED) ╔   ╦ $(LYELLOW) ╦  ╦ $(LMAGENTA) ╔══╗ \n \
+		    ${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║\  ║ $(LYELLOW) ║  ║ $(LMAGENTA) ║   \n \
+		    ${NC} ╠══  $(LCYAN) ║  ║ $(LRED) ║ \ ║ $(LYELLOW) ║  ║ $(LMAGENTA) ╚══╗\n \
+		    ${NC} ║  ║ $(LCYAN) ║  ║ $(LRED) ║  \║ $(LYELLOW) ║  ║ $(LMAGENTA)    ║\n \
+		    ${NC} ╚══  $(LCYAN)  ══  $(LRED) ╩   ╝ $(LYELLOW)  ══  $(LMAGENTA) ╚══╝\n \
+		    ${NC}_______________________________\n \
+		\n"
+
+clean:
+	@$(call cleaning, $(RM) $(D_OBJ));
+
+fclean: clean
+	@$(call fcleaning, $(RM) $(NAME))
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
+#------------------------------------------------------------------------------#
+#								  MAKEUP RULES								   #
+#------------------------------------------------------------------------------#
+
+#----------------------------------- SOURCE -----------------------------------#
+
+#----------------------------------- INTROS -----------------------------------#
+
+#----------------------------------- COLORS -----------------------------------#
+LRED= \033[91m
+RED= \033[31m
+LGREEN= \033[92m
+YELLOW= \033[33m
+LYELLOW= \033[93m
+LMAGENTA= \033[95m
+LCYAN= \033[96m
+LGRAY= \033[37m
+DGRAY= \033[90m
+BLACK= \033[30m
+NC= \033[0;39m
+
+#----------------------------------- TEXTES -----------------------------------#
+OK_STRING = "[OK]"
+ERROR_STRING = "[ERROR]"
+WARN_STRING = "[WARNING]"
+COMP_STRING = "Generating"
+CLEAN_STRING = "Cleaning"
+ARCH_STRING = "Archiving"
+
+#----------------------------------- DEFINE -----------------------------------#
+define run_and_test
+printf "$(LRED)■$(NC)"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+			printf "%-60b%b" "$(LCYAN)$(COMP_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define cleaning
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define fcleaning
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Filess" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+define archiving
+printf "%b" "\n$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)$(NC)\r"; \
+$(1) 2> $@.log; \
+RESULT=$$?; \
+	if [ $$RESULT -ne 0 ]; then \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "💥$(NC)\n"; \
+	elif [ -s $@.log ]; then \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "⚠️$(NC)\n"; \
+	else \
+		printf "%-60b%b" "$(LCYAN)$(ARCH_STRING)$(LMAGENTA) $(@F)" "✅$(NC)\n"; \
+	fi; \
+	cat $@.log; \
+	rm -f $@.log; \
+	exit $$RESULT
+endef
+
+
+.PHONY: all

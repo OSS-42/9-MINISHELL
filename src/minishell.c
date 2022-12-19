@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/15 21:33:15 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/17 22:50:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(void)
 
 	signal(SIGINT, sig_handler);
 	init_data(&data);
-//	system(INTRO);
 	intro_minishell();
+//	intro_daftpunk();
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
