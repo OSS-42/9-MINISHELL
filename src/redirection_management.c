@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/16 10:39:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/18 19:54:47 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,13 +177,7 @@ void	clean_output(t_vault *data, int i)
 			temp++;
 			begin++;
 			if (data->rl_decomp[i][begin] == '\"' || data->rl_decomp[i][begin] == '\'')
-			{
-				data->quote->quote_priority = data->rl_decomp[i][begin];
-				begin++;
-				while (data->rl_decomp[i][begin] != data->quote->quote_priority)
-					begin++;
-				begin++;
-			}
+				begin = while_quote(data, data->rl_decomp[i], begin);
 			else
 				begin = while_is_not_flag(data->rl_decomp[i], begin);
 			if (data->rl_decomp[i][begin])
@@ -208,18 +202,10 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	len = 0;
 	if (data->rl_decomp[i][temp] == data->flag->chevron)
 	{
-		//>"test">"test1">"test2" begin à partir du deuxieme chevron
-		// >"tes>t">test1
 		temp++;
 		len++;
 		if (data->rl_decomp[i][temp] == '\'' || data->rl_decomp[i][temp] == '\"')
-		{
-			data->quote->quote_priority = data->rl_decomp[i][temp];
-			temp++;
-			while (data->rl_decomp[i][temp] != data->quote->quote_priority)
-				temp++;
-			temp++;
-		}
+			temp = while_quote(data, data->rl_decomp[i], temp);
 		else
 			temp = while_is_not_flag(data->rl_decomp[i], temp);
 		*begin = temp;
@@ -234,7 +220,6 @@ int	len_without_output(t_vault *data, int i, int temp, int *begin)
 	}
 	else
 	{
-		// "bonjour">"test">"test1">"test2" begin a partir du debut
 		temp = while_is_not_flag(data->rl_decomp[i], temp);
 		len = temp;
 		if (data->rl_decomp[i][temp])
@@ -278,7 +263,7 @@ void	output_in_next_array(t_vault *data, int i, int *j, char c)
 	else
 	{
 		data->rl_decomp[i][*j] = '\0';
-		if (flag_in_str(data->rl_decomp[i + 1]) == FALSE) // Ajouter une sécurité pour m'assurer que le flag n'Est pas entre guillemets
+		if (flag_in_str(data->rl_decomp[i + 1]) == FALSE)
 			find_decomposer_to_switch(data, i + 1);
 		else
 			clean_output_next_array(data, i + 1);
@@ -320,7 +305,7 @@ void	clean_output_next_array(t_vault *data, int i)
 	len = 0;
 	temp = NULL;
 	j = 1;
-	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')
+	if (data->rl_decomp[i][0] == '\'' || data->rl_decomp[i][0] == '\"')//voir si je peux mette en place while_quote
 	{
 		data->quote->quote_priority = data->rl_decomp[i][0];
 		while (data->rl_decomp[i][j] != data->quote->quote_priority)

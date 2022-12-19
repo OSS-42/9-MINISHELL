@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/18 19:09:23 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/18 19:46:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,10 @@ int		flag_in_str(char *str);
 void	clean_output(t_vault *data, int i);
 void	clean_output_next_array(t_vault *data, int i);
 int		len_without_output(t_vault *data, int i, int temp, int *begin);
+
+/***** redirection_utils.c *****/
+void	dup_from_begin(t_vault *data, int i, int j, char *temp);
+int		while_quote(t_vault *data, char *str, int i);
 
 /***** double_quote_management.c *****/
 void	find_str_quote(t_vault *data);
