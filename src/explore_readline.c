@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/19 17:39:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:59:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,14 @@ void	built_in(t_vault *data)
 void	create_tab_arg(t_vault *data)
 {
 	int		row;
+	int		line;
 	size_t	i;
 	char	*temp;
 
 	row = 0;
 	temp = NULL;
 	printf("pipe count : %d\n", data->flag->pipe_count);
-	data->tab_arg = ft_calloc(sizeof(char *), data->flag->pipe_count + 1);
+	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	i = 0;
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '|')
 		i++;
@@ -90,23 +91,37 @@ void	create_tab_arg(t_vault *data)
 	{
 		printf("%zu\n", i);
 		printf("%zu\n", ft_strlen(data->rl_decomp[row]));
-		if (data->tab_arg[row] == NULL)
-			data->tab_arg[row] = ft_strdup(data->rl_decomp[row]);
-		else
+		line = 0;
+		while (data->rl_decomp[row] && data->rl_decomp[row][0])
 		{
-			while (data->rl_decomp[row] && data->rl_decomp[row] != "|\0")
+			if (data->rl_decomp[row][0] == '|')
 			{
-				temp = ft_strjoin(data->tab_arg[row], data->rl_decomp[row]);
-				free (data->tab_arg[row]);
-				data->tab_arg[row] = ft_strdup(temp);
-				free (temp);
-				data->tab_arg[row] = ft_strjoin(data->tab_arg[row], " ");
+				line ++;
 				row++;
 			}
+			if (data->tab_arg[line] == NULL)
+			{
+				data->tab_arg[line] = ft_strdup(data->rl_decomp[row]);
+				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
+					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
+			}
+			else
+			{
+				temp = ft_strjoin(data->tab_arg[line], data->rl_decomp[row]);
+				free (data->tab_arg[line]);
+				data->tab_arg[line] = ft_strdup(temp);
+				free (temp);
+				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
+					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
+			}
+			row++;
 		}
-		// else
-		// {
-		// 	remove_pipe_form_str();
-		// }
+		line++;
+		data->tab_arg[line] = NULL;
+	// else
+	// {
+	// 	remove_pipe_form_str();
+	// }
 		print_double_array(data->tab_arg);
+	}
 }

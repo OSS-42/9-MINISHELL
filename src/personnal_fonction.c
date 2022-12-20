@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/14 09:27:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 20:48:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	print_double_array(char **array)
 {
-	int	i;
+	int	row;
 
-	i = 0;
-	while (array[i] && array[i][0] != '\0')
+	row = 0;
+	while (array[row] && array[row][0])
 	{
-		printf("%s\n", array[i]);
-		i++;
+		printf("ligne #%d : %s\n", row, array[row]);
+		row++;
 	}
 	printf("\n");
 }
