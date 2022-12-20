@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/20 09:57:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 12:09:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	execute_redirection(t_vault *data, int i, int j)
 				else if (data->rl_decomp[i][j] == '>'
 				|| data->rl_decomp[i][j] == '<')
 					redir_in_same_array(data, i, &j, data->rl_decomp[i][j]);
+				else if (data->rl_decomp[i][j] == '|')
+					return ;
 				j++;
 			}
 		}
