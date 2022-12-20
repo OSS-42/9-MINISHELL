@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/17 23:08:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:30:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	parse_row(t_vault *data, int row)
 		if (ft_isinset(data->rl_decomp[row][i]) == 0)
 			data->buffer[data->pos] = data->rl_decomp[row][i];
 		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
-			i = echo_sgle_quote(data, row, i);
+			i = sgle_quote_mngmt(data, row, i);
 		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
-			i = echo_dble_quote(data, row, i);
+			i = dble_quote_mngmt(data, row, i);
 		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
 		{
 			dollar_var_to_extract(data, row, i);
@@ -90,7 +90,7 @@ void	parse_row(t_vault *data, int row)
 	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
 }
 
-int	echo_sgle_quote(t_vault *data, int row, int i)
+int	sgle_quote_mngmt(t_vault *data, int row, int i)
 {
 	i++;
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\'')
@@ -103,7 +103,7 @@ int	echo_sgle_quote(t_vault *data, int row, int i)
 	return (i);
 }
 
-int	echo_dble_quote(t_vault *data, int row, int i)
+int	dble_quote_mngmt(t_vault *data, int row, int i)
 {
 	i++;
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\"')
