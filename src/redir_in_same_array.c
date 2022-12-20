@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/20 09:36:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:15:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,28 @@
 void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 {
 	data->flag->chevron = c;
-	if (data->rl_decomp[i][*j + 1] == c)
+	if (c == '>' && data->rl_decomp[i][*j + 1] == c)
 	{
 		data->flag->append = TRUE;
 		data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i], 0, 0);
 	}
-	find_redir_in_same_array(data, data->rl_decomp[i]);
+	else if (c == '<' && data->rl_decomp[i][*j + 1] == c)
+	{
+		data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i], 0, 0);
+		find_redir_in_next_array(data, data->rl_decomp[i + 1]);
+		heredoc(data);
+	}
+	else
+		find_redir_in_same_array(data, data->rl_decomp[i]);
 	clean_redir(data, i);
 	data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i], 0, 0);
 	if (data->rl_decomp[i][0] == '\0')
 		find_decomposer_to_switch(data, i);
 	*j = -1;
-	stdout_redirection(data, data->flag->output);
+	if (data->flag->heredoc_delimiter == FALSE)
+		redirection(data, data->flag->output);
+	free (data->flag->output);
 }
-
 
 void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array)
 {

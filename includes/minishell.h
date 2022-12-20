@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/20 09:06:34 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:00:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_flag
 	int		var_not_found;
 	char	chevron;
 	int		append;
+	int		heredoc_delimiter;
+	int		heredoc_fd;
 }	t_flag;
 
 typedef struct s_quote
@@ -211,5 +213,8 @@ void	parse_minus(t_vault *data);
 void	recreate_arg_tab(t_vault *data, char **tab);
 char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
+
+/***** heredoc.c *****/
+void	heredoc(t_vault *data);
 
 #endif

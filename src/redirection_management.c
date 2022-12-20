@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/20 12:09:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 15:24:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ echo test 16>"tes>t">test1
 	A partir du moment ou le fichier est trouvé et que la redirection est
 	faite, je vais supprimer le chevron et le nom du fichier qui suit.
 */
+
 void	execute_redirection(t_vault *data, int i, int j)
 {
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
@@ -71,7 +72,7 @@ void	execute_redirection(t_vault *data, int i, int j)
 			{
 				if ((data->rl_decomp[i][j] == '>'
 					|| data->rl_decomp[i][j] == '<')
-					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == data->rl_decomp[i][j] && !data->rl_decomp[i][j + 2])))
+					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == '>' && !data->rl_decomp[i][j + 2])))
 					redir_in_next_array(data, i, &j, data->rl_decomp[i][j]);
 				else if (data->rl_decomp[i][j] == '>'
 				|| data->rl_decomp[i][j] == '<')
@@ -92,7 +93,6 @@ void	redirection(t_vault *data, char *redirection)
 		stdout_redirection(data, redirection);
 	else if (data->flag->chevron == '<')
 		stdin_redirection(data, redirection);
-	free (redirection);
 }
 
 void	stdout_redirection(t_vault *data, char *redirection)
