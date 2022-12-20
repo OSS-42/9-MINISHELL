@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/20 15:39:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:13:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,13 +162,52 @@ int	remove_pipe_from_str(t_vault *data, int row, int *line)
 				i++;
 				j++;
 			}
-			if (data->rl_decomp[row][j] == '|')
-				count++;
+			if (data->tab_arg[*line] == NULL)
+			{
+				data->tab_arg[*line] = ft_strdup(temp);
+				free (temp);
+			}
+			else
+			{
+				buf = ft_strjoin(data->tab_arg[*line], temp);
+				free (temp);
+				free (data->tab_arg[*line]);
+				data->tab_arg[*line] = ft_strdup(buf);
+				free (buf);
+			}
+			(*line)++;
+			if (data->rl_decomp[row][j + 1])		//attention SS ici
+			{
+				temp = ft_calloc(sizeof(char), ft_strlen(data->rl_decomp[row]));
+				j++;
+				while (data->rl_decomp[row][j])
+				{
+					temp[i] = data->rl_decomp[row][j];
+					i++;
+					j++;
+				}
+				if (data->tab_arg[*line] == NULL)
+				{
+					data->tab_arg[*line] = ft_strdup(temp);
+					free (temp);
+				}
+				else
+				{
+					buf = ft_strjoin(data->tab_arg[*line], temp);
+					free (temp);
+					free (data->tab_arg[*line]);
+					data->tab_arg[*line] = ft_strdup(buf);
+					free (buf);
+				}
+			}
+			(*line)++;
+			// if (data->rl_decomp[row][j] == '|')
+			// 	count++;
 		}
 		if (data->tab_arg[*line] == NULL)
 		{
 			data->tab_arg[*line] = ft_strdup(temp);
-			free (temp);
+//			free (temp);
 		}
 		else
 		{
