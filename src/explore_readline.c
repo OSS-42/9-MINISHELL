@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/20 09:04:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 09:52:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	explore_readline(t_vault *data)
 		execute_redirection(data, 0, 0);
 		row_parsing(data);
 		parse_minus(data);
-		print_double_array(data->rl_decomp);
+		// print_double_array(data->rl_decomp);
 		create_tab_arg(data);
 		built_in(data);
 		//pipe
@@ -83,15 +83,15 @@ void	create_tab_arg(t_vault *data)
 
 	row = 0;
 	temp = NULL;
-	printf("pipe count : %d\n", data->flag->pipe_count);
+	// printf("pipe count : %d\n", data->flag->pipe_count);
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	i = 0;
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '|')
 		i++;
 	if (i == ft_strlen(data->rl_decomp[row]))
 	{
-		printf("%zu\n", i);
-		printf("%zu\n", ft_strlen(data->rl_decomp[row]));
+		// printf("%zu\n", i);
+		// printf("%zu\n", ft_strlen(data->rl_decomp[row]));
 		line = 0;
 		while (data->rl_decomp[row] && data->rl_decomp[row][0])
 		{
@@ -123,6 +123,6 @@ void	create_tab_arg(t_vault *data)
 	// {
 	// 	remove_pipe_form_str();
 	// }
-		print_double_array(data->tab_arg);
+		// print_double_array(data->tab_arg);
 	}
 }

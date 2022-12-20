@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 14:15:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 09:57:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ echo test 2 >1 >2 >3
 echo test 3> test> test1> test2
 echo test 4>test>test1>test2
 echo test 5>1 > 2> 3 >4 > 5
+echo "test 6">"test" > "test1"
+echo "test 7">"test" >"test1"
+echo "test 8">"test"> "test1"> "test2"
+echo "test 9">"test">"test1">"test2"
+echo "test 10" > "test"> "test1" >"test2">"test3"> "test4"
+echo "test 11" >test 4
+echo test 12 > "tes>t"
+echo test 13 > "tes>t">test1
+echo test 14 > 1> 2
+echo test 15 >"tes>t">test1
+echo test 16>"tes>t">test1
+
+echo test 1 >> test >> test1 >> test2
+echo test 2 >>1 >>2 >>3
+echo test 3>> test>> test1>> test2
+echo test 4>>test>>test1>>test2
+echo test 5>>1 >> 2>> 3 >>4 >> 5
 echo "test 6">"test" > "test1"
 echo "test 7">"test" >"test1"
 echo "test 8">"test"> "test1"> "test2"
@@ -54,7 +71,7 @@ void	execute_redirection(t_vault *data, int i, int j)
 			{
 				if ((data->rl_decomp[i][j] == '>'
 					|| data->rl_decomp[i][j] == '<')
-					&& !data->rl_decomp[i][j + 1])
+					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == data->rl_decomp[i][j] && !data->rl_decomp[i][j + 2])))
 					redir_in_next_array(data, i, &j, data->rl_decomp[i][j]);
 				else if (data->rl_decomp[i][j] == '>'
 				|| data->rl_decomp[i][j] == '<')
@@ -80,22 +97,19 @@ void	stdout_redirection(t_vault *data, char *redirection)
 {
 	int	fd;
 
-	(void)data;
-	fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->flag->append == TRUE)
+		fd = open(redirection, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		printf("No such file or directory\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
+		printf("Probleme avec open sur fd_out\n");
 	}
-	else
+	if (dup2(fd, STDOUT_FILENO) == -1)
 	{
-		if (dup2(fd, STDOUT_FILENO) == -1)
-		{
-			printf("Probleme avec dup2 sur fd_out\n");
-		}
+		printf("Probleme avec dup2 sur fd_out\n");
 	}
+	data->flag->append = FALSE;
 }
 
 void	stdin_redirection(t_vault *data, char *redirection)

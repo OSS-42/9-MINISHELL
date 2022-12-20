@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 11:55:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/20 09:41:16 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 {
 	data->flag->chevron = c;
+	if (data->rl_decomp[i][*j + 1] == c)
+	{
+		data->flag->append = TRUE;
+		data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i], 0, 0);
+	}
 	find_redir_in_next_array(data, data->rl_decomp[i + 1]);
 	if (*j == 0)
 	{
@@ -30,10 +35,12 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 		if (ft_strlen(data->rl_decomp[i]) == 1)
 			find_decomposer_to_switch(data, i);
 		else
+		{
 			data->rl_decomp[i]
 				= clean_the_chevron(data, data->rl_decomp[i], 0, 0);
-		if (ft_strlen(data->rl_decomp[i]) < 1)
-			find_decomposer_to_switch(data, i);
+			if (ft_strlen(data->rl_decomp[i]) < 1)
+				find_decomposer_to_switch(data, i);
+		}
 	}
 	else
 	{

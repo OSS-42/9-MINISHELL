@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 15:21:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/20 09:12:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	main(void)
 				free(data.read_line);
 				reinit_data(&data);
 				free_dbl_ptr((void **)data.rl_decomp);
-				// rajouter une fonction pour reinitialise certaine variable à 0 comme les compteurs de flags par exemple.
 			}
 		}
 		else
