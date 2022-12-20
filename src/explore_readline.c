@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/19 08:39:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 14:34:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	explore_readline(t_vault *data)
 		row_parsing(data);
 		parse_minus(data);
 		built_in(data);
+		//pipe
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);
 	}

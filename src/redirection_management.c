@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 12:05:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/19 14:15:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,17 @@ void	stdout_redirection(t_vault *data, char *redirection)
 	fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		printf("Probleme avec open sur fd_out\n");
+		printf("No such file or directory\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	if (dup2(fd, STDOUT_FILENO) == -1)
+	else
 	{
-		printf("Probleme avec dup2 sur fd_out\n");
+		if (dup2(fd, STDOUT_FILENO) == -1)
+		{
+			printf("Probleme avec dup2 sur fd_out\n");
+		}
 	}
 }
 
@@ -100,10 +106,17 @@ void	stdin_redirection(t_vault *data, char *redirection)
 	fd = open(redirection, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Probleme avec open sur fd_out\n");
+		printf("No such file or directory\n");
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	if (dup2(fd, STDIN_FILENO) == -1)
+	else
 	{
-		printf("Probleme avec dup2 sur fd_out\n");
+		if (dup2(fd, STDIN_FILENO) == -1)
+		{
+			printf("Probleme avec dup2 sur fd_out\n");
+		}
 	}
 }
