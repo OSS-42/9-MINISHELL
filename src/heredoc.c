@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 11:04:30 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 17:30:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	heredoc(t_vault *data)
 {
 	char	*str;
 
+	if (data->flag->heredoc_delimiter == TRUE)
+	{
+		data->flag->heredoc_delimiter = FALSE;
+		dup2(data->flag->stdin_backup, STDIN_FILENO);
+	}
 	data->flag->heredoc_fd = open("temp_heredoc", O_CREAT
 			| O_WRONLY | O_TRUNC, 0644);
 	while (data->flag->heredoc_delimiter == FALSE)
@@ -23,7 +28,7 @@ void	heredoc(t_vault *data)
 		str = readline("HEREDOC> ");
 		if (str == NULL)
 		{
-			free (str);
+			free(str);
 			break ;
 		}
 		if (ft_strncmp(str, data->flag->output,
@@ -34,7 +39,9 @@ void	heredoc(t_vault *data)
 			ft_putstr_fd(str, data->flag->heredoc_fd);
 		free(str);
 	}
-	close (data->flag->heredoc_fd);
+	close(data->flag->heredoc_fd);
+	data->flag->heredoc_fd = open("temp_heredoc", O_CREAT
+			| O_WRONLY | O_TRUNC, 0644);
 	if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 		printf("Problème avec dup2 sur heredoc\n");
 }
