@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/21 08:40:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 11:55:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	explore_readline(t_vault *data)
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);
+		close (data->flag->stdout_backup);
+		close (data->flag->stdin_backup);
+		close (data->flag->fd);
 	}
 	return ;
 }
@@ -86,12 +89,6 @@ void	create_tab_arg(t_vault *data)
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
-<<<<<<< HEAD
-		// printf("%zu\n", i);
-		// printf("%zu\n", ft_strlen(data->rl_decomp[row]));
-		line = 0;
-		while (data->rl_decomp[row] && data->rl_decomp[row][0])
-=======
 		if (data->rl_decomp[row][0] == '|' && data->rl_decomp[row][1] == '\0')
 		{
 			line++;
@@ -103,7 +100,6 @@ void	create_tab_arg(t_vault *data)
 		printf("%zu\n", i);
 		printf("%zu\n", ft_strlen(data->rl_decomp[row]));
 		if (i == ft_strlen(data->rl_decomp[row]))
->>>>>>> master
 		{
 			if (data->tab_arg[line] == NULL)
 			{
@@ -121,15 +117,6 @@ void	create_tab_arg(t_vault *data)
 					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
 			}
 		}
-<<<<<<< HEAD
-		line++;
-		data->tab_arg[line] = NULL;
-	// else
-	// {
-	// 	remove_pipe_form_str();
-	// }
-		// print_double_array(data->tab_arg);
-=======
 		else if (ft_strlen(data->rl_decomp[row]) > 1)
 		{
 			row = remove_pipe_from_str(data, row, &line);
@@ -234,7 +221,6 @@ int	remove_pipe_from_str(t_vault *data, int row, int *line)
 		}
 		i = 0;
 		row ++;
->>>>>>> master
 	}
 	return (row);
 }

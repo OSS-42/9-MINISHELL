@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/20 16:15:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 09:25:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 	else if (c == '<' && data->rl_decomp[i][*j + 1] == c)
 	{
 		data->rl_decomp[i] = clean_the_chevron(data, data->rl_decomp[i], 0, 0);
-		find_redir_in_next_array(data, data->rl_decomp[i + 1]);
+		find_redir_in_same_array(data, data->rl_decomp[i]);
 		heredoc(data);
 	}
 	else

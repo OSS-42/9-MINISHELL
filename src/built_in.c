@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/19 16:21:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:58:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_exit(t_vault *data)
 {
 	// if (data->rl_decomp)
 	// 	free_dbl_ptr((void **)data->rl_decomp);
+	close (data->flag->stdout_backup);
+	close (data->flag->stdin_backup);
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
 	if (data->b_in->env_export)

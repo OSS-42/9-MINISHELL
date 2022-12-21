@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/20 15:24:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 11:53:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	execute_redirection(t_vault *data, int i, int j)
 			{
 				if ((data->rl_decomp[i][j] == '>'
 					|| data->rl_decomp[i][j] == '<')
-					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == '>' && !data->rl_decomp[i][j + 2])))
+					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == data->rl_decomp[i][j] && !data->rl_decomp[i][j + 2])))
 					redir_in_next_array(data, i, &j, data->rl_decomp[i][j]);
 				else if (data->rl_decomp[i][j] == '>'
 				|| data->rl_decomp[i][j] == '<')
 					redir_in_same_array(data, i, &j, data->rl_decomp[i][j]);
-				else if (data->rl_decomp[i][j] == '|')
+				else if (data->rl_decomp[i][j] == '|' && check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
 					return ;
 				j++;
 			}
@@ -97,17 +97,17 @@ void	redirection(t_vault *data, char *redirection)
 
 void	stdout_redirection(t_vault *data, char *redirection)
 {
-	int	fd;
-
+	if (data->flag->fd != 0)
+		close (data->flag->fd);
 	if (data->flag->append == TRUE)
-		fd = open(redirection, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
-		fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
+		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->flag->fd == -1)
 	{
 		printf("Probleme avec open sur fd_out\n");
 	}
-	if (dup2(fd, STDOUT_FILENO) == -1)
+	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
 		printf("Probleme avec dup2 sur fd_out\n");
 	}
@@ -116,11 +116,10 @@ void	stdout_redirection(t_vault *data, char *redirection)
 
 void	stdin_redirection(t_vault *data, char *redirection)
 {
-	int	fd;
-
-	(void)data;
-	fd = open(redirection, O_RDONLY);
-	if (fd == -1)
+	if (data->flag->fd != 0)
+		close (data->flag->fd);
+	data->flag->fd = open(redirection, O_RDONLY);
+	if (data->flag->fd == -1)
 	{
 		printf("No such file or directory\n");
 		printf("\n");
@@ -130,7 +129,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 	}
 	else
 	{
-		if (dup2(fd, STDIN_FILENO) == -1)
+		if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 		{
 			printf("Probleme avec dup2 sur fd_out\n");
 		}

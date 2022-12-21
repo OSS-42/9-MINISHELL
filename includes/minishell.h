@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 08:40:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 11:10:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_flag
 	int		append;
 	int		heredoc_delimiter;
 	int		heredoc_fd;
+	int		fd;
 }	t_flag;
 
 typedef struct s_quote
