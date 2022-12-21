@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 10:17:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:01:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-void	create_tab_arg(t_vault *data);
 int		remove_pipe_from_str(t_vault *data, int row, int *line);
 
 /***** meta_analyzis.c *****/
@@ -213,5 +212,9 @@ char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
 
 /***** pipe_utils.c *****/
+void	create_tab_arg(t_vault *data, int row, int line);
+size_t	check_if_pipe(t_vault *data, int row, int i);
+void	switch_lines(t_vault *data, int row, int line);
+void	switch_lines2(t_vault *data, int row, int line, char *temp);
 
 #endif
