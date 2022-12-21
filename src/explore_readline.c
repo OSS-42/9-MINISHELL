@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/20 23:27:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:16:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data, 0, 0);
 		execute_redirection(data, 0, 0);
-		row_parsing(data);
-		parse_minus(data);
 		print_double_array(data->rl_decomp);
 		create_tab_arg(data);
+		print_double_array(data->tab_arg);
+		row_parsing(data);
+		parse_minus(data);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);
@@ -87,16 +88,26 @@ void	create_tab_arg(t_vault *data)
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
-		if (data->rl_decomp[row][0] == '|' && data->rl_decomp[row][1] == '\0')
+		if (data->rl_decomp[row][0] == '|')
 		{
-			line++;
-			row++;
+			if (data->rl_decomp[row][1] == '\0')
+			{
+				line++;
+				row++;
+			}
+			else if (data->rl_decomp[row][1] == '|')
+				return ;
 		}
 		i = 0;
+		if (data->rl_decomp[row][i] == '\'' || data->rl_decomp[row][i] == '\"')
+		{
+			data->quote->quote_priority = data->rl_decomp[row][i];
+			i++;
+			while (data->rl_decomp[row][i] != data->quote->quote_priority)
+			i++;
+		}
 		while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '|')
 			i++;
-		printf("%zu\n", i);
-		printf("%zu\n", ft_strlen(data->rl_decomp[row]));
 		if (i == ft_strlen(data->rl_decomp[row]))
 		{
 			if (data->tab_arg[line] == NULL)
@@ -124,7 +135,6 @@ void	create_tab_arg(t_vault *data)
 	}
 	line++;
 	data->tab_arg[line] = NULL;
-	print_double_array(data->tab_arg);
 }
 
 int	remove_pipe_from_str(t_vault *data, int row, int *line)
@@ -140,7 +150,6 @@ int	remove_pipe_from_str(t_vault *data, int row, int *line)
 	buf = NULL;
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
-//		temp = ft_calloc(sizeof(char), ft_strlen(data->rl_decomp[row] + 1));
 		temp = ft_calloc(sizeof(char), 500);
 		j = 0;
 		if (data->rl_decomp[row][i] == '\'' || data->rl_decomp[row][i] == '\"')
@@ -203,7 +212,7 @@ int	remove_pipe_from_str(t_vault *data, int row, int *line)
 			if (data->tab_arg[*line] == NULL)
 			{
 				data->tab_arg[*line] = ft_strdup(temp);
-				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|' && count == 0)
+				if (data->tab_arg[*line][0] && data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|' && count == 0)
  					data->tab_arg[*line] = ft_strjoin(data->tab_arg[*line], " ");
 			}
 			else

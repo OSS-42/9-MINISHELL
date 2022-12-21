@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/20 15:07:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:17:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,5 +211,7 @@ void	parse_minus(t_vault *data);
 void	recreate_arg_tab(t_vault *data, char **tab);
 char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
+
+/***** pipe_utils.c *****/
 
 #endif
