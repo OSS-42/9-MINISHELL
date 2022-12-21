@@ -6,38 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 12:01:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:05:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	create_tab_arg(t_vault *data, int row, int line)
-{
-	size_t	i;
 
-	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
-	while (data->rl_decomp[++row] && data->rl_decomp[row][0])
-	{
-		if (data->rl_decomp[row][0] == '|')
-		{
-			if (data->rl_decomp[row][1] == '\0')
-			{
-				line++;
-				row++;
-			}
-			else if (data->rl_decomp[row][1] == '|')
-				return ;
-		}
-		i = check_if_pipe(data, row, i);
-		if (i == ft_strlen(data->rl_decomp[row]))
-			switch_lines(data, row, line);
-		else if (ft_strlen(data->rl_decomp[row]) > 1)
-			row = remove_pipe_from_str(data, row, &line) - 1;
-	}
-	line++;
-	data->tab_arg[line] = NULL;
-}
 
 void	switch_lines(t_vault *data, int row, int line)
 {
@@ -96,9 +71,51 @@ size_t	check_if_pipe(t_vault *data, int row, int i)
 		data->quote->quote_priority = data->rl_decomp[row][i];
 		i++;
 		while (data->rl_decomp[row][i] != data->quote->quote_priority)
-		i++;
+			i++;
 	}
 	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '|')
 		i++;
 	return (i);
+}
+
+char	*check_if_pipe2(t_vault *data, int row, int *i, int *count)
+{
+	char	*buffer;
+
+	buffer = NULL;
+	if (data->rl_decomp[row][*i] == '\'' || data->rl_decomp[row][*i] == '\"')
+	{
+		data->quote->quote_priority = data->rl_decomp[row][*i];
+		i++;
+		buffer = copy_in_temp(data, row, i, data->quote->quote_priority);
+		i++;
+	}
+	else
+	{
+		buffer = copy_in_temp(data, row, i, '|');
+		if (data->rl_decomp[row][*i] == '|')
+		{
+			(*count)++;
+			(*i)++;
+		}
+	}
+	return (buffer);
+}
+
+char	*copy_in_temp(t_vault *data, int row, int *i, char c)
+{
+	int		j;
+	char	*buffer;
+
+	j = 0;
+	if (c == 0)
+		c = '\0';
+	buffer = ft_calloc(sizeof(char), 500);
+	while (data->rl_decomp[row][*i] && data->rl_decomp[row][*i] != c)
+	{
+		buffer[j] = data->rl_decomp[row][*i];
+		j++;
+		(*i)++;
+	}
+	return (buffer);
 }
