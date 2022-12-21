@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 14:05:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:58:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	switch_lines2(t_vault *data, int row, int line, char *temp)
 	{
 		data->tab_arg[line] = ft_strdup(temp);
 		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
-			&& data->rl_decomp[row + 1][0] != '|')
+			&& data->rl_decomp[row + 1][0] != '|'
+			&& data->flag->pipe_count == 0)
 			data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
 	}
 	else
@@ -58,7 +59,8 @@ void	switch_lines2(t_vault *data, int row, int line, char *temp)
 		data->tab_arg[line] = ft_strdup(buffer);
 		free (buffer);
 		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
-			&& data->rl_decomp[row + 1][0] != '|')
+			&& data->rl_decomp[row + 1][0] != '|'
+			&& data->flag->pipe_count == 0)
 			data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
 	}
 }
@@ -78,26 +80,32 @@ size_t	check_if_pipe(t_vault *data, int row, int i)
 	return (i);
 }
 
-char	*check_if_pipe2(t_vault *data, int row, int *i, int *count)
+char	*check_if_pipe2(t_vault *data, int row, int *i)
 {
 	char	*buffer;
 
 	buffer = NULL;
-	if (data->rl_decomp[row][*i] == '\'' || data->rl_decomp[row][*i] == '\"')
+	while (data->rl_decomp[row][*i] && data->rl_decomp[row][*i] != '|')
 	{
-		data->quote->quote_priority = data->rl_decomp[row][*i];
-		i++;
-		buffer = copy_in_temp(data, row, i, data->quote->quote_priority);
-		i++;
-	}
-	else
-	{
-		buffer = copy_in_temp(data, row, i, '|');
-		if (data->rl_decomp[row][*i] == '|')
+		if ((data->flag->pipe_count > 0) && (data->rl_decomp[row][*i] == '\''
+			|| data->rl_decomp[row][*i] == '\"'))
 		{
-			(*count)++;
+			data->quote->quote_priority = data->rl_decomp[row][*i];
 			(*i)++;
+			buffer = copy_in_temp(data, row, i, data->quote->quote_priority);
 		}
+		else if (data->flag->pipe_count > 0)
+		{
+			if (buffer)
+				buffer = ft_strjoin(buffer, copy_in_temp(data, row, i, '|'));
+			else
+			{
+				buffer = copy_in_temp(data, row, i, '|');
+				if (data->rl_decomp[row][*i] == '|')
+					data->flag->pipe_count++;
+			}
+		}
+		(*i)++;
 	}
 	return (buffer);
 }

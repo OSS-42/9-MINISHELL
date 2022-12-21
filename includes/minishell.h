@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 14:04:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:30:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,6 @@ size_t	check_if_pipe(t_vault *data, int row, int i);
 void	switch_lines(t_vault *data, int row, int line);
 void	switch_lines2(t_vault *data, int row, int line, char *temp);
 char	*copy_in_temp(t_vault *data, int row, int *i, char c);
-char	*check_if_pipe2(t_vault *data, int row, int *i, int *count);
+char	*check_if_pipe2(t_vault *data, int row, int *i);
 
 #endif

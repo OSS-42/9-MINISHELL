@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/21 14:06:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:28:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,21 +104,20 @@ void	create_tab_arg(t_vault *data, int row, int line)
 int	remove_pipe_from_str(t_vault *data, int row, int *line)
 {
 	int		i;
-	int		count;
 	char	*temp;
 	char	*buf;
 
 	i = 0;
-	count = 0;
+	data->flag->pipe_count = 0;
 	buf = NULL;
 	while (data->rl_decomp[row] && data->rl_decomp[row][i])
 	{
-		temp = check_if_pipe2(data, row, &i, &count);
+		temp = check_if_pipe2(data, row, &i);
 		switch_lines2(data, row, *line, temp);
-		if (count > 0)
+		if (data->flag->pipe_count > 0)
 		{
 			(*line)++;
-			count--;
+			data->flag->pipe_count--;
 		}
 		temp = copy_in_temp(data, row, &i, 0);
 		if (data->rl_decomp[row][i] || temp)
