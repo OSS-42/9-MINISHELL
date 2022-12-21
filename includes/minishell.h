@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/20 16:00:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 08:40:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	reinit_data(t_vault *data);
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
 void	create_tab_arg(t_vault *data);
+int		remove_pipe_from_str(t_vault *data, int row, int *line);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
