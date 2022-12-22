@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 11:10:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 08:39:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libft/includes/libft.h"
 # include "../librl/readline.h"
 # include "../librl/history.h"
-# include "../libpretty/includes/libpretty.h"
+# include "../libart/includes/libart.h"
 
 # define TRUE 1
 # define FALSE 0
@@ -106,8 +106,6 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
-void	create_tab_arg(t_vault *data);
-int		remove_pipe_from_str(t_vault *data, int row, int *line);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -216,7 +214,11 @@ void	recreate_arg_tab(t_vault *data, char **tab);
 char	**create_temp_swap(t_vault *data, int row);
 void	check_minus_validity(t_vault *data, int row, int i);
 
-/***** heredoc.c *****/
-void	heredoc(t_vault *data);
+/***** pipe_utils.c *****/
+void	create_tab_arg(t_vault *data, int row, int line);
+void	switch_lines(t_vault *data, int row, int line);
+void	clear_pipe_from_str(t_vault *data, int line);
+int		parsing_pipe(t_vault *data, int row, int line);
+void	copy_in_temp(t_vault *data, int row, int i, int *j);
 
 #endif

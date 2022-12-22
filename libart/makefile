@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------#
 #								   GENERAL									   #
 #------------------------------------------------------------------------------#
-NAME = libpretty.a
+NAME = libart.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
@@ -11,13 +11,14 @@ AR = ar rcs
 #------------------------------------------------------------------------------#
 #									SOURCES									   #
 #------------------------------------------------------------------------------#
-HEADER = includes/libpretty.h
+HEADER = includes/libart.h
 D_SRC = src/
 D_OBJ = obj/
 OBJS = $(patsubst $(D_SRC)%.c,$(D_OBJ)%.o,$(SRCS))
 SRCS = \
-		src/pretty_colors.c\
-		src/pretty_intro_mini.c
+		src/art_colors.c\
+		src/art_intro_mini.c\
+		src/art_exit_mini.c
 
 #------------------------------------------------------------------------------#
 #									 RULES									   #
@@ -26,7 +27,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJS)
 	@$(call archiving, $(AR) $@ $(OBJS))
-	@echo "$(LGREEN)LIBPRETTY completed !$(NC)"
+	@echo "$(LGREEN)LIBART completed !$(NC)"
 
 $(OBJS) : $(D_OBJ)%.o : $(D_SRC)%.c $(HEADER)
 	@mkdir -p $(D_OBJ)
@@ -158,15 +159,15 @@ RESULT=$$?; \
 endef
 
 define cleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories$(NC)\r"; \
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Objects Files & Directories$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Objects Files & Directories" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Objects Files & Directories" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Objects Files & Directories" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Objects Files & Directories" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \
@@ -174,15 +175,15 @@ RESULT=$$?; \
 endef
 
 define fcleaning
-printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files$(NC)\r"; \
+printf "%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Executable Files$(NC)\r"; \
 $(1) 2> $@.log; \
 RESULT=$$?; \
 	if [ $$RESULT -ne 0 ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "💥$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Executable Files" "💥$(NC)\n"; \
 	elif [ -s $@.log ]; then \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Filess" "⚠️$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Executable Filess" "⚠️$(NC)\n"; \
 	else \
-		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBPRETTY Executable Files" "✅$(NC)\n"; \
+		printf "%-60b%b" "$(LCYAN)$(CLEAN_STRING)$(LMAGENTA) LIBART Executable Files" "✅$(NC)\n"; \
 	fi; \
 	cat $@.log; \
 	rm -f $@.log; \

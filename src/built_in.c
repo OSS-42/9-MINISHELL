@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/21 11:58:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 08:38:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ft_exit(t_vault *data)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
+	exit_minishell();
 	exit (0);
 }
 
@@ -100,6 +101,7 @@ void	ft_echo(t_vault *data, int row)
 	int	tab_len;
 
 	line = 1;
+	parse_minus(data);
 	tab_len = ft_dbl_ptr_len(data->rl_decomp);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;

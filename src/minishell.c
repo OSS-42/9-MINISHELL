@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/20 09:12:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 08:39:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(void)
 	signal(SIGINT, sig_handler);
 	init_data(&data);
 	intro_minishell();
-//	intro_daftpunk();
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
