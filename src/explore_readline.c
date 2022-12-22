@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/21 23:12:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:54:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,93 +71,4 @@ void	built_in(t_vault *data)
 	if (ft_strcmp("exit", data->rl_decomp[0]) == 0)
 		ft_exit (data);
 	return ;
-}
-
-void	create_tab_arg(t_vault *data, int row, int line)
-{
-	size_t	i;
-	int		j;
-	char	*buffer;
-
-	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
-	buffer = NULL;
-	while (data->rl_decomp[++row] && data->rl_decomp[row] && data->rl_decomp[row][0])
-	{
-		if (data->rl_decomp[row][0] == '|')
-		{
-			if (!(data->rl_decomp[row][1]))
-			{
-				line++;
-				row++;
-				if (!(data->rl_decomp[row]))
-					return ; //retourner un code d'erreur.
-			}
-			else if (data->rl_decomp[row][1] == '|')
-			{
-				data->rl_decomp[row] = NULL;
-				return ; //avant le return : vider la ligne.
-			}
-		}
-		i = 0;
-		j = 0;
-		data->buffer = ft_calloc(sizeof(char), 500);
-		while (data->rl_decomp[row] && data->rl_decomp[row][i])
-		{
-			if (data->rl_decomp[row][i] == '\'' || data->rl_decomp[row][i] == '\"')
-			{
-				data->quote->quote_priority = data->rl_decomp[row][i];
-				while (data->rl_decomp[row][++i] != data->quote->quote_priority)
-				{
-					data->buffer[j] = data->rl_decomp[row][i];
-					j++;
-				}
-			}
-			else if (data->rl_decomp[row][i] == '|')
-			{
-				if (data->tab_arg[line] == NULL)
-				{
-					data->tab_arg[line] = ft_strdup(data->buffer);
-					free (data->buffer);
-					data->buffer = ft_calloc(sizeof(char), 500);
-				}
-				else
-				{
-					buffer = ft_strjoin(data->tab_arg[line], data->buffer);
-					free (data->buffer);
-					free (data->tab_arg[line]);
-					data->tab_arg[line] = ft_strdup(buffer);
-					free (buffer);
-					data->buffer = ft_calloc(sizeof(char), 500);
-				}
-				line++;
-				j = 0;
-			}
-			else
-			{
-				data->buffer[j] = data->rl_decomp[row][i];
-				j++;
-			}
-			i++;
-		}
-		if (data->buffer[0] != '\0')
-		{
-			if (data->tab_arg[line] == NULL)
-			{
-				data->tab_arg[line] = ft_strdup(data->buffer);
-				free (data->buffer);
-				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
-					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
-			}
-			else
-			{
-				buffer = ft_strjoin(data->tab_arg[line], data->buffer);
-				free (data->buffer);
-				free (data->tab_arg[line]);
-				data->tab_arg[line] = ft_strdup(buffer);
-				free (buffer);
-				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
-					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
-			}
-		}
-	}
 }
