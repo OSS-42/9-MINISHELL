@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 08:38:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 10:35:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ft_pwd(t_vault *data, int row)
 
 void	ft_exit(t_vault *data)
 {
-	// if (data->rl_decomp)
-	// 	free_dbl_ptr((void **)data->rl_decomp);
 	close (data->flag->stdout_backup);
 	close (data->flag->stdin_backup);
 	if (data->b_in->export_var)
@@ -64,6 +62,8 @@ void	ft_exit(t_vault *data)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
+	if (data->path_names)
+		free_dbl_ptr((void **)data->path_names);
 	exit_minishell();
 	exit (0);
 }

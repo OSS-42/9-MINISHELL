@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 08:44:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 10:41:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,14 @@
 # define TRUE 1
 # define FALSE 0
 
-/***** STRUTURE *****/
+/***** STRUTURES *****/
+
+typedef struct s_cmd
+{
+	char	*path;
+	char	*name;
+	char	**options;
+}	t_cmd;
 
 typedef struct s_builtins
 {
@@ -85,6 +92,7 @@ typedef struct s_vault
 	char		**rl_decomp;
 	char		**clean_decomposer;
 	char		**tab_arg;
+	char		**path_names;
 	char		*read_line;
 	char		*env_path;
 	char		*test;
@@ -92,7 +100,9 @@ typedef struct s_vault
 	t_builtins	*b_in;
 	t_quote		*quote;
 	t_flag		*flag;
+	t_cmd		*cmd;
 	char		*dollar_var;
+	char		*paths;
 	int			dollar_var_len;
 	int			spc_count;
 	int			pos;
@@ -224,4 +234,6 @@ void	copy_in_temp(t_vault *data, int row, int i, int *j);
 /***** heredoc.c *****/
 void	heredoc(t_vault *data);
 
+/***** prog_utils.c *****/
+void	find_paths(t_vault *data);
 #endif
