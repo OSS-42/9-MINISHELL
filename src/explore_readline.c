@@ -6,11 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/21 17:08:06 by mbertin          ###   ########.fr       */
-=======
-/*   Updated: 2022/12/21 23:54:16 by ewurstei         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2022/12/22 08:42:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +42,7 @@ void	explore_readline(t_vault *data)
 		execute_redirection(data, 0, 0);
 		row_parsing(data);
 		parse_minus(data);
-		create_tab_arg(data);
+		create_tab_arg(data, -1, 0);
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);

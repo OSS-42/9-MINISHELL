@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 08:39:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 08:44:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,8 @@ void	switch_lines(t_vault *data, int row, int line);
 void	clear_pipe_from_str(t_vault *data, int line);
 int		parsing_pipe(t_vault *data, int row, int line);
 void	copy_in_temp(t_vault *data, int row, int i, int *j);
+
+/***** heredoc.c *****/
+void	heredoc(t_vault *data);
 
 #endif

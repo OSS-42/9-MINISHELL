@@ -54,7 +54,8 @@ SRCS =	src/minishell.c \
 		src/redirection_utils.c\
 		src/redirection_utils_2.c\
 		src/minus_utils.c\
-		src/pipe_utils.c
+		src/pipe_utils.c\
+		src/heredoc.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
