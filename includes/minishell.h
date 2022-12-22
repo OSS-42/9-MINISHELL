@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 11:49:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:04:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ typedef struct s_vault
 	int			begin;
 	int			fd_in;
 	int			fd_out;
-	int			pid;
 	int			fork_count;
+	pid_t		pid;
+	int			child_id;
+	int			status;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -129,6 +131,8 @@ void	reinit_data(t_vault *data);
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
 void	piping(t_vault *data);
+int		is_built_in(char *str);
+void	forking(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -244,6 +248,8 @@ void	heredoc(t_vault *data);
 
 /***** prog_utils.c *****/
 void	find_paths(t_vault *data);
+void	cmd_path_check(t_vault *data);
+void	find_prog(t_vault *data, int line);
 
 /***** io_utils.c *****/
 void	io_redirection(t_vault *data, int input, int output);
