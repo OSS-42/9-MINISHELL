@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 13:54:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:15:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	built_in(t_vault *data)
 	if (ft_strcmp("unset", data->cmd->name) == 0)
 		ft_unset (data, i);
 	if (ft_strcmp("exit", data->cmd->name) == 0)
-		ft_exit (data);
+		ft_exit (data, 0);
 	return ;
 }
 
@@ -129,7 +129,7 @@ void	forking(t_vault *data)
 				dup_fds(data, line);
 				close_pipe(data);
 				execute_redirection(data, 0, 0);
-				find_prog(data, line);
+				find_prog(data);
 //				exit(EXIT_FAILURE);
 			}
 		}

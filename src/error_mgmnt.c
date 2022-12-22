@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/01 23:08:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:16:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,31 @@ int	check_error(t_vault *data, int row)
 	if (!(data->rl_decomp[row]) || ft_str_env_var(data->rl_decomp[row], 0) == 0)
 		return (0);
 	return (1);
+}
+
+// int	check_cmd(t_vault *data)
+// {
+// 	if (ft_strchr(data->cmd->options[0], '/') != NULL)
+// 		return (1);
+// 	return (0);
+// }
+
+int	message(t_vault *data, char *str1, char *str2, int error_code)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str1, 2);
+	ft_putendl_fd(str2, 2);
+	if (error_code == 9)
+		close_pipe(data);
+	else if (error_code == 8)
+		free_dbl_ptr((void **)data->cmd->options);
+	return (error_code);
+}
+
+void	exit_on_error(t_vault *data, int error_code)
+{
+	if (error_code == 7)
+		free_dbl_ptr((void **)data->path_names);
+	else
+		ft_exit (data, error_code);
 }
