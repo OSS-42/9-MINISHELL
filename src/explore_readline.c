@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 10:55:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 11:10:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,3 +181,8 @@ void	redirect_pipe(int input, int output)
 	return ;
 }
 */
+
+int	is_built_in(char *str)
+{
+
+}
