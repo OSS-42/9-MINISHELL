@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 11:04:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:15:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void	cmd_path_check(t_vault *data)
 
 void	find_prog(t_vault *data, int line)
 {
-	data->cmd->options = ft_split(data->tab_arg[line], ' ');
-	if (!data->cmd->options)
-		printf("error 66");
-	data->cmd->name = data->cmd->options[0];
 	if (is_built_in(data->cmd->name) == 1)
 		built_in(data);
 //		exit_on_error(data, message(data, "Unexpected error.", "", 0));

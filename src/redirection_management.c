@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 17:27:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/21 13:33:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ echo test 16>"tes>t">test1
 /*
 	Je vais chercher un chevon qui n'est pas entre quote et le nom du
 	fichier qui suit. Si le nom du fichier est dans le prochain array de
-	rl_decomp je rentre dans output_in_next_array.
+	tab_arg je rentre dans output_in_next_array.
 
 	A partir du moment ou le fichier est trouvé et que la redirection est
 	faite, je vais supprimer le chevron et le nom du fichier qui suit.
@@ -61,23 +61,23 @@ void	execute_redirection(t_vault *data, int i, int j)
 {
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
-	while (data->rl_decomp[i] && data->rl_decomp[i][0])
+	while (data->tab_arg[i] && data->tab_arg[i][0])
 	{
-		if ((ft_strchr(data->rl_decomp[i], '>') != NULL
-				&& check_if_inside_quote(data->rl_decomp[i], '>') == FALSE)
-			|| (ft_strchr(data->rl_decomp[i], '<') != NULL
-				&& check_if_inside_quote(data->rl_decomp[i], '<') == FALSE))
+		if ((ft_strchr(data->tab_arg[i], '>') != NULL
+				&& check_if_inside_quote(data->tab_arg[i], '>') == FALSE)
+			|| (ft_strchr(data->tab_arg[i], '<') != NULL
+				&& check_if_inside_quote(data->tab_arg[i], '<') == FALSE))
 		{
-			while (data->rl_decomp[i][j])
+			while (data->tab_arg[i][j])
 			{
-				if ((data->rl_decomp[i][j] == '>'
-					|| data->rl_decomp[i][j] == '<')
-					&& (!data->rl_decomp[i][j + 1] || (data->rl_decomp[i][j + 1] == data->rl_decomp[i][j] && !data->rl_decomp[i][j + 2])))
-					redir_in_next_array(data, i, &j, data->rl_decomp[i][j]);
-				else if (data->rl_decomp[i][j] == '>'
-				|| data->rl_decomp[i][j] == '<')
-					redir_in_same_array(data, i, &j, data->rl_decomp[i][j]);
-				else if (data->rl_decomp[i][j] == '|' && check_if_inside_quote(data->rl_decomp[i], '|') == FALSE)
+				if ((data->tab_arg[i][j] == '>'
+					|| data->tab_arg[i][j] == '<')
+					&& (!data->tab_arg[i][j + 1] || (data->tab_arg[i][j + 1] == data->tab_arg[i][j] && !data->tab_arg[i][j + 2])))
+					redir_in_next_array(data, i, &j, data->tab_arg[i][j]);
+				else if (data->tab_arg[i][j] == '>'
+				|| data->tab_arg[i][j] == '<')
+					redir_in_same_array(data, i, &j, data->tab_arg[i][j]);
+				else if (data->tab_arg[i][j] == '|' && check_if_inside_quote(data->tab_arg[i], '|') == FALSE)
 					return ;
 				j++;
 			}

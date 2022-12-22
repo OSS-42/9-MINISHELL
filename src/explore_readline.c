@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 11:12:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 11:48:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,11 @@ void	explore_readline(t_vault *data)
 	{
 		find_str_quote(data);
 		flag_count(data, 0, 0);
-		execute_redirection(data, 0, 0);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
-		built_in(data);
-		forking()
-		dup2(data->flag->stdout_backup, STDOUT_FILENO);
-		dup2(data->flag->stdin_backup, STDIN_FILENO);
-		close (data->flag->stdout_backup);
-		close (data->flag->stdin_backup);
+		forking(data);
+		reset_io(data);
 		if (data->flag->fd != 0)
 			close (data->flag->fd);
 	}
@@ -109,59 +104,35 @@ void	piping(t_vault *data)
 
 void	forking(t_vault *data)
 {
-	int		i;
 	int		line;
-	i = 0;
+
 	line = 0;
-
-	while (data-> tab_arg[i])
+	while (data->tab_arg[line])
 	{
-		data->pid = fork();
-		if (data->pid == -1)
-			printf("Probleme de pid\n"); // ajouter gestion d'erreur
-		else if (data->pid == 0)
+		data->cmd->options = ft_split(data->tab_arg[line], ' ');
+		data->cmd->name = data->cmd->options[0];
+		if (ft_strcmp(data->cmd->name, "cd") == 0
+			|| (ft_strcmp(data->cmd->name, "exit") == 0
+				&& !(data->tab_arg[line + 1])))
+			built_in(data);
+		else
 		{
-			check_redirection(data);
-			close_pipe(data);
-			check_access(data, j);
-			exit(EXIT_FAILURE);
+			data->pid = fork();
+			if (data->pid == -1)
+				printf("Probleme de pid\n"); // ajouter gestion d'erreur
+			else if (data->pid == 0)
+			{
+				dup_fds(data, line);
+				close_pipe(data);
+				execute_redirection(data, 0, 0);
+				find_prog(data, line);
+//				exit(EXIT_FAILURE);
+			}
 		}
-		data->fork_count++;
-		j++;
+		line++;
 	}
 }
 
-void	check_redirection(t_vault *data)
-{
-	if (data->fork_count == 0)
-	{
-		redirect_pipe(data->fd_in, data->flag->pipe[0][1]);
-		close(data->fd_in);
-	}
-	else if (data->fork_count + 1 < data->cmd_count)
-		redirection(data->pipe[data->fork_count - 1][0],
-			data->pipe[data->fork_count][1]);
-	else if (data->fork_count == data->cmd_count - 1)
-	{
-		check_fd(data, data->argv, "fd_out");
-		redirection(data->pipe[data->fork_count - 1][0], data->fd_out);
-		close(data->fd_out);
-	}
-}
-
-void	redirect_pipe(int input, int output)
-{
-	if (dup2(input, STDIN_FILENO) == -1)
-	{
-		write(2, "Error dup STDIN\n", 16);
-		exit (1);
-	}
-	if (dup2(output, STDOUT_FILENO) == -1)
-	{
-		write(2, "Error dup STDOUT\n", 16);
-		exit (1);
-	}
-}
 /*
 	Si la commande est un exit mais qu'elle est suivi d'un pipe, il faut
 	executer exit dans un child process. Sinon si exit est la seul commande
@@ -194,8 +165,3 @@ void	redirect_pipe(int input, int output)
 	return ;
 }
 */
-
-int	is_built_in(char *str)
-{
-
-}

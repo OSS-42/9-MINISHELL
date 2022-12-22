@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 10:54:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 11:49:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@
 # include "../librl/history.h"
 # include "../libart/includes/libart.h"
 
+/***** DEFINES *****/
 # define TRUE 1
 # define FALSE 0
+
+enum	e_pipe_ends_name
+{
+	p_read,
+	p_write
+};
 
 /***** STRUTURES *****/
 
@@ -219,11 +226,6 @@ char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
 
-//void	clean_quote(t_vault *data, int row);
-//int		insert_row(int pos, int count, char **dest, char **source);
-//void	split_on_char(t_vault *data, int row, char c);
-//void	change_tab(t_vault *data, int row);
-
 /***** minus_utils. *****/
 void	parse_minus(t_vault *data);
 void	recreate_arg_tab(t_vault *data, char **tab);
@@ -242,4 +244,11 @@ void	heredoc(t_vault *data);
 
 /***** prog_utils.c *****/
 void	find_paths(t_vault *data);
+
+/***** io_utils.c *****/
+void	io_redirection(t_vault *data, int input, int output);
+int		dup_fds(t_vault *data, int line);
+void	close_pipe(t_vault *data);
+void	reset_io(t_vault *data);
+
 #endif
