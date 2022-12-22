@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 14:15:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:50:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	row_parsing(t_vault *data)
 void	explore_readline(t_vault *data)
 {
 	data->rl_decomp = ft_split(data->read_line, ' ');
+	data->debug = open("debug", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
 		find_str_quote(data);
@@ -42,7 +43,7 @@ void	explore_readline(t_vault *data)
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
-		forking(data);
+		// forking(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
 			close (data->flag->fd);
@@ -74,6 +75,7 @@ void	built_in(t_vault *data)
 
 int	is_built_in(char *str)
 {
+	// fprintf(stderr, "is built in\n");
 	if (ft_strcmp("cd", str) == 0
 		|| ft_strcmp("pwd", str) == 0
 		|| ft_strcmp("echo", str) == 0
@@ -100,6 +102,7 @@ void	piping(t_vault *data)
 		// 	Gestion d'erreur
 		i++;
 	}
+	forking(data);
 	close_pipe(data);
 	data->child_id = waitpid(0, &data->status, 0);
 	while (data->child_id != -1)
@@ -121,6 +124,7 @@ void	forking(t_vault *data)
 			built_in(data);
 		else
 		{
+			find_paths(data);
 			data->pid = fork();
 			if (data->pid == -1)
 				printf("Probleme de pid\n"); // ajouter gestion d'erreur

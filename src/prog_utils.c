@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 14:18:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:46:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,13 @@ void	cmd_path_check(t_vault *data)
 void	find_prog(t_vault *data)
 {
 	if (is_built_in(data->cmd->name) == 1)
+	{
 		built_in(data);
+		return ;
+	}
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)
 		execve(data->cmd->name, data->cmd->options, data->env);
-	else if (access(data->cmd->options[0], F_OK | X_OK) != 0)
+	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
 	exit_on_error(data, message(data, "Command not found: ",
 			data->cmd->options[0], 8));

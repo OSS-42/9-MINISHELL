@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 11:49:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:04:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	dup_fds(t_vault *data, int line)
 {
 	int	len;
 
+	if (data->flag->pipe_count == 0)
+		return (0);
 	len = ft_dbl_ptr_len(data->tab_arg);
 	if (line == 0)
 	{
@@ -46,6 +48,8 @@ void	close_pipe(t_vault *data)
 	int	x;
 
 	x = 0;
+	if (data->flag->pipe_count == 0)
+		return ;
 	while (x < data->flag->pipe_count)
 	{
 		close (data->flag->pipe[x][p_write]);
@@ -61,6 +65,4 @@ void	reset_io(t_vault *data)
 {
 	dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	dup2(data->flag->stdin_backup, STDIN_FILENO);
-	close (data->flag->stdout_backup);
-	close (data->flag->stdin_backup);
 }

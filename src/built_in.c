@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 14:12:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:52:19 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	ft_exit(t_vault *data, int error_code)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
-	if (data->path_names)
-		free_dbl_ptr((void **)data->path_names);
-	exit_minishell();
+	// if (data->path_names)
+	// 	free_dbl_ptr((void **)data->path_names);
+	// exit_minishell();
 	exit (error_code);
 }
 
@@ -105,16 +105,7 @@ void	ft_echo(t_vault *data, int row)
 	tab_len = ft_dbl_ptr_len(data->rl_decomp);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	while (line < tab_len)
-	{
-		if (data->rl_decomp[row] && data->rl_decomp[row][0])
-		{
-				print_row(data, row);
-				data->b_in->echo_flag_n = 0;
-		}
-		row++;
-		line++;
-	}
+	print_row(data, row);
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	return ;
