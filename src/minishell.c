@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 15:21:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:06:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(void)
 	signal(SIGINT, sig_handler);
 	init_data(&data);
 	intro_minishell();
-//	intro_daftpunk();
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");

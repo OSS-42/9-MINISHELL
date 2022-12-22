@@ -17,9 +17,9 @@ D_LIBFT = libft/
 LIBFT = libft/libft.a
 D_LIBFTHEAD = libft/includes/libft.h
 
-D_LIBPRETTY = libpretty/
-LIBPRETTY = libpretty/libpretty.a
-D_LIBPRETTYHEAD = libpretty/includes/libpretty.h
+D_LIBART = libart/
+LIBART = libart/libart.a
+D_LIBARTHEAD = libart/includes/libart.h
 
 # Pour faire fonctionner readline, modification du code dans keymap.h, readline.h et history.h
 # Il faut enlever les conditions "if" autour de rlstdc.h (et les autres .h)
@@ -68,20 +68,20 @@ SRCS =	src/minishell.c \
 all:	daftpunk $(NAME)
 
 #-lcurses pour les signaux
-$(NAME):	$(LIBFT) $(LIBPRETTY) $(LIBRL) $(OBJS)
-	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBPRETTY) $(LIBRL) -lreadline -lcurses -o $@)
+$(NAME):	$(LIBFT) $(LIBART) $(LIBRL) $(OBJS)
+	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBART) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 	@sleep 2
 #	@clear
 
 daftpunk:
-	@$(MAKE) intro_daftpunk -C $(D_LIBPRETTY)
+	@$(MAKE) intro_daftpunk -C $(D_LIBART)
 
 $(LIBFT): $(D_OBJ) $(D_LIBFTHEAD)
 	@$(MAKE) -C $(D_LIBFT)
 
-$(LIBPRETTY): $(D_OBJ) $(D_LIBPRETTYHEAD)
-	@$(MAKE) -C $(D_LIBPRETTY)
+$(LIBART): $(D_OBJ) $(D_LIBARTHEAD)
+	@$(MAKE) -C $(D_LIBART)
 
 $(LIBRL):
 	@echo "$(LGREEN)LIB READLINE Configuration started ...$(NC)"
@@ -113,7 +113,7 @@ fclean:	clean
 lclean: fclean
 	@$(call lcleaning)
 	@$(MAKE) -s --no-print-directory -C $(D_LIBFT) fclean
-	@$(MAKE) -s --no-print-directory -C $(D_LIBPRETTY) fclean
+	@$(MAKE) -s --no-print-directory -C $(D_LIBART) fclean
 	@$(MAKE) -s --no-print-directory -C $(D_LIBRL) distclean
 
 re:	fclean all

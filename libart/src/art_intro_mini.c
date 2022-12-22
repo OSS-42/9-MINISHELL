@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pretty_intro_mini.c                                :+:      :+:    :+:   */
+/*   art_intro_mini.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:00:40 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/17 15:17:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:01:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libpretty.h"
+#include "../includes/libart.h"
 
 void	intro_minishell(void)
 {

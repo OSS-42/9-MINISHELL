@@ -61,7 +61,7 @@ $THISPROG = "texi2html $THISVERSION";	# program name and version
 
 # Identity:
 
-$T2H_TODAY = &pretty_date;		# like "20 September 1993"
+$T2H_TODAY = &art_date;		# like "20 September 1993"
 # the eval prevents this from breaking on system which do not have
 # a proper getpwuid implemented
 eval { ($T2H_USER = (getpwuid ($<))[6]) =~ s/,.*//;}; # Who am i
@@ -878,9 +878,9 @@ sub T2H_DEFAULT_print_chapter_footer
   &$T2H_print_navigation(@_);
 }
 ###################################################################
-$T2H_TODAY = &pretty_date;		# like "20 September 1993"
+$T2H_TODAY = &art_date;		# like "20 September 1993"
 
-sub pretty_date {
+sub art_date {
     local($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst);
 
     ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = localtime(time);
@@ -5310,7 +5310,7 @@ sub t2h_anchor {
     return($result);
 }
 
-sub pretty_date {
+sub art_date {
     local(@MoY, $sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst);
 
     @MoY = ('January', 'February', 'March', 'April', 'May', 'June',

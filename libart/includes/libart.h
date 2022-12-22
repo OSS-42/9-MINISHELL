@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pretty.h                                           :+:      :+:    :+:   */
+/*   libart.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:15:03 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/17 00:17:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:22:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@
 # include <stdio.h>
 
 /***** PRETTY *****/
-/***** pretty_intro_mini.c *****/
+/***** art_intro_mini.c *****/
 void	intro_minishell(void);
 void	intro_minishell_p2(void);
 void	intro_minishell_p3(void);
 void	color_reset(void);
 
-/***** pretty_intro_daftpunk.c *****/
+/***** art_exit_mini.c *****/
+void	exit_minishell(void);
+void	cyan(void);
+
+/***** art_intro_daftpunk.c *****/
 void	intro_daftpunk(void);
 void	intro_daftpunk_p2(void);
 void	intro_daftpunk_p3(void);
 void	intro_daftpunk_p4(void);
 
-/***** pretty_colors.c *****/
+/***** art_colors.c *****/
 void	lred(void);
 void	lcyan(void);
 void	lyellow(void);

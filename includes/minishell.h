@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/21 23:54:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:01:37 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "../libft/includes/libft.h"
 # include "../librl/readline.h"
 # include "../librl/history.h"
-# include "../libpretty/includes/libpretty.h"
+# include "../libart/includes/libart.h"
 
 # define TRUE 1
 # define FALSE 0
