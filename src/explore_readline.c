@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/21 14:28:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:12:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	explore_readline(t_vault *data)
 		print_double_array(data->rl_decomp);
 		create_tab_arg(data, -1, 0);
 		print_double_array(data->tab_arg);
-		row_parsing(data);
-		parse_minus(data); //echo doit appeler ce parsing
+		row_parsing(data); //a realiser sur tab_arg et non rl_decomp
 		built_in(data);
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);
@@ -77,53 +76,88 @@ void	built_in(t_vault *data)
 void	create_tab_arg(t_vault *data, int row, int line)
 {
 	size_t	i;
+	int		j;
+	char	*buffer;
 
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
-	while (data->rl_decomp[++row] && data->rl_decomp[row][0])
+	buffer = NULL;
+	while (data->rl_decomp[++row] && data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		if (data->rl_decomp[row][0] == '|')
 		{
-			if (data->rl_decomp[row][1] == '\0')
+			if (!(data->rl_decomp[row][1]))
 			{
 				line++;
 				row++;
+				if (!(data->rl_decomp[row]))
+					return ; //retourner un code d'erreur.
 			}
 			else if (data->rl_decomp[row][1] == '|')
-				return ;
+			{
+				data->rl_decomp[row] = NULL;
+				return ; //avant le return : vider la ligne.
+			}
 		}
-		i = check_if_pipe(data, row, i);
-		if (i == ft_strlen(data->rl_decomp[row]))
-			switch_lines(data, row, line);
-		else if (ft_strlen(data->rl_decomp[row]) > 1)
-			row = remove_pipe_from_str(data, row, &line) - 1;
-	}
-	line++;
-	data->tab_arg[line] = NULL;
-}
-
-int	remove_pipe_from_str(t_vault *data, int row, int *line)
-{
-	int		i;
-	char	*temp;
-	char	*buf;
-
-	i = 0;
-	data->flag->pipe_count = 0;
-	buf = NULL;
-	while (data->rl_decomp[row] && data->rl_decomp[row][i])
-	{
-		temp = check_if_pipe2(data, row, &i);
-		switch_lines2(data, row, *line, temp);
-		if (data->flag->pipe_count > 0)
-		{
-			(*line)++;
-			data->flag->pipe_count--;
-		}
-		temp = copy_in_temp(data, row, &i, 0);
-		if (data->rl_decomp[row][i] || temp)
-			switch_lines2(data, row, *line, temp);
 		i = 0;
-		row ++;
+		j = 0;
+		data->buffer = ft_calloc(sizeof(char), 500);
+		while (data->rl_decomp[row] && data->rl_decomp[row][i])
+		{
+			if (data->rl_decomp[row][i] == '\'' || data->rl_decomp[row][i] == '\"')
+			{
+				data->quote->quote_priority = data->rl_decomp[row][i];
+				while (data->rl_decomp[row][++i] != data->quote->quote_priority)
+				{
+					data->buffer[j] = data->rl_decomp[row][i];
+					j++;
+				}
+			}
+			else if (data->rl_decomp[row][i] == '|')
+			{
+				if (data->tab_arg[line] == NULL)
+				{
+					data->tab_arg[line] = ft_strdup(data->buffer);
+					free (data->buffer);
+					data->buffer = ft_calloc(sizeof(char), 500);
+				}
+				else
+				{
+					buffer = ft_strjoin(data->tab_arg[line], data->buffer);
+					free (data->buffer);
+					free (data->tab_arg[line]);
+					data->tab_arg[line] = ft_strdup(buffer);
+					free (buffer);
+					data->buffer = ft_calloc(sizeof(char), 500);
+				}
+				line++;
+				j = 0;
+			}
+			else
+			{
+				data->buffer[j] = data->rl_decomp[row][i];
+				j++;
+			}
+			i++;
+		}
+		if (data->buffer[0] != '\0')
+		{
+			if (data->tab_arg[line] == NULL)
+			{
+				data->tab_arg[line] = ft_strdup(data->buffer);
+				free (data->buffer);
+				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
+					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
+			}
+			else
+			{
+				buffer = ft_strjoin(data->tab_arg[line], data->buffer);
+				free (data->buffer);
+				free (data->tab_arg[line]);
+				data->tab_arg[line] = ft_strdup(buffer);
+				free (buffer);
+				if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0] && data->rl_decomp[row + 1][0] != '|')
+					data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
+			}
+		}
 	}
-	return (row);
 }

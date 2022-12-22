@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/19 16:21:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/21 20:17:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_echo(t_vault *data, int row)
 	int	tab_len;
 
 	line = 1;
+	parse_minus(data);
 	tab_len = ft_dbl_ptr_len(data->rl_decomp);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
