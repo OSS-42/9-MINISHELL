@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 13:33:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 14:02:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,15 @@ echo test 16>"tes>t">test1
 	faite, je vais supprimer le chevron et le nom du fichier qui suit.
 */
 
-void	execute_redirection(t_vault *data, int i, int j)
+void	execute_redirection(t_vault *data, int line, int j)
 {
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
-	while (data->tab_arg[i] && data->tab_arg[i][0])
+	while (data->tab_arg[line][j])
 	{
-		if ((ft_strchr(data->tab_arg[i], '>') != NULL
-				&& check_if_inside_quote(data->tab_arg[i], '>') == FALSE)
-			|| (ft_strchr(data->tab_arg[i], '<') != NULL
-				&& check_if_inside_quote(data->tab_arg[i], '<') == FALSE))
-		{
-			while (data->tab_arg[i][j])
-			{
-				if ((data->tab_arg[i][j] == '>'
-					|| data->tab_arg[i][j] == '<')
-					&& (!data->tab_arg[i][j + 1] || (data->tab_arg[i][j + 1] == data->tab_arg[i][j] && !data->tab_arg[i][j + 2])))
-					redir_in_next_array(data, i, &j, data->tab_arg[i][j]);
-				else if (data->tab_arg[i][j] == '>'
-				|| data->tab_arg[i][j] == '<')
-					redir_in_same_array(data, i, &j, data->tab_arg[i][j]);
-				else if (data->tab_arg[i][j] == '|' && check_if_inside_quote(data->tab_arg[i], '|') == FALSE)
-					return ;
-				j++;
-			}
-		}
-		j = 0;
-		i++;
+		if (data->tab_arg[line][j] == '>' || data->tab_arg[line][j] == '<') // Vérifier si le </> est entre quote
+			redir_in_same_array(data, line, &j, data->tab_arg[line][j]);
+		j++;
 	}
 }
 
