@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 14:28:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:35:30 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	init_data(t_vault *data)
 	data->env = environ;
 	data->read_line = NULL;
 	data->tab_arg = NULL;
-	data->cmd->options = NULL;
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	data->quote = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
+	data->cmd = ft_calloc(sizeof(t_cmd), 1);
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
 	data->rl_decomp = NULL;

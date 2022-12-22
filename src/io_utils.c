@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 15:04:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:20:10 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	io_redirection(t_vault *data, int input, int output)
 {
+	(void)data;
 	if (dup2(input, STDIN_FILENO) == -1)
-		exit_on_error(data, 1);
+		printf("error 54\n");
+		// exit_on_error(data, 1);
 	if (dup2(output, STDOUT_FILENO) == -1)
-		exit_on_error(data, 1);
+		printf("error 55\n");
+		// exit_on_error(data, 1);
 }
 
 int	dup_fds(t_vault *data, int line)
@@ -30,7 +33,8 @@ int	dup_fds(t_vault *data, int line)
 	if (line == 0)
 	{
 		if (dup2(data->flag->pipe[line][p_write], STDOUT_FILENO) == -1)
-			exit_on_error(data, 1);
+			printf("error 56\n");
+			// exit_on_error(data, 1);
 	}
 	else if (line != len - 1)
 		io_redirection(data, data->flag->pipe[line - 1][p_read],
@@ -38,7 +42,8 @@ int	dup_fds(t_vault *data, int line)
 	else
 	{
 		if (dup2(data->flag->pipe[line - 1][p_read], STDIN_FILENO) == -1)
-			exit_on_error(data, 1);
+			printf("error 2\n");
+			// exit_on_error(data, 1);
 	}
 	return (0);
 }

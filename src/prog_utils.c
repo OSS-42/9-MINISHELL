@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 15:46:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:17:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		exit_on_error(data, message(data, "Unexpected error.", "", 7));
+		printf("error 69\n");
+		// exit_on_error(data, message(data, "Unexpected error.", "", 7));
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
@@ -69,6 +70,7 @@ void	find_prog(t_vault *data)
 		execve(data->cmd->name, data->cmd->options, data->env);
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	exit_on_error(data, message(data, "Command not found: ",
-			data->cmd->options[0], 8));
+	// exit_on_error(data, message(data, "Command not found: ",
+	// 		data->cmd->options[0], 8));
+	printf("error 68\n");
 }

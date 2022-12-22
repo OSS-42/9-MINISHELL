@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 15:50:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 16:41:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	piping(t_vault *data)
 	}
 	forking(data);
 	close_pipe(data);
-	data->child_id = waitpid(0, &data->status, 0);
-	while (data->child_id != -1)
-		data->child_id = waitpid(0, &data->status, 0);
+	// data->child_id = waitpid(0, &data->status, 0);
+	// while (data->child_id != -1)
+	// 	data->child_id = waitpid(0, &data->status, 0);
 }
 
 void	forking(t_vault *data)
@@ -117,7 +117,7 @@ void	forking(t_vault *data)
 	while (data->tab_arg[line])
 	{
 		data->cmd->options = ft_split(data->tab_arg[line], ' ');
-		data->cmd->name = data->cmd->options[0];
+		data->cmd->name = ft_strdup(data->cmd->options[0]);
 		if (ft_strcmp(data->cmd->name, "cd") == 0
 			|| (ft_strcmp(data->cmd->name, "exit") == 0
 				&& !(data->tab_arg[line + 1])))
@@ -134,7 +134,7 @@ void	forking(t_vault *data)
 				close_pipe(data);
 				execute_redirection(data, 0, 0);
 				find_prog(data);
-//				exit(EXIT_FAILURE);
+				ft_exit(data, 0);
 			}
 		}
 		line++;
