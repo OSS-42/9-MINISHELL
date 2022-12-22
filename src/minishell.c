@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 08:39:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 10:40:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	init_data(t_vault *data)
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
 	data->rl_decomp = NULL;
+	data->fd_in = -1;
+	data->fd_out = -1;
+	data->fork_count = 0;
 	return ;
 }
 

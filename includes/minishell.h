@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 08:44:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 10:39:18 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_flag
 	int		heredoc_delimiter;
 	int		heredoc_fd;
 	int		fd;
+	int		**pipe;
 }	t_flag;
 
 typedef struct s_quote
@@ -97,6 +98,10 @@ typedef struct s_vault
 	int			spc_count;
 	int			pos;
 	int			begin;
+	int			fd_in;
+	int			fd_out;
+	int			pid;
+	int			fork_count;
 }	t_vault;
 
 /***** minishell.c *****/
@@ -106,6 +111,7 @@ void	reinit_data(t_vault *data);
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
 void	built_in(t_vault *data);
+void	piping(t_vault *data);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
