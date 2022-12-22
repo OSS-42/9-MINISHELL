@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 11:15:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:18:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		printf("error 65");
-//		exit_on_error(data, message(data, "Unexpected error.", "", 7));
+		exit_on_error(data, message(data, "Unexpected error.", "", 7));
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
@@ -41,12 +40,12 @@ void	find_paths(t_vault *data)
 
 void	cmd_path_check(t_vault *data)
 {
-	size_t	x;
+	size_t	i;
 
-	x = 0;
-	while (data->path_names[x])
+	i = 0;
+	while (data->path_names[i])
 	{
-		data->cmd->path = ft_strjoin(data->path_names[x], "/");
+		data->cmd->path = ft_strjoin(data->path_names[i], "/");
 		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->options[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 			execve(data->cmd->name, data->cmd->options, data->env);
@@ -55,20 +54,18 @@ void	cmd_path_check(t_vault *data)
 			free(data->cmd->name);
 			free(data->cmd->path);
 		}
-		x++;
+		i++;
 	}
 }
 
-void	find_prog(t_vault *data, int line)
+void	find_prog(t_vault *data)
 {
 	if (is_built_in(data->cmd->name) == 1)
 		built_in(data);
-//		exit_on_error(data, message(data, "Unexpected error.", "", 0));
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)
 		execve(data->cmd->name, data->cmd->options, data->env);
 	else if (access(data->cmd->options[0], F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	printf("error 67");
-//	exit_on_error(data, message(data, "Command not found: ",
-//			data->cmd.options[0], 8));
+	exit_on_error(data, message(data, "Command not found: ",
+			data->cmd->options[0], 8));
 }
