@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 16:17:48 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/23 13:57:08 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	find_prog(t_vault *data)
 		execve(data->cmd->name, data->cmd->options, data->env);
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	// exit_on_error(data, message(data, "Command not found: ",
-	// 		data->cmd->options[0], 8));
+	exit_on_error(data, message(data, "Command not found: ",
+			data->cmd->options[0], 8));
 	printf("error 68\n");
 }

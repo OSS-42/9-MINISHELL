@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/23 12:00:42 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/23 13:56:49 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,11 @@ void	piping(t_vault *data)
 	forking(data);
 	i = 0;
 	close_pipe(data);
-	data->child_id = waitpid(0, &data->status, 0);
-	data->child_id = waitpid(0, &data->status, 0);
-	// while (i < data->flag->pipe_count + 1)
-	// {
-	// 	data->child_id = waitpid(data->pid[i], &data->status, 0);
-	// 	dprintf(2, "%d\n", data->pid[i]);
-	// 	i++;
-	// }
+	while (i < data->flag->pipe_count + 1)
+	{
+		data->child_id = waitpid(data->pid[i], &data->status, 0);
+		i++;
+	}
 }
 
 void	forking(t_vault *data)
@@ -133,14 +130,13 @@ void	forking(t_vault *data)
 		{
 			find_paths(data);
 			data->pid[line] = fork();
-			if (data->pid[line] != 0)
-				dprintf(2, "pid : %d commande : %s\n", data->pid[line], data->cmd->name);
 			if (data->pid[line] == -1)
 				printf("Probleme de pid\n"); // ajouter gestion d'erreur
 			else if (data->pid[line] == 0)
 			{
 				dup_fds(data, line);
 				execute_redirection(data, 0, 0);
+				close_pipe(data);
 				find_prog(data);
 				ft_exit(data, 0);
 			}
