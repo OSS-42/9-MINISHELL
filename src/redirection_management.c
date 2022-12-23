@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/22 15:06:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/23 10:06:19 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ echo test 16>"tes>t">test1
 
 void	execute_redirection(t_vault *data, int line, int j)
 {
-	data->flag->stdout_backup = dup(STDOUT_FILENO);
-	data->flag->stdin_backup = dup(STDIN_FILENO);
 	while (data->tab_arg[line][j])
 	{
 		if (data->tab_arg[line][j] == '>' || data->tab_arg[line][j] == '<') // Vérifier si le </> est entre quote

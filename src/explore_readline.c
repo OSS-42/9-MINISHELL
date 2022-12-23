@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/23 08:59:18 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/23 12:00:42 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
-		execute_redirection(data, 0, 0); // pour debug
+		// execute_redirection(data, 0, 0); pour debug
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -98,15 +98,21 @@ void	piping(t_vault *data)
 	while (i < data->flag->pipe_count)
 	{
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
-		// if (pipe(data->pipe[i]) == -1)
-		// 	Gestion d'erreur
+		if (pipe(data->flag->pipe[i]) == -1)
+			printf("Probleme de pipe\n");
 		i++;
 	}
 	forking(data);
+	i = 0;
 	close_pipe(data);
 	data->child_id = waitpid(0, &data->status, 0);
-	while (data->child_id != -1)
-		data->child_id = waitpid(0, &data->status, 0);
+	data->child_id = waitpid(0, &data->status, 0);
+	// while (i < data->flag->pipe_count + 1)
+	// {
+	// 	data->child_id = waitpid(data->pid[i], &data->status, 0);
+	// 	dprintf(2, "%d\n", data->pid[i]);
+	// 	i++;
+	// }
 }
 
 void	forking(t_vault *data)
@@ -114,6 +120,7 @@ void	forking(t_vault *data)
 	int		line;
 
 	line = 0;
+	data->pid = ft_calloc(sizeof(int), data->flag->pipe_count + 1);
 	while (data->tab_arg[line])
 	{
 		data->cmd->options = ft_split(data->tab_arg[line], ' ');
@@ -125,13 +132,14 @@ void	forking(t_vault *data)
 		else
 		{
 			find_paths(data);
-			data->pid = fork();
-			if (data->pid == -1)
+			data->pid[line] = fork();
+			if (data->pid[line] != 0)
+				dprintf(2, "pid : %d commande : %s\n", data->pid[line], data->cmd->name);
+			if (data->pid[line] == -1)
 				printf("Probleme de pid\n"); // ajouter gestion d'erreur
-			else if (data->pid == 0)
+			else if (data->pid[line] == 0)
 			{
 				dup_fds(data, line);
-				close_pipe(data);
 				execute_redirection(data, 0, 0);
 				find_prog(data);
 				ft_exit(data, 0);

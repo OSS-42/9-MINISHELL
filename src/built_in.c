@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/23 08:59:21 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/23 10:29:30 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ft_pwd(t_vault *data, int row)
 
 void	ft_exit(t_vault *data, int error_code)
 {
-	close (data->flag->stdout_backup);
-	close (data->flag->stdin_backup);
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
 	if (data->b_in->env_export)
@@ -97,13 +95,6 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int row)
 {
-<<<<<<< HEAD
-	// int	line;
-	int	tab_len;
-
-	// line = 1;
-=======
->>>>>>> master
 	parse_minus(data);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;

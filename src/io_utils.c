@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 16:20:10 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/23 11:51:50 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	dup_fds(t_vault *data, int line)
 {
 	int	len;
 
+	data->flag->stdout_backup = dup(STDOUT_FILENO);
+	data->flag->stdin_backup = dup(STDIN_FILENO);
 	if (data->flag->pipe_count == 0)
 		return (0);
 	len = ft_dbl_ptr_len(data->tab_arg);
