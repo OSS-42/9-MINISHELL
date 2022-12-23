@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 20:03:22 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/23 08:59:18 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	piping(t_vault *data)
 	}
 	forking(data);
 	close_pipe(data);
-	// data->child_id = waitpid(0, &data->status, 0);
-	// while (data->child_id != -1)
-	// 	data->child_id = waitpid(0, &data->status, 0);
+	data->child_id = waitpid(0, &data->status, 0);
+	while (data->child_id != -1)
+		data->child_id = waitpid(0, &data->status, 0);
 }
 
 void	forking(t_vault *data)
@@ -140,6 +140,18 @@ void	forking(t_vault *data)
 		line++;
 	}
 }
+
+//en erreur:
+//echo bonjour $USER
+//echo bonjour | cat -e
+//echo bonjour |cat -e
+
+//possibilite de suivre le child :
+//1. ouvrir un 2e terminal
+//2. lancer lldb
+// lire  : https://lldb.llvm.org/use/map.html
+//3a. pro at -n minishell -w
+//ou 3b. pro at -p #pid
 
 /*
 	Si la commande est un exit mais qu'elle est suivi d'un pipe, il faut
