@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 16:41:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 22:37:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	piping(t_vault *data)
 	}
 	forking(data);
 	close_pipe(data);
-	// data->child_id = waitpid(0, &data->status, 0);
-	// while (data->child_id != -1)
-	// 	data->child_id = waitpid(0, &data->status, 0);
+	data->child_id = waitpid(0, &data->status, 0);
+	while (data->child_id != -1)
+		data->child_id = waitpid(0, &data->status, 0);
 }
 
 void	forking(t_vault *data)
@@ -140,6 +140,18 @@ void	forking(t_vault *data)
 		line++;
 	}
 }
+
+//en erreur:
+//echo bonjour $USER
+//echo bonjour | cat -e
+//echo bonjour |cat -e
+
+//possibilite de suivre le child :
+//1. ouvrir un 2e terminal
+//2. lancer lldb
+// lire  : https://lldb.llvm.org/use/map.html
+//3a. pro at -n minishell -w
+//ou 3b. pro at -p #pid
 
 /*
 	Si la commande est un exit mais qu'elle est suivi d'un pipe, il faut
