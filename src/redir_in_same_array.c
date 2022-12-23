@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 13:33:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 20:13:19 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array)
 	while (rl_decomp_array[i] != data->flag->chevron)
 		i++;
 	i++;
+	while (rl_decomp_array[i] == ' ')
+		i++;
 	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
 	{
 		data->quote->quote_priority = rl_decomp_array[i];
@@ -62,7 +64,7 @@ void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array)
 	}
 	else
 	{
-		while (i < while_is_not_flag(rl_decomp_array, i))
+		while (i < while_is_not_flag(rl_decomp_array, i) && rl_decomp_array[i] != ' ')
 			data->flag->output[len++] = rl_decomp_array[i++];
 	}
 }
@@ -77,6 +79,8 @@ void	len_of_redir(t_vault *data, char *rl_decomp_array)
 	while (rl_decomp_array[i] != data->flag->chevron)
 		i++;
 	i++;
+	while (rl_decomp_array[i] == ' ')
+		i++;
 	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
 	{
 		data->quote->quote_priority = rl_decomp_array[i];

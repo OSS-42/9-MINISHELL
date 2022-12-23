@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 15:52:19 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 19:57:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int row)
 {
-	int	line;
+	// int	line;
 	int	tab_len;
 
-	line = 1;
+	// line = 1;
 	parse_minus(data);
 	tab_len = ft_dbl_ptr_len(data->rl_decomp);
 	data->b_in->first_word = 1;

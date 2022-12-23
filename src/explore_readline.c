@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/22 16:41:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/22 20:03:22 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
+		execute_redirection(data, 0, 0); // pour debug
 		piping(data);
-		// forking(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
 			close (data->flag->fd);
