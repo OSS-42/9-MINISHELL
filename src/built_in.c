@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/23 10:29:30 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/25 13:22:34 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_cd(t_vault *data, int row)
+void	ft_cd(t_vault *data)
 {
-	if (chdir(data->rl_decomp[row]) != 0)
+	if (data->flag->pipe_count != 0)
+		return ;
+	if (chdir(data->cmd->options[1]) != 0)
 		perror("cd");
 }
 
@@ -23,9 +25,9 @@ void	ft_pwd(t_vault *data, int row)
 	char	*pwd;
 	int		size_buffer;
 
-	(void)data;
+	(void)row;
 	size_buffer = 1;
-	if (data->rl_decomp[row] != NULL)
+	if (data->cmd->options[1] != NULL)
 		write(2, "pwd: too many arguments\n", 24);
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 13:33:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/25 11:38:58 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	clean_redir(t_vault *data, int i)
 	{
 		str[temp] = data->flag->chevron;
 		temp++;
+		if (data->tab_arg[i][begin] == ' ')
+			begin++;
 		while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != '\0')
 		{
 			str[temp] = data->tab_arg[i][begin];
@@ -119,10 +121,16 @@ int	len_from_chevron_at_zero(t_vault *data, int i, int *begin)
 
 	temp = 1;
 	len = 1;
+	if (data->tab_arg[i][temp] == ' ')
+		temp++;
 	if (data->tab_arg[i][temp] == '\'' || data->tab_arg[i][temp] == '\"')
 		temp = while_quote(data, data->tab_arg[i], temp);
 	else
-		temp = while_is_not_flag(data->tab_arg[i], temp);
+	{
+		while (data->tab_arg[i][temp] && (data->tab_arg[i][temp] && '>'
+		&& data->tab_arg[i][temp] != '<' && data->tab_arg[i][temp] != ' '))
+			temp++;
+	}
 	*begin = temp;
 	if (data->tab_arg[i][temp])
 	{

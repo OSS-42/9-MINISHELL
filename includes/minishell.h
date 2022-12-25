@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/23 10:41:34 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/25 13:18:06 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	replace_decomposer_array(t_vault *data, int end, int *i);
 void	find_decomposer_to_switch(t_vault *data, int to_switch);
 
 /***** built_in.c *****/
-void	ft_cd(t_vault *data, int row);
+void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data, int row);
 void	ft_exit(t_vault *data, int error_code);
 void	ft_env(t_vault *data, int env);

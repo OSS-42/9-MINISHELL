@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/23 13:56:49 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/25 13:24:50 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	built_in(t_vault *data)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (ft_strcmp("cd", data->cmd->name) == 0)
-		ft_cd(data, i);
+		ft_cd(data);
 	if (ft_strcmp("pwd", data->cmd->name) == 0)
 		ft_pwd(data, i);
 	if (ft_strcmp("echo", data->cmd->name) == 0)
@@ -120,12 +120,28 @@ void	forking(t_vault *data)
 	data->pid = ft_calloc(sizeof(int), data->flag->pipe_count + 1);
 	while (data->tab_arg[line])
 	{
-		data->cmd->options = ft_split(data->tab_arg[line], ' ');
-		data->cmd->name = ft_strdup(data->cmd->options[0]);
-		if (ft_strcmp(data->cmd->name, "cd") == 0
-			|| (ft_strcmp(data->cmd->name, "exit") == 0
+		if (data->flag->pipe_count == 0)
+		{
+			execute_redirection(data, 0, 0);
+			data->cmd->options = ft_split(data->tab_arg[line], ' ');
+			data->cmd->name = ft_strdup(data->cmd->options[0]);
+			if (ft_strcmp(data->cmd->name, "cd") == 0
+				|| (ft_strcmp(data->cmd->name, "exit") == 0
 				&& !(data->tab_arg[line + 1])))
-			built_in(data);
+				built_in(data);
+			else
+			{
+				find_paths(data);
+				data->pid[line] = fork();
+				if (data->pid[line] == -1)
+					printf("Probleme de pid\n"); // ajouter gestion d'erreur
+				else if (data->pid[line] == 0)
+				{
+					find_prog(data);
+					ft_exit(data, 0);
+				}
+			}
+		}
 		else
 		{
 			find_paths(data);
@@ -136,6 +152,8 @@ void	forking(t_vault *data)
 			{
 				dup_fds(data, line);
 				execute_redirection(data, 0, 0);
+				data->cmd->options = ft_split(data->tab_arg[line], ' ');
+				data->cmd->name = ft_strdup(data->cmd->options[0]);
 				close_pipe(data);
 				find_prog(data);
 				ft_exit(data, 0);
