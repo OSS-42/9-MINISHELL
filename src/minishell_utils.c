@@ -6,28 +6,31 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/16 20:54:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:32:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	print_row(t_vault *data, int row)
+void	print_row(t_vault *data, int line)
 {
+	// print_double_array(data->rl_decomp);
+	// print_double_array(data->tab_arg);
+	// printf("%d\n", line);
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
-		ft_putstr_fd(data->rl_decomp[row], 1);
+		ft_putstr_fd(data->tab_arg[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else if (data->b_in->first_word == 1)
 	{
-		ft_putstr_fd(data->rl_decomp[row], 1);
+		ft_putstr_fd(data->tab_arg[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else
 	{
 		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->rl_decomp[row], 1);
+		ft_putstr_fd(data->tab_arg[line], 1);
 	}
 	return ;
 }

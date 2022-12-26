@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/25 13:22:34 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/25 22:33:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ void	ft_cd(t_vault *data)
 		perror("cd");
 }
 
-void	ft_pwd(t_vault *data, int row)
+void	ft_pwd(t_vault *data)
 {
 	char	*pwd;
 	int		size_buffer;
 
-	(void)row;
 	size_buffer = 1;
 	if (data->cmd->options[1] != NULL)
 		write(2, "pwd: too many arguments\n", 24);
@@ -95,12 +94,12 @@ void	ft_env(t_vault *data, int env)
 	return ;
 }
 
-void	ft_echo(t_vault *data, int row)
+void	ft_echo(t_vault *data, int line)
 {
 	parse_minus(data);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	print_row(data, row);
+	print_row(data, line);
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	return ;

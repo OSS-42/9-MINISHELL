@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/25 13:18:06 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:59:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,11 @@ void	reinit_data(t_vault *data);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
-void	built_in(t_vault *data);
+void	built_in(t_vault *data, int line);
 void	piping(t_vault *data);
 int		is_built_in(char *str);
 void	forking(t_vault *data);
+void	recompose_tab_arg(t_vault *data, int line);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -185,10 +186,10 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);
-void	ft_pwd(t_vault *data, int row);
+void	ft_pwd(t_vault *data);
 void	ft_exit(t_vault *data, int error_code);
 void	ft_env(t_vault *data, int env);
-void	ft_echo(t_vault *data, int row);
+void	ft_echo(t_vault *data, int line);
 
 /***** parsing_utils ******/
 int		check_next_char(t_vault *data, int row, int i);
@@ -209,7 +210,7 @@ void	copy_env(t_vault *data, char **temp, int i);
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
 void	print_double_array(char **array);
-int		dbl_array_len(char **array);
+//int		dbl_array_len(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
@@ -217,7 +218,7 @@ void	exit_on_error(t_vault *data, int error_code);
 int		message(t_vault *data, char *str1, char *str2, int error_code);
 
 /***** minishell_utils.c *****/
-void	print_row(t_vault *data, int row);
+void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
 void	row_parsing(t_vault *data);
 
@@ -252,7 +253,7 @@ void	heredoc(t_vault *data);
 /***** prog_utils.c *****/
 void	find_paths(t_vault *data);
 void	cmd_path_check(t_vault *data);
-void	find_prog(t_vault *data);
+void	find_prog(t_vault *data, int line);
 
 /***** io_utils.c *****/
 void	io_redirection(t_vault *data, int input, int output);

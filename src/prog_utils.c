@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/25 12:33:23 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:57:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	cmd_path_check(t_vault *data)
 	}
 }
 
-void	find_prog(t_vault *data)
+void	find_prog(t_vault *data, int line)
 {
 	if (is_built_in(data->cmd->name) == 1)
 	{
-		built_in(data);
+		built_in(data, line);
 		return ;
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)

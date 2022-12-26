@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/25 13:24:50 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/25 22:31:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,20 @@ void	explore_readline(t_vault *data)
 	return ;
 }
 
-void	built_in(t_vault *data)
+void	built_in(t_vault *data, int line)
 {
-	int	i;
-
-	i = 0;
 	if (ft_strcmp("cd", data->cmd->name) == 0)
 		ft_cd(data);
 	if (ft_strcmp("pwd", data->cmd->name) == 0)
-		ft_pwd(data, i);
+		ft_pwd(data);
 	if (ft_strcmp("echo", data->cmd->name) == 0)
-		ft_echo(data, i);
+		ft_echo(data, line);
 	if (ft_strcmp("env", data->cmd->name) == 0)
 		ft_env (data, 1);
 	if (ft_strcmp("export", data->cmd->name) == 0)
-		ft_export (data, i);
+		ft_export (data, 1);
 	if (ft_strcmp("unset", data->cmd->name) == 0)
-		ft_unset (data, i);
+		ft_unset (data, 1);
 	if (ft_strcmp("exit", data->cmd->name) == 0)
 		ft_exit (data, 0);
 	return ;
@@ -125,10 +122,11 @@ void	forking(t_vault *data)
 			execute_redirection(data, 0, 0);
 			data->cmd->options = ft_split(data->tab_arg[line], ' ');
 			data->cmd->name = ft_strdup(data->cmd->options[0]);
+			recompose_tab_arg(data, line);
 			if (ft_strcmp(data->cmd->name, "cd") == 0
 				|| (ft_strcmp(data->cmd->name, "exit") == 0
-				&& !(data->tab_arg[line + 1])))
-				built_in(data);
+					&& !(data->tab_arg[line + 1])))
+				built_in(data, line);
 			else
 			{
 				find_paths(data);
@@ -137,7 +135,7 @@ void	forking(t_vault *data)
 					printf("Probleme de pid\n"); // ajouter gestion d'erreur
 				else if (data->pid[line] == 0)
 				{
-					find_prog(data);
+					find_prog(data, line);
 					ft_exit(data, 0);
 				}
 			}
@@ -154,14 +152,30 @@ void	forking(t_vault *data)
 				execute_redirection(data, 0, 0);
 				data->cmd->options = ft_split(data->tab_arg[line], ' ');
 				data->cmd->name = ft_strdup(data->cmd->options[0]);
+				recompose_tab_arg(data, line);
 				close_pipe(data);
-				find_prog(data);
+				find_prog(data, line);
 				ft_exit(data, 0);
 			}
 		}
 		line++;
 	}
 }
+
+void	recompose_tab_arg(t_vault *data, int line)
+{
+	char	*buffer;
+
+	buffer = ft_strchr(data->tab_arg[line], ' ');
+	data->tab_arg[line] = NULL;
+	data->tab_arg[line] = ft_substr(buffer, 1, ft_strlen(buffer));
+}
+
+//en erreur 25/12
+// echo bonjour $USER'"$TERM"' (il manque les "")
+// echo bonjout "'$USER$TERM'" (il manque les '')
+// ?? echo bonjour $US∂R | cat -e
+
 
 //en erreur:
 //echo bonjour $USER
