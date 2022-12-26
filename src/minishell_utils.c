@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/25 22:32:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 00:05:19 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	print_row(t_vault *data, int line)
 {
-	// print_double_array(data->rl_decomp);
-	// print_double_array(data->tab_arg);
-	// printf("%d\n", line);
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
 		ft_putstr_fd(data->tab_arg[line], 1);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/25 22:31:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 00:02:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,22 +165,30 @@ void	forking(t_vault *data)
 void	recompose_tab_arg(t_vault *data, int line)
 {
 	char	*buffer;
+	int		i;
 
-	buffer = ft_strchr(data->tab_arg[line], ' ');
+	i = 1;
+	buffer = NULL;
 	data->tab_arg[line] = NULL;
-	data->tab_arg[line] = ft_substr(buffer, 1, ft_strlen(buffer));
+	data->tab_arg[line] = ft_strdup(data->cmd->options[i]);
+	i++;
+	while (data->cmd->options[i])
+	{
+		buffer = ft_strjoin(data->tab_arg[line], " ");
+		data->tab_arg[line] = NULL;
+		data->tab_arg[line] = ft_strjoin(buffer, data->cmd->options[i]);
+		free (buffer);
+		i++;
+	}
+	print_double_array(data->tab_arg);
 }
 
 //en erreur 25/12
+// echo -n bonjour -n
+// ecbo bonjour -n
 // echo bonjour $USER'"$TERM"' (il manque les "")
 // echo bonjout "'$USER$TERM'" (il manque les '')
 // ?? echo bonjour $US∂R | cat -e
-
-
-//en erreur:
-//echo bonjour $USER
-//echo bonjour | cat -e
-//echo bonjour |cat -e
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
