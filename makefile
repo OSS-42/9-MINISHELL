@@ -76,7 +76,7 @@ $(NAME):	$(LIBFT) $(LIBART) $(LIBRL) $(OBJS)
 	@$(call creating, $(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBART) $(LIBRL) -lreadline -lcurses -o $@)
 	@echo "$(LGREEN)Software Compilation completed ...!$(NC)"
 	@sleep 2
-#	@clear
+	@clear
 
 daftpunk:
 	@$(MAKE) intro_daftpunk -C $(D_LIBART)

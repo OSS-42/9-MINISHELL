@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 16:51:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:35:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,9 +243,9 @@ void	check_minus_validity(t_vault *data, int row, int i);
 /***** pipe_utils.c *****/
 void	create_tab_arg(t_vault *data, int row, int line);
 void	switch_lines(t_vault *data, int row, int line);
-void	clear_pipe_from_str(t_vault *data, int line);
-int		parsing_pipe(t_vault *data, int row, int line);
-void	copy_in_temp(t_vault *data, int row, int i, int *j);
+//void	clear_pipe_from_str(t_vault *data, int line);
+//int		parsing_pipe(t_vault *data, int row, int line);
+//void	copy_in_temp(t_vault *data, int row, int i, int *j);
 
 /***** heredoc.c *****/
 void	heredoc(t_vault *data);

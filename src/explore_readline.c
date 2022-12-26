@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/26 16:51:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:35:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data, 0, 0);
 		row_parsing(data);
+		print_double_array(data->rl_decomp);
 //		print_double_array(data->rl_decomp);
 		create_tab_arg(data, -1, 0);
+		print_double_array(data->tab_arg);
 		// execute_redirection(data, 0, 0); pour debug
 		piping(data);
 		reset_io(data);
@@ -188,6 +190,8 @@ void	recompose_tab_arg(t_vault *data, int line)
 
 //en erreur 26/12
 // ?? echo bonjour $US∂R | cat -e
+// export variable & unset (utilisent encore rl_decomp)
+// echo bonjour | cat -e |" wc"
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
