@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/26 11:30:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:51:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	row_parsing(t_vault *data)
 	while (data->rl_decomp[row] && data->rl_decomp[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
-		quote_priority(data, row);
+//		quote_priority(data, row);
 		parse_row(data, row);
 		free(data->buffer);
 		data->b_in->forget_minus = 0;

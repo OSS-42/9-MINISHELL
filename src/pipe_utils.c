@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 10:59:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:52:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	create_tab_arg(t_vault *data, int row, int line)
 				data->rl_decomp[row] = NULL;
 				return ;
 			}
-	//		data->flag->pipe_count++;
 		}
-		if (data->b_in->echo_priority != 0)
+		if (data->b_in->echo_priority != 0) // n'existe plus
 			data->buffer = ft_strdup(data->rl_decomp[row]);
 		else
 			line = parsing_pipe(data, row, line);

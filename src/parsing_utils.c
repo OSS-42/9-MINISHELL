@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/19 09:30:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:51:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,6 @@ int	check_next_char(t_vault *data, int row, int i)
 		}
 	}
 	return (i);
-}
-
-void	quote_priority(t_vault *data, int row)
-{
-	int	j;
-
-	j = 0;
-	data->b_in->echo_priority = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
-	{
-		if (data->rl_decomp[row][j] == '\"')
-		{
-			data->b_in->echo_dble_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 2;
-			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-				data->b_in->echo_priority = 34;
-		}
-		else if (data->rl_decomp[row][j] == '\'')
-		{
-			data->b_in->echo_sgle_q++;
-			if (data->b_in->echo_first == 0)
-				data->b_in->echo_first = 1;
-			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-				data->b_in->echo_priority = 39;
-		}
-		j++;
-	}
-	return ;
 }
 
 void	parse_row(t_vault *data, int row)
@@ -123,3 +94,32 @@ int	dble_quote_mngmt(t_vault *data, int row, int i)
 	data->pos--;
 	return (i);
 }
+
+// void	quote_priority(t_vault *data, int row)
+// {
+// 	int	j;
+
+// 	j = 0;
+// 	data->b_in->echo_priority = 0;
+// 	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
+// 	{
+// 		if (data->rl_decomp[row][j] == '\"')
+// 		{
+// 			data->b_in->echo_dble_q++;
+// 			if (data->b_in->echo_first == 0)
+// 				data->b_in->echo_first = 2;
+// 			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
+// 				data->b_in->echo_priority = 34;
+// 		}
+// 		else if (data->rl_decomp[row][j] == '\'')
+// 		{
+// 			data->b_in->echo_sgle_q++;
+// 			if (data->b_in->echo_first == 0)
+// 				data->b_in->echo_first = 1;
+// 			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
+// 				data->b_in->echo_priority = 39;
+// 		}
+// 		j++;
+// 	}
+// 	return ;
+// }
