@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/26 00:02:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 11:30:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data, 0, 0);
 		row_parsing(data);
+//		print_double_array(data->rl_decomp);
 		create_tab_arg(data, -1, 0);
 		// execute_redirection(data, 0, 0); pour debug
 		piping(data);
@@ -115,7 +116,7 @@ void	forking(t_vault *data)
 
 	line = 0;
 	data->pid = ft_calloc(sizeof(int), data->flag->pipe_count + 1);
-	while (data->tab_arg[line])
+	while (data->tab_arg[line] && data->tab_arg[line][0])
 	{
 		if (data->flag->pipe_count == 0)
 		{
@@ -170,7 +171,10 @@ void	recompose_tab_arg(t_vault *data, int line)
 	i = 1;
 	buffer = NULL;
 	data->tab_arg[line] = NULL;
-	data->tab_arg[line] = ft_strdup(data->cmd->options[i]);
+	if (data->cmd->options[i])
+		data->tab_arg[line] = ft_strdup(data->cmd->options[i]);
+	else
+		return ;
 	i++;
 	while (data->cmd->options[i])
 	{
@@ -180,14 +184,9 @@ void	recompose_tab_arg(t_vault *data, int line)
 		free (buffer);
 		i++;
 	}
-	print_double_array(data->tab_arg);
 }
 
-//en erreur 25/12
-// echo -n bonjour -n
-// ecbo bonjour -n
-// echo bonjour $USER'"$TERM"' (il manque les "")
-// echo bonjout "'$USER$TERM'" (il manque les '')
+//en erreur 26/12
 // ?? echo bonjour $US∂R | cat -e
 
 //possibilite de suivre le child :

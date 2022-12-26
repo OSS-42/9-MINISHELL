@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/25 23:42:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 09:42:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,9 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int line)
 {
-	printf("options 1\n");
-	print_double_array(data->cmd->options);
 	parse_minus(data);
-	printf("options 2\n");
-	print_double_array(data->cmd->options);
 	if (data->b_in->minus_n == 1)
 		recompose_tab_arg(data, line);
-	printf("options 3\n");
-	print_double_array(data->cmd->options);
-	print_double_array(data->tab_arg);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
 	print_row(data, line);
