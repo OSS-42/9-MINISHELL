@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/22 20:13:19 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,60 +38,60 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 	free (data->flag->output);
 }
 
-void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array)
+void	find_redir_in_same_array(t_vault *data, char *rl_dec_array)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	len_of_redir(data, rl_decomp_array);
-	while (rl_decomp_array[i] != data->flag->chevron)
+	len_of_redir(data, rl_dec_array);
+	while (rl_dec_array[i] != data->flag->chevron)
 		i++;
 	i++;
-	while (rl_decomp_array[i] == ' ')
+	while (rl_dec_array[i] == ' ')
 		i++;
-	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
+	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
 	{
-		data->quote->quote_priority = rl_decomp_array[i];
+		data->quote->quote_priority = rl_dec_array[i];
 		i++;
-		while (rl_decomp_array[i] != data->quote->quote_priority)
+		while (rl_dec_array[i] != data->quote->quote_priority)
 		{
-			data->flag->output[len] = rl_decomp_array[i];
+			data->flag->output[len] = rl_dec_array[i];
 			len++;
 			i++;
 		}
 	}
 	else
 	{
-		while (i < while_is_not_flag(rl_decomp_array, i) && rl_decomp_array[i] != ' ')
-			data->flag->output[len++] = rl_decomp_array[i++];
+		while (i < while_is_not_flag(rl_dec_array, i) && rl_dec_array[i] != ' ')
+			data->flag->output[len++] = rl_dec_array[i++];
 	}
 }
 
-void	len_of_redir(t_vault *data, char *rl_decomp_array)
+void	len_of_redir(t_vault *data, char *rl_dec_array)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (rl_decomp_array[i] != data->flag->chevron)
+	while (rl_dec_array[i] != data->flag->chevron)
 		i++;
 	i++;
-	while (rl_decomp_array[i] == ' ')
+	while (rl_dec_array[i] == ' ')
 		i++;
-	if (rl_decomp_array[i] == '\"' || rl_decomp_array[i] == '\'')
+	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
 	{
-		data->quote->quote_priority = rl_decomp_array[i];
+		data->quote->quote_priority = rl_dec_array[i];
 		i++;
-		while (rl_decomp_array[i] != data->quote->quote_priority)
+		while (rl_dec_array[i] != data->quote->quote_priority)
 		{
 			i++;
 			len++;
 		}
 	}
 	else
-		len = while_is_not_flag(rl_decomp_array, i) - i;
+		len = while_is_not_flag(rl_dec_array, i) - i;
 	data->flag->output = ft_calloc(sizeof(char), len + 1);
 }

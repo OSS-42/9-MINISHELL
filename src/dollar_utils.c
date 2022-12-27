@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 00:09:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	dollar_var_to_extract(t_vault *data, int row, int i)
 	char	*temp;
 	int		k;
 
-	if (ft_char_env_var(data->rl_decomp[row][i + 1]) != 1)
+	if (ft_char_env_var(data->rl_dec[row][i + 1]) != 1)
 	{
 		i = check_next_char(data, row, i);
 		return (i);
@@ -43,15 +43,15 @@ char	*var_extract(t_vault *data, int row, int position)
 	temp = NULL;
 	k = position;
 	data->dollar_var_len = 0;
-	while (data->rl_decomp[row][k]
-		&& ft_char_env_var(data->rl_decomp[row][k]) == 1)
+	while (data->rl_dec[row][k]
+		&& ft_char_env_var(data->rl_dec[row][k]) == 1)
 	{
 		data->dollar_var_len++;
 		k++;
 	}
 	if (data->dollar_var_len > 0)
 	{
-		temp = ft_substr(data->rl_decomp[row], position,
+		temp = ft_substr(data->rl_dec[row], position,
 				data->dollar_var_len);
 		data->dollar_var = ft_strjoin(temp, "=");
 		free (temp);

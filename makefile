@@ -61,7 +61,8 @@ SRCS =	src/minishell.c \
 		src/io_utils.c\
 		src/prog_utils.c\
 		src/explore_utils.c\
-		src/detached_quote.c
+		src/detached_quote.c\
+		src/detached_quote_utils.c\
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/

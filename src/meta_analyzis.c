@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/26 11:34:14 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,27 @@ void	flag_count(t_vault *data, int i, int j)
 	char	c;
 
 	c = '\0';
-	while (data->rl_decomp[i] && data->rl_decomp[i][0])
+	while (data->rl_dec[i] && data->rl_dec[i][0])
 	{
-		while (data->rl_decomp[i][j])
+		while (data->rl_dec[i][j])
 		{
-			if (data->rl_decomp[i][j] == '\'' || data->rl_decomp[i][j] == '\"')
+			if (data->rl_dec[i][j] == '\'' || data->rl_dec[i][j] == '\"')
 			{
-				c = data->rl_decomp[i][j];
+				c = data->rl_dec[i][j];
 				j++;
-				while (data->rl_decomp[i][j] != c)
+				while (data->rl_dec[i][j] != c)
 				{
-					if (data->rl_decomp[i][j] == '|')
-						if (data->rl_decomp[i][j + 1] == c && data->rl_decomp[i][j - 1] == c)
+					if (data->rl_dec[i][j] == '|')
+						if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
 							data->flag->pipe_count++;
 					j++;
 				}
 			}
-			if (data->rl_decomp[i][j] == '>')
+			if (data->rl_dec[i][j] == '>')
 				data->flag->output_count++;
-			if (data->rl_decomp[i][j] == '<')
+			if (data->rl_dec[i][j] == '<')
 				data->flag->input_count++;
-			if (data->rl_decomp[i][j] == '|')
+			if (data->rl_dec[i][j] == '|')
 				data->flag->pipe_count++;
 			j++;
 		}

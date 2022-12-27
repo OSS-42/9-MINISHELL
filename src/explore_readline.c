@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 09:14:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 11:27:41 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	explore_readline(t_vault *data)
 {
-	data->rl_decomp = ft_split(data->read_line, ' ');
+	data->rl_dec = ft_split(data->read_line, ' ');
 	data->debug = open("debug", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
 		find_str_quote(data);
 		flag_count(data, 0, 0);
 		detached_quote_tab(data);
-		// diviser les str collé au quotes ici
-		print_double_array(data->rl_decomp);
+		print_double_array(data->rl_dec);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
@@ -142,7 +141,7 @@ void	child_creation(t_vault *data, int line)
 
 	void	explore_readline(t_vault *data)
 {
-	data->rl_decomp = ft_split(data->read_line, ' ');
+	data->rl_dec = ft_split(data->read_line, ' ');
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
 		find_str_quote(data);
