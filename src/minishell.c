@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 00:00:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:44:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_data(t_vault *data)
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
-	data->rl_decomp = NULL;
+	data->rl_dec = NULL;
 	data->fd_in = -1;
 	data->fd_out = -1;
 	data->fork_count = 0;
@@ -40,6 +40,7 @@ void	reinit_data(t_vault *data)
 	data->quote->double_quote_count = 0;
 	data->quote->simple_quote_count = 0;
 	data->quote->begin = 0;
+	data->quote->last_replace = 0;
 }
 
 void	sig_handler(int sig)
@@ -58,7 +59,7 @@ void	readline_exec(t_vault *data)
 	explore_readline(data);
 	free(data->read_line);
 	reinit_data(data);
-	free_dbl_ptr((void **)data->rl_decomp);
+	free_dbl_ptr((void **)data->rl_dec);
 }
 
 int	main(void)

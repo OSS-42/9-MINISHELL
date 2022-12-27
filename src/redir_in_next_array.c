@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/21 13:33:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 	*j = -1;
 }
 
-void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array)
+void	find_redir_in_next_array(t_vault *data, char *rl_dec_array)
 {
 	int		j;
 	int		len;
 
 	j = 0;
 	len = 0;
-	if (rl_decomp_array[j] == '\"' || rl_decomp_array[j] == '\'')
+	if (rl_dec_array[j] == '\"' || rl_dec_array[j] == '\'')
 	{
-		data->quote->quote_priority = rl_decomp_array[j];
+		data->quote->quote_priority = rl_dec_array[j];
 		j++;
-		while (rl_decomp_array[j] != data->quote->quote_priority)
+		while (rl_dec_array[j] != data->quote->quote_priority)
 		{
 			j++;
 			len++;
@@ -87,8 +87,8 @@ void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array)
 		j = 1;
 	}
 	else
-		len = while_is_not_flag(rl_decomp_array, j);
-	data->flag->output = ft_substr(rl_decomp_array, j, len);
+		len = while_is_not_flag(rl_dec_array, j);
+	data->flag->output = ft_substr(rl_dec_array, j, len);
 }
 
 void	clean_redir_next_array(t_vault *data, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 12:01:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 13:57:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_quote
 	int		double_quote_count;
 	int		simple_quote_count;
 	int		len_of_replacement;
+	int		last_replace;
 	int		begin;
 	char	quote_priority;
 	char	temp_priority;
@@ -97,7 +98,7 @@ typedef struct s_quote
 typedef struct s_vault
 {
 	char		**env;
-	char		**rl_decomp;
+	char		**rl_dec;
 	char		**clean_decomposer;
 	char		**tab_arg;
 	char		**path_names;
@@ -154,8 +155,8 @@ void	stdin_redirection(t_vault *data, char *redirection);
 
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_same_array(t_vault *data, char *rl_decomp_array);
-void	len_of_redir(t_vault *data, char *rl_decomp_array);
+void	find_redir_in_same_array(t_vault *data, char *rl_dec_array);
+void	len_of_redir(t_vault *data, char *rl_dec_array);
 
 /***** redir_in_same_array_2.c *****/
 void	clean_redir(t_vault *data, int i);
@@ -166,7 +167,7 @@ int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
 
 /***** redir_in_next_array.c *****/
 void	redir_in_next_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_next_array(t_vault *data, char *rl_decomp_array);
+void	find_redir_in_next_array(t_vault *data, char *rl_dec_array);
 void	clean_redir_next_array(t_vault *data, int i);
 void	token_without_redir_name(t_vault *data, int i, int begin, int len);
 
@@ -263,5 +264,15 @@ void	io_redirection(t_vault *data, int input, int output);
 int		dup_fds(t_vault *data, int line);
 void	close_pipe(t_vault *data);
 void	reset_io(t_vault *data);
+
+/***** detached_quote.c *****/
+void	detached_quote_tab(t_vault *data);
+int		len_detached_quote_tab(t_vault *data);
+void	quote_to_quote(t_vault *data, int row, int *line, int *len);
+void	fill_detached_quote_tab(t_vault *data, char **buffer);
+
+/***** detached_quote_utils.c *****/
+int		len_in_quote_dtch(t_vault *data, char *rl_dec, int line);
+int		len_out_quote_dtch(char *rl_dec, int line);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:34:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	check_next_char(t_vault *data, int row, int i)
 {
-	if (data->rl_decomp[row][i + 1] == '\''
-		|| data->rl_decomp[row][i + 1] == '\"')
+	if (data->rl_dec[row][i + 1] == '\''
+		|| data->rl_dec[row][i + 1] == '\"')
 	{
 		i = i - 2;
-		while (data->rl_decomp[row][i])
+		while (data->rl_dec[row][i])
 		{
-			if (data->rl_decomp[row][i] != '\''
-				|| data->rl_decomp[row][i] != '\"'
-					|| data->rl_decomp[row][i] != '$')
+			if (data->rl_dec[row][i] != '\''
+				|| data->rl_dec[row][i] != '\"'
+					|| data->rl_dec[row][i] != '$')
 				i++;
-			data->buffer[data->pos] = data->rl_decomp[row][i];
+			data->buffer[data->pos] = data->rl_dec[row][i];
 			data->pos++;
 			i++;
 		}
@@ -38,16 +38,16 @@ void	parse_row(t_vault *data, int row)
 
 	i = 0;
 	data->pos = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][i])
+	while (data->rl_dec[row] && data->rl_dec[row][i])
 	{
 		data->dollar_var_len = 0;
-		if (ft_isinset(data->rl_decomp[row][i]) == 0)
-			data->buffer[data->pos] = data->rl_decomp[row][i];
-		else if (ft_isinset(data->rl_decomp[row][i]) == 1)
+		if (ft_isinset(data->rl_dec[row][i]) == 0)
+			data->buffer[data->pos] = data->rl_dec[row][i];
+		else if (ft_isinset(data->rl_dec[row][i]) == 1)
 			i = sgle_quote_mngmt(data, row, i);
-		else if (ft_isinset(data->rl_decomp[row][i]) == 2)
+		else if (ft_isinset(data->rl_dec[row][i]) == 2)
 			i = dble_quote_mngmt(data, row, i);
-		else if (ft_isinset(data->rl_decomp[row][i]) == 3)
+		else if (ft_isinset(data->rl_dec[row][i]) == 3)
 		{
 			dollar_var_to_extract(data, row, i);
 			i = i + data->dollar_var_len;
@@ -56,17 +56,17 @@ void	parse_row(t_vault *data, int row)
 		i++;
 		data->pos++;
 	}
-	free (data->rl_decomp[row]);
-	data->rl_decomp[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
-	ft_strlcpy(data->rl_decomp[row], data->buffer, 500);
+	free (data->rl_dec[row]);
+	data->rl_dec[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
+	ft_strlcpy(data->rl_dec[row], data->buffer, 500);
 }
 
 int	sgle_quote_mngmt(t_vault *data, int row, int i)
 {
 	i++;
-	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\'')
+	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\'')
 	{
-		data->buffer[data->pos] = data->rl_decomp[row][i];
+		data->buffer[data->pos] = data->rl_dec[row][i];
 		data->pos++;
 		i++;
 	}
@@ -77,17 +77,17 @@ int	sgle_quote_mngmt(t_vault *data, int row, int i)
 int	dble_quote_mngmt(t_vault *data, int row, int i)
 {
 	i++;
-	while (data->rl_decomp[row][i] && data->rl_decomp[row][i] != '\"')
+	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\"')
 	{
-		if (data->rl_decomp[row][i] == '$'
-			&& ft_char_env_var(data->rl_decomp[row][i + 1]) == 1)
+		if (data->rl_dec[row][i] == '$'
+			&& ft_char_env_var(data->rl_dec[row][i + 1]) == 1)
 		{
 			dollar_var_to_extract(data, row, i);
 			i = i + data->dollar_var_len;
 			data->pos--;
 		}
 		else
-			data->buffer[data->pos] = data->rl_decomp[row][i];
+			data->buffer[data->pos] = data->rl_dec[row][i];
 		data->pos++;
 		i++;
 	}
@@ -103,7 +103,7 @@ void	row_parsing(t_vault *data)
 	data->b_in->forget_minus = 0;
 	data->b_in->minus_n = 0;
 	data->b_in->dont_do_minus = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][0])
+	while (data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
 		parse_row(data, row);

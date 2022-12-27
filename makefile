@@ -7,6 +7,9 @@ NAME = minishell
 CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra
 #CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+# CFLAGS = -g -Wall -Werror -Wextra
+# CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror
 # -fsanitize=leak
 #-fsanitize=address
 RM = rm -rf
@@ -59,7 +62,9 @@ SRCS =	src/minishell.c \
 		src/heredoc.c\
 		src/io_utils.c\
 		src/prog_utils.c\
-		src/explore_utils.c
+		src/explore_utils.c\
+		src/detached_quote.c\
+		src/detached_quote_utils.c\
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/
