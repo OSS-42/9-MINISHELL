@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 00:05:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 11:45:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	ft_exit(t_vault *data, int error_code)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
+	if (data->tab_arg)
+		free_dbl_ptr((void **)data->tab_arg);
 	exit (error_code);
 }
 	//ne pas oublier exit_minishell();

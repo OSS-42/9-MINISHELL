@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 00:08:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 11:50:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	piping(t_vault *data)
 	int	i;
 
 	i = 0;
-	data->flag->pipe = ft_calloc(sizeof(int *), (data->flag->pipe_count));
+	data->flag->pipe = ft_calloc(sizeof(int *), (data->flag->pipe_count) + 1);
 	while (i < data->flag->pipe_count)
 	{
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
@@ -59,9 +59,9 @@ void	launching_exec(t_vault *data)
 {
 	int		line;
 
-	line = 0;
+	line = -1;
 	data->pid = ft_calloc(sizeof(int), data->flag->pipe_count + 1);
-	while (data->tab_arg[line] && data->tab_arg[line][0])
+	while (data->tab_arg[++line] && data->tab_arg[line][0])
 	{
 		if (data->flag->pipe_count == 0)
 		{
@@ -80,7 +80,8 @@ void	launching_exec(t_vault *data)
 		}
 		else
 			forking(data, line, 2);
-		line++;
+		if (data->path_names)
+			free_dbl_ptr((void **)data->path_names);
 	}
 }
 
@@ -122,7 +123,6 @@ void	child_creation(t_vault *data, int line)
 }
 
 //en erreur 26/12
-// ?? echo bonjour $US∂R | cat -e
 // echo bonjour | cat -e |" wc"
 
 //possibilite de suivre le child :

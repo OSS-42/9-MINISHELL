@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/25 11:38:58 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/27 10:40:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	len_from_chevron_at_zero(t_vault *data, int i, int *begin)
 		temp = while_quote(data, data->tab_arg[i], temp);
 	else
 	{
-		while (data->tab_arg[i][temp] && (data->tab_arg[i][temp] && '>'
+		while (data->tab_arg[i][temp] && (data->tab_arg[i][temp] != '>'
 		&& data->tab_arg[i][temp] != '<' && data->tab_arg[i][temp] != ' '))
 			temp++;
 	}
