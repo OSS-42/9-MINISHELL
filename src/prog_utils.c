@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 15:27:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:31:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	find_prog(t_vault *data, int line)
 {
 	if (is_built_in(data->cmd->name) == 1)
 	{
+		free_dbl_ptr((void **) data->path_names);
 		built_in(data, line);
 		return ;
 	}
