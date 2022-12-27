@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:49:24 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 12:49:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 09:53:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 	int		i;
 	int		j;
 
-	i = 0;
+	i = data->quote->last_replace;
 	while (data->rl_decomp[i])
 	{
 		j = 0;
@@ -30,6 +30,7 @@ void	find_decomposer_array_to_replace(t_vault *data, int end)
 			if (data->rl_decomp[i][j] == data->quote->quote_priority)
 			{
 				replace_decomposer_array(data, end, &i);
+				data->quote->last_replace = i;
 				return ;
 			}
 			j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 00:08:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 09:14:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	explore_readline(t_vault *data)
 	{
 		find_str_quote(data);
 		flag_count(data, 0, 0);
+		detached_quote_tab(data);
+		// diviser les str collé au quotes ici
+		print_double_array(data->rl_decomp);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
@@ -152,7 +155,7 @@ void	child_creation(t_vault *data, int line)
 			redirection_management;
 			close_pipe
 			find_path (rajouter une condition pour voir si c'est un built_in)
-			built_in(data); (Si la commande est un built_in faire le built_in, 
+			built_in(data); (Si la commande est un built_in faire le built_in,
 																sinon exeve)
 		}
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);

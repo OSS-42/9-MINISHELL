@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 00:15:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 10:48:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_quote
 	int		double_quote_count;
 	int		simple_quote_count;
 	int		len_of_replacement;
+	int		last_replace;
 	int		begin;
 	char	quote_priority;
 	char	temp_priority;
@@ -262,5 +263,9 @@ void	io_redirection(t_vault *data, int input, int output);
 int		dup_fds(t_vault *data, int line);
 void	close_pipe(t_vault *data);
 void	reset_io(t_vault *data);
+
+/***** detached_quote.c *****/
+void	detached_quote_tab(t_vault *data);
+void	quote_to_quote(t_vault *data, int row, int *line, int *len);
 
 #endif

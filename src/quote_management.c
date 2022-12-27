@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 12:49:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 10:04:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ void	begin_of_new_replacement(t_vault *data, int *rl_index)
 	data->quote->quote_priority = data->read_line[*rl_index];
 	while (*rl_index != 0 && data->read_line[*rl_index] != ' ')
 		(*rl_index)--;
-	if (*rl_index != 0)
+	if (*rl_index != 0 || data->read_line[*rl_index] == ' ')
 		(*rl_index)++;
+	data->quote->begin = *rl_index;
 }
 
 void	len_after_quote(t_vault *data, int *rl_index)
