@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 13:58:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:00:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	switch_lines(t_vault *data, int row, int line)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
 		free (data->buffer);
-		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
-			&& data->rl_decomp[row + 1][1])
+		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
+			&& data->rl_dec[row + 1][1])
 			do_the_switch(data, line);
 	}
 	else
@@ -60,8 +60,8 @@ void	switch_lines(t_vault *data, int row, int line)
 		free (data->tab_arg[line]);
 		data->tab_arg[line] = ft_strdup(temp);
 		free (temp);
-		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
-			&& data->rl_decomp[row + 1][1])
+		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
+			&& data->rl_dec[row + 1][1])
 			do_the_switch(data, line);
 	}
 }
