@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 21:42:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:34:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,21 @@ int	dble_quote_mngmt(t_vault *data, int row, int i)
 	return (i);
 }
 
-// void	quote_priority(t_vault *data, int row)
-// {
-// 	int	j;
+void	row_parsing(t_vault *data)
+{
+	int	row;
 
-// 	j = 0;
-// 	data->b_in->echo_priority = 0;
-// 	while (data->rl_decomp[row] && data->rl_decomp[row][j] != '\0')
-// 	{
-// 		if (data->rl_decomp[row][j] == '\"')
-// 		{
-// 			data->b_in->echo_dble_q++;
-// 			if (data->b_in->echo_first == 0)
-// 				data->b_in->echo_first = 2;
-// 			if (data->b_in->echo_dble_q % 2 == 0 && data->b_in->echo_first == 2)
-// 				data->b_in->echo_priority = 34;
-// 		}
-// 		else if (data->rl_decomp[row][j] == '\'')
-// 		{
-// 			data->b_in->echo_sgle_q++;
-// 			if (data->b_in->echo_first == 0)
-// 				data->b_in->echo_first = 1;
-// 			if (data->b_in->echo_sgle_q % 2 == 0 && data->b_in->echo_first == 1)
-// 				data->b_in->echo_priority = 39;
-// 		}
-// 		j++;
-// 	}
-// 	return ;
-// }
+	row = 0;
+	data->b_in->forget_minus = 0;
+	data->b_in->minus_n = 0;
+	data->b_in->dont_do_minus = 0;
+	while (data->rl_decomp[row] && data->rl_decomp[row][0])
+	{
+		data->buffer = ft_calloc(sizeof(char), 500);
+		parse_row(data, row);
+		free(data->buffer);
+		data->b_in->forget_minus = 0;
+		data->b_in->echo_first = 0;
+		row++;
+	}
+}

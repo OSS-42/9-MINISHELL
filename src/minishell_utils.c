@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 00:05:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:15:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,26 @@ int	ft_isinset(char c)
 		return (3);
 	else
 		return (0);
+}
+
+void	export_only_format(t_vault *data, char *buff2, char **temp, int i)
+{
+	data->buffer = ft_strjoin("declare -x ", temp[i]);
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = ft_strjoin(temp[i], "\"");
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	buff2 = ft_strtrim(ft_strchr(data->env[i], '='), "=");
+	data->buffer = ft_strjoin(temp[i], buff2);
+	free (buff2);
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = ft_strjoin(temp[i], "\"");
+	free (temp[i]);
+	temp[i] = ft_strdup(data->buffer);
+	free (data->buffer);
 }

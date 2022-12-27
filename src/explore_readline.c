@@ -6,30 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:08:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	row_parsing(t_vault *data)
-{
-	int	row;
-
-	row = 0;
-	data->b_in->forget_minus = 0;
-	data->b_in->minus_n = 0;
-	data->b_in->dont_do_minus = 0;
-	while (data->rl_decomp[row] && data->rl_decomp[row][0])
-	{
-		data->buffer = ft_calloc(sizeof(char), 500);
-		parse_row(data, row);
-		free(data->buffer);
-		data->b_in->forget_minus = 0;
-		data->b_in->echo_first = 0;
-		row++;
-	}
-}
 
 void	explore_readline(t_vault *data)
 {
@@ -41,7 +22,6 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
-		// execute_redirection(data, 0, 0); pour debug
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -49,47 +29,15 @@ void	explore_readline(t_vault *data)
 	}
 	return ;
 }
+		// execute_redirection(data, 0, 0); pour debug
 
-void	built_in(t_vault *data, int line)
-{
-	if (ft_strcmp("cd", data->cmd->name) == 0)
-		ft_cd(data);
-	if (ft_strcmp("pwd", data->cmd->name) == 0)
-		ft_pwd(data);
-	if (ft_strcmp("echo", data->cmd->name) == 0)
-		ft_echo(data, line);
-	if (ft_strcmp("env", data->cmd->name) == 0)
-		ft_env (data, 1);
-	if (ft_strcmp("export", data->cmd->name) == 0)
-		ft_export (data, 1);
-	if (ft_strcmp("unset", data->cmd->name) == 0)
-		ft_unset (data, 1);
-	if (ft_strcmp("exit", data->cmd->name) == 0)
-		ft_exit (data, 0);
-	return ;
-}
-
-int	is_built_in(char *str)
-{
-	if (ft_strcmp("cd", str) == 0
-		|| ft_strcmp("pwd", str) == 0
-		|| ft_strcmp("echo", str) == 0
-		|| ft_strcmp("env", str) == 0
-		|| ft_strcmp("export", str) == 0
-		|| ft_strcmp("unset", str) == 0
-		|| ft_strcmp("exit", str) == 0)
-		return (TRUE);
-	return (FALSE);
-}
-
+//gestion d'erruer si creation de pipe en echec
 void	piping(t_vault *data)
 {
 	int	i;
 
 	i = 0;
 	data->flag->pipe = ft_calloc(sizeof(int *), (data->flag->pipe_count));
-	// if (!data->flag->pipe)
-		// Gestion d'erreur
 	while (i < data->flag->pipe_count)
 	{
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
@@ -97,7 +45,7 @@ void	piping(t_vault *data)
 			printf("Probleme de pipe\n");
 		i++;
 	}
-	forking(data);
+	launching_exec(data);
 	i = 0;
 	close_pipe(data);
 	while (i < data->flag->pipe_count + 1)
@@ -107,7 +55,7 @@ void	piping(t_vault *data)
 	}
 }
 
-void	forking(t_vault *data)
+void	launching_exec(t_vault *data)
 {
 	int		line;
 
@@ -128,66 +76,53 @@ void	forking(t_vault *data)
 				|| ft_strcmp(data->cmd->name, "export"))
 				built_in(data, line);
 			else
-			{
-				find_paths(data);
-				data->pid[line] = fork();
-				if (data->pid[line] == -1)
-					printf("Probleme de pid\n"); // ajouter gestion d'erreur
-				else if (data->pid[line] == 0)
-				{
-					find_prog(data, line);
-					ft_exit(data, 0);
-				}
-			}
+				forking(data, line, 1);
 		}
 		else
-		{
-			find_paths(data);
-			data->pid[line] = fork();
-			if (data->pid[line] == -1)
-				printf("Probleme de pid\n"); // ajouter gestion d'erreur
-			else if (data->pid[line] == 0)
-			{
-				dup_fds(data, line);
-				execute_redirection(data, 0, 0);
-				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-				data->cmd->name = ft_strdup(data->cmd->opt[0]);
-				recompose_tab_arg(data, line);
-				close_pipe(data);
-				find_prog(data, line);
-				ft_exit(data, 0);
-			}
-		}
+			forking(data, line, 2);
 		line++;
 	}
 }
 
-void	recompose_tab_arg(t_vault *data, int line)
+void	forking(t_vault *data, int line, int type)
 {
-	char	*buffer;
-	int		i;
-
-	i = 1;
-	buffer = NULL;
-	data->tab_arg[line] = NULL;
-	if (data->cmd->opt[i])
-		data->tab_arg[line] = ft_strdup(data->cmd->opt[i]);
-	else
-		return ;
-	i++;
-	while (data->cmd->opt[i])
+	if (type == 1)
 	{
-		buffer = ft_strjoin(data->tab_arg[line], " ");
-		data->tab_arg[line] = NULL;
-		data->tab_arg[line] = ft_strjoin(buffer, data->cmd->opt[i]);
-		free (buffer);
-		i++;
+		child_creation(data, line);
+		if (data->pid[line] == 0)
+		{
+			find_prog(data, line);
+			ft_exit(data, 0);
+		}
 	}
+	else if (type == 2)
+	{
+		child_creation(data, line);
+		if (data->pid[line] == 0)
+		{
+			dup_fds(data, line);
+			execute_redirection(data, 0, 0);
+			data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+			data->cmd->name = ft_strdup(data->cmd->opt[0]);
+			recompose_tab_arg(data, line);
+			close_pipe(data);
+			find_prog(data, line);
+			ft_exit(data, 0);
+		}
+	}
+}
+
+// ajouter gestion d'erreur
+void	child_creation(t_vault *data, int line)
+{
+	find_paths(data);
+	data->pid[line] = fork();
+	if (data->pid[line] == -1)
+		ft_putstr_fd("Probleme de pid\n", 2);
 }
 
 //en erreur 26/12
 // ?? echo bonjour $US∂R | cat -e
-// export variable & unset (utilisent encore rl_decomp)
 // echo bonjour | cat -e |" wc"
 
 //possibilite de suivre le child :
@@ -217,7 +152,8 @@ void	recompose_tab_arg(t_vault *data, int line)
 			redirection_management;
 			close_pipe
 			find_path (rajouter une condition pour voir si c'est un built_in)
-			built_in(data); (Si la commande est un built_in faire le built_in, sinon exeve)
+			built_in(data); (Si la commande est un built_in faire le built_in, 
+																sinon exeve)
 		}
 		dup2(data->flag->stdout_backup, STDOUT_FILENO);
 		dup2(data->flag->stdin_backup, STDIN_FILENO);

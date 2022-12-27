@@ -6,12 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:06:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// penser aux retour de code d'erreur;
 void	find_paths(t_vault *data)
 {
 	size_t	i;
@@ -30,8 +31,7 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		printf("error 69\n");
-		// exit_on_error(data, message(data, "Unexpected error.", "", 7));
+		ft_putstr_fd("error 69\n", 2);
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');

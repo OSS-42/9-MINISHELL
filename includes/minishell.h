@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:29:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:15:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,19 @@ typedef struct s_vault
 /***** minishell.c *****/
 void	init_data(t_vault *data);
 void	reinit_data(t_vault *data);
+void	readline_exec(t_vault *data);
+void	sig_handler(int sig);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
-void	built_in(t_vault *data, int line);
 void	piping(t_vault *data);
+void	launching_exec(t_vault *data);
+void	forking(t_vault *data, int line, int type);
+void	child_creation(t_vault *data, int line);
+
+/***** explore_utils.c *****/
+void	built_in(t_vault *data, int line);
 int		is_built_in(char *str);
-void	forking(t_vault *data);
 void	recompose_tab_arg(t_vault *data, int line);
 
 /***** meta_analyzis.c *****/
@@ -193,10 +199,10 @@ void	ft_echo(t_vault *data, int line);
 
 /***** parsing_utils ******/
 int		check_next_char(t_vault *data, int row, int i);
-//void	quote_priority(t_vault *data, int row);
 void	parse_row(t_vault *data, int row);
 int		sgle_quote_mngmt(t_vault *data, int row, int i);
 int		dble_quote_mngmt(t_vault *data, int row, int i);
+void	row_parsing(t_vault *data);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int line);
@@ -204,8 +210,6 @@ void	remove_line_env(t_vault *data, int i);
 void	ft_export(t_vault *data, int line);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
-void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
-void	copy_env(t_vault *data, char **temp, int i);
 
 /***** personnal_fonction.c *****/
 int		check_if_inside_quote(char *str, char c);
@@ -220,13 +224,14 @@ int		message(t_vault *data, char *str1, char *str2, int error_code);
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
-void	row_parsing(t_vault *data);
+void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int line);
 void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
 void	var_prep(t_vault *data, int line);
+void	copy_env(t_vault *data, char **temp, int i);
 
 /***** dollar_utils.c *****/
 int		dollar_var_to_extract(t_vault *data, int row, int i);
@@ -243,9 +248,6 @@ void	check_minus_validity(t_vault *data, int row, int i);
 /***** pipe_utils.c *****/
 void	create_tab_arg(t_vault *data, int row, int line);
 void	switch_lines(t_vault *data, int row, int line);
-//void	clear_pipe_from_str(t_vault *data, int line);
-//int		parsing_pipe(t_vault *data, int row, int line);
-//void	copy_in_temp(t_vault *data, int row, int i, int *j);
 
 /***** heredoc.c *****/
 void	heredoc(t_vault *data);

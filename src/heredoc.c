@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/22 08:56:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 00:09:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	heredoc(t_vault *data)
 	close(data->flag->heredoc_fd);
 	data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
 	if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
-		printf("Problème avec dup2 sur heredoc\n");
+		ft_putstr_fd("Problème avec dup2 sur heredoc\n", 2);
 }

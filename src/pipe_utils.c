@@ -6,12 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 18:30:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:02:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+//retourner un code d'erreur.
 void	create_tab_arg(t_vault *data, int row, int line)
 {
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
@@ -25,7 +26,7 @@ void	create_tab_arg(t_vault *data, int row, int line)
 				line++;
 				row++;
 				if (!(data->rl_decomp[row]))
-					return ; //retourner un code d'erreur.
+					return ;
 			}
 			else if (data->rl_decomp[row][1] == '|')
 			{

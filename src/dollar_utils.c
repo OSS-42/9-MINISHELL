@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 21:47:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:09:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ char	*expand_var(t_vault *data, int row_var)
 	temp = NULL;
 	if (data->flag->var_not_found == 1)
 	{
-//		temp = " \0";
 		free (data->dollar_var);
 		return (temp);
 	}
@@ -107,42 +106,3 @@ char	*expand_var(t_vault *data, int row_var)
 	}
 	return (temp);
 }
-
-// void	clean_quote(t_vault *data, int row)
-// {
-// 	int		j;
-// 	int		k;
-// 	int		len;
-// 	char	*temp;
-//
-// 	j = 0;
-// 	k = 0;
-// 	len = ft_strlen(data->rl_decomp[row]);
-// 	temp = ft_calloc(len, sizeof(char));
-// 	while (j < len)
-// 	{
-// 		if (data->rl_decomp[row][j] == data->b_in->echo_priority)
-// 			j++;
-// 		temp[k] = data->rl_decomp[row][j];
-// 		j++;
-// 		k++;
-// 	}
-// 	free (data->rl_decomp[row]);
-// 	data->rl_decomp[row] = temp;
-// }
-
-// int	insert_row(int pos, int count, char **dest, char **source)
-// {
-// 	int	m;
-//
-// 	m = 0;
-// 	while (m < count && source[m])
-// 	{
-// 		dest[pos] = ft_strdup(source[m]);
-// 		free (source[m]);
-// 		pos++;
-// 		m++;
-// 	}
-// 	free (source);
-// 	return (pos);
-// }
