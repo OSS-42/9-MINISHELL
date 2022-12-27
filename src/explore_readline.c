@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 15:27:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:33:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
-	data->debug = open("debug", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
 		find_str_quote(data);
