@@ -3,28 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   error_mgmnt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 16:16:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_error(t_vault *data, int row)
+int	check_error(t_vault *data, int line)
 {
-	if (!(data->rl_decomp[row]) || ft_str_env_var(data->rl_decomp[row], 0) == 0)
+	if (!(data->cmd->opt[line])
+		|| ft_str_env_var(data->cmd->opt[line], 0) == 0)
 		return (0);
 	return (1);
 }
-
-// int	check_cmd(t_vault *data)
-// {
-// 	if (ft_strchr(data->cmd->options[0], '/') != NULL)
-// 		return (1);
-// 	return (0);
-// }
 
 int	message(t_vault *data, char *str1, char *str2, int error_code)
 {
@@ -34,7 +28,7 @@ int	message(t_vault *data, char *str1, char *str2, int error_code)
 	if (error_code == 9)
 		close_pipe(data);
 	else if (error_code == 8)
-		free_dbl_ptr((void **)data->cmd->options);
+		free_dbl_ptr((void **)data->cmd->opt);
 	return (error_code);
 }
 

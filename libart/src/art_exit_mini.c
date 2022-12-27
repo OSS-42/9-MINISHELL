@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 00:04:28 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/22 01:12:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:13:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	exit_minishell(void)
 	printf("	                        ░             \n");
 	printf("	                        ▒             \n");
 	lred();
-	printf("	 ╔═══════════════≡≡≡≡≡≡═");
+	printf("	 ╔══════════════\\≡≡≡≡≡≡/");
 	lcyan();
 	printf("▓");
 	lred();
 	printf("════════════╗\n");
-	printf("	 ║                      ");
+	printf("	 ║               ¯¯¯¯¯¯ ");
 	lcyan();
 	printf("█");
 	lred();

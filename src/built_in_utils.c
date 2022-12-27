@@ -6,17 +6,17 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 00:52:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	join_unset(t_vault *data, int row)
+void	join_unset(t_vault *data, int line)
 {
 	int	j;
 
-	data->b_in->unset_arg = ft_strjoin(data->rl_decomp[row], "=");
+	data->b_in->unset_arg = ft_strjoin(data->cmd->opt[line], "=");
 	j = 0;
 	while (data->env[j])
 	{
@@ -73,11 +73,11 @@ void	dup_env(t_vault *data)
 	return ;
 }
 
-void	var_prep(t_vault *data, int row)
+void	var_prep(t_vault *data, int line)
 {
 	free(data->b_in->exp_arg);
-	data->b_in->exp_arg = ft_strjoin(data->rl_decomp[row], "=\0");
-	data->b_in->export_var = ft_strjoin(data->rl_decomp[row], "=");
+	data->b_in->exp_arg = ft_strjoin(data->cmd->opt[line], "=\0");
+	data->b_in->export_var = ft_strjoin(data->cmd->opt[line], "=");
 	return ;
 }
 

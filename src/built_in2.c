@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 10:38:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	remove_line_env(t_vault *data, int i)
 	rows = 0;
 	while (data->env[rows])
 		rows++;
-//	if (data->b_in->env_unset)
-//		free_dbl_ptr((void **)data->b_in->env_unset);
 	data->b_in->env_unset = ft_calloc(rows, sizeof(char *));
 	j = 0;
 	rows = 0;
@@ -40,18 +38,18 @@ void	remove_line_env(t_vault *data, int i)
 	return ;
 }
 
-void	ft_unset(t_vault *data, int row)
+void	ft_unset(t_vault *data, int line)
 {
-	while (data->rl_decomp[row])
+	while (data->cmd->opt[line])
 	{
-		if (check_error(data, row) == 1)
-			join_unset(data, row);
+		if (check_error(data, line) == 1)
+			join_unset(data, line);
 		else
 		{
 			ft_putstr_fd("unset : argument error\n", 2);
 			return ;
 		}
-		row++;
+		line++;
 	}
 	return ;
 }
@@ -74,42 +72,41 @@ void	add_line_env(t_vault *data)
 			return ;
 		}
 	}
-//	if (data->b_in->env_export)
-//		free_dbl_ptr((void **)data->b_in->env_export);
 	data->b_in->env_export = ft_dbl_ptr_realloc(data->b_in->env_export, j + 2);
 	dup_env(data);
-//	free(data->b_in->env_export[j]);
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
+	print_double_array(data->b_in->env_export);
 	free (data->b_in->exp_arg);
 	data->env = &data->b_in->env_export[0];
 	return ;
 }
 
-void	ft_export(t_vault *data, int row)
+void	ft_export(t_vault *data, int line)
 {
-	if (!(data->rl_decomp[row]))
+	if (!(data->cmd->opt[line]))
 		order_env(data);
 	else
 	{
-		while (data->rl_decomp[row])
+		while (data->cmd->opt[line])
 		{
-			if (ft_str_env_var(data->rl_decomp[row], '=') == 0)
+			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
 			{
-				printf("export : bad argument\n");
+				ft_putstr_fd("export : bad argument\n", 2);
 				return ;
 			}
 			if (data->b_in->export_var)
 				free(data->b_in->export_var);
-			data->b_in->exp_arg = ft_strdup(data->rl_decomp[row]);
+			data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);
 			if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
-				var_prep(data, row);
+				var_prep(data, line);
 			else
-				data->b_in->export_var = ft_substr(data->rl_decomp[row], 0,
-						ft_strlen(data->rl_decomp[row])
-						- ft_strlen(ft_strchr(data->rl_decomp[row], '=')) + 1);
+				data->b_in->export_var = ft_substr(data->cmd->opt[line], 0,
+						ft_strlen(data->cmd->opt[line])
+						- ft_strlen(ft_strchr(data->cmd->opt[line], '=')) + 1);
 			add_line_env(data);
-			row++;
+			line++;
 		}
+		print_double_array(data->env);
 	}
 }
 
@@ -167,7 +164,7 @@ void	copy_env(t_vault *data, char **temp, int i)
 	int	j;
 
 	j = -1;
-	temp[i] = ft_calloc(sizeof(char), ft_strlen(data->env[i]) + 14);
+	temp[i] = ft_calloc(sizeof(char), ft_strlen(data->env[i]) + 15);
 	while (data->env[i][++j] != '\0' && data->env[i][j] != '=')
 		temp[i][j] = data->env[i][j];
 	temp[i][j] = data->env[i][j];

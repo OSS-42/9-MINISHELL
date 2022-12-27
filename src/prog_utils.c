@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/25 21:57:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	cmd_path_check(t_vault *data)
 	while (data->path_names[i])
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");
-		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->options[0]);
+		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
-			execve(data->cmd->name, data->cmd->options, data->env);
+			execve(data->cmd->name, data->cmd->opt, data->env);
 		else
 		{
 			free(data->cmd->name);
@@ -67,10 +67,10 @@ void	find_prog(t_vault *data, int line)
 		return ;
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)
-		execve(data->cmd->name, data->cmd->options, data->env);
+		execve(data->cmd->name, data->cmd->opt, data->env);
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
 	exit_on_error(data, message(data, "Command not found: ",
-			data->cmd->options[0], 8));
+			data->cmd->opt[0], 8));
 	printf("error 68\n");
 }

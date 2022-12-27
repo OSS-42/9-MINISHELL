@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 18:35:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_cmd
 {
 	char	*path;
 	char	*name;
-	char	**options;
+	char	**opt;
 }	t_cmd;
 
 typedef struct s_builtins
@@ -199,9 +199,9 @@ int		sgle_quote_mngmt(t_vault *data, int row, int i);
 int		dble_quote_mngmt(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
-void	ft_unset(t_vault *data, int row);
+void	ft_unset(t_vault *data, int line);
 void	remove_line_env(t_vault *data, int i);
-void	ft_export(t_vault *data, int row);
+void	ft_export(t_vault *data, int line);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
 void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
@@ -223,10 +223,10 @@ int		ft_isinset(char c);
 void	row_parsing(t_vault *data);
 
 /***** built_in_utils.c *****/
-void	join_unset(t_vault *data, int row);
+void	join_unset(t_vault *data, int line);
 void	swap_lines(t_vault *data, int rows);
 void	dup_env(t_vault *data);
-void	var_prep(t_vault *data, int row);
+void	var_prep(t_vault *data, int line);
 
 /***** dollar_utils.c *****/
 int		dollar_var_to_extract(t_vault *data, int row, int i);

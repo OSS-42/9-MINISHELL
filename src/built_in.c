@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/26 09:42:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_cd(t_vault *data)
 {
 	if (data->flag->pipe_count != 0)
 		return ;
-	if (chdir(data->cmd->options[1]) != 0)
+	if (chdir(data->cmd->opt[1]) != 0)
 		perror("cd");
 }
 
@@ -26,7 +26,7 @@ void	ft_pwd(t_vault *data)
 	int		size_buffer;
 
 	size_buffer = 1;
-	if (data->cmd->options[1] != NULL)
+	if (data->cmd->opt[1] != NULL)
 		write(2, "pwd: too many arguments\n", 24);
 	else
 	{
@@ -61,9 +61,7 @@ void	ft_exit(t_vault *data, int error_code)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
-	// if (data->path_names)
-	// 	free_dbl_ptr((void **)data->path_names);
-	// exit_minishell();
+	//exit_minishell();
 	exit (error_code);
 }
 

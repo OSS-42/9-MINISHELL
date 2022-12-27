@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/25 23:10:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	recreate_arg_tab(t_vault *data, char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free (data->cmd->options[i]);
-		data->cmd->options[i] = ft_strdup(tab[i]);
+		free (data->cmd->opt[i]);
+		data->cmd->opt[i] = ft_strdup(tab[i]);
 		free (tab[i]);
 		i++;
 	}
-	data->cmd->options[i] = NULL;
+	data->cmd->opt[i] = NULL;
 	free (tab);
 }
 
@@ -34,15 +34,15 @@ char	**create_temp_swap(t_vault *data, int row)
 	int		line;
 	char	**temp_swap;
 
-	temp_swap = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->cmd->options));
+	temp_swap = ft_calloc(sizeof(char *), ft_dbl_ptr_len(data->cmd->opt));
 	i = 0;
 	line = 0;
-	while (data->cmd->options[line])
+	while (data->cmd->opt[line])
 	{
 		if (line == row)
 			line++;
-		if (data->cmd->options[line])
-			temp_swap[i] = ft_strdup(data->cmd->options[line]);
+		if (data->cmd->opt[line])
+			temp_swap[i] = ft_strdup(data->cmd->opt[line]);
 		else
 		{
 			temp_swap[i] = NULL;
@@ -56,7 +56,7 @@ char	**create_temp_swap(t_vault *data, int row)
 
 void	check_minus_validity(t_vault *data, int row, int i)
 {
-	while (data->cmd->options[row][i] == '-' && data->cmd->options[row][i])
+	while (data->cmd->opt[row][i] == '-' && data->cmd->opt[row][i])
 			i++;
 	if (i > 1 || data->b_in->forget_minus == 1)
 	{
@@ -66,9 +66,9 @@ void	check_minus_validity(t_vault *data, int row, int i)
 	}
 	else
 	{
-		while (data->cmd->options[row][i])
+		while (data->cmd->opt[row][i])
 		{
-			if (data->cmd->options[row][i] != 'n')
+			if (data->cmd->opt[row][i] != 'n')
 			{
 				data->b_in->forget_minus = 1;
 				data->b_in->dont_do_minus = 1;
@@ -89,13 +89,13 @@ void	parse_minus(t_vault *data)
 
 	row = 1;
 	i = 0;
-	while (data->cmd->options[row] && data->cmd->options[row][i])
+	while (data->cmd->opt[row] && data->cmd->opt[row][i])
 	{
 		check_minus_validity(data, row, i);
 		if (data->b_in->forget_minus == 0)
 		{
 			temp_swap = create_temp_swap(data, row);
-			ft_dbl_ptr_realloc(data->cmd->options, ft_dbl_ptr_len(temp_swap));
+			ft_dbl_ptr_realloc(data->cmd->opt, ft_dbl_ptr_len(temp_swap));
 			recreate_arg_tab(data, temp_swap);
 			data->b_in->echo_flag_n = 1;
 			data->b_in->minus_n = 1;
