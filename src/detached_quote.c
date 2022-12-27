@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 13:39:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:02:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	detached_quote_tab(t_vault *data)
 
 	buffer = data->rl_dec;
 	len = len_detached_quote_tab(data);
-	// free_dbl_ptr((void **)data->rl_dec);
 	data->rl_dec = ft_dbl_ptr_realloc(data->rl_dec, len + 1);
 	fill_detached_quote_tab(data, buffer);
-	// free_dbl_ptr((void **)buffer);
 }
 
 int	len_detached_quote_tab(t_vault *data)

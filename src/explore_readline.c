@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 13:57:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:27:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	explore_readline(t_vault *data)
 		find_str_quote(data);
 		flag_count(data, 0, 0);
 		detached_quote_tab(data);
+		check_for_pipe(data);
 		print_double_array(data->rl_dec);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
@@ -82,8 +83,6 @@ void	launching_exec(t_vault *data)
 		}
 		else
 			forking(data, line, 2);
-		if (data->path_names)
-			free_dbl_ptr((void **)data->path_names);
 	}
 }
 

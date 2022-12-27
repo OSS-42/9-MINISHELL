@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 13:57:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 14:44:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,5 +274,9 @@ void	fill_detached_quote_tab(t_vault *data, char **buffer);
 /***** detached_quote_utils.c *****/
 int		len_in_quote_dtch(t_vault *data, char *rl_dec, int line);
 int		len_out_quote_dtch(char *rl_dec, int line);
+
+/***** pipe_management.c *****/
+void	check_for_pipe(t_vault *data);
+void	bigger_tab(t_vault *data, int len);
 
 #endif
