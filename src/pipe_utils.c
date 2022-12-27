@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 13:57:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/27 13:58:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,15 @@ void	switch_lines(t_vault *data, int row, int line)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
 		free (data->buffer);
-<<<<<<< HEAD
 		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
 			&& data->rl_decomp[row + 1][1])
 			do_the_switch(data, line);
-=======
-		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
-			&& data->rl_dec[row + 1][1])
-			data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
->>>>>>> mbertin
 	}
 	else
 	{
 		temp = ft_strjoin(data->tab_arg[line], data->buffer);
 		free (data->buffer);
 		free (data->tab_arg[line]);
-<<<<<<< HEAD
 		data->tab_arg[line] = ft_strdup(temp);
 		free (temp);
 		if (data->rl_decomp[row + 1] && data->rl_decomp[row + 1][0]
@@ -80,62 +73,3 @@ void	do_the_switch(t_vault *data, int line)
 	data->tab_arg[line] = ft_strdup(data->buffer);
 	free (data->buffer);
 }
-=======
-		data->tab_arg[line] = ft_strdup(buffer);
-		free (buffer);
-		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
-			&& data->rl_dec[row + 1][1])
-			data->tab_arg[line] = ft_strjoin(data->tab_arg[line], " ");
-	}
-}
-
-// void	clear_pipe_from_str(t_vault *data, int line)
-// {
-// 	char	*buffer;
-
-// 	buffer = NULL;
-// 	if (data->tab_arg[line] == NULL)
-// 	{
-// 		data->tab_arg[line] = ft_strdup(data->buffer);
-// 		free (data->buffer);
-// 		data->buffer = ft_calloc(sizeof(char), 500);
-// 	}
-// 	else
-// 	{
-// 		buffer = ft_strjoin(data->tab_arg[line], data->buffer);
-// 		free (data->buffer);
-// 		free (data->tab_arg[line]);
-// 		data->tab_arg[line] = ft_strdup(buffer);
-// 		free (buffer);
-// 		data->buffer = ft_calloc(sizeof(char), 500);
-// 	}
-// }
-
-// int	parsing_pipe(t_vault *data, int row, int line)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = -1;
-// 	j = 0;
-// 	data->buffer = ft_calloc(sizeof(char), 500);
-// 	while (data->rl_dec[row] && data->rl_dec[row][++i])
-// 	{
-// 		if (data->rl_dec[row][i] == '|')
-// 		{
-// 			clear_pipe_from_str(data, line);
-// 			line++;
-// 			j = 0;
-// 		}
-// 		else
-// 			copy_in_temp(data, row, i, &j);
-// 	}
-// 	return (line);
-// }
-
-// void	copy_in_temp(t_vault *data, int row, int i, int *j)
-// {
-// 	data->buffer[*j] = data->rl_dec[row][i];
-// 	(*j)++;
-// }
->>>>>>> mbertin
