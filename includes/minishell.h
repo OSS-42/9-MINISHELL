@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 20:32:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 23:56:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,7 @@ int		len_out_quote_dtch(char *rl_dec, int line);
 
 /***** pipe_management.c *****/
 void	check_for_pipe(t_vault *data);
-void	bigger_tab(t_vault *data, int len);
+void	expand_tab(t_vault *data, int len);
+void	search_for_pipe(t_vault *data, int row, int *i, char ***temp);
 
 #endif
