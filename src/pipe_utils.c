@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 20:42:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:52:41 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 //retourner un code d'erreur.
 void	create_tab_arg(t_vault *data, int row, int line)
 {
-	char	*temp;
+	//char	*temp;
 
-	temp = NULL;
+	//temp = NULL;
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])
@@ -38,15 +38,18 @@ void	create_tab_arg(t_vault *data, int row, int line)
 			}
 		}
 		data->buffer = ft_strdup(data->rl_dec[row]);
-		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
-		{
-			temp = ft_strjoin(data->buffer, " ");
-			free (data->buffer);
-			data->buffer = ft_strdup(temp);
-			free (temp);
-		}
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
+//		data->buffer = ft_strdup(data->rl_dec[row]);
+//		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
+//		{
+//			temp = ft_strjoin(data->buffer, " ");
+//			free (data->buffer);
+//			data->buffer = ft_strdup(temp);
+//			free (temp);
+//		}
+//		if (data->buffer[0] != '\0')
+//			switch_lines(data, row, line);
 	}
 }
 
