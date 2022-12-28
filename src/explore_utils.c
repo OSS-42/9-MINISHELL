@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:51:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:50:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	built_in(t_vault *data, int line)
 	if (ft_strcmp("env", data->cmd->name) == 0)
 		ft_env (data, 1);
 	if (ft_strcmp("export", data->cmd->name) == 0)
-		ft_export (data, 1);
+		ft_export (data, line + 1);
 	if (ft_strcmp("unset", data->cmd->name) == 0)
-		ft_unset (data, 1);
+		ft_unset (data, line);
 	if (ft_strcmp("exit", data->cmd->name) == 0)
 		ft_exit (data, 0);
 	return ;
