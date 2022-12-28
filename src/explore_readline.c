@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 15:33:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:56:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		detached_quote_tab(data);
 		check_for_pipe(data);
-		print_double_array(data->rl_dec);
+//		print_double_array(data->rl_dec);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
@@ -74,8 +74,8 @@ void	launching_exec(t_vault *data)
 			if (ft_strcmp(data->cmd->name, "cd") == 0
 				|| (ft_strcmp(data->cmd->name, "exit") == 0
 					&& !(data->tab_arg[line + 1]))
-				|| ft_strcmp(data->cmd->name, "unset")
-				|| ft_strcmp(data->cmd->name, "export"))
+				|| ft_strcmp(data->cmd->name, "unset") == 0
+				|| ft_strcmp(data->cmd->name, "export") == 0)
 				built_in(data, line);
 			else
 				forking(data, line, 1);
