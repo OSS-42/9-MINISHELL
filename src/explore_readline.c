@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 09:27:12 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 12:51:37 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,20 @@ void	launching_exec(t_vault *data)
 		if (data->flag->pipe_count == 0)
 		{
 			execute_redirection(data, 0, 0);
-			data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-			data->cmd->name = ft_strdup(data->cmd->opt[0]);
-			recompose_tab_arg(data, line);
-			if (ft_strcmp(data->cmd->name, "cd") == 0
-				|| (ft_strcmp(data->cmd->name, "exit") == 0
-					&& !(data->tab_arg[line + 1]))
-				|| ft_strcmp(data->cmd->name, "unset") == 0
-				|| ft_strcmp(data->cmd->name, "export") == 0)
-				built_in(data, line);
-			else
-				forking(data, line, 1);
+			if (data->tab_arg[line][0] != '\0')
+			{
+				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+				data->cmd->name = ft_strdup(data->cmd->opt[0]);
+				recompose_tab_arg(data, line);
+				if (ft_strcmp(data->cmd->name, "cd") == 0
+					|| (ft_strcmp(data->cmd->name, "exit") == 0
+						&& !(data->tab_arg[line + 1]))
+					|| ft_strcmp(data->cmd->name, "unset") == 0
+					|| ft_strcmp(data->cmd->name, "export") == 0)
+					built_in(data, line);
+				else
+					forking(data, line, 1);
+			}
 		}
 		else
 			forking(data, line, 2);
@@ -102,12 +105,15 @@ void	forking(t_vault *data, int line, int type)
 		{
 			dup_fds(data, line);
 			execute_redirection(data, 0, 0);
-			data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-			data->cmd->name = ft_strdup(data->cmd->opt[0]);
-			recompose_tab_arg(data, line);
-			close_pipe(data);
-			find_prog(data, line);
-			ft_exit(data, 0);
+			if (data->tab_arg[line][0] != '\0')
+			{
+				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+				data->cmd->name = ft_strdup(data->cmd->opt[0]);
+				recompose_tab_arg(data, line);
+				close_pipe(data);
+				find_prog(data, line);
+				ft_exit(data, 0);
+			}
 		}
 	}
 }

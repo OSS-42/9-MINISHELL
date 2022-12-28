@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/28 12:47:09 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 		find_redir_in_same_array(data, data->tab_arg[i]);
 	clean_redir(data, i);
 	data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
-	if (data->tab_arg[i][0] == '\0')
-		find_decomposer_to_switch(data, i);
 	*j = -1;
-	if (data->flag->heredoc_delimiter == FALSE)
-		redirection(data, data->flag->output);
+	redirection(data, data->flag->output);
 	free (data->flag->output);
 }
 

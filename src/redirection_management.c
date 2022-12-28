@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/23 10:06:19 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 12:31:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,38 @@ void	stdin_redirection(t_vault *data, char *redirection)
 {
 	if (data->flag->fd != 0)
 		close (data->flag->fd);
-	data->flag->fd = open(redirection, O_RDONLY);
-	if (data->flag->fd == -1)
+	if (data->flag->heredoc_delimiter == FALSE)
 	{
-		printf("No such file or directory\n");
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	else
-	{
-		if (dup2(data->flag->fd, STDIN_FILENO) == -1)
+		data->flag->fd = open(redirection, O_RDONLY);
+		if (data->flag->fd == -1)
 		{
-			printf("Probleme avec dup2 sur fd_out\n");
+			printf("No such file or directory\n");
+			printf("\n");
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
 		}
+		else
+		{
+			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
+			{
+				printf("Probleme avec dup2 sur fd_out\n");
+			}
+		}
+	}
+	else if (data->flag->heredoc_delimiter == TRUE)
+	{
+		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
+		if (data->flag->heredoc_fd == -1)
+		{
+			printf("No such file or directory\n");
+			printf("\n");
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
+			ft_putstr_fd("Problème avec dup2 sur heredoc\n", 2);
+		data->flag->heredoc_delimiter = FALSE;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/19 11:54:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/28 12:06:35 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 		{
 			clean = 1;
 			i++;
+			while (str[i] == ' ')
+				i++;
 		}
 		if (str[i])
 			temp[j++] = str[i++];
