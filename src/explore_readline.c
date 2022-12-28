@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 16:45:53 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:06:28 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			dup_fds(data, line);
-			execute_redirection(data, 0, 0);
+			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
 			{
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
