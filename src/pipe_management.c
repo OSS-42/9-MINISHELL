@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 23:58:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:09:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,89 +43,61 @@ void	check_for_pipe(t_vault *data)
 
 void	expand_tab(t_vault *data, int len)
 {
-	char	**temp;
 	int		i;
 	int		row;
-	int		j;
-	int		k;
+	// int		j;
+	// int		k;
 
 	row = 0;
 	i = 0;
-	temp = NULL;
-	temp = ft_calloc(sizeof(char *),
+	data->temp = NULL;
+	data->temp = ft_calloc(sizeof(char *),
 			ft_dbl_ptr_len(data->rl_dec) + len * 2 + 1);
 	while (data->rl_dec[row])
 	{
 		if (ft_strchr(data->rl_dec[row], '|') == 0)
 		{
-			temp[i] = ft_strdup(data->rl_dec[row]);
+			data->temp[i] = ft_strdup(data->rl_dec[row]);
 			free (data->rl_dec[row]);
 			i++;
 		}
 		else
 		{
-			j = 0;
-			// search_for_pipe(data, row, &i, &temp);
-			while (data->rl_dec[row][j])
-			{
-				k = 0;
-				if (data->rl_dec[row][j] == '|')
-				{
-					temp[i] = ft_calloc(sizeof(char), 2);
-					temp[i][0] = '|';
-					i++;
-				}
-				else
-				{
-					temp[i] = ft_calloc(sizeof(char),
-							ft_strlen(data->rl_dec[row]));
-					while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
-					{
-						temp[i][k] = data->rl_dec[row][j];
-						k++;
-						j++;
-					}
-					i++;
-					j--;
-				}
-				j++;
-			}
+			search_for_pipe(data, row, &i);
 			free (data->rl_dec[row]);
 		}
 		row++;
 	}
 	free(data->rl_dec);
-	data->rl_dec = temp;
+	data->rl_dec = data->temp;
 }
 
-// void	search_for_pipe(t_vault *data, int row, int *i, char ***temp)
-// {
-// 	int	j;
-// 	int	k;
+// en erreur 28/12 :
+// echo bonjour"| wc" | cat -e (n'affiche rien)...
 
-// 	j = 0;
-// 	while (data->rl_dec[row][j])
-// 	{
-// 		k = 0;
-// 		if (data->rl_dec[row][j] == '|')
-// 		{
-// 			(*temp)[*i] = ft_calloc(sizeof(char), 2);
-// 			(*temp)[*i][0] = '|';
-// 			i++;
-// 		}
-// 		else
-// 		{
-// 			(*temp)[*i] = ft_calloc(sizeof(char),
-// 					ft_strlen(data->rl_dec[row]));
-// 			while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
-// 			{
-// 				(*temp)[*i][k] = data->rl_dec[row][j];
-// 				k++;
-// 				j++;
-// 			}
-// 			(*i)++;
-// 			j--;
-// 		}
-// 		j++;
-// 	}
-// }
+void	search_for_pipe(t_vault *data, int row, int *i)
+{
+	int	j;
+	int	k;
+
+	j = -1;
+	while (data->rl_dec[row][++j])
+	{
+		if (data->rl_dec[row][j] == '|')
+		{
+			data->temp[*i] = ft_calloc(sizeof(char), 2);
+			data->temp[*i][0] = '|';
+			(*i)++;
+		}
+		else
+		{
+			data->temp[*i] = ft_calloc(sizeof(char),
+					ft_strlen(data->rl_dec[row]));
+			k = -1;
+			while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
+				data->temp[*i][++k] = data->rl_dec[row][j++];
+			(*i)++;
+			j--;
+		}
+	}
+}

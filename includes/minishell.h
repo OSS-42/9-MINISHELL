@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 08:30:02 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 10:03:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_vault
 	// char		**clean_decomposer; //pas trouve, a supprimer ?
 	char		**tab_arg;
 	char		**path_names;
+	char		**temp;
 	char		*read_line;
 	// char		*env_path; //pas trouve, a supprimer ?
 	// char		*test; //pas trouve, a supprimer ?
@@ -278,6 +279,6 @@ int		len_out_quote_dtch(char *rl_dec, int line);
 /***** pipe_management.c *****/
 void	check_for_pipe(t_vault *data);
 void	expand_tab(t_vault *data, int len);
-void	search_for_pipe(t_vault *data, int row, int *i, char ***temp);
+void	search_for_pipe(t_vault *data, int row, int *i);
 
 #endif
