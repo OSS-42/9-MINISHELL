@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 14:00:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 20:42:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 //retourner un code d'erreur.
 void	create_tab_arg(t_vault *data, int row, int line)
 {
+	char	*temp;
+
+	temp = NULL;
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])
@@ -35,6 +38,13 @@ void	create_tab_arg(t_vault *data, int row, int line)
 			}
 		}
 		data->buffer = ft_strdup(data->rl_dec[row]);
+		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
+		{
+			temp = ft_strjoin(data->buffer, " ");
+			free (data->buffer);
+			data->buffer = ft_strdup(temp);
+			free (temp);
+		}
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
