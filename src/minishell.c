@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:39:52 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 12:41:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_data(t_vault *data)
 	data->dollar_var = NULL;
 	data->dollar_var_len = 0;
 	data->rl_dec = NULL;
+	data->flag->stdout_backup = dup(STDOUT_FILENO);
+	data->flag->stdin_backup = dup(STDIN_FILENO);
 	return ;
 }
 

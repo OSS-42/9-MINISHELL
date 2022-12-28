@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 13:58:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/28 11:52:24 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	len_from_chevron_at_zero(t_vault *data, int i, int *begin)
 
 	temp = 1;
 	len = 1;
-	if (data->tab_arg[i][temp] == ' ')
+	while (data->tab_arg[i][temp] == ' ')
 		temp++;
 	if (data->tab_arg[i][temp] == '\'' || data->tab_arg[i][temp] == '\"')
 		temp = while_quote(data, data->tab_arg[i], temp);
