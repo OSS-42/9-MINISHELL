@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 09:30:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:26:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	readline_exec(t_vault *data)
 	explore_readline(data);
 	free(data->read_line);
 	reinit_data(data);
-	free_dbl_ptr((void **)data->rl_dec);
+	ft_dbl_ptr_free((void **)data->rl_dec);
 }
 
 int	main(void)

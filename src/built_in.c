@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 11:45:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:26:15 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ft_exit(t_vault *data, int error_code)
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
 	if (data->b_in->env_export)
-		free_dbl_ptr((void **)data->b_in->env_export);
+		ft_dbl_ptr_free((void **)data->b_in->env_export);
 	if (data->b_in->env_unset)
-		free_dbl_ptr((void **)data->b_in->env_unset);
+		ft_dbl_ptr_free((void **)data->b_in->env_unset);
 	if (data->b_in->env_ord)
 		free(data->b_in->env_ord);
 	if (data->read_line)
@@ -62,7 +62,7 @@ void	ft_exit(t_vault *data, int error_code)
 	if (data->flag)
 		free(data->flag);
 	if (data->tab_arg)
-		free_dbl_ptr((void **)data->tab_arg);
+		ft_dbl_ptr_free((void **)data->tab_arg);
 	exit (error_code);
 }
 	//ne pas oublier exit_minishell();

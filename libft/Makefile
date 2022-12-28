@@ -65,9 +65,10 @@ SRCS = \
 		src/ft_lstmap.c \
 		src/get_next_line.c \
 		src/get_next_line_utils.c \
-		src/free_dbl_ptr.c \
+		src/ft_dbl_ptr_free.c \
 		src/ft_dbl_ptr_len.c\
 		src/ft_dbl_ptr_realloc.c\
+		src/ft_dbl_ptr_copy.c\
 		src/ft_atolong.c
 
 #------------------------------------------------------------------------------#

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:27:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	message(t_vault *data, char *str1, char *str2, int error_code)
 	if (error_code == 9)
 		close_pipe(data);
 	else if (error_code == 8)
-		free_dbl_ptr((void **)data->cmd->opt);
+		ft_dbl_ptr_free((void **)data->cmd->opt);
 	return (error_code);
 }
 
 void	exit_on_error(t_vault *data, int error_code)
 {
 	if (error_code == 7)
-		free_dbl_ptr((void **)data->path_names);
+		ft_dbl_ptr_free((void **)data->path_names);
 	else
 		ft_exit (data, error_code);
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:09:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:21:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	expand_tab(t_vault *data, int len)
 {
 	int		i;
 	int		row;
-	// int		j;
-	// int		k;
 
 	row = 0;
 	i = 0;
@@ -69,7 +67,7 @@ void	expand_tab(t_vault *data, int len)
 		row++;
 	}
 	free(data->rl_dec);
-	data->rl_dec = data->temp;
+	data->rl_dec = ft_dbl_ptr_copy(data->temp);
 }
 
 // en erreur 28/12 :

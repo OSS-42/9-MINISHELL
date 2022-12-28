@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-void	free_dbl_ptr(void **ptr)
+void	ft_dbl_ptr_free(void **ptr)
 {
 	int	i;
 

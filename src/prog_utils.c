@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 15:31:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:27:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	cmd_path_check(t_vault *data)
 		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 		{
-			free_dbl_ptr((void **) data->path_names);
+			ft_dbl_ptr_free((void **) data->path_names);
 			execve(data->cmd->name, data->cmd->opt, data->env);
 		}
 		else
@@ -66,13 +66,13 @@ void	find_prog(t_vault *data, int line)
 {
 	if (is_built_in(data->cmd->name) == 1)
 	{
-		free_dbl_ptr((void **) data->path_names);
+		ft_dbl_ptr_free((void **) data->path_names);
 		built_in(data, line);
 		return ;
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)
 	{
-		free_dbl_ptr((void **) data->path_names);
+		ft_dbl_ptr_free((void **) data->path_names);
 		execve(data->cmd->name, data->cmd->opt, data->env);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
