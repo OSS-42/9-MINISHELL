@@ -56,3 +56,5 @@ dkms.conf
 .venv
 minishell
 .DS_Store
+*.log
+test
