@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 14:44:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/27 20:32:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ typedef struct s_builtins
 	char	*unset_arg;
 	char	*exp_arg;
 	char	*export_var;
-	char	*order_var;
-	char	*echo_var;
-	char	echo_priority;
-	int		echo_first;
+	char	*order_var; //pas trouve, a supprimer ?
+	char	*echo_var; //pas trouve, a supprimer ?
+	char	echo_priority; //pas trouve, a supprimer ?
+	int		echo_first; //pas utilise, a supprimer ?
 	int		echo_flag_n;
 	int		minus_n;
-	int		echo_dble_q;
-	int		echo_sgle_q;
+	int		echo_dble_q; //pas trouve, a supprimer ?
+	int		echo_sgle_q; //pas trouve, a supprimer ?
 	int		forget_minus;
 	int		dont_do_minus;
 	int		first_word;
@@ -68,10 +68,10 @@ typedef struct s_builtins
 typedef struct s_flag
 {
 	char	*output;
-	int		*fd_out;
-	int		output_count;
-	int		chevron_count;
-	int		input_count;
+	int		*fd_out; //pas trouve, a supprimer ?
+	int		output_count; //trouve seulement incrementation, aucune utilisation, a supprimer ?
+	int		chevron_count; //pas trouve, a supprimer ?
+	int		input_count; //trouve seulement incrementation, aucune utilisation, a supprimer ?
 	int		pipe_count;
 	int		stdout_backup;
 	int		stdin_backup;
@@ -99,12 +99,12 @@ typedef struct s_vault
 {
 	char		**env;
 	char		**rl_dec;
-	char		**clean_decomposer;
+	char		**clean_decomposer; //pas trouve, a supprimer ?
 	char		**tab_arg;
 	char		**path_names;
 	char		*read_line;
-	char		*env_path;
-	char		*test;
+	char		*env_path; //pas trouve, a supprimer ?
+	char		*test; //pas trouve, a supprimer ?
 	char		*buffer;
 	t_builtins	*b_in;
 	t_quote		*quote;
@@ -116,13 +116,13 @@ typedef struct s_vault
 	int			spc_count;
 	int			pos;
 	int			begin;
-	int			fd_in;
-	int			fd_out;
-	int			fork_count;
+	int			fd_in; //trouve juste initialisation a -1, aucune utilisation, a supprimer ?
+	int			fd_out; //trouve juste initialisation a -1, aucune utilisation, a supprimer ?
+	int			fork_count; //trouve juste initialisation a 0, aucune utilisation, a supprimer ?
 	pid_t		*pid;
 	int			child_id;
 	int			status;
-	int			debug;
+	int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
 /***** minishell.c *****/

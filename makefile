@@ -5,8 +5,8 @@ NAME = minishell
 #NAME_BONUS = minishell_bonus
 
 CC = gcc
-CFLAGS = -g -Wall -Werror -Wextra
-#CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g -Wall -Werror -Wextra -fsanitize-memory-track-origins
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 # CFLAGS = -g -Wall -Werror -Wextra
 # CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 CFLAGS = -g -Wall -Wextra -Werror
