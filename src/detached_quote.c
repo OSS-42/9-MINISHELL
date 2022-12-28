@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/28 10:38:22 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 16:39:42 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	len_detached_quote_tab(t_vault *data)
 void	quote_to_quote(t_vault *data, int row, int *line, int *len)
 {
 	data->quote->quote_priority = data->rl_dec[row][*line];
-	if (data->rl_dec[row][*line - 1] != ' ' && data->rl_dec[row][*line - 1])
+	if (*line > 0 && data->rl_dec[row][*line - 1] != ' ')
 		(*len)++;
 	(*line)++;
 	while (data->rl_dec[row][*line] != data->quote->quote_priority)
