@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/28 09:23:41 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	row_parsing(t_vault *data)
 		parse_row(data, row);
 		free(data->buffer);
 		data->b_in->forget_minus = 0;
-		data->b_in->echo_first = 0;
 		row++;
 	}
 }

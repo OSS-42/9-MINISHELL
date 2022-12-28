@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/28 09:23:04 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ void	flag_count(t_vault *data, int i, int j)
 					j++;
 				}
 			}
-			if (data->rl_dec[i][j] == '>')
-				data->flag->output_count++;
-			if (data->rl_dec[i][j] == '<')
-				data->flag->input_count++;
 			if (data->rl_dec[i][j] == '|')
 				data->flag->pipe_count++;
 			j++;

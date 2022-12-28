@@ -3,31 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 14:02:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:38:22 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-	Je me balade dans rl_dec grace a une boucle. Je cherche les lignes qui
-	contiennent des quotes. Quand c'est le cas je regarde si il y à quelque
-	chose de collé au début de ces quotes. Si c'est le cas j'augment de un len.
-	Meme chose à la fin des quotes.
-*/
-
 void	detached_quote_tab(t_vault *data)
 {
-	char	**buffer;
 	int		len;
 
-	buffer = data->rl_dec;
+	data->quote->buffer = data->rl_dec;
 	len = len_detached_quote_tab(data);
 	data->rl_dec = ft_dbl_ptr_realloc(data->rl_dec, len + 1);
-	fill_detached_quote_tab(data, buffer);
+	fill_detached_quote_tab(data);
 }
 
 int	len_detached_quote_tab(t_vault *data)
@@ -83,58 +75,35 @@ void	quote_to_quote(t_vault *data, int row, int *line, int *len)
 	}
 }
 
-void	fill_detached_quote_tab(t_vault *data, char **buffer)
+void	fill_detached_quote_tab(t_vault *data)
 {
 	int	row;
 	int	line;
 	int	i;
-	int	j;
 
 	row = 0;
 	i = 0;
-	j = 0;
-	while (buffer[row] && buffer[row][0])
+	while (data->quote->buffer[row] && data->quote->buffer[row][0])
 	{
 		line = 0;
-		if (ft_strchr(buffer[row], '\'') == NULL && ft_strchr(buffer[row], '\"') == NULL)
-			data->rl_dec[i++] = ft_strdup(buffer[row]);
+		if (ft_strchr(data->quote->buffer[row], '\'') == NULL
+			&& ft_strchr(data->quote->buffer[row], '\"') == NULL)
+			data->rl_dec[i++] = ft_strdup(data->quote->buffer[row]);
 		else
-		{
-			while (buffer[row][line])
-			{
-				if (buffer[row][line] != '\'' && buffer[row][line] != '\"')
-				{
-					data->rl_dec[i] = ft_calloc(sizeof(char), len_out_quote_dtch(buffer[row], line) + 1);
-					while (buffer[row][line] && buffer[row][line] != '\'' && buffer[row][line] != '\"')
-					{
-						data->rl_dec[i][j] = buffer[row][line];
-						j++;
-						line++;
-					}
-					j = 0;
-					i++;
-				}
-				else if (buffer[row][line] == '\'' || buffer[row][line] == '\"')
-				{
-					data->rl_dec[i] = ft_calloc(sizeof(char), len_in_quote_dtch(data, buffer[row], line) + 1);
-					data->quote->quote_priority = buffer[row][line];
-					data->rl_dec[i][j] = buffer[row][line];
-					line++;
-					j++;
-					while (buffer[row][line] != data->quote->quote_priority)
-					{
-						data->rl_dec[i][j] = buffer[row][line];
-						j++;
-						line++;
-					}
-					data->rl_dec[i][j] = buffer[row][line];
-					line++;
-					i++;
-					j = 0;
-				}
-			}
-		}
+			row_with_quote(data, &i, row, &line);
 		row++;
 	}
 }
- //echo bonjour | cat -e |" wc"| "cat -e"
+
+void	row_with_quote(t_vault *data, int *i, int row, int *line)
+{
+	while (data->quote->buffer[row][*line])
+	{
+		if (data->quote->buffer[row][*line] != '\''
+			&& data->quote->buffer[row][*line] != '\"')
+			fill_out_quote(data, i, row, line);
+		else if (data->quote->buffer[row][*line] == '\''
+			|| data->quote->buffer[row][*line] == '\"')
+			fill_in_quote(data, i, row, line);
+	}
+}
