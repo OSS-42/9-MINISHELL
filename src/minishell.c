@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:39:52 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:17:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ void	reinit_data(t_vault *data)
 	data->quote->last_replace = 0;
 }
 
-void	sig_handler(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	return ;
-}
-
 void	readline_exec(t_vault *data)
 {
 	add_history(data->read_line);
@@ -61,9 +51,9 @@ int	main(void)
 {
 	t_vault	data;
 
+	intro_minishell();
 	signal(SIGINT, sig_handler);
 	init_data(&data);
-	intro_minishell();
 	while (1)
 	{
 		data.read_line = readline("\033[95malive>\033[0;39m");
