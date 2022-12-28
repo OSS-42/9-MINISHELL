@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:39:21 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/28 17:17:06 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ enum	e_pipe_ends_name
 };
 
 /***** STRUTURES *****/
-
 typedef struct s_cmd
 {
 	char	*path;
@@ -131,7 +130,6 @@ typedef struct s_vault
 void	init_data(t_vault *data);
 void	reinit_data(t_vault *data);
 void	readline_exec(t_vault *data);
-void	sig_handler(int sig);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
@@ -284,5 +282,8 @@ void	fill_in_quote(t_vault *data, int *i, int row, int *line);
 void	check_for_pipe(t_vault *data);
 void	expand_tab(t_vault *data, int len);
 void	search_for_pipe(t_vault *data, int row, int *i);
+
+/***** signal_management.c *****/
+void	sig_handler(int sig);
 
 #endif
