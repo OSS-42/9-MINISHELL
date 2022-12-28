@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 18:06:28 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/28 18:08:23 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	launching_exec(t_vault *data)
 	{
 		if (data->flag->pipe_count == 0)
 		{
-			execute_redirection(data, 0, 0);
+			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
 			{
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
