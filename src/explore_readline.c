@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/27 22:56:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 09:27:12 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		detached_quote_tab(data);
 		check_for_pipe(data);
-//		print_double_array(data->rl_dec);
+		print_double_array(data->rl_dec);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
 		piping(data);
@@ -31,7 +31,6 @@ void	explore_readline(t_vault *data)
 	}
 	return ;
 }
-		// execute_redirection(data, 0, 0); pour debug
 
 //gestion d'erruer si creation de pipe en echec
 void	piping(t_vault *data)

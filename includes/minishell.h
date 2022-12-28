@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:03:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/28 10:39:21 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_quote
 	int		begin;
 	char	quote_priority;
 	char	temp_priority;
+	char	**buffer;
 }	t_quote;
 
 typedef struct s_vault
@@ -270,11 +271,14 @@ void	reset_io(t_vault *data);
 void	detached_quote_tab(t_vault *data);
 int		len_detached_quote_tab(t_vault *data);
 void	quote_to_quote(t_vault *data, int row, int *line, int *len);
-void	fill_detached_quote_tab(t_vault *data, char **buffer);
+void	fill_detached_quote_tab(t_vault *data);
+void	row_with_quote(t_vault *data, int *i, int row, int *line);
 
 /***** detached_quote_utils.c *****/
-int		len_in_quote_dtch(t_vault *data, char *rl_dec, int line);
-int		len_out_quote_dtch(char *rl_dec, int line);
+int		len_in_quote_dtch(t_vault *data, int line, int row);
+int		len_out_quote_dtch(t_vault *data, int row, int line);
+void	fill_out_quote(t_vault *data, int *i, int row, int *line);
+void	fill_in_quote(t_vault *data, int *i, int row, int *line);
 
 /***** pipe_management.c *****/
 void	check_for_pipe(t_vault *data);
