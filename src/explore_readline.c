@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 12:51:37 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/29 09:03:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		detached_quote_tab(data);
 		check_for_pipe(data);
-		print_double_array(data->rl_dec);
 		row_parsing(data);
 		create_tab_arg(data, -1, 0);
+		execute_redirection(data, 0, 0);
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -66,7 +66,7 @@ void	launching_exec(t_vault *data)
 	{
 		if (data->flag->pipe_count == 0)
 		{
-			execute_redirection(data, 0, 0);
+			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
 			{
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
@@ -104,7 +104,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			dup_fds(data, line);
-			execute_redirection(data, 0, 0);
+			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
 			{
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
@@ -127,8 +127,9 @@ void	child_creation(t_vault *data, int line)
 		ft_putstr_fd("Probleme de pid\n", 2);
 }
 
-//en erreur 26/12
-// echo bonjour | cat -e |" wc"
+//en erreur 28/12
+// Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
+// Creer un flag qui empeche lexecution de commande si mauvais input
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal

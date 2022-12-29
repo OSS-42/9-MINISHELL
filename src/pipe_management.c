@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 17:32:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:14:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	check_for_pipe(t_vault *data)
 	int		i;
 	int		len;
 
-	row = -1;
+	row = 0;
 	len = 0;
-	while (data->rl_dec[++row])
+	while (data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		i = 0;
 		while (data->rl_dec[row][i])
@@ -28,6 +28,7 @@ void	check_for_pipe(t_vault *data)
 			if (data->rl_dec[row][i] == '\'' || data->rl_dec[row][i] == '\"')
 			{
 				data->quote->quote_priority = data->rl_dec[row][i];
+				i++;
 				while (data->rl_dec[row]
 					&& data->rl_dec[row][i] != data->quote->quote_priority)
 					i++;
@@ -36,6 +37,7 @@ void	check_for_pipe(t_vault *data)
 				len++;
 			i++;
 		}
+		row++;
 	}
 	if (len > 0)
 		expand_tab(data, len);
@@ -88,9 +90,19 @@ void	search_for_pipe(t_vault *data, int row, int *i)
 		{
 			data->temp[*i] = ft_calloc(sizeof(char),
 					ft_strlen(data->rl_dec[row]));
-			k = -1;
+			k = 0;
 			while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
-				data->temp[*i][++k] = data->rl_dec[row][j++];
+			{
+				if (data->rl_dec[row][j] == '\'' || data->rl_dec[row][j] == '\"')
+				{
+					data->quote->quote_priority = data->rl_dec[row][j++];
+					while (data->rl_dec[row][j] != data->quote->quote_priority)
+						data->temp[*i][k++] = data->rl_dec[row][j++];
+					data->temp[*i][k++] = data->rl_dec[row][j++];
+				}
+				else
+					data->temp[*i][k++] = data->rl_dec[row][j++];
+			}
 			(*i)++;
 			j--;
 		}

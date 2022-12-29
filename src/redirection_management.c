@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/28 12:31:39 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/29 09:11:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 /*
 echo test 1 > test > test1 > test2
 echo test 2 >1 >2 >3
-echo test 3> test> test1> test2
-echo test 4>test>test1>test2
+>echo test 4>test>test1>test2
 echo test 5>1 > 2> 3 >4 > 5
 echo "test 6">"test" > "test1"
 echo "test 7">"test" >"test1"
@@ -104,10 +103,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		if (data->flag->fd == -1)
 		{
 			printf("No such file or directory\n");
-			printf("\n");
-			rl_replace_line("", 0);
-			rl_on_new_line();
-			rl_redisplay();
+			ft_exit(data, 2);
 		}
 		else
 		{
