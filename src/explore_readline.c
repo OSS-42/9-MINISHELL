@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 18:08:23 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:29:47 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ void	child_creation(t_vault *data, int line)
 		ft_putstr_fd("Probleme de pid\n", 2);
 }
 
-//en erreur 26/12
-// echo bonjour | cat -e |" wc"
+//en erreur 28/12
+// Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
