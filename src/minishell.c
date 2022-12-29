@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:11:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:03:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ extern char	**environ;
 void	init_data(t_vault *data)
 {
 	data->env = environ;
+	data->exit_code = 0;
+	find_paths(data);
 	data->read_line = NULL;
 	data->tab_arg = NULL;
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
@@ -49,29 +51,43 @@ void	readline_exec(t_vault *data)
 	ft_dbl_ptr_free((void **)data->rl_dec);
 }
 
-int	main(void)
+void	launch_minishell(t_vault *data)
 {
-	t_vault	data;
-
-	intro_minishell();
-	init_data(&data);
 	while (1)
 	{
 		init_signal(ALIVE);
-		data.read_line = readline("\033[95malive>\033[0;39m");
-		if (data.read_line != NULL)
+		data->read_line = readline("\033[95malive>\033[0;39m");
+		if (data->read_line != NULL)
 		{
 			init_signal(EXEC);
-			if (ft_strcmp(data.read_line, "") != 0)
-				readline_exec(&data);
+			if (ft_strcmp(data->read_line, "") != 0)
+				readline_exec(data);
 		}
 		else
 		{
 			printf("exit\n");
-			close (data.flag->stdout_backup);
-			close (data.flag->stdin_backup);
-			ft_exit(&data, 1);
+			close (data->flag->stdout_backup);
+			close (data->flag->stdin_backup);
+			ft_exit(data, 1);
 		}
+	}
+	return ;
+}
+
+int	main(void)
+{
+	t_vault	data;
+
+	init_data(&data);
+	if (data.exit_code == 1)
+	{
+		message(&data, "unexpected error: ", "env or path missing", 67);
+		return (0);
+	}
+	else
+	{
+		intro_minishell();
+		launch_minishell(&data);
 	}
 	return (0);
 }

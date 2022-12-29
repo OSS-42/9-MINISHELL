@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:14:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:59:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_vault
 void	init_data(t_vault *data);
 void	reinit_data(t_vault *data);
 void	readline_exec(t_vault *data);
+void	launch_minishell(t_vault *data);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);

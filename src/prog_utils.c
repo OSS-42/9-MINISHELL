@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:27:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:56:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		ft_putstr_fd("error 69\n", 2);
+		data->exit_code = 1;
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
@@ -79,5 +79,5 @@ void	find_prog(t_vault *data, int line)
 		cmd_path_check(data);
 	exit_on_error(data, message(data, "Command not found: ",
 			data->cmd->opt[0], 8));
-	printf("error 68\n");
+	data->exit_code = 99;
 }
