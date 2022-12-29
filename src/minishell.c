@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 17:18:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:11:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ int	main(void)
 	t_vault	data;
 
 	intro_minishell();
-	signal(SIGINT, sig_handler);
 	init_data(&data);
 	while (1)
 	{
+		init_signal(ALIVE);
 		data.read_line = readline("\033[95malive>\033[0;39m");
 		if (data.read_line != NULL)
 		{
+			init_signal(EXEC);
 			if (ft_strcmp(data.read_line, "") != 0)
 				readline_exec(&data);
 		}
@@ -74,5 +75,4 @@ int	main(void)
 	}
 	return (0);
 }
-// sigaction, sigemptyset, sigaddset
 // valgrind --leak-check=full  --show-reachable=yes --suppressions=./minishell.sup ./minishell
