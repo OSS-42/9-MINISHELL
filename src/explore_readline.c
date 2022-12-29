@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 11:12:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 11:49:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	forking(t_vault *data, int line, int type)
 // ajouter gestion d'erreur
 void	child_creation(t_vault *data, int line)
 {
-	find_paths(data);
+//	find_paths(data);
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
 		ft_putstr_fd("Probleme de pid\n", 2);
