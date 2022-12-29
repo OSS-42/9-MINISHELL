@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 09:48:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 11:14:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ void	expand_tab(t_vault *data, int len)
 	free(data->rl_dec);
 	data->rl_dec = ft_dbl_ptr_copy(data->temp);
 }
-
-// en erreur 28/12 :
-// echo bonjour"| wc" | cat -e (n'affiche rien)...
 
 void	search_for_pipe(t_vault *data, int row, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 17:17:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:14:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <curses.h>
+# include <signal.h>
 # include "../libft/includes/libft.h"
 # include "../librl/readline.h"
 # include "../librl/history.h"
@@ -28,6 +29,8 @@
 /***** DEFINES *****/
 # define TRUE 1
 # define FALSE 0
+# define ALIVE 1
+# define EXEC 2
 
 enum	e_pipe_ends_name
 {
@@ -123,6 +126,7 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
+	int			exit_code;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
@@ -284,6 +288,11 @@ void	expand_tab(t_vault *data, int len);
 void	search_for_pipe(t_vault *data, int row, int *i);
 
 /***** signal_management.c *****/
-void	sig_handler(int sig);
+void	init_signal(int mode);
+void	interrupt_alive(int sig);
+void	quit_alive(int sig);
+void	interrupt_exec(int sig);
+void	quit_exec(int sig);
+//t_vault	*get_data(void);
 
 #endif
