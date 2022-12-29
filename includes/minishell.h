@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:10:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:14:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,6 @@ void	interrupt_alive(int sig);
 void	quit_alive(int sig);
 void	interrupt_exec(int sig);
 void	quit_exec(int sig);
-t_vault	*get_data(void);
+//t_vault	*get_data(void);
 
 #endif
