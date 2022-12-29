@@ -6,7 +6,7 @@
 /*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 20:29:47 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:32:08 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	child_creation(t_vault *data, int line)
 
 //en erreur 28/12
 // Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
+// Creer un flag qui empeche lexecution de commande si mauvais input
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
