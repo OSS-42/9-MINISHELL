@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 11:16:27 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 12:59:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,17 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
 			|| data->tab_arg[i][begin] == '\'')
 			begin = while_quote(data, data->tab_arg[i], begin);
 		else
-			begin = while_is_not_flag(data->tab_arg[i], begin);
+		{
+			while (data->tab_arg[i][begin] == ' ')
+			{
+				str[temp] = data->tab_arg[i][begin];
+				temp++;
+				begin++;
+			}
+			while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != ' ')
+				begin++;
+			// begin = while_is_not_flag(data->tab_arg[i], begin);
+		}
 		if (data->tab_arg[i][begin])
 		{
 			while (data->tab_arg[i][begin]
@@ -96,7 +106,9 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		len = len_from_chevron_at_zero(data, i, begin);
 	else
 	{
-		temp = while_is_not_flag(data->tab_arg[i], temp);
+		// temp = while_is_not_flag(data->tab_arg[i], temp);
+		while (data->tab_arg[i][temp] != data->flag->chevron)
+			temp++;
 		len = temp;
 		if (data->tab_arg[i][temp])
 		{

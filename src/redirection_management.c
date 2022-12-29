@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 11:02:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 12:45:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 /*
 echo test 1 > test > test1 > test2
 echo test 2 >1 >2 >3
-echo test 4>test>test1>test2
+echo test 3> test> test1> test2
+>echo test 4>test>test1>test2
 echo test 5>1 > 2> 3 >4 > 5
 echo "test 6">"test" > "test1"
 echo "test 7">"test" >"test1"
 echo "test 8">"test"> "test1"> "test2"
 echo "test 9">"test">"test1">"test2"
 echo "test 10" > "test"> "test1" >"test2">"test3"> "test4"
-echo "test 11" >test 4 PROBLEME 4 disparé
-echo test 12 > "tes>t"
+echo "test 11" >test 4
+echo test 12 > "tes>t" probleme de output
 echo test 13 > "tes>t">test1
 echo test 14 > 1> 2
 echo test 15 >"tes>t">test1

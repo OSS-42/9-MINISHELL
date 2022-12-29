@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:10:41 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 12:26:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,17 @@ void	switch_lines(t_vault *data, int row, int line)
 	}
 	else
 	{
-		data->buffer = ft_strjoin(data->buffer, " ");
 		temp = ft_strjoin(data->tab_arg[line], data->buffer);
+		// if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
+		// 	temp = ft_strjoin(temp, " ");
 		free (data->buffer);
 		free (data->tab_arg[line]);
 		data->tab_arg[line] = ft_strdup(temp);
 		free (temp);
-		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
-			&& data->rl_dec[row + 1][1])
+		// if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
+		// 	&& data->rl_dec[row + 1][1])
+		// 	do_the_switch(data, line);
+		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
 			do_the_switch(data, line);
 	}
 }
