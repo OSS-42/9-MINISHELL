@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 09:46:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 10:58:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	detached_quote_tab(t_vault *data)
 {
 	int		len;
 
-	len = len_detached_quote_tab(data);
+	len = len_detached_quote_tab(data); //Mauvais len avec echo "test 9">"test">"test1">"test2"
 	data->temp = ft_calloc(sizeof(char *), len + 1);
 	fill_detached_quote_tab(data);
 	data->rl_dec = ft_dbl_ptr_copy(data->temp);
@@ -24,9 +24,9 @@ void	detached_quote_tab(t_vault *data)
 
 int	len_detached_quote_tab(t_vault *data)
 {
-	int	row;
-	int	line;
-	int	len;
+	int		row;
+	int		line;
+	int		len;
 
 	row = 0;
 	len = 0;
@@ -38,7 +38,10 @@ int	len_detached_quote_tab(t_vault *data)
 			if (data->rl_dec[row][line] == '\''
 				|| data->rl_dec[row][line] == '\"')
 				quote_to_quote(data, row, &line, &len);
-			line++;
+			if (line < (int)ft_strlen(data->rl_dec[row]))
+				line++;
+			else
+				break ;
 		}
 		row++;
 		len++;
@@ -71,6 +74,8 @@ void	quote_to_quote(t_vault *data, int row, int *line, int *len)
 					(*line)++;
 				(*len)++;
 			}
+			else
+				(*len)++;
 		}
 	}
 }

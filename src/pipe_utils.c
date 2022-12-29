@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 17:52:41 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/29 11:10:41 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	switch_lines(t_vault *data, int row, int line)
 	}
 	else
 	{
+		data->buffer = ft_strjoin(data->buffer, " ");
 		temp = ft_strjoin(data->tab_arg[line], data->buffer);
 		free (data->buffer);
 		free (data->tab_arg[line]);
