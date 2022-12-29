@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/28 16:39:42 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/29 09:46:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	detached_quote_tab(t_vault *data)
 {
 	int		len;
 
-	data->quote->buffer = data->rl_dec;
 	len = len_detached_quote_tab(data);
-	data->rl_dec = ft_dbl_ptr_realloc(data->rl_dec, len + 1);
+	data->temp = ft_calloc(sizeof(char *), len + 1);
 	fill_detached_quote_tab(data);
+	data->rl_dec = ft_dbl_ptr_copy(data->temp);
 }
 
 int	len_detached_quote_tab(t_vault *data)
@@ -83,27 +83,28 @@ void	fill_detached_quote_tab(t_vault *data)
 
 	row = 0;
 	i = 0;
-	while (data->quote->buffer[row] && data->quote->buffer[row][0])
+	while (data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		line = 0;
-		if (ft_strchr(data->quote->buffer[row], '\'') == NULL
-			&& ft_strchr(data->quote->buffer[row], '\"') == NULL)
-			data->rl_dec[i++] = ft_strdup(data->quote->buffer[row]);
+		if (ft_strchr(data->rl_dec[row], '\'') == NULL
+			&& ft_strchr(data->rl_dec[row], '\"') == NULL)
+			data->temp[i++] = ft_strdup(data->rl_dec[row]);
 		else
 			row_with_quote(data, &i, row, &line);
+		free (data->rl_dec[row]);
 		row++;
 	}
 }
 
 void	row_with_quote(t_vault *data, int *i, int row, int *line)
 {
-	while (data->quote->buffer[row][*line])
+	while (data->rl_dec[row][*line])
 	{
-		if (data->quote->buffer[row][*line] != '\''
-			&& data->quote->buffer[row][*line] != '\"')
+		if (data->rl_dec[row][*line] != '\''
+			&& data->rl_dec[row][*line] != '\"')
 			fill_out_quote(data, i, row, line);
-		else if (data->quote->buffer[row][*line] == '\''
-			|| data->quote->buffer[row][*line] == '\"')
+		else if (data->rl_dec[row][*line] == '\''
+			|| data->rl_dec[row][*line] == '\"')
 			fill_in_quote(data, i, row, line);
 	}
 }

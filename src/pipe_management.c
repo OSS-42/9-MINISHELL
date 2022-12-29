@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 17:17:16 by maison           ###   ########.fr       */
+/*   Updated: 2022/12/29 09:48:05 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	check_for_pipe(t_vault *data)
 	int		i;
 	int		len;
 
-	row = -1;
+	row = 0;
 	len = 0;
-	while (data->rl_dec[++row])
+	while (data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		i = 0;
 		while (data->rl_dec[row][i])
@@ -37,6 +37,7 @@ void	check_for_pipe(t_vault *data)
 				len++;
 			i++;
 		}
+		row++;
 	}
 	if (len > 0)
 		expand_tab(data, len);
