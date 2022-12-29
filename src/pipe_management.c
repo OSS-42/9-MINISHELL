@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:14:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:39:07 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	search_for_pipe(t_vault *data, int row, int *i)
 			{
 				if (data->rl_dec[row][j] == '\'' || data->rl_dec[row][j] == '\"')
 				{
-					data->quote->quote_priority = data->rl_dec[row][j++];
+					data->quote->quote_priority = data->rl_dec[row][j];
+					data->temp[*i][k++] = data->rl_dec[row][j++];
 					while (data->rl_dec[row][j] != data->quote->quote_priority)
 						data->temp[*i][k++] = data->rl_dec[row][j++];
 					data->temp[*i][k++] = data->rl_dec[row][j++];

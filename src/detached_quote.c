@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 10:58:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 11:27:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	detached_quote_tab(t_vault *data)
 {
 	int		len;
 
-	len = len_detached_quote_tab(data); //Mauvais len avec echo "test 9">"test">"test1">"test2"
+	len = len_detached_quote_tab(data);
 	data->temp = ft_calloc(sizeof(char *), len + 1);
 	fill_detached_quote_tab(data);
 	data->rl_dec = ft_dbl_ptr_copy(data->temp);
