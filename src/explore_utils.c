@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 11:50:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:22:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	built_in(t_vault *data, int line)
 	if (ft_strcmp("unset", data->cmd->name) == 0)
 		ft_unset (data, line);
 	if (ft_strcmp("exit", data->cmd->name) == 0)
-		ft_exit (data, 0);
+		ft_exit (data);
 	return ;
 }
 

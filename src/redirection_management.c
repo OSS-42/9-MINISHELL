@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 12:45:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 17:14:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ void	stdout_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->flag->fd == -1)
 	{
+		g_error_code = 3;
 		printf("Probleme avec open sur fd_out\n");
 	}
 	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
+		g_error_code = 3;
 		printf("Probleme avec dup2 sur fd_out\n");
 	}
 	data->flag->append = FALSE;
@@ -103,13 +105,15 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_RDONLY);
 		if (data->flag->fd == -1)
 		{
+			g_error_code = 4;
 			printf("No such file or directory\n");
-			ft_exit(data, 2);
+			ft_exit(data);
 		}
 		else
 		{
 			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 			{
+				g_error_code = 5;
 				printf("Probleme avec dup2 sur fd_out\n");
 			}
 		}
@@ -119,6 +123,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
 		if (data->flag->heredoc_fd == -1)
 		{
+			g_error_code = 6;
 			printf("No such file or directory\n");
 			printf("\n");
 			rl_replace_line("", 0);
@@ -126,7 +131,11 @@ void	stdin_redirection(t_vault *data, char *redirection)
 			rl_redisplay();
 		}
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
+		{
+			g_error_code = 7;
 			ft_putstr_fd("Problème avec dup2 sur heredoc\n", 2);
+		}
 		data->flag->heredoc_delimiter = FALSE;
 	}
+	//ne pas oublier le unlink du heredoc temp.
 }

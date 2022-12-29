@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 13:02:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 17:17:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	piping(t_vault *data)
 	{
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
 		if (pipe(data->flag->pipe[i]) == -1)
+		{
+			g_error_code = 8;
 			printf("Probleme de pipe\n");
+			// ft_exit(data);
+		}
 		i++;
 	}
 	launching_exec(data);
@@ -95,7 +99,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
-			ft_exit(data, 0);
+			ft_exit(data);
 		}
 	}
 	else if (type == 2)
@@ -112,7 +116,7 @@ void	forking(t_vault *data, int line, int type)
 				recompose_tab_arg(data, line);
 				close_pipe(data);
 				find_prog(data, line);
-				ft_exit(data, 0);
+				ft_exit(data);
 			}
 		}
 	}
@@ -121,10 +125,13 @@ void	forking(t_vault *data, int line, int type)
 // ajouter gestion d'erreur
 void	child_creation(t_vault *data, int line)
 {
-//	find_paths(data);
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
+	{
+		g_error_code = 9;
 		ft_putstr_fd("Probleme de pid\n", 2);
+		ft_exit(data);
+	}
 }
 
 //en erreur 28/12

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 11:00:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:41:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	ft_cd(t_vault *data)
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
+	{
+		g_error_code = 4;
 		perror("cd");
+		// ft_exit(data);
+	}
 }
 
 void	ft_pwd(t_vault *data)
@@ -27,7 +31,11 @@ void	ft_pwd(t_vault *data)
 
 	size_buffer = 1;
 	if (data->cmd->opt[1] != NULL)
+	{
+		g_error_code = 10;
 		write(2, "pwd: too many arguments\n", 24);
+		// ft_exit(data);
+	}
 	else
 	{
 		pwd = calloc(sizeof(char), size_buffer);
@@ -43,29 +51,32 @@ void	ft_pwd(t_vault *data)
 	}
 }
 
-void	ft_exit(t_vault *data, int error_code)
+void	ft_exit(t_vault *data)
 {
-	if (data->b_in->export_var)
-		free (data->b_in->export_var);
-	if (data->b_in->env_export)
-		ft_dbl_ptr_free((void **)data->b_in->env_export);
-	if (data->b_in->env_unset)
-		ft_dbl_ptr_free((void **)data->b_in->env_unset);
-	if (data->b_in->env_ord)
-		free(data->b_in->env_ord);
-	if (data->read_line)
-		free(data->read_line);
-	if (data->b_in)
-		free(data->b_in);
-	if (data->quote)
-		free(data->quote);
-	if (data->flag)
-		free(data->flag);
-	if (data->tab_arg)
-		ft_dbl_ptr_free((void **)data->tab_arg);
-	exit (error_code);
+	if (g_error_code == 1)
+		message(data, "path or env missing", 1);
+	if (g_error_code == 2)
+		message(data, "EOF on readline", 1);
+	if (g_error_code == 3)
+		message(data, "FD error", 1);
+	if (g_error_code == 4)
+		message(data, "no such file or directory", 1);
+	if (g_error_code == 5)
+		message(data, "I/O error (dup2)", 1);
+	if (g_error_code == 6)
+		message(data, "heredoc: no such file or directory", 1);
+	if (g_error_code == 7)
+		message(data, "heredoc: I/O error ", 1);
+	if (g_error_code == 8)
+		message(data, "pipe creation error", 1);
+	if (g_error_code == 9)
+		message(data, "pid creation error", 1);
+	if (g_error_code == 10)
+		message(data, "missing or wrong arguments", 1);
+	if (g_error_code == 11)
+		message(data, "command not found", 1);
+	free_all(data);
 }
-	//ne pas oublier exit_minishell();
 
 void	ft_env(t_vault *data, int env)
 {

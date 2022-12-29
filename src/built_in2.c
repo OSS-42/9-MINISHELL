@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 11:50:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:28:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_unset(t_vault *data, int line)
 			join_unset(data, line);
 		else
 		{
+			g_error_code = 10;
 			ft_putstr_fd("unset : argument error\n", 2);
 			return ;
 		}
@@ -90,6 +91,7 @@ void	ft_export(t_vault *data, int line)
 		{
 			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
 			{
+				g_error_code = 10;
 				ft_putstr_fd("export : bad argument\n", 2);
 				return ;
 			}
