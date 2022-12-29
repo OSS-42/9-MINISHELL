@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 13:02:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 15:34:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	child_creation(t_vault *data, int line)
 //en erreur 28/12
 // Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
 // Creer un flag qui empeche lexecution de commande si mauvais input
+// Continuer de tester echo test 12 > "tes>t"
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
@@ -138,36 +139,3 @@ void	child_creation(t_vault *data, int line)
 //3a. pro at -n minishell -w
 //ou 3b. pro at -p #pid
 
-/*
-	Si la commande est un exit mais qu'elle est suivi d'un pipe, il faut
-	executer exit dans un child process. Sinon si exit est la seul commande
-	il faut l'executer dans le parents.
-
-	void	explore_readline(t_vault *data)
-{
-	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
-	{
-		find_str_quote(data);
-		flag_count(data, 0, 0);
-		row_parsing(data);
-		create_tab_arg(data, -1, 0);
-		piping (compter, créer, relier les pipes)
-		while (tab_arg[i]) (dans une fonction forking)
-		{
-			redirection_management;
-			close_pipe
-			find_path (rajouter une condition pour voir si c'est un built_in)
-			built_in(data); (Si la commande est un built_in faire le built_in,
-																sinon exeve)
-		}
-		dup2(data->flag->stdout_backup, STDOUT_FILENO);
-		dup2(data->flag->stdin_backup, STDIN_FILENO);
-		close (data->flag->stdout_backup);
-		close (data->flag->stdin_backup);
-		if (data->flag->fd != 0)
-			close (data->flag->fd);
-	}
-	return ;
-}
-*/

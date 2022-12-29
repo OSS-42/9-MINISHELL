@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 12:54:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 13:51:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	find_redir_in_same_array(t_vault *data, char *rl_dec_array)
 	}
 	else
 	{
-		while (rl_dec_array[i] && rl_dec_array[i] != ' ')
+		while (rl_dec_array[i] && rl_dec_array[i] != ' '
+			&& rl_dec_array[i] != '<' && rl_dec_array[i]
+			!= '>' && rl_dec_array[i] != '|')
 			data->flag->output[len++] = rl_dec_array[i++];
 	}
 }
@@ -90,8 +92,9 @@ void	len_of_redir(t_vault *data, char *rl_dec_array)
 	}
 	else
 	{
-		while (rl_dec_array[i] && rl_dec_array[i++] != ' ')
-			len++;
+		len = while_is_not_flag(rl_dec_array, i) - i;
+		// while (rl_dec_array[i] && rl_dec_array[i++] != ' ')
+		// 	len++;
 	}
 	data->flag->output = ft_calloc(sizeof(char), len + 1);
 }

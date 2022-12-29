@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 12:59:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/29 14:00:50 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,12 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
 				temp++;
 				begin++;
 			}
-			while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != ' ')
-				begin++;
-			// begin = while_is_not_flag(data->tab_arg[i], begin);
+			// while (data->tab_arg[i][begin] && data->tab_arg[i][begin]!= ' '
+			// 	&& data->tab_arg[i][begin] != '<'
+			// 	&& data->tab_arg[i][begin] != '>'
+			// 	&& data->tab_arg[i][begin] != '|')
+			// 	begin++;
+			begin = while_is_not_flag(data->tab_arg[i], begin);
 		}
 		if (data->tab_arg[i][begin])
 		{
