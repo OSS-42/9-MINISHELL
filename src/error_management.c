@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_mgmnt.c                                      :+:      :+:    :+:   */
+/*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 23:44:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:00:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ int	check_error(t_vault *data, int line)
 void	message(t_vault *data, char *str1)
 {
 	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(data->cmd->name, 2);
-	ft_putstr_fd(": ", 2);
+	if (data->cmd->name)
+	{
+		ft_putstr_fd(data->cmd->name, 2);
+		ft_putstr_fd(": ", 2);
+	}
 	ft_putendl_fd(str1, 2);
 	return ;
 }

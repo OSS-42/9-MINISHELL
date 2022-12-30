@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 23:51:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:02:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	ft_echo(t_vault *data, int line)
 	return ;
 }
 
+// tests au 30/12 - 10:45
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
@@ -128,8 +129,8 @@ void	ft_echo(t_vault *data, int line)
 //echo salut -n						|		OK
 //echo salut bonjour -n				|		OK
 //echo -n bonjour -n				|		OK
-//echo "-n salut bonjour"			|		OK
-//echo '-n salut bonjour'			|		OK
+//echo "-n salut bonjour"			|			KO
+//echo '-n salut bonjour'			|			KO
 //echo "-n" salut bonjour			|		OK
 //echo '-n' salut bonjour			|		OK
 //echo -n -n salut bonjour			|		OK
@@ -142,24 +143,24 @@ void	ft_echo(t_vault *data, int line)
 //echo '--n' salut bonjour			|		OK
 //echo "--n salut bonjour"			|		OK
 //echo $USER						|		OK
-//echo $"USER"						|		OK
+//echo $"USER"						|			KO (resultat attendu : USER\n)
 //echo $USERA						|		OK
 //echo $USER$TERM					|		OK
 //echo "$USER"						|		OK
 //echo '$USER'						|		OK
 //echo "'$USER'"					|		OK
 //echo '"$USER"'					|		OK
-//echo '$USER'$TERM					|		OK
-//echo "$USER"'$TERM'				|		OK
-//echo $USER'$TERM					|		OK
-//echo $USER"$TERM"					|		OK
+//echo '$USER'$TERM					|			KO espace en trop
+//echo "$USER"'$TERM'				|			KO Segfault (detached_quote.c l:72)
+//echo $USER'$TERM					|			KO corrige, a confirmer
+//echo $USER"$TERM"					|			KO espace en trop
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
 //echo $USER $TErM					|		OK
 //echo $USER $TErM $HOME			|		OK
 //echo "bonjour $USER"				|		OK
 //echo "bonjour '$USER'"			|		OK
-//echo "a"b'c'						|		OK
-//echo ""x''y						|		OK
-//echo 1' '2" "3					|		OK
+//echo "a"b'c'						|			KO (ne devrait pas etre en erreur)
+//echo ""x''y						|			KO (n'affiche rien)
+//echo 1' '2" "3					|			KO (ne devrait pas etre en erreur)
 //echo "$USER "$USER" $TERM '$PATH'"|		OK

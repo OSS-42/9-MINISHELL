@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 23:36:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:58:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
-				g_error_code = 5;
+				g_error_code = 10;
 				error_message(data);
 				return (FALSE);
 			}

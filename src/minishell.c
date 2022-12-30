@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 18:13:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:01:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	reinit_data(t_vault *data)
 	data->quote->simple_quote_count = 0;
 	data->quote->begin = 0;
 	data->quote->last_replace = 0;
+	data->cmd->name = NULL;
 }
 
 void	readline_exec(t_vault *data)
