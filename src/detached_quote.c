@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 11:27:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 11:09:48 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	quote_to_quote(t_vault *data, int row, int *line, int *len)
 		&& data->rl_dec[row][*line + 1] != ' ')
 	{
 		(*len)++;
-		(*line)++;
 		while (data->rl_dec[row][(*line)++])
 		{
 			if (data->rl_dec[row][*line] == '\''
