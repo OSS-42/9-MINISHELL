@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 17:22:16 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 00:17:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,25 @@ void	recompose_tab_arg(t_vault *data, int line)
 		free (buffer);
 		i++;
 	}
+}
+
+int	is_special_built_in(t_vault *data, int line)
+{
+	if (ft_strcmp(data->cmd->name, "cd") == 0
+		|| (ft_strcmp(data->cmd->name, "exit") == 0
+			&& !(data->tab_arg[line + 1]))
+		|| ft_strcmp(data->cmd->name, "unset") == 0
+		|| ft_strcmp(data->cmd->name, "export") == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	in_child_exec(t_vault *data, int line)
+{
+	data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
+	recompose_tab_arg(data, line);
+	close_pipe(data);
+	find_prog(data, line);
+	ft_exit(data);
 }

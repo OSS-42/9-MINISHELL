@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 23:35:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 00:17:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	explore_readline(t_vault *data)
 	return ;
 }
 
-//gestion d'erruer si creation de pipe en echec
 void	piping(t_vault *data)
 {
 	int	i;
@@ -75,11 +74,7 @@ void	launching_exec(t_vault *data)
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
 				data->cmd->name = ft_strdup(data->cmd->opt[0]);
 				recompose_tab_arg(data, line);
-				if (ft_strcmp(data->cmd->name, "cd") == 0
-					|| (ft_strcmp(data->cmd->name, "exit") == 0
-						&& !(data->tab_arg[line + 1]))
-					|| ft_strcmp(data->cmd->name, "unset") == 0
-					|| ft_strcmp(data->cmd->name, "export") == 0)
+				if (is_special_built_in(data, line) == TRUE)
 					built_in(data, line);
 				else
 					forking(data, line, 1);
@@ -109,19 +104,11 @@ void	forking(t_vault *data, int line, int type)
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
-			{
-				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-				data->cmd->name = ft_strdup(data->cmd->opt[0]);
-				recompose_tab_arg(data, line);
-				close_pipe(data);
-				find_prog(data, line);
-				ft_exit(data);
-			}
+				in_child_exec(data, line);
 		}
 	}
 }
 
-// ajouter gestion d'erreur
 void	child_creation(t_vault *data, int line)
 {
 	data->pid[line] = fork();
@@ -134,7 +121,8 @@ void	child_creation(t_vault *data, int line)
 }
 
 //en erreur 28/12
-// Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
+// Quand on rentre un mauvais input avec < on sort de minishell si il y une 
+// seul commande avec echo
 // Creer un flag qui empeche lexecution de commande si mauvais input
 
 //possibilite de suivre le child :
@@ -143,37 +131,3 @@ void	child_creation(t_vault *data, int line)
 // lire  : https://lldb.llvm.org/use/map.html
 //3a. pro at -n minishell -w
 //ou 3b. pro at -p #pid
-
-/*
-	Si la commande est un exit mais qu'elle est suivi d'un pipe, il faut
-	executer exit dans un child process. Sinon si exit est la seul commande
-	il faut l'executer dans le parents.
-
-	void	explore_readline(t_vault *data)
-{
-	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
-	{
-		find_str_quote(data);
-		flag_count(data, 0, 0);
-		row_parsing(data);
-		create_tab_arg(data, -1, 0);
-		piping (compter, créer, relier les pipes)
-		while (tab_arg[i]) (dans une fonction forking)
-		{
-			redirection_management;
-			close_pipe
-			find_path (rajouter une condition pour voir si c'est un built_in)
-			built_in(data); (Si la commande est un built_in faire le built_in,
-																sinon exeve)
-		}
-		dup2(data->flag->stdout_backup, STDOUT_FILENO);
-		dup2(data->flag->stdin_backup, STDIN_FILENO);
-		close (data->flag->stdout_backup);
-		close (data->flag->stdin_backup);
-		if (data->flag->fd != 0)
-			close (data->flag->fd);
-	}
-	return ;
-}
-*/

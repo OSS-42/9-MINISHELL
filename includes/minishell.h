@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 23:32:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 00:25:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ void	child_creation(t_vault *data, int line);
 void	built_in(t_vault *data, int line);
 int		is_built_in(char *str);
 void	recompose_tab_arg(t_vault *data, int line);
+int		is_special_built_in(t_vault *data, int line);
+void	in_child_exec(t_vault *data, int line);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -289,6 +291,7 @@ void	fill_in_quote(t_vault *data, int *i, int row, int *line);
 void	check_for_pipe(t_vault *data);
 void	expand_tab(t_vault *data, int len);
 void	search_for_pipe(t_vault *data, int row, int *i);
+int		prep_temp(t_vault *data, int row, int *i, int j);
 
 /***** signal_management.c *****/
 void	init_signal(int mode);
