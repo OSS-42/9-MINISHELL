@@ -6,28 +6,28 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 12:03:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:13:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern char	**environ;
+int g_error_code = 0;
 
-void	init_data(t_vault *data)
+void	init_data(t_vault *data, char **env)
 {
-	data->env = environ;
-	data->exit_code = 0;
-	find_paths(data);
-	data->read_line = NULL;
-	data->tab_arg = NULL;
+	// data->exit_code = 0;
+	data->env = env;
+	data->cmd = ft_calloc(sizeof(t_cmd), 1);
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	data->quote = ft_calloc(sizeof(t_quote), 1);
 	data->flag = ft_calloc(sizeof(t_flag), 1);
-	data->cmd = ft_calloc(sizeof(t_cmd), 1);
-	data->dollar_var = NULL;
-	data->dollar_var_len = 0;
 	data->rl_dec = NULL;
+	data->dollar_var = NULL;
+	data->read_line = NULL;
+	data->tab_arg = NULL;
+	data->dollar_var_len = 0;
+	find_paths(data);
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	return ;
@@ -68,27 +68,27 @@ void	launch_minishell(t_vault *data)
 			printf("exit\n");
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
-			ft_exit(data, 1);
+			g_error_code = 2;
+			ft_exit(data);
 		}
 	}
 	return ;
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	t_vault	data;
 
-	init_data(&data);
-	if (data.exit_code == 1)
-	{
-		message(&data, "unexpected error: ", "env or path missing", 67);
-		return (0);
-	}
+	(void) argc;
+	(void) argv;
+	init_data(&data, env);
+	if (g_error_code == 1)
+		ft_exit(&data);
 	else
 	{
 		intro_minishell();
 		launch_minishell(&data);
 	}
-	return (0);
+	return (g_error_code);
 }
 // valgrind --leak-check=full  --show-reachable=yes --suppressions=./minishell.sup ./minishell

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/28 11:00:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:51:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	ft_cd(t_vault *data)
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
-		perror("cd");
+	{
+		g_error_code = 4;
+		error_message(data);
+	}
 }
 
 void	ft_pwd(t_vault *data)
@@ -25,11 +28,16 @@ void	ft_pwd(t_vault *data)
 	char	*pwd;
 	int		size_buffer;
 
+	(void) data;
 	size_buffer = 1;
-	if (data->cmd->opt[1] != NULL)
-		write(2, "pwd: too many arguments\n", 24);
-	else
-	{
+	// if (data->cmd->opt[1] != NULL)
+	// {
+	// 	g_error_code = 10;
+	// 	write(2, "pwd: too many arguments\n", 24);
+	// 	// ft_exit(data);
+	// }
+	// else
+//	{
 		pwd = calloc(sizeof(char), size_buffer);
 		while (getcwd(pwd, size_buffer) == NULL)
 		{
@@ -40,10 +48,10 @@ void	ft_pwd(t_vault *data)
 		ft_putstr_fd(pwd, 1);
 		write(1, "\n", 1);
 		free (pwd);
-	}
+//	}
 }
 
-void	ft_exit(t_vault *data, int error_code)
+void	ft_exit(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
@@ -63,7 +71,7 @@ void	ft_exit(t_vault *data, int error_code)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
-	exit (error_code);
+	exit (g_error_code);
 }
 	//ne pas oublier exit_minishell();
 
@@ -106,8 +114,6 @@ void	ft_echo(t_vault *data, int line)
 		ft_putstr_fd("\n", 1);
 	return ;
 }
-
-
 
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.

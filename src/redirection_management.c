@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 15:14:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 09:36:11 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,13 @@ void	stdout_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->flag->fd == -1)
 	{
-		printf("Probleme avec open sur fd_out\n");
+		g_error_code = 3;
+		error_message(data);
 	}
 	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
-		printf("Probleme avec dup2 sur fd_out\n");
+		g_error_code = 3;
+		error_message(data);
 	}
 	data->flag->append = FALSE;
 }
@@ -103,13 +105,15 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_RDONLY);
 		if (data->flag->fd == -1)
 		{
-			printf("No such file or directory\n");
-			ft_exit(data, 2);
+			g_error_code = 4;
+			error_message(data);
+			ft_exit(data);
 		}
 		else
 		{
 			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 			{
+				g_error_code = 5;
 				printf("Probleme avec dup2 sur fd_out\n");
 			}
 		}
@@ -119,14 +123,19 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
 		if (data->flag->heredoc_fd == -1)
 		{
-			printf("No such file or directory\n");
-			printf("\n");
+			g_error_code = 6;
+			error_message(data);
+//			printf("\n");
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
 		}
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
-			ft_putstr_fd("Problème avec dup2 sur heredoc\n", 2);
+		{
+			g_error_code = 7;
+			error_message(data);
+		}
 		data->flag->heredoc_delimiter = FALSE;
 	}
+	//ne pas oublier le unlink du heredoc temp.
 }

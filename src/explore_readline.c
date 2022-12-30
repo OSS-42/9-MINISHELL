@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 15:34:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 09:33:24 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	explore_readline(t_vault *data)
 	return ;
 }
 
-//gestion d'erruer si creation de pipe en echec
 void	piping(t_vault *data)
 {
 	int	i;
@@ -43,7 +42,10 @@ void	piping(t_vault *data)
 	{
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
 		if (pipe(data->flag->pipe[i]) == -1)
-			printf("Probleme de pipe\n");
+		{
+			g_error_code = 8;
+			error_message(data);
+		}
 		i++;
 	}
 	launching_exec(data);
@@ -72,11 +74,7 @@ void	launching_exec(t_vault *data)
 				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
 				data->cmd->name = ft_strdup(data->cmd->opt[0]);
 				recompose_tab_arg(data, line);
-				if (ft_strcmp(data->cmd->name, "cd") == 0
-					|| (ft_strcmp(data->cmd->name, "exit") == 0
-						&& !(data->tab_arg[line + 1]))
-					|| ft_strcmp(data->cmd->name, "unset") == 0
-					|| ft_strcmp(data->cmd->name, "export") == 0)
+				if (is_special_built_in(data, line) == TRUE)
 					built_in(data, line);
 				else
 					forking(data, line, 1);
@@ -95,7 +93,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
-			ft_exit(data, 0);
+			ft_exit(data);
 		}
 	}
 	else if (type == 2)
@@ -106,29 +104,25 @@ void	forking(t_vault *data, int line, int type)
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0')
-			{
-				data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-				data->cmd->name = ft_strdup(data->cmd->opt[0]);
-				recompose_tab_arg(data, line);
-				close_pipe(data);
-				find_prog(data, line);
-				ft_exit(data, 0);
-			}
+				in_child_exec(data, line);
 		}
 	}
 }
 
-// ajouter gestion d'erreur
 void	child_creation(t_vault *data, int line)
 {
-//	find_paths(data);
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
-		ft_putstr_fd("Probleme de pid\n", 2);
+	{
+		g_error_code = 9;
+		error_message(data);
+		ft_exit(data);
+	}
 }
 
 //en erreur 28/12
-// Quand on rentre un mauvais input avec < on sort de minishell si il y une seul commande avec echo
+// Quand on rentre un mauvais input avec < on sort de minishell si il y une
+// seul commande avec echo
 // Creer un flag qui empeche lexecution de commande si mauvais input
 // Continuer de tester echo test 12 > "tes>t"
 
@@ -138,4 +132,3 @@ void	child_creation(t_vault *data, int line)
 // lire  : https://lldb.llvm.org/use/map.html
 //3a. pro at -n minishell -w
 //ou 3b. pro at -p #pid
-

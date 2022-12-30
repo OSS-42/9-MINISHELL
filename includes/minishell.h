@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 14:25:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 09:34:55 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include "../librl/readline.h"
 # include "../librl/history.h"
 # include "../libart/includes/libart.h"
+
+/***** GLOBAL *****/
+extern int g_error_code;
 
 /***** DEFINES *****/
 # define TRUE 1
@@ -126,12 +129,11 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
-	int			exit_code;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
 /***** minishell.c *****/
-void	init_data(t_vault *data);
+void	init_data(t_vault *dat, char **env);
 void	reinit_data(t_vault *data);
 void	readline_exec(t_vault *data);
 void	launch_minishell(t_vault *data);
@@ -147,6 +149,8 @@ void	child_creation(t_vault *data, int line);
 void	built_in(t_vault *data, int line);
 int		is_built_in(char *str);
 void	recompose_tab_arg(t_vault *data, int line);
+int		is_special_built_in(t_vault *data, int line);
+void	in_child_exec(t_vault *data, int line);
 
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
@@ -199,7 +203,7 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
-void	ft_exit(t_vault *data, int error_code);
+void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int line);
 
@@ -225,8 +229,8 @@ void	print_double_array(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
-void	exit_on_error(t_vault *data, int error_code);
-int		message(t_vault *data, char *str1, char *str2, int error_code);
+void	message(t_vault *data, char *str1);
+void	error_message(t_vault *data);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);
@@ -288,6 +292,7 @@ void	fill_in_quote(t_vault *data, int *i, int row, int *line);
 void	check_for_pipe(t_vault *data);
 void	expand_tab(t_vault *data, int len);
 void	search_for_pipe(t_vault *data, int row, int *i);
+int		prep_temp(t_vault *data, int row, int *i, int j);
 
 /***** signal_management.c *****/
 void	init_signal(int mode);
