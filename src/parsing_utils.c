@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 10:25:17 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/30 11:36:44 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,11 @@ void	row_parsing(t_vault *data)
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
 		parse_row(data, row);
+		if (!data->rl_dec[row][0])
+		{
+			find_decomposer_to_switch(data, row);
+			row--;
+		}
 		free(data->buffer);
 		data->b_in->forget_minus = 0;
 		row++;

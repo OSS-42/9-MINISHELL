@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 12:26:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 13:50:32 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	switch_lines(t_vault *data, int row, int line)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
 		free (data->buffer);
-		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
-			&& data->rl_dec[row + 1][1])
+		// if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
+		// 	&& data->rl_dec[row + 1][1])
+		// 	do_the_switch(data, line);
+		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
 			do_the_switch(data, line);
 	}
 	else

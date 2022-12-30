@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 09:34:55 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/30 15:44:10 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cmd
 	char	*path;
 	char	*name;
 	char	**opt;
+	char	**output;
 }	t_cmd;
 
 typedef struct s_builtins
@@ -129,6 +130,7 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
+	t_commande	command;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 

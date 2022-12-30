@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/30 11:02:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:05:16 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_exit(t_vault *data)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
+	free(data->pid);
 	exit (g_error_code);
 }
 	//ne pas oublier exit_minishell();
@@ -151,7 +152,7 @@ void	ft_echo(t_vault *data, int line)
 //echo "'$USER'"					|		OK
 //echo '"$USER"'					|		OK
 //echo '$USER'$TERM					|			KO espace en trop
-//echo "$USER"'$TERM'				|			KO Segfault (detached_quote.c l:72)
+//echo "$USER"'$TERM'				|			KO corrige, a confirmer
 //echo $USER'$TERM					|			KO corrige, a confirmer
 //echo $USER"$TERM"					|			KO espace en trop
 //echo $USER $TERM					|		OK
