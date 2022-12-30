@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/29 17:17:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:35:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	piping(t_vault *data)
 		if (pipe(data->flag->pipe[i]) == -1)
 		{
 			g_error_code = 8;
-			printf("Probleme de pipe\n");
-			// ft_exit(data);
+			error_message(data);
 		}
 		i++;
 	}
@@ -129,7 +128,7 @@ void	child_creation(t_vault *data, int line)
 	if (data->pid[line] == -1)
 	{
 		g_error_code = 9;
-		ft_putstr_fd("Probleme de pid\n", 2);
+		error_message(data);
 		ft_exit(data);
 	}
 }

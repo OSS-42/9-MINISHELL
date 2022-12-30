@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 17:42:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:44:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,42 @@ int	check_error(t_vault *data, int line)
 	return (1);
 }
 
-int	message(t_vault *data, char *str1, int error_code)
+void	message(t_vault *data, char *str1)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(data->cmd->name, 2);
+	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(str1, 2);
-	return (error_code);
+	return ;
 }
 
-void	free_all(t_vault *data)
+void	error_message(t_vault *data)
 {
-	if (data->b_in->export_var)
-		free (data->b_in->export_var);
-	if (data->b_in->env_export)
-		ft_dbl_ptr_free((void **)data->b_in->env_export);
-	if (data->b_in->env_unset)
-		ft_dbl_ptr_free((void **)data->b_in->env_unset);
-	if (data->b_in->env_ord)
-		free(data->b_in->env_ord);
-	if (data->read_line)
-		free(data->read_line);
-	if (data->b_in)
-		free(data->b_in);
-	if (data->quote)
-		free(data->quote);
-	if (data->flag)
-		free(data->flag);
-	if (data->tab_arg)
-		ft_dbl_ptr_free((void **)data->tab_arg);
-	exit (g_error_code);
+	if (g_error_code == 1)
+		message(data, "path or env missing");
+	if (g_error_code == 2)
+		message(data, "EOF on readline");
+	if (g_error_code == 3)
+		message(data, "FD error");
+	if (g_error_code == 4)
+		message(data, "no such file or directory");
+	if (g_error_code == 5)
+		message(data, "I/O error (dup2)");
+	if (g_error_code == 6)
+		message(data, "heredoc: no such file or directory");
+	if (g_error_code == 7)
+		message(data, "heredoc: I/O error ");
+	if (g_error_code == 8)
+		message(data, "pipe creation error");
+	if (g_error_code == 9)
+		message(data, "pid creation error");
+	if (g_error_code == 10)
+		message(data, "missing or wrong arguments");
+	if (g_error_code == 11)
+		message(data, "command not found");
+	if (g_error_code == 12)
+		message(data, "unexpected error");
 }
-	//ne pas oublier exit_minishell();
 
 //error codes :
 // 1 - no path or no env

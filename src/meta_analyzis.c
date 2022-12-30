@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/28 10:39:41 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/29 23:36:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
-				printf("Wrong argument\n");
+				g_error_code = 5;
+				error_message(data);
 				return (FALSE);
 			}
 			else if (c == '\"')

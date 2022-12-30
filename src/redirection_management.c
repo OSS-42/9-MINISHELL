@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 17:14:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:42:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void	stdout_redirection(t_vault *data, char *redirection)
 	if (data->flag->fd == -1)
 	{
 		g_error_code = 3;
-		printf("Probleme avec open sur fd_out\n");
+		error_message(data);
 	}
 	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
 		g_error_code = 3;
-		printf("Probleme avec dup2 sur fd_out\n");
+		error_message(data);
 	}
 	data->flag->append = FALSE;
 }
@@ -106,7 +106,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		if (data->flag->fd == -1)
 		{
 			g_error_code = 4;
-			printf("No such file or directory\n");
+			error_message(data);
 			ft_exit(data);
 		}
 		else
@@ -124,8 +124,8 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		if (data->flag->heredoc_fd == -1)
 		{
 			g_error_code = 6;
-			printf("No such file or directory\n");
-			printf("\n");
+			error_message(data);
+//			printf("\n");
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
@@ -133,7 +133,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 		{
 			g_error_code = 7;
-			ft_putstr_fd("Problème avec dup2 sur heredoc\n", 2);
+			error_message(data);
 		}
 		data->flag->heredoc_delimiter = FALSE;
 	}

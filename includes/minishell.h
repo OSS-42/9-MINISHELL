@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 18:07:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:32:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,8 +226,8 @@ void	print_double_array(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
-int		message(t_vault *data, char *str1, int error_code);
-void	free_all(t_vault *data);
+void	message(t_vault *data, char *str1);
+void	error_message(t_vault *data);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);
