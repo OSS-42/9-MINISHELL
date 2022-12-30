@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:40:08 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/30 10:25:17 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ void	parse_row(t_vault *data, int row)
 
 int	sgle_quote_mngmt(t_vault *data, int row, int i)
 {
+	if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+	{
+		data->quote->quote_priority = data->rl_dec[row][i];
+		data->buffer[data->pos++] = data->rl_dec[row][i++];
+		while (data->rl_dec[row][i] != data->quote->quote_priority)
+			data->buffer[data->pos++] = data->rl_dec[row][i++];
+		data->buffer[data->pos] = data->rl_dec[row][i];
+		return (i);
+	}
 	i++;
 	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\'')
 	{
@@ -76,6 +85,15 @@ int	sgle_quote_mngmt(t_vault *data, int row, int i)
 
 int	dble_quote_mngmt(t_vault *data, int row, int i)
 {
+	if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+	{
+		data->quote->quote_priority = data->rl_dec[row][i];
+		data->buffer[data->pos++] = data->rl_dec[row][i++];
+		while (data->rl_dec[row][i] != data->quote->quote_priority)
+			data->buffer[data->pos++] = data->rl_dec[row][i++];
+		data->buffer[data->pos] = data->rl_dec[row][i];
+		return (i);
+	}
 	i++;
 	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\"')
 	{
@@ -111,4 +129,27 @@ void	row_parsing(t_vault *data)
 		data->b_in->forget_minus = 0;
 		row++;
 	}
+}
+
+int	check_is_redir(t_vault *data, int row, int i)
+{
+	int	end;
+
+	end = 0;
+	if (i != 0)
+	{
+		i--;
+		while (data->rl_dec[row][i] == ' ')
+			i--;
+		if (data->rl_dec[row][i] == '<' || data->rl_dec[row][i] == '>')
+			return (TRUE);
+	}
+	else if (row != 0)
+	{
+		end = ft_strlen(data->rl_dec[row - 1]) - 1;
+		if (data->rl_dec[row - 1][end] == '<'
+			|| data->rl_dec[row - 1][end] == '>')
+			return (TRUE);
+	}
+	return (FALSE);
 }

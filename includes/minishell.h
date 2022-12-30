@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 00:25:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 09:34:55 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void	parse_row(t_vault *data, int row);
 int		sgle_quote_mngmt(t_vault *data, int row, int i);
 int		dble_quote_mngmt(t_vault *data, int row, int i);
 void	row_parsing(t_vault *data);
+int		check_is_redir(t_vault *data, int row, int i);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int line);

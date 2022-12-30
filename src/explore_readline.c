@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/30 00:17:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 10:53:14 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,10 @@ void	child_creation(t_vault *data, int line)
 }
 
 //en erreur 28/12
-// Quand on rentre un mauvais input avec < on sort de minishell si il y une 
+// Quand on rentre un mauvais input avec < on sort de minishell si il y une
 // seul commande avec echo
 // Creer un flag qui empeche lexecution de commande si mauvais input
+// Continuer de tester echo test 12 > "tes>t"
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
