@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 15:23:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:25:17 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	sgle_quote_mngmt(t_vault *data, int row, int i)
 		data->buffer[data->pos++] = data->rl_dec[row][i++];
 		while (data->rl_dec[row][i] != data->quote->quote_priority)
 			data->buffer[data->pos++] = data->rl_dec[row][i++];
+		data->buffer[data->pos] = data->rl_dec[row][i];
 		return (i);
 	}
 	i++;
@@ -90,6 +91,7 @@ int	dble_quote_mngmt(t_vault *data, int row, int i)
 		data->buffer[data->pos++] = data->rl_dec[row][i++];
 		while (data->rl_dec[row][i] != data->quote->quote_priority)
 			data->buffer[data->pos++] = data->rl_dec[row][i++];
+		data->buffer[data->pos] = data->rl_dec[row][i];
 		return (i);
 	}
 	i++;

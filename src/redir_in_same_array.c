@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 13:51:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 10:54:23 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 	{
 		data->flag->append = TRUE;
 		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
+		find_redir_in_same_array(data, data->tab_arg[i]);
+
 	}
 	else if (c == '<' && data->tab_arg[i][*j + 1] == c)
 	{
@@ -84,6 +86,7 @@ void	len_of_redir(t_vault *data, char *rl_dec_array)
 	{
 		data->quote->quote_priority = rl_dec_array[i];
 		i++;
+		len++;
 		while (rl_dec_array[i] != data->quote->quote_priority)
 		{
 			i++;

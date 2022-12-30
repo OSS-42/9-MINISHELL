@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 09:36:11 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/30 10:46:05 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ echo "test 8">"test"> "test1"> "test2"
 echo "test 9">"test">"test1">"test2"
 echo "test 10" > "test"> "test1" >"test2">"test3"> "test4"
 echo "test 11" >test 4
-echo test 12 > "tes>t" PROBLEME. Vue qu'on enleve les quotes je ne peux plus connaitre le debut et la fin de mon input
+echo test 12 > "tes>t" 
 echo test 13 > "tes>t">test1
 echo test 14 > 1> 2
 echo test 15 >"tes>t">test1
