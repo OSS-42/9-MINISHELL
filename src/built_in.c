@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/30 11:02:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:52:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int line)
 {
+	data->b_in->forget_minus = 0;
+	data->b_in->minus_n = 0;
+	data->b_in->dont_do_minus = 0;
 	parse_minus(data);
 	if (data->b_in->minus_n == 1)
 		recompose_tab_arg(data, line);
@@ -112,6 +115,7 @@ void	ft_echo(t_vault *data, int line)
 	print_row(data, line);
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
+	data->b_in->forget_minus = 0;
 	return ;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 09:34:55 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/30 20:39:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void	piping(t_vault *data);
 void	launching_exec(t_vault *data);
 void	forking(t_vault *data, int line, int type);
 void	child_creation(t_vault *data, int line);
+void	dollar_parsing(t_vault *data);
 
 /***** explore_utils.c *****/
 void	built_in(t_vault *data, int line);
@@ -209,11 +210,13 @@ void	ft_echo(t_vault *data, int line);
 
 /***** parsing_utils ******/
 int		check_next_char(t_vault *data, int row, int i);
-void	parse_row(t_vault *data, int row);
-int		sgle_quote_mngmt(t_vault *data, int row, int i);
-int		dble_quote_mngmt(t_vault *data, int row, int i);
-void	row_parsing(t_vault *data);
+void	final_quotes_removing(t_vault *data, int row);
+int		quote_mngmt(t_vault *data, int line, int i, char quote);
+//int		sgle_quote_mngmt(t_vault *data, int row, int i);
+//int		dble_quote_mngmt(t_vault *data, int row, int i);
+// void	row_parsing(t_vault *data);
 int		check_is_redir(t_vault *data, int row, int i);
+int		line_count(t_vault *data, int line);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int line);
@@ -245,7 +248,7 @@ void	var_prep(t_vault *data, int line);
 void	copy_env(t_vault *data, char **temp, int i);
 
 /***** dollar_utils.c *****/
-int		dollar_var_to_extract(t_vault *data, int row, int i);
+int		dollar_var_to_expand(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
