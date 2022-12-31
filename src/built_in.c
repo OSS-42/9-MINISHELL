@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 12:40:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:48:36 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	ft_cd(t_vault *data)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
 	{
-		g_error_code = 4;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "no such file or directory");
 	}
 }
 
@@ -120,7 +120,7 @@ void	ft_echo(t_vault *data, int line)
 	return ;
 }
 
-// tests au 30/12 - 10:45
+// tests au 31/12 a 14h
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
@@ -134,8 +134,8 @@ void	ft_echo(t_vault *data, int line)
 //echo salut -n						|		OK
 //echo salut bonjour -n				|		OK
 //echo -n bonjour -n				|		OK
-//echo "-n salut bonjour"			|			KO
-//echo '-n salut bonjour'			|			KO
+//echo "-n salut bonjour"			|		OK
+//echo '-n salut bonjour'			|		OK
 //echo "-n" salut bonjour			|		OK
 //echo '-n' salut bonjour			|		OK
 //echo -n -n salut bonjour			|		OK
@@ -148,7 +148,7 @@ void	ft_echo(t_vault *data, int line)
 //echo '--n' salut bonjour			|		OK
 //echo "--n salut bonjour"			|		OK
 //echo $USER						|		OK
-//echo $"USER"						|			KO (resultat attendu : USER\n)
+//echo $"USER"						|			KO segfault
 //echo $USERA						|		OK
 //echo $USER$TERM					|		OK
 //echo "$USER"						|		OK
@@ -156,8 +156,8 @@ void	ft_echo(t_vault *data, int line)
 //echo "'$USER'"					|		OK
 //echo '"$USER"'					|		OK
 //echo '$USER'$TERM					|			KO espace en trop
-//echo "$USER"'$TERM'				|			KO corrige, a confirmer
-//echo $USER'$TERM					|			KO corrige, a confirmer
+//echo "$USER"'$TERM'				|			KO espace en trop
+//echo $USER'$TERM					|			KO espace en trop
 //echo $USER"$TERM"					|			KO espace en trop
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
@@ -165,7 +165,7 @@ void	ft_echo(t_vault *data, int line)
 //echo $USER $TErM $HOME			|		OK
 //echo "bonjour $USER"				|		OK
 //echo "bonjour '$USER'"			|		OK
-//echo "a"b'c'						|			KO (ne devrait pas etre en erreur)
-//echo ""x''y						|			KO (n'affiche rien)
-//echo 1' '2" "3					|			KO (ne devrait pas etre en erreur)
+//echo "a"b'c'						|			KO espace en trop
+//echo ""x''y						|			KO espace en trop
+//echo 1' '2" "3					|			KO espaces en trop
 //echo "$USER "$USER" $TERM '$PATH'"|		OK

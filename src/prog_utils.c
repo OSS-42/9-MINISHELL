@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 23:41:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:56:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	find_prog(t_vault *data, int line)
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	g_error_code = 11;
-	error_message(data);
+	g_error_code = 127;
+	error_message(data, "command not found");
 	ft_exit(data);
 }

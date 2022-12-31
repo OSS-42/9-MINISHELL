@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:45:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:47:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	explore_readline(t_vault *data)
 		pipe_check(data);						// se fait sur readline
 		flag_count(data, 0, 0);					// se fait sur rl_dec
 		dollar_parsing(data);					// se fait sur rl_dec
-		detached_quote_tab(data);				// se fait sur rl_dec
+//		detached_quote_tab(data);				// se fait sur rl_dec
 		create_tab_arg(data, -1, 0);
 		piping(data);
 		reset_io(data);
@@ -120,8 +120,8 @@ void	piping(t_vault *data)
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
 		if (pipe(data->flag->pipe[i]) == -1)
 		{
-			g_error_code = 8;
-			error_message(data);
+			g_error_code = 1;
+			error_message(data, "pipe creation error");
 		}
 		i++;
 	}
@@ -194,8 +194,8 @@ void	child_creation(t_vault *data, int line)
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
 	{
-		g_error_code = 9;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "pid creation error");
 		ft_exit(data);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 23:41:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:54:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	launch_minishell(t_vault *data)
 			printf("exit\n");
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
-			g_error_code = 2;
+			g_error_code = 131;
 			ft_exit(data);
 		}
 	}
@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	init_data(&data, env);
-	if (g_error_code == 1)
+	if (g_error_code != 0)
 		ft_exit(&data);
 	else
 	{

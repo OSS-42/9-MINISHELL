@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 10:46:05 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:59:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	stdout_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->flag->fd == -1)
 	{
-		g_error_code = 3;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "FD error");
 	}
 	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
-		g_error_code = 3;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "FD error");
 	}
 	data->flag->append = FALSE;
 }
@@ -105,16 +105,16 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_RDONLY);
 		if (data->flag->fd == -1)
 		{
-			g_error_code = 4;
-			error_message(data);
+			g_error_code = 1;
+			error_message(data, "no such file or directory");
 			ft_exit(data);
 		}
 		else
 		{
 			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 			{
-				g_error_code = 5;
-				printf("Probleme avec dup2 sur fd_out\n");
+				g_error_code = 1;
+				error_message(data, "FD error (dup2)");
 			}
 		}
 	}
@@ -123,8 +123,8 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
 		if (data->flag->heredoc_fd == -1)
 		{
-			g_error_code = 6;
-			error_message(data);
+			g_error_code = 1;
+			error_message(data, "heredoc - no such file or directory");
 //			printf("\n");
 			rl_replace_line("", 0);
 			rl_on_new_line();
@@ -132,8 +132,8 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		}
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 		{
-			g_error_code = 7;
-			error_message(data);
+			g_error_code = 1;
+			error_message(data, "heredoc - I/O error (dup2)");
 		}
 		data->flag->heredoc_delimiter = FALSE;
 	}

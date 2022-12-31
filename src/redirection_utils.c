@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 10:54:36 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:59:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 	if (!temp)
 	{
 		free (temp);
-		g_error_code = 12;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "unexpected error");
 		exit (EXIT_FAILURE);
 	}
 	while (str[i] && str[i] != '\0')

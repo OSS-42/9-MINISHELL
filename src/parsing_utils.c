@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 10:19:01 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 15:29:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	check_next_char(t_vault *data, int row, int i)
-{
-	if (data->rl_dec[row][i + 1] == '\''
-		|| data->rl_dec[row][i + 1] == '\"')
-	{
-		i = i - 2;
-		while (data->rl_dec[row][i])
-		{
-			if (data->rl_dec[row][i] != '\''
-				|| data->rl_dec[row][i] != '\"'
-					|| data->rl_dec[row][i] != '$')
-				i++;
-			data->buffer[data->pos] = data->rl_dec[row][i];
-			data->pos++;
-			i++;
-		}
-	}
-	return (i);
-}
 
 void	final_quotes_removing(t_vault *data, int line)
 {
