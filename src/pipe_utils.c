@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 11:04:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:49:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	create_tab_arg(t_vault *data, int row, int line)
 {
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])
@@ -44,8 +42,6 @@ void	create_tab_arg(t_vault *data, int row, int line)
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
 	printf("tab_arg\n");
 	print_double_array(data->tab_arg);
 }
