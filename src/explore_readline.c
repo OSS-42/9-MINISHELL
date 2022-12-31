@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 10:40:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:18:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	explore_readline(t_vault *data)
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)   // se fait sur readline
 	{
 		find_str_quote(data);					// se fait sur readline
+		pipe_check(data);						// se fait sur readline
 		flag_count(data, 0, 0);					// se fait sur rl_dec
 		dollar_parsing(data);					// se fait sur rl_dec
 		detached_quote_tab(data);				// se fait sur rl_dec

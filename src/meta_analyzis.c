@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 23:39:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:39:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,43 @@ void	flag_count(t_vault *data, int i, int j)
 			j++;
 		}
 		j = 0;
+		i++;
+	}
+}
+
+void	pipe_check(t_vault *data)
+{
+	int	i;
+
+	i  = 0;
+	while (data->read_line[i])
+	{
+		if (data->read_line[i] == '\'' || data->read_line[i] == '\"')
+		{
+			data->quote->quote_priority = data->read_line[i];
+			i++;
+			while (data->read_line[i] != data->quote->quote_priority)
+				i++;
+		}
+		else if (data->read_line[i] == '|')
+		{
+			i++;
+			while (data->read_line[i])
+			{
+				if (data->read_line[i] != ' ' && data->read_line[i] != '|')
+				{
+					g_error_code = 0;
+					return ;
+				}
+				else if (data->read_line[i] == '|' && g_error_code != 0)
+				{
+					error_message(data);
+					ft_exit(data);	
+				}
+				g_error_code = 10;
+				i++;
+			}
+		}
 		i++;
 	}
 }
