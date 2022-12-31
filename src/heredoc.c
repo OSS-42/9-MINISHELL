@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 00:18:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:09:35 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	heredoc(t_vault *data)
 			ft_putstr_fd(str, data->flag->heredoc_fd);
 		free(str);
 	}
+	ft_putstr_fd("\n", data->flag->heredoc_fd);
 	close(data->flag->heredoc_fd);
 // ne pas oublier le unlink du temp.
 }

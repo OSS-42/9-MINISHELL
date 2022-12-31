@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 12:18:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:43:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	explore_readline(t_vault *data)
 		create_tab_arg(data, -1, 0);
 		// execute_redirection(data, 1, 0);
 		// final_quotes_removing(data, 1);
+		// execute_redirection(data, 0, 0); // debug
+		// final_quotes_removing(data, 0); // debug
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
