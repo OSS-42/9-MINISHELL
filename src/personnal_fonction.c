@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/20 09:29:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/31 16:10:10 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	print_double_array(char **array)
 	printf("\n");
 }
 
-// Changer la fonction pour qu'elle renvoie FALSE si le char c ce trouve
-//	en dehors des quotes puis à l'intérieur des quotes. EX : echo coucou >"tes>t">test1
 int	check_if_inside_quote(char *str, char c)
 {
 	int		i;

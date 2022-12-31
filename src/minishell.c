@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 23:41:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:52:46 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_data(t_vault *data, char **env)
 	find_paths(data);
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
+	data->fail_redir = FALSE;
 	return ;
 }
 
@@ -41,6 +42,7 @@ void	reinit_data(t_vault *data)
 	data->quote->begin = 0;
 	data->quote->last_replace = 0;
 	data->cmd->name = NULL;
+	data->fail_redir = FALSE;
 }
 
 void	readline_exec(t_vault *data)

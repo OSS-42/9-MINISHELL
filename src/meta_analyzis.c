@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 12:45:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:09:26 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//TODO ajouter la verification de la premiere occurence VOIR AVEC ERIC
 int	rl_prio_n_qty(t_vault *data, int i, char c)
 {
 	while (data->read_line[i])

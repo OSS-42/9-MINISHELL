@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 12:18:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:40:35 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
+	int			fail_redir;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
@@ -167,7 +168,7 @@ void	stdin_redirection(t_vault *data, char *redirection);
 
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_same_array(t_vault *data, char *rl_dec_array);
+void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
 void	len_of_redir(t_vault *data, char *rl_dec_array);
 
 /***** redir_in_same_array_2.c *****/
@@ -191,6 +192,7 @@ int		while_quote(t_vault *data, char *str, int i);
 
 /***** redirection_utils_2.c *****/
 void	dup_from_begin(t_vault *data, int i, int j, char *temp);
+int		is_in_quote(t_vault *data, int line, int array);
 
 /***** quote_management.c *****/
 void	find_str_quote(t_vault *data);

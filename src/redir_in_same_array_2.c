@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 10:44:06 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:10:48 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
 	while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != '\0')
 	{
 		temp = while_not_chevron(data, i, str, &begin);
-		while(data->tab_arg[i][begin] == ' ')
+		while (data->tab_arg[i][begin] == ' ')
 			begin++;
 		if (data->tab_arg[i][begin] == '\"'
 			|| data->tab_arg[i][begin] == '\'')
@@ -64,11 +64,6 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
 				temp++;
 				begin++;
 			}
-			// while (data->tab_arg[i][begin] && data->tab_arg[i][begin]!= ' '
-			// 	&& data->tab_arg[i][begin] != '<'
-			// 	&& data->tab_arg[i][begin] != '>'
-			// 	&& data->tab_arg[i][begin] != '|')
-			// 	begin++;
 			begin = while_is_not_flag(data->tab_arg[i], begin);
 		}
 		if (data->tab_arg[i][begin])
@@ -111,7 +106,6 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		len = len_from_chevron_at_zero(data, i, begin);
 	else
 	{
-		// temp = while_is_not_flag(data->tab_arg[i], temp);
 		while (data->tab_arg[i][temp] != data->flag->chevron)
 			temp++;
 		len = temp;

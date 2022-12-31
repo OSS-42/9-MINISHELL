@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 10:46:05 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:07:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ echo "test 8">"test"> "test1"> "test2"
 echo "test 9">"test">"test1">"test2"
 echo "test 10" > "test"> "test1" >"test2">"test3"> "test4"
 echo "test 11" >test 4
-echo test 12 > "tes>t" 
+echo test 12 > "tes>t"
 echo test 13 > "tes>t">test1
 echo test 14 > 1> 2
 echo test 15 >"tes>t">test1
 echo test 16>"tes>t">test1
+echo "tes>t"
+echo "bon>jour" ">test" >coucou SEGFAULT
 
 echo test 1 >> test >> test1 >> test2
 echo test 2 >>1 >>2 >>3
@@ -46,6 +48,8 @@ echo test 13 > "tes>t">test1
 echo test 14 > 1> 2
 echo test 15 >"tes>t">test1
 echo test 16>"tes>t">test1
+echo "tes>t"
+echo "bon>jour" ">test" >coucou SEGFAULT
 */
 
 /*
@@ -59,10 +63,13 @@ echo test 16>"tes>t">test1
 
 void	execute_redirection(t_vault *data, int line, int j)
 {
-	while (data->tab_arg[line][j])
+	while (data->tab_arg[line][j] && data->fail_redir == FALSE)
 	{
-		if (data->tab_arg[line][j] == '>' || data->tab_arg[line][j] == '<') // Vérifier si le </> est entre quote
-			redir_in_same_array(data, line, &j, data->tab_arg[line][j]);
+		if (data->tab_arg[line][j] == '>' || data->tab_arg[line][j] == '<')
+		{
+			if (is_in_quote(data, line, j) == FALSE)
+				redir_in_same_array(data, line, &j, data->tab_arg[line][j]);
+		}
 		j++;
 	}
 }
@@ -87,11 +94,13 @@ void	stdout_redirection(t_vault *data, char *redirection)
 	{
 		g_error_code = 3;
 		error_message(data);
+		data->fail_redir = TRUE;
 	}
-	if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
+	else if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
 		g_error_code = 3;
 		error_message(data);
+		data->fail_redir = TRUE;
 	}
 	data->flag->append = FALSE;
 }
@@ -107,14 +116,15 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		{
 			g_error_code = 4;
 			error_message(data);
-			ft_exit(data);
+			data->fail_redir = TRUE;
 		}
 		else
 		{
 			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 			{
 				g_error_code = 5;
-				printf("Probleme avec dup2 sur fd_out\n");
+				error_message(data);
+				data->fail_redir = TRUE;
 			}
 		}
 	}
@@ -129,11 +139,13 @@ void	stdin_redirection(t_vault *data, char *redirection)
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
+			data->fail_redir = TRUE;
 		}
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 		{
 			g_error_code = 7;
 			error_message(data);
+			data->fail_redir = TRUE;
 		}
 		data->flag->heredoc_delimiter = FALSE;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 13:45:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:55:54 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	explore_readline(t_vault *data)
 		pipe_check(data);						// se fait sur readline
 		flag_count(data, 0, 0);					// se fait sur rl_dec
 		dollar_parsing(data);					// se fait sur rl_dec
-		detached_quote_tab(data);				// se fait sur rl_dec
 		create_tab_arg(data, -1, 0);
+		execute_redirection(data, 0, 0);
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -41,8 +41,6 @@ void	dollar_parsing(t_vault *data)
 	row = 0;
 	data->pos = 0;
 	data->buffer = ft_calloc(sizeof(char), 500);
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
 	while (data->rl_dec[row])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
@@ -105,8 +103,6 @@ void	dollar_parsing(t_vault *data)
 		i = 0;
 		row++;
 	}
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
 }
 
 void	piping(t_vault *data)
@@ -147,7 +143,7 @@ void	launching_exec(t_vault *data)
 		if (data->flag->pipe_count == 0)
 		{
 			execute_redirection(data, line, 0);
-			if (data->tab_arg[line][0] != '\0')
+			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 			{
 				//data->cmd->opt = ft_split(data->tab_arg[line], ' ');
 				// split intelligent ici (final_quotes_removing(line))
@@ -183,7 +179,7 @@ void	forking(t_vault *data, int line, int type)
 		{
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
-			if (data->tab_arg[line][0] != '\0')
+			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 				in_child_exec(data, line);
 		}
 	}

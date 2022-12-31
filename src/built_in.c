@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 12:40:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:17 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,16 @@ void	ft_pwd(t_vault *data)
 
 	(void) data;
 	size_buffer = 1;
-	// if (data->cmd->opt[1] != NULL)
-	// {
-	// 	g_error_code = 10;
-	// 	write(2, "pwd: too many arguments\n", 24);
-	// 	// ft_exit(data);
-	// }
-	// else
-//	{
-		pwd = calloc(sizeof(char), size_buffer);
-		while (getcwd(pwd, size_buffer) == NULL)
-		{
-			free (pwd);
-			size_buffer++;
-			pwd = calloc(sizeof(char), size_buffer);
-		}
-		ft_putstr_fd(pwd, 1);
-		write(1, "\n", 1);
+	pwd = calloc(sizeof(char), size_buffer);
+	while (getcwd(pwd, size_buffer) == NULL)
+	{
 		free (pwd);
-//	}
+		size_buffer++;
+		pwd = calloc(sizeof(char), size_buffer);
+	}
+	ft_putstr_fd(pwd, 1);
+	write(1, "\n", 1);
+	free (pwd);
 }
 
 void	ft_exit(t_vault *data)
@@ -71,7 +62,6 @@ void	ft_exit(t_vault *data)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
-//	free(data->pid);
 	exit (g_error_code);
 }
 	//ne pas oublier exit_minishell();

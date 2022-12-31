@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 10:19:01 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 16:06:20 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	final_quotes_removing(t_vault *data, int line)
 	data->buffer = ft_calloc(sizeof(char), 500);
 	size = line_count(data, line);
 	data->cmd->opt = ft_calloc(sizeof(char *), size + 2);
-	// printf("tab_arg\n");
-	// print_double_array(data->tab_arg);
 	while (data->tab_arg[line] && data->tab_arg[line][i])
 	{
 		if (data->tab_arg[line][i] == ' ')
@@ -70,8 +68,6 @@ void	final_quotes_removing(t_vault *data, int line)
 	data->cmd->opt[row] = ft_strdup(data->buffer);
 	free (data->buffer);
 	data->buffer = NULL;
-	// printf("cmd.opt\n");
-	// print_double_array(data->cmd->opt);
 }
 
 int	line_count(t_vault *data, int line)
