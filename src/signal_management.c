@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 12:04:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 11:10:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,43 +31,43 @@ void	init_signal(int mode)
 void	interrupt_alive(int sig)
 {
 	(void)sig;
+	g_error_code = 1;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	return ;
 }
-	//exit status 1
 
 //management of ctrl+D
 void	quit_alive(int sig)
 {
 	(void)sig;
+	g_error_code = 1;
 	rl_redisplay();
 }
-	//exit status 1
 
 //CMD EXEC - EXEC MODE
 //management of ctrl+C
 void	interrupt_exec(int sig)
 {
 	(void)sig;
+	g_error_code = 130;
 	kill(0, 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 }
-	//exit status 130
 
 //management of ctrl+D
 //sans singleton
 void	quit_exec(int sig)
 {	
 	(void)sig;
+	g_error_code = 131;
 	kill(0, 0);
 	ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 	rl_on_new_line();
 }
-	//exit status 131
 
 //avec singleton
 

@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 15:47:49 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:12:09 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_error(t_vault *data, int line)
 	return (1);
 }
 
-void	message(t_vault *data, char *str1)
+void	error_message(t_vault *data, char *message)
 {
 	ft_putstr_fd("minishell: ", 2);
 	if (data->cmd->name)
@@ -28,36 +28,8 @@ void	message(t_vault *data, char *str1)
 		ft_putstr_fd(data->cmd->name, 2);
 		ft_putstr_fd(": ", 2);
 	}
-	ft_putendl_fd(str1, 2);
+	ft_putendl_fd(message, 2);
 	return ;
-}
-
-void	error_message(t_vault *data)
-{
-	if (g_error_code == 1)
-		message(data, "path or env missing");
-	if (g_error_code == 2)
-		message(data, "EOF on readline");
-	if (g_error_code == 3)
-		message(data, "FD error");
-	if (g_error_code == 4)
-		message(data, "no such file or directory");
-	if (g_error_code == 5)
-		message(data, "I/O error (dup2)");
-	if (g_error_code == 6)
-		message(data, "heredoc: no such file or directory");
-	if (g_error_code == 7)
-		message(data, "heredoc: I/O error ");
-	if (g_error_code == 8)
-		message(data, "pipe creation error");
-	if (g_error_code == 9)
-		message(data, "pid creation error");
-	if (g_error_code == 10)
-		message(data, "missing or wrong arguments");
-	if (g_error_code == 11)
-		message(data, "command not found");
-	if (g_error_code == 12)
-		message(data, "unexpected error");
 }
 
 //error codes :
@@ -72,3 +44,13 @@ void	error_message(t_vault *data)
 // 9 - PID creation error
 // 10 - Arguments error
 // 11 - Command not found
+
+//bash error codes :
+// 1 - Catchall for general errors
+// 2 - Misuse of shell builtins
+// 126 - Command invoked cannot execute
+// 127 - "command not found"
+// 128 - Invalid argument to exit
+// 128 + n - Fatal error signal "n"
+// 130 - Script terminated by Control-C
+// 255 - Exit status out of range (seulement int 0 - 255)

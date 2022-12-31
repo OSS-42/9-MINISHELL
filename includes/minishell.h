@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:35 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:11:49 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,6 @@ void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int line);
 
 /***** parsing_utils ******/
-int		check_next_char(t_vault *data, int row, int i);
 void	final_quotes_removing(t_vault *data, int row);
 int		quote_mngmt(t_vault *data, int line, int i, char quote);
 //int		sgle_quote_mngmt(t_vault *data, int row, int i);
@@ -236,8 +235,8 @@ void	print_double_array(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
-void	message(t_vault *data, char *str1);
-void	error_message(t_vault *data);
+//void	message(t_vault *data, char *str1);
+void	error_message(t_vault *data, char *message);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);

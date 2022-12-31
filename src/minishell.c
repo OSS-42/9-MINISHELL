@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 15:52:46 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:12:45 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	launch_minishell(t_vault *data)
 			printf("exit\n");
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
-			g_error_code = 2;
+			g_error_code = 131;
 			ft_exit(data);
 		}
 	}
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	init_data(&data, env);
-	if (g_error_code == 1)
+	if (g_error_code != 0)
 		ft_exit(&data);
 	else
 	{

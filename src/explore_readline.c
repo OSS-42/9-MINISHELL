@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 16:55:54 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:12:31 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ void	piping(t_vault *data)
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
 		if (pipe(data->flag->pipe[i]) == -1)
 		{
-			g_error_code = 8;
-			error_message(data);
+			g_error_code = 1;
+			error_message(data, "pipe creation error");
 		}
 		i++;
 	}
@@ -190,8 +190,8 @@ void	child_creation(t_vault *data, int line)
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
 	{
-		g_error_code = 9;
-		error_message(data);
+		g_error_code = 1;
+		error_message(data, "pid creation error");
 		ft_exit(data);
 	}
 }

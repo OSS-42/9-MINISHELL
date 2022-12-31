@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 16:09:26 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:12:36 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
-				g_error_code = 10;
-				error_message(data);
+				g_error_code = 1;
+				error_message(data, "missing or wrong arguments");
 				return (FALSE);
 			}
 			else if (c == '\"')
@@ -98,10 +98,10 @@ void	pipe_check(t_vault *data)
 				}
 				else if (data->read_line[i] == '|' && g_error_code != 0)
 				{
-					error_message(data);
+					error_message(data, "missing or wrong arguments");
 					ft_exit(data);
 				}
-				g_error_code = 10;
+				g_error_code = 1;
 				i++;
 			}
 		}

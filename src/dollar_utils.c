@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 17:18:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 15:29:01 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@ int	dollar_var_to_expand(t_vault *data, int row, int i)
 	char	*temp;
 	int		k;
 
+	temp = NULL;
 	if (ft_char_env_var(data->rl_dec[row][i + 1]) != 1)
 	{
-		i = check_next_char(data, row, i);
-		return (i);
+		if (data->rl_dec[row][i + 1] == '?')
+		{
+			temp = ft_itoa(g_error_code);
+			data->dollar_var_len = ft_strlen(temp) - 1;
+		}
+		else
+			return (i);
 	}
-	temp = var_extract(data, row, i + 1);
+	if (!temp)
+		temp = var_extract(data, row, i + 1);
 	k = -1;
 	if (data->flag->var_not_found == 1)
 		return (0);
