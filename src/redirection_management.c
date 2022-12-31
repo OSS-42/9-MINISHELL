@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 17:13:00 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 17:26:14 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,15 @@ void	stdout_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (data->flag->fd == -1)
 	{
-<<<<<<< HEAD
-		g_error_code = 3;
-		error_message(data);
-		data->fail_redir = TRUE;
-=======
 		g_error_code = 1;
 		error_message(data, "FD error");
->>>>>>> ewurstei
+		data->fail_redir = TRUE;
 	}
 	else if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
 	{
-<<<<<<< HEAD
-		g_error_code = 3;
-		error_message(data);
-		data->fail_redir = TRUE;
-=======
 		g_error_code = 1;
 		error_message(data, "FD error");
->>>>>>> ewurstei
+		data->fail_redir = TRUE;
 	}
 	data->flag->append = FALSE;
 }
@@ -124,28 +114,17 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		data->flag->fd = open(redirection, O_RDONLY);
 		if (data->flag->fd == -1)
 		{
-<<<<<<< HEAD
-			g_error_code = 4;
-			error_message(data);
-			data->fail_redir = TRUE;
-=======
 			g_error_code = 1;
 			error_message(data, "no such file or directory");
-			ft_exit(data);
->>>>>>> ewurstei
+			data->fail_redir = TRUE;
 		}
 		else
 		{
 			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
 			{
-<<<<<<< HEAD
-				g_error_code = 5;
-				error_message(data);
-				data->fail_redir = TRUE;
-=======
 				g_error_code = 1;
 				error_message(data, "FD error (dup2)");
->>>>>>> ewurstei
+				data->fail_redir = TRUE;
 			}
 		}
 	}
@@ -164,14 +143,9 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		}
 		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 		{
-<<<<<<< HEAD
-			g_error_code = 7;
-			error_message(data);
-			data->fail_redir = TRUE;
-=======
 			g_error_code = 1;
 			error_message(data, "heredoc - I/O error (dup2)");
->>>>>>> ewurstei
+			data->fail_redir = TRUE;
 		}
 		data->flag->heredoc_delimiter = FALSE;
 	}
