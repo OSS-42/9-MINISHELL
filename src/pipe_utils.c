@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 10:18:11 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 11:04:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,29 @@
 
 void	create_tab_arg(t_vault *data, int row, int line)
 {
+	printf("rl_dec\n");
+	print_double_array(data->rl_dec);
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])
 	{
 		if (data->rl_dec[row][0] == '|')
 		{
-			if (!(data->rl_dec[row][1]))
+			if (data->rl_dec[row + 1][0] == '|')
 			{
-				line++;
-				row++;
-				if (!(data->rl_dec[row]))
-					return ;
+				data->rl_dec[row] = 0;
+				printf("rl_dec\n");
+				print_double_array(data->rl_dec);
+				printf("tab_arg\n");
+				print_double_array(data->tab_arg);
+				data->flag->pipe_count = ft_dbl_ptr_len(data->tab_arg) - 1;
+				return ;
 			}
-			else if (data->rl_dec[row][1] == '|')
+			line++;
+			row++;
+			if (!(data->rl_dec[row]))
 			{
-				data->rl_dec[row] = NULL;
+				data->flag->pipe_count = ft_dbl_ptr_len(data->tab_arg) - 1;
 				return ;
 			}
 		}
@@ -37,6 +44,10 @@ void	create_tab_arg(t_vault *data, int row, int line)
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
+	printf("rl_dec\n");
+	print_double_array(data->rl_dec);
+	printf("tab_arg\n");
+	print_double_array(data->tab_arg);
 }
 
 void	switch_lines(t_vault *data, int row, int line)
