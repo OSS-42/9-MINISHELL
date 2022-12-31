@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 17:03:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:39:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	flag_count(t_vault *data, int i, int j)
 			if (data->rl_dec[i][j] == '\'' || data->rl_dec[i][j] == '\"')
 			{
 				c = data->rl_dec[i][j];
-				j++; // ++j sur la ligne suivante ?
+				j++;
 				while (data->rl_dec[i][j] != c)
-				{
-					if (data->rl_dec[i][j] == '|')
-						if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
-							data->flag->pipe_count++;
+				// {
+					// if (data->rl_dec[i][j] == '|')
+					// 	if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
+					// 		data->flag->pipe_count++;
 					j++;
-				}
+				// }
 			}
 			if (data->rl_dec[i][j] == '|')
 				data->flag->pipe_count++;

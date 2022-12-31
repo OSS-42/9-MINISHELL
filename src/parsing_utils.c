@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 20:58:19 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 22:23:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	final_quotes_removing(t_vault *data, int line)
 	int	size;
 
 	i = 0;
-	row = line;
+	row = 0;
 	data->pos = 0;
 	data->buffer = ft_calloc(sizeof(char), 500);
 	size = line_count(data, line);

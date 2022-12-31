@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/29 12:26:56 by mbertin          ###   ########.fr       */
+/*   Updated: 2022/12/30 23:50:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-//retourner un code d'erreur.
 void	create_tab_arg(t_vault *data, int row, int line)
 {
-	//char	*temp;
-
-	//temp = NULL;
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])
@@ -40,16 +36,6 @@ void	create_tab_arg(t_vault *data, int row, int line)
 		data->buffer = ft_strdup(data->rl_dec[row]);
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
-//		data->buffer = ft_strdup(data->rl_dec[row]);
-//		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
-//		{
-//			temp = ft_strjoin(data->buffer, " ");
-//			free (data->buffer);
-//			data->buffer = ft_strdup(temp);
-//			free (temp);
-//		}
-//		if (data->buffer[0] != '\0')
-//			switch_lines(data, row, line);
 	}
 }
 
@@ -58,6 +44,8 @@ void	switch_lines(t_vault *data, int row, int line)
 	char	*temp;
 
 	temp = NULL;
+	printf("rl_dec\n");
+	print_double_array(data->rl_dec);
 	if (data->tab_arg[line] == NULL)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
@@ -69,17 +57,17 @@ void	switch_lines(t_vault *data, int row, int line)
 	else
 	{
 		temp = ft_strjoin(data->tab_arg[line], data->buffer);
-		// if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
-		// 	temp = ft_strjoin(temp, " ");
 		free (data->buffer);
 		free (data->tab_arg[line]);
 		data->tab_arg[line] = ft_strdup(temp);
 		free (temp);
-		// if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0]
-		// 	&& data->rl_dec[row + 1][1])
-		// 	do_the_switch(data, line);
 		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
+		{
+			if (ft_strchr(data->rl_dec[row + 1], '|') != 0
+				&& ft_strlen((const char *) data->rl_dec[row + 1]) == 1)
+				return ;
 			do_the_switch(data, line);
+		}
 	}
 }
 
