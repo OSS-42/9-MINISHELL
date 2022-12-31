@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/29 23:43:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:54:36 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 			while (str[i] == ' ')
 				i++;
 		}
-		if (str[i])
+		else if (str[i])
 			temp[j++] = str[i++];
 	}
+	if (temp[j - 1] == ' ')
+		temp[j - 1] = '\0';
 	free (str);
 	return (temp);
 }
