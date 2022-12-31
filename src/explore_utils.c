@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 00:17:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 21:01:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,19 @@ void	recompose_tab_arg(t_vault *data, int line)
 	else
 		return ;
 	i++;
-	while (data->cmd->opt[i])
+	if (data->cmd->opt[i])
 	{
-		buffer = ft_strjoin(data->tab_arg[line], " ");
-		data->tab_arg[line] = NULL;
-		data->tab_arg[line] = ft_strjoin(buffer, data->cmd->opt[i]);
-		free (buffer);
-		i++;
+		while (data->cmd->opt[i])
+		{
+			buffer = ft_strjoin(data->tab_arg[line], " ");
+			data->tab_arg[line] = NULL;
+			data->tab_arg[line] = ft_strjoin(buffer, data->cmd->opt[i]);
+			free (buffer);
+			i++;
+		}
 	}
+	else
+		return ;
 }
 
 int	is_special_built_in(t_vault *data, int line)
@@ -80,7 +85,8 @@ int	is_special_built_in(t_vault *data, int line)
 
 void	in_child_exec(t_vault *data, int line)
 {
-	data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+	// data->cmd->opt = ft_split(data->tab_arg[line], ' ');
+	final_quotes_removing(data, line);
 	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 	recompose_tab_arg(data, line);
 	close_pipe(data);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 11:01:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:41:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
-	// data->exit_code = 0;
 	data->env = env;
+	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
 	data->quote = ft_calloc(sizeof(t_quote), 1);

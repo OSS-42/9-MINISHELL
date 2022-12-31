@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 10:58:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/30 23:39:41 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				data->quote->double_quote_count++;
 			else if (c == '\'')
 				data->quote->simple_quote_count++;
-			i++;
+			i++; // ++i sur le ligne suivante ?
 			while (data->read_line[i] && data->read_line[i] != c)
 				i++;
 			if (!data->read_line[i])
@@ -57,12 +57,12 @@ void	flag_count(t_vault *data, int i, int j)
 				c = data->rl_dec[i][j];
 				j++;
 				while (data->rl_dec[i][j] != c)
-				{
-					if (data->rl_dec[i][j] == '|')
-						if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
-							data->flag->pipe_count++;
+				// {
+					// if (data->rl_dec[i][j] == '|')
+					// 	if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
+					// 		data->flag->pipe_count++;
 					j++;
-				}
+				// }
 			}
 			if (data->rl_dec[i][j] == '|')
 				data->flag->pipe_count++;

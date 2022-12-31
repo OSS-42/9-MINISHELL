@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/30 14:05:16 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 00:05:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int line)
 {
+	data->b_in->forget_minus = 0;
+	data->b_in->minus_n = 0;
+	data->b_in->dont_do_minus = 0;
 	parse_minus(data);
 	if (data->b_in->minus_n == 1)
 		recompose_tab_arg(data, line);
@@ -113,6 +116,7 @@ void	ft_echo(t_vault *data, int line)
 	print_row(data, line);
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
+	data->b_in->forget_minus = 0;
 	return ;
 }
 

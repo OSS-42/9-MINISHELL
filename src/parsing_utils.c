@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 11:36:44 by momo             ###   ########.fr       */
+/*   Updated: 2022/12/31 00:06:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,109 +32,131 @@ int	check_next_char(t_vault *data, int row, int i)
 	return (i);
 }
 
-void	parse_row(t_vault *data, int row)
+void	final_quotes_removing(t_vault *data, int line)
 {
-	int		i;
+	int	i;
+	int	row;
+	int	size;
 
 	i = 0;
+	row = 0;
 	data->pos = 0;
-	while (data->rl_dec[row] && data->rl_dec[row][i])
+	data->buffer = ft_calloc(sizeof(char), 500);
+	size = line_count(data, line);
+	data->cmd->opt = ft_calloc(sizeof(char *), size + 2);
+	printf("tab_arg\n");
+	print_double_array(data->tab_arg);
+	while (data->tab_arg[line] && data->tab_arg[line][i])
 	{
-		data->dollar_var_len = 0;
-		if (ft_isinset(data->rl_dec[row][i]) == 0)
-			data->buffer[data->pos] = data->rl_dec[row][i];
-		else if (ft_isinset(data->rl_dec[row][i]) == 1)
-			i = sgle_quote_mngmt(data, row, i);
-		else if (ft_isinset(data->rl_dec[row][i]) == 2)
-			i = dble_quote_mngmt(data, row, i);
-		else if (ft_isinset(data->rl_dec[row][i]) == 3)
+		if (data->tab_arg[line][i] == ' ')
 		{
-			dollar_var_to_extract(data, row, i);
-			i = i + data->dollar_var_len;
-			data->pos--;
-		}
+			data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
+			data->cmd->opt[row] = ft_strdup(data->buffer);
+			free (data->buffer);
+			data->buffer = ft_calloc(sizeof(char), 500);
+			row++;
+			data->pos = -1;
+		}	
+		else if (ft_isinset(data->tab_arg[line][i]) == 0)
+			data->buffer[data->pos] = data->tab_arg[line][i];
+		else if (ft_isinset(data->tab_arg[line][i]) == 1)
+			i = quote_mngmt(data, line, i, data->tab_arg[line][i]);
+		else if (ft_isinset(data->tab_arg[line][i]) == 2)
+			i = quote_mngmt(data, line, i, data->tab_arg[line][i]);
 		i++;
 		data->pos++;
 	}
-	free (data->rl_dec[row]);
-	data->rl_dec[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
-	ft_strlcpy(data->rl_dec[row], data->buffer, 500);
+	data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
+	data->cmd->opt[row] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = NULL;
+	printf("cmd.opt\n");
+	print_double_array(data->cmd->opt);
 }
 
-int	sgle_quote_mngmt(t_vault *data, int row, int i)
+int	line_count(t_vault *data, int line)
 {
-	if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+	int	line_count;
+	int	i;
+
+	i = 0;
+	line_count = 0;
+	while (data->tab_arg[line] && data->tab_arg[line][i])
 	{
-		data->quote->quote_priority = data->rl_dec[row][i];
-		data->buffer[data->pos++] = data->rl_dec[row][i++];
-		while (data->rl_dec[row][i] != data->quote->quote_priority)
-			data->buffer[data->pos++] = data->rl_dec[row][i++];
-		data->buffer[data->pos] = data->rl_dec[row][i];
-		return (i);
+		if (data->tab_arg[line][i] == '\'' || data->tab_arg[line][i] == '\"')
+		{
+			data->quote->quote_priority = data->tab_arg[line][i];
+			while (data->tab_arg[line][i] != data->quote->quote_priority)
+				i++;
+		}
+		else if (data->tab_arg[line][i] == ' ')
+			line_count++;
+		i++;
 	}
+	return (line_count);
+}
+
+int	quote_mngmt(t_vault *data, int line, int i, char quote)
+{
 	i++;
-	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\'')
+	while (data->tab_arg[line][i] && data->tab_arg[line][i] != quote)
 	{
-		data->buffer[data->pos] = data->rl_dec[row][i];
+		data->buffer[data->pos] = data->tab_arg[line][i];
 		data->pos++;
 		i++;
 	}
 	data->pos = data->pos - 1;
 	return (i);
 }
+	// if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+	// {
+	// 	data->quote->quote_priority = data->rl_dec[row][i];
+	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
+	// 	while (data->rl_dec[row][i] != data->quote->quote_priority)
+	// 		data->buffer[data->pos++] = data->rl_dec[row][i++];
+	// 	data->buffer[data->pos] = data->rl_dec[row][i];
+	// 	return (i);
+	// }
 
-int	dble_quote_mngmt(t_vault *data, int row, int i)
-{
-	if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
-	{
-		data->quote->quote_priority = data->rl_dec[row][i];
-		data->buffer[data->pos++] = data->rl_dec[row][i++];
-		while (data->rl_dec[row][i] != data->quote->quote_priority)
-			data->buffer[data->pos++] = data->rl_dec[row][i++];
-		data->buffer[data->pos] = data->rl_dec[row][i];
-		return (i);
-	}
-	i++;
-	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\"')
-	{
-		if (data->rl_dec[row][i] == '$'
-			&& ft_char_env_var(data->rl_dec[row][i + 1]) == 1)
-		{
-			dollar_var_to_extract(data, row, i);
-			i = i + data->dollar_var_len;
-			data->pos--;
-		}
-		else
-			data->buffer[data->pos] = data->rl_dec[row][i];
-		data->pos++;
-		i++;
-	}
-	data->pos--;
-	return (i);
-}
+// int	dble_quote_mngmt(t_vault *data, int row, int i)
+// {
+// 	i++;
+// 	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\"')
+// 	{
+// 		data->buffer[data->pos] = data->rl_dec[row][i];
+// 		data->pos++;
+// 		i++;
+// 	}
+// 	data->pos--;
+// 	return (i);
+// }
+	// if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+	// {
+	// 	data->quote->quote_priority = data->rl_dec[row][i];
+	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
+	// 	while (data->rl_dec[row][i] != data->quote->quote_priority)
+	// 		data->buffer[data->pos++] = data->rl_dec[row][i++];
+	// 	data->buffer[data->pos] = data->rl_dec[row][i];
+	// 	return (i);
+	// }
 
-void	row_parsing(t_vault *data)
-{
-	int	row;
+// void	row_parsing(t_vault *data)
+// {
+// 	int	row;
 
-	row = 0;
-	data->b_in->forget_minus = 0;
-	data->b_in->minus_n = 0;
-	data->b_in->dont_do_minus = 0;
-	while (data->rl_dec[row] && data->rl_dec[row][0])
-	{
-		data->buffer = ft_calloc(sizeof(char), 500);
-		parse_row(data, row);
-		if (!data->rl_dec[row][0])
-		{
-			find_decomposer_to_switch(data, row);
-			row--;
-		}
-		free(data->buffer);
-		data->b_in->forget_minus = 0;
-		row++;
-	}
-}
+// 	row = 0;
+// 	data->b_in->forget_minus = 0;
+// 	data->b_in->minus_n = 0;
+// 	data->b_in->dont_do_minus = 0;
+// 	while (data->rl_dec[row] && data->rl_dec[row][0])
+// 	{
+// 		data->buffer = ft_calloc(sizeof(char), 500);
+// //		parse_row(data, row);
+// 		free(data->buffer);
+// 		data->b_in->forget_minus = 0;
+// 		row++;
+// 	}
+// }
 
 int	check_is_redir(t_vault *data, int row, int i)
 {
