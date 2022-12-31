@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 00:05:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:17:14 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
-	t_commande	command;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 

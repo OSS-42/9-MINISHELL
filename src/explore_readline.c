@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 00:05:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:26:55 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	explore_readline(t_vault *data)
 		check_for_pipe(data);					// se fait sur rl_dec
 //		row_parsing(data);						//
 		create_tab_arg(data, -1, 0);
+		execute_redirection(data, 1, 0);
+		final_quotes_removing(data, 1);
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -109,6 +111,7 @@ void	piping(t_vault *data)
 		data->child_id = waitpid(data->pid[i], &data->status, 0);
 		i++;
 	}
+	free(data->pid);
 }
 
 void	launching_exec(t_vault *data)
@@ -138,7 +141,6 @@ void	launching_exec(t_vault *data)
 		else
 			forking(data, line, 2);
 	}
-	free(data->pid);
 }
 
 void	forking(t_vault *data, int line, int type)
