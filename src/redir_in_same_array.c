@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 16:45:44 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 14:32:10 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 		data->flag->append = TRUE;
 		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
 		find_redir_in_same_array(data, data->tab_arg[i], i);
-
 	}
 	else if (c == '<' && data->tab_arg[i][*j + 1] == c)
 	{
 		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
 		find_redir_in_same_array(data, data->tab_arg[i], i);
-		heredoc(data);
+		if (ft_strlen(data->tab_arg[i]) != 1)
+			heredoc(data);
 	}
 	else
 		find_redir_in_same_array(data, data->tab_arg[i], i);
 	clean_redir(data, i);
-	data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
+	data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], i, 0);
 	*j = -1;
 	redirection(data, data->flag->output);
 	free (data->flag->output);
@@ -44,7 +44,7 @@ void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line)
 
 	i = 0;
 	len = 0;
-	len_of_redir(data, rl_dec_array);
+	len_of_redir(data, rl_dec_array, line);
 	while (rl_dec_array[i] != data->flag->chevron)
 	{
 		if (rl_dec_array[i + 1] == data->flag->chevron)
@@ -79,15 +79,19 @@ void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line)
 	}
 }
 
-void	len_of_redir(t_vault *data, char *rl_dec_array)
+void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
 {
 	int	i;
 	int	len;
 
 	i = 0;
 	len = 0;
-	while (rl_dec_array[i] != data->flag->chevron)
+	while (rl_dec_array[i])
+	{
+		if (rl_dec_array[i] == data->flag->chevron && is_in_quote(data, line, i) == FALSE)
+			break;
 		i++;
+	}
 	i++;
 	while (rl_dec_array[i] == ' ')
 		i++;

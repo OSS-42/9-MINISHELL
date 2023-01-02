@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 08:27:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:59:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@ void	explore_readline(t_vault *data)
 	{
 		find_str_quote(data);					// se fait sur readline
 		check_for_pipe(data);					// se fait sur rl_dec
-		pipe_check(data);						// se fait sur readline
+		if (pipe_check(data) == 1)
+			return ;						// se fait sur readline
 		flag_count(data, 0, 0);					// se fait sur rl_dec
 		dollar_parsing(data);					// se fait sur rl_dec
 		create_tab_arg(data, -1, 0);
 		execute_redirection(data, 0, 0);
+		if (!(data->tab_arg[0]))
+		{
+			ft_putstr_fd("1\0", data->error_fd);
+			error_message(data, "putain con, regarde ce que tu ecris");
+			return ;
+		}
 		piping(data);
 		reset_io(data);
 		if (data->flag->fd != 0)
@@ -41,9 +48,6 @@ void	dollar_parsing(t_vault *data)
 	row = 0;
 	data->pos = 0;
 	data->buffer = ft_calloc(sizeof(char), 500);
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
-	printf("row : %d\n", row);
 	while (data->rl_dec[row])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
@@ -106,8 +110,6 @@ void	dollar_parsing(t_vault *data)
 		i = 0;
 		row++;
 	}
-//	printf("rl_dec\n");
-//	print_double_array(data->rl_dec);
 }
 
 void	piping(t_vault *data)
@@ -164,6 +166,11 @@ void	launching_exec(t_vault *data)
 		else
 			forking(data, line, 2);
 	}
+	if (data->flag->heredoc_delimiter == TRUE)
+	{
+		data->flag->heredoc_delimiter = FALSE;
+		unlink("temp_heredoc");
+	}
 }
 
 void	forking(t_vault *data, int line, int type)
@@ -174,7 +181,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
-//			ft_exit(data);
+			ft_exit(data);
 		}
 	}
 	else if (type == 2)
@@ -199,13 +206,15 @@ void	child_creation(t_vault *data, int line)
 		error_message(data, "pid creation error");
 		ft_exit(data);
 	}
+	if (data->pid[line] == 0)
+		data->error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 }
 
-//en erreur 28/12
-// Quand on rentre un mauvais input avec < on sort de minishell si il y une
-// seul commande avec echo
-// Creer un flag qui empeche lexecution de commande si mauvais input
-// Continuer de tester echo test 12 > "tes>t"
+// À corriger :
+// Gestion des fd
+// Gestion des leaks
+// echo bonjour | | nous fait sortir
+
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 08:30:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:59:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 			error_message(data, "heredoc - I/O error (dup2)");
 			data->fail_redir = TRUE;
 		}
-		data->flag->heredoc_delimiter = FALSE;
+		// data->flag->heredoc_delimiter = FALSE;
 	}
 	//ne pas oublier le unlink du heredoc temp.
 }

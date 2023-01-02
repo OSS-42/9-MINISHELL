@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 08:29:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 12:42:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	create_tab_arg(t_vault *data, int row, int line)
 	{
 		if (data->rl_dec[row][0] == '|')
 		{
-			if (data->rl_dec[row + 1][0] == '|')
+			if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0] == '|')
 			{
 				data->rl_dec[row] = 0;
 				data->flag->pipe_count = ft_dbl_ptr_len(data->tab_arg) - 1;
@@ -38,6 +38,7 @@ void	create_tab_arg(t_vault *data, int row, int line)
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
+	
 }
 
 void	switch_lines(t_vault *data, int row, int line)

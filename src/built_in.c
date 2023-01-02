@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 08:28:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:51:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_cd(t_vault *data)
 		ft_putstr_fd("1\0", data->error_fd);
 		error_message(data, "no such file or directory");
 	}
+	else
+		ft_putstr_fd("0\0", data->error_fd);
 }
 
 void	ft_pwd(t_vault *data)
@@ -39,10 +41,11 @@ void	ft_pwd(t_vault *data)
 	}
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
+	ft_putstr_fd("0\0", data->error_fd);
 	free (pwd);
 }
 
-void	ft_exit(t_vault *data)
+void	clean_before_exit(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
@@ -63,11 +66,16 @@ void	ft_exit(t_vault *data)
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 	free (data->cmd->name);
-//	free(data->pid);
+	ft_exit (data);
+}
+	//ne pas oublier exit_minishell();
+
+void	ft_exit(t_vault *data)
+{
+	clean_before_exit(data);
 	unlink(".temp_error");
 	exit (g_error_code);
 }
-	//ne pas oublier exit_minishell();
 
 void	ft_env(t_vault *data, int env)
 {
@@ -93,6 +101,7 @@ void	ft_env(t_vault *data, int env)
 			i++;
 		}
 	}
+	ft_putstr_fd("0\0", data->error_fd);
 	return ;
 }
 
@@ -110,6 +119,7 @@ void	ft_echo(t_vault *data, int line)
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;
+	ft_putstr_fd("0\0", data->error_fd);
 	return ;
 }
 

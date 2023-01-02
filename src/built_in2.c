@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/01 20:45:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:10:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	ft_unset(t_vault *data, int line)
 	while (data->cmd->opt[line])
 	{
 		if (check_error(data, line) == 1)
+		{
 			join_unset(data, line);
+			ft_putstr_fd("0\0", data->error_fd);
+		}
 		else
 		{
 			ft_putstr_fd("2\0", data->error_fd);
@@ -95,6 +98,8 @@ void	ft_export(t_vault *data, int line)
 				error_message(data, "missing or wrong arguments");
 				return ;
 			}
+			else
+				ft_putstr_fd("0\0", data->error_fd);
 			if (data->b_in->export_var)
 				free(data->b_in->export_var);
 			data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);

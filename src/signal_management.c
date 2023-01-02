@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 12:04:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/01 21:02:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:46:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	interrupt_alive(int sig)
 	sig = 128 + sig;
 	fd_temp = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(ft_itoa(sig), fd_temp);
-//	close(fd_temp);
+	close(fd_temp);
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -51,7 +51,7 @@ void	quit_alive(int sig)
 	sig = 128 + sig;
 	fd_temp = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(ft_itoa(sig), fd_temp);
-//	close(fd_temp);
+	close(fd_temp);
 	rl_redisplay();
 }
 
@@ -64,7 +64,7 @@ void	interrupt_exec(int sig)
 	sig = 128 + sig;
 	fd_temp = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(ft_itoa(sig), fd_temp);
-//	close(fd_temp);
+	close(fd_temp);
 	kill(0, 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
@@ -73,13 +73,13 @@ void	interrupt_exec(int sig)
 //management of ctrl+D
 //sans singleton
 void	quit_exec(int sig)
-{	
+{
 	int	fd_temp;
 
 	sig = 128 + sig;
 	fd_temp = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(ft_itoa(sig), fd_temp);
-//	close(fd_temp);
+	close(fd_temp);
 	kill(0, 0);
 	ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
 	rl_on_new_line();
@@ -88,7 +88,7 @@ void	quit_exec(int sig)
 //avec singleton
 
 // void	quit_exec(int sig)
-// {	
+// {
 // 	t_vault *data;
 
 // 	data = get_data();

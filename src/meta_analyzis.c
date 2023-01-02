@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 08:28:50 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:43:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
+				data->error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 				ft_putstr_fd("1\0", data->error_fd);
 				error_message(data, "missing or wrong arguments");
 				return (FALSE);
@@ -72,7 +73,7 @@ void	flag_count(t_vault *data, int i, int j)
 	}
 }
 
-void	pipe_check(t_vault *data)
+int	pipe_check(t_vault *data)
 {
 	int	i;
 
@@ -94,13 +95,14 @@ void	pipe_check(t_vault *data)
 				if (data->read_line[i] != ' ' && data->read_line[i] != '|')
 				{
 					g_error_code = 0;
-					return ;
+					return (0);
 				}
 				else if (data->read_line[i] == '|' && g_error_code == 1)
 				{
 					ft_putstr_fd("1\0", data->error_fd);
 					error_message(data, "missing or wrong arguments");
-					ft_exit(data);
+					return (1);
+					// ft_exit(data);
 				}
 				g_error_code = 1;
 				i++;
@@ -108,4 +110,5 @@ void	pipe_check(t_vault *data)
 		}
 		i++;
 	}
+	return (0);
 }

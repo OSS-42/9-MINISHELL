@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 08:27:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:50:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	in_child_exec(t_vault *data, int line);
 /***** meta_analyzis.c *****/
 int		rl_prio_n_qty(t_vault *data, int i, char c);
 void	flag_count(t_vault *data, int i, int j);
-void	pipe_check(t_vault *data);
+int		pipe_check(t_vault *data);
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data, int i, int j);
@@ -170,7 +170,7 @@ void	stdin_redirection(t_vault *data, char *redirection);
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
-void	len_of_redir(t_vault *data, char *rl_dec_array);
+void	len_of_redir(t_vault *data, char *rl_dec_array, int line);
 
 /***** redir_in_same_array_2.c *****/
 void	clean_redir(t_vault *data, int i);
@@ -186,7 +186,7 @@ void	clean_redir_next_array(t_vault *data, int i);
 void	token_without_redir_name(t_vault *data, int i, int begin, int len);
 
 /***** redirection_utils.c *****/
-char	*clean_the_chevron(t_vault *data, char *str, int i, int j);
+char	*clean_the_chevron(t_vault *data, char *str, int line, int i);
 int		flag_in_str(char *str);
 int		while_is_not_flag(char *str, int i);
 int		while_quote(t_vault *data, char *str, int i);
@@ -209,6 +209,7 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
+void	clean_before_exit(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int line);

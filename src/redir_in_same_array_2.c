@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 16:10:48 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 09:25:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,10 @@ int	while_not_chevron(t_vault *data, int i, char *str, int *begin)
 	int	temp;
 
 	temp = 0;
-	while (data->tab_arg[i][*begin] != data->flag->chevron)
+	while (data->tab_arg[i][*begin])
 	{
+		if (data->tab_arg[i][*begin] == data->flag->chevron && is_in_quote(data, i, *begin) == FALSE)
+			break;
 		str[temp] = data->tab_arg[i][*begin];
 		temp++;
 		(*begin)++;
@@ -106,8 +108,15 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		len = len_from_chevron_at_zero(data, i, begin);
 	else
 	{
-		while (data->tab_arg[i][temp] != data->flag->chevron)
+		// while (data->tab_arg[i][temp] != data->flag->chevron)
+		// 	temp++;
+		while (data->tab_arg[i][temp])
+		{
+			if (data->tab_arg[i][temp] == data->flag->chevron
+				&& is_in_quote(data, i, temp) == FALSE)
+				break;
 			temp++;
+		}
 		len = temp;
 		if (data->tab_arg[i][temp])
 		{

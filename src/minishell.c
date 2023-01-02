@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 08:28:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 12:21:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	main(int argc, char **argv, char **env)
 	else
 	{
 		intro_minishell();
+		data.error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		ft_putstr_fd(ft_itoa(g_error_code), data.error_fd);
 		launch_minishell(&data);
 	}
 	return (g_error_code);

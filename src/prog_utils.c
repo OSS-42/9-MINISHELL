@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/01 20:55:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:10:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,11 @@ void	find_prog(t_vault *data, int line)
 	else if (access(data->cmd->name, F_OK | X_OK) == 0)
 	{
 		ft_dbl_ptr_free((void **) data->path_names);
+		ft_putstr_fd("0\0", data->error_fd);
 		execve(data->cmd->name, data->cmd->opt, data->env);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	printf("hello\n");
-	printf("%d\n", data->error_fd);
 	ft_putstr_fd("127\0", data->error_fd);
 	error_message(data, "command not found");
-//	ft_exit(data);
 }

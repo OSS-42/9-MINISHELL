@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/01 20:48:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 09:28:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // Ajouter des free et message d'erreur au exit
-char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
+char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 {
 	char	*temp;
 	int		clean;
+	int		j;
 
 	clean = 0;
+	j = 0;
 	temp = ft_calloc(sizeof(char), ft_strlen(str));
 	if (!temp)
 	{
@@ -29,7 +31,7 @@ char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 	}
 	while (str[i] && str[i] != '\0')
 	{
-		if (str[i] == data->flag->chevron && clean == 0)
+		if (str[i] == data->flag->chevron && is_in_quote(data, line, i) == FALSE && clean == 0)
 		{
 			clean = 1;
 			i++;
