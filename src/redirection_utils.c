@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 15:59:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:48:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*clean_the_chevron(t_vault *data, char *str, int i, int j)
 	if (!temp)
 	{
 		free (temp);
-		g_error_code = 1;
+		ft_putstr_fd("1\0", data->error_fd);
 		error_message(data, "unexpected error");
 		exit (EXIT_FAILURE);
 	}

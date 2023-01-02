@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 17:11:49 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 08:27:29 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_vault
 	int			child_id;
 	int			status;
 	int			fail_redir;
+	int			error_fd;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
@@ -237,6 +238,7 @@ void	print_double_array(char **array);
 int		check_error(t_vault *data, int row);
 //void	message(t_vault *data, char *str1);
 void	error_message(t_vault *data, char *message);
+char	*find_error_code(t_vault *data);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);

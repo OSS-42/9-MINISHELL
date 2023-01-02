@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 17:12:01 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 08:28:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_cd(t_vault *data)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
 	{
-		g_error_code = 1;
+		ft_putstr_fd("1\0", data->error_fd);
 		error_message(data, "no such file or directory");
 	}
 }
@@ -62,6 +62,9 @@ void	ft_exit(t_vault *data)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
+	free (data->cmd->name);
+//	free(data->pid);
+	unlink(".temp_error");
 	exit (g_error_code);
 }
 	//ne pas oublier exit_minishell();

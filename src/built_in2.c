@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 15:49:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:45:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_unset(t_vault *data, int line)
 			join_unset(data, line);
 		else
 		{
-			g_error_code = 2;
+			ft_putstr_fd("2\0", data->error_fd);
 			error_message(data, "missing or wrong arguments");
 			return ;
 		}
@@ -91,7 +91,7 @@ void	ft_export(t_vault *data, int line)
 		{
 			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
 			{
-				g_error_code = 2;
+				ft_putstr_fd("2\0", data->error_fd);
 				error_message(data, "missing or wrong arguments");
 				return ;
 			}

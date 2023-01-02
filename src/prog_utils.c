@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 15:56:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:55:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		g_error_code = 1;
+		ft_putstr_fd("1\0", data->error_fd);
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
@@ -60,13 +60,14 @@ void	cmd_path_check(t_vault *data)
 		}
 		i++;
 	}
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 }
 
 void	find_prog(t_vault *data, int line)
 {
 	if (is_built_in(data->cmd->name) == 1)
 	{
-		ft_dbl_ptr_free((void **) data->path_names);
+//		ft_dbl_ptr_free((void **) data->path_names);
 		built_in(data, line);
 		return ;
 	}
@@ -77,7 +78,9 @@ void	find_prog(t_vault *data, int line)
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	g_error_code = 127;
+	printf("hello\n");
+	printf("%d\n", data->error_fd);
+	ft_putstr_fd("127\0", data->error_fd);
 	error_message(data, "command not found");
-	ft_exit(data);
+//	ft_exit(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 16:06:47 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 08:29:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	switch_lines(t_vault *data, int row, int line)
 	char	*temp;
 
 	temp = NULL;
-
 	if (data->tab_arg[line] == NULL)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
