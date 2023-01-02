@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 15:54:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 21:20:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
+	data->error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	ft_putstr_fd(ft_itoa(g_error_code), data->error_fd);
 	data->env = env;
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
@@ -69,7 +71,7 @@ void	launch_minishell(t_vault *data)
 			printf("exit\n");
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
-			g_error_code = 131;
+			ft_putstr_fd("131\0", data->error_fd);
 			ft_exit(data);
 		}
 	}
@@ -83,6 +85,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	init_data(&data, env);
+	g_error_code = ft_atoi(find_error_code(&data));
 	if (g_error_code != 0)
 		ft_exit(&data);
 	else

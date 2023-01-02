@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 16:06:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 14:47:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_vault
 	pid_t		*pid;
 	int			child_id;
 	int			status;
+	int			error_fd;
 	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
@@ -235,6 +236,7 @@ void	print_double_array(char **array);
 int		check_error(t_vault *data, int row);
 //void	message(t_vault *data, char *str1);
 void	error_message(t_vault *data, char *message);
+char	*find_error_code(t_vault *data);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);

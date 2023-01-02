@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 15:48:36 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:44:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_cd(t_vault *data)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
 	{
-		g_error_code = 1;
+		ft_putstr_fd("1\0", data->error_fd);
 		error_message(data, "no such file or directory");
 	}
 }
@@ -71,7 +71,9 @@ void	ft_exit(t_vault *data)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
+	free (data->cmd->name);
 //	free(data->pid);
+	unlink(".temp_error");
 	exit (g_error_code);
 }
 	//ne pas oublier exit_minishell();

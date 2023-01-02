@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 15:53:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:46:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
-				g_error_code = 1;
+				ft_putstr_fd("1\0", data->error_fd);
 				error_message(data, "missing or wrong arguments");
 				return (FALSE);
 			}
@@ -97,8 +97,9 @@ void	pipe_check(t_vault *data)
 					g_error_code = 0;
 					return ;
 				}
-				else if (data->read_line[i] == '|' && g_error_code != 0)
+				else if (data->read_line[i] == '|' && g_error_code == 1)
 				{
+					ft_putstr_fd("1\0", data->error_fd);
 					error_message(data, "missing or wrong arguments");
 					ft_exit(data);
 				}

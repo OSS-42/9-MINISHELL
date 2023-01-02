@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 15:47:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 20:38:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE)   // se fait sur readline
+	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
-		find_str_quote(data);					// se fait sur readline
-		check_for_pipe(data);					// se fait sur rl_dec
-		pipe_check(data);						// se fait sur readline
-		flag_count(data, 0, 0);					// se fait sur rl_dec
-		dollar_parsing(data);					// se fait sur rl_dec
+		find_str_quote(data);
+		check_for_pipe(data);
+		pipe_check(data);
+		flag_count(data, 0, 0);
+		dollar_parsing(data);
 //		detached_quote_tab(data);				// se fait sur rl_dec
 		create_tab_arg(data, -1, 0);
 		piping(data);
@@ -43,6 +43,7 @@ void	dollar_parsing(t_vault *data)
 	data->buffer = ft_calloc(sizeof(char), 500);
 	printf("rl_dec\n");
 	print_double_array(data->rl_dec);
+	printf("row : %d\n", row);
 	while (data->rl_dec[row])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
@@ -105,8 +106,8 @@ void	dollar_parsing(t_vault *data)
 		i = 0;
 		row++;
 	}
-	printf("rl_dec\n");
-	print_double_array(data->rl_dec);
+//	printf("rl_dec\n");
+//	print_double_array(data->rl_dec);
 }
 
 void	piping(t_vault *data)
@@ -120,7 +121,7 @@ void	piping(t_vault *data)
 		data->flag->pipe[i] = ft_calloc(sizeof(int), 2);
 		if (pipe(data->flag->pipe[i]) == -1)
 		{
-			g_error_code = 1;
+			ft_putstr_fd("1\0", data->error_fd);
 			error_message(data, "pipe creation error");
 		}
 		i++;
@@ -173,7 +174,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
-			ft_exit(data);
+//			ft_exit(data);
 		}
 	}
 	else if (type == 2)
@@ -194,7 +195,7 @@ void	child_creation(t_vault *data, int line)
 	data->pid[line] = fork();
 	if (data->pid[line] == -1)
 	{
-		g_error_code = 1;
+		ft_putstr_fd("1\0", data->error_fd);
 		error_message(data, "pid creation error");
 		ft_exit(data);
 	}

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 16:05:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/01 15:47:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	check_error(t_vault *data, int line)
 
 void	error_message(t_vault *data, char *message)
 {
+	g_error_code = ft_atoi(find_error_code(data));
 	ft_putstr_fd("minishell: ", 2);
 	if (data->cmd->name)
 	{
@@ -30,6 +31,21 @@ void	error_message(t_vault *data, char *message)
 	}
 	ft_putendl_fd(message, 2);
 	return ;
+}
+
+char	*find_error_code(t_vault *data)
+{
+	char	*temp;
+	int		read_val;
+
+	temp = ft_calloc(sizeof(char), 4);
+	close(data->error_fd);
+	data->error_fd = open(".temp_error", O_RDONLY);
+	read_val = read(data->error_fd, temp, 3);
+	if (read_val < 0)
+		perror("reading error");
+	close(data->error_fd);
+	return (temp);
 }
 
 //error codes :
