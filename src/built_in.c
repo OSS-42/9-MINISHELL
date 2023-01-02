@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 15:09:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:11:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ void	clean_before_exit(t_vault *data)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 	free (data->cmd->name);
 }
-	//ne pas oublier exit_minishell();
+	//ne pas oublier ç;
 
 void	ft_exit(t_vault *data)
 {
 	clean_before_exit(data);
 	unlink(".temp_error");
+	exit_minishell();
 	exit (g_error_code);
 }
 
