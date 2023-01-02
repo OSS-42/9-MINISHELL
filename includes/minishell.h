@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 14:50:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:39:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ void	print_double_array(char **array);
 int		check_error(t_vault *data, int row);
 //void	message(t_vault *data, char *str1);
 void	error_message(t_vault *data, char *message);
+void	error_message2(t_vault *data, char *message, char *code);
 char	*find_error_code(t_vault *data);
 
 /***** minishell_utils.c *****/

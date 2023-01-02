@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 00:12:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:39:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,9 @@ void	copy_env(t_vault *data, char **temp, int i)
 		temp[i][j] = data->env[i][j];
 	temp[i][j] = data->env[i][j];
 }
+
+// export banane=42 2wasabi=3 oss117=1001
+// minishell: export: missing or wrong arguments
+
+//oss117 doit etre modifie aussi
+// meme comportement avec unset

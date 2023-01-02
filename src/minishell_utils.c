@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/27 00:15:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:28:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,27 @@ void	export_only_format(t_vault *data, char *buff2, char **temp, int i)
 	free (temp[i]);
 	temp[i] = ft_strdup(data->buffer);
 	free (data->buffer);
+}
+
+void	clean_before_exit(t_vault *data)
+{
+	if (data->b_in->export_var)
+		free (data->b_in->export_var);
+	if (data->b_in->env_export)
+		ft_dbl_ptr_free((void **)data->b_in->env_export);
+	if (data->b_in->env_unset)
+		ft_dbl_ptr_free((void **)data->b_in->env_unset);
+	if (data->b_in->env_ord)
+		free(data->b_in->env_ord);
+	if (data->read_line)
+		free(data->read_line);
+	if (data->b_in)
+		free(data->b_in);
+	if (data->quote)
+		free(data->quote);
+	if (data->flag)
+		free(data->flag);
+	if (data->tab_arg)
+		ft_dbl_ptr_free((void **)data->tab_arg);
+	free (data->cmd->name);
 }

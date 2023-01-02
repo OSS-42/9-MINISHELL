@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 11:34:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:39:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ int	check_error(t_vault *data, int line)
 		|| ft_str_env_var(data->cmd->opt[line], 0) == 0)
 		return (0);
 	return (1);
+}
+
+void	error_message2(t_vault *data, char *message, char *code)
+{
+	ft_putstr_fd(code, data->error_fd);
+	g_error_code = ft_atoi(find_error_code(data));
+	ft_putstr_fd("minishell: ", 2);
+	if (data->cmd->name)
+	{
+		ft_putstr_fd(data->cmd->name, 2);
+		ft_putstr_fd(": ", 2);
+	}
+	ft_putendl_fd(message, 2);
+	return ;
 }
 
 void	error_message(t_vault *data, char *message)

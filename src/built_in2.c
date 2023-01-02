@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 11:10:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:39:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ void	add_line_env(t_vault *data)
 
 void	ft_export(t_vault *data, int line)
 {
-	if (!(data->cmd->opt[line]))
+	if (!(data->cmd->opt[line + 1]))
 		order_env(data);
 	else
 	{
-		while (data->cmd->opt[line])
+		while (data->cmd->opt[++line])
 		{
 			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
 			{
-				ft_putstr_fd("2\0", data->error_fd);
-				error_message(data, "missing or wrong arguments");
+				// ft_putstr_fd("2\0", data->error_fd);
+				error_message2(data, "missing or wrong arguments", "2\0");
 				return ;
 			}
 			else
@@ -110,7 +110,6 @@ void	ft_export(t_vault *data, int line)
 						ft_strlen(data->cmd->opt[line])
 						- ft_strlen(ft_strchr(data->cmd->opt[line], '=')) + 1);
 			add_line_env(data);
-			line++;
 		}
 	}
 }

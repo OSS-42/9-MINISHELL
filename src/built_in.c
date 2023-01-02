@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 15:11:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:44:21 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,11 @@ void	ft_pwd(t_vault *data)
 	free (pwd);
 }
 
-void	clean_before_exit(t_vault *data)
-{
-	if (data->b_in->export_var)
-		free (data->b_in->export_var);
-	if (data->b_in->env_export)
-		ft_dbl_ptr_free((void **)data->b_in->env_export);
-	if (data->b_in->env_unset)
-		ft_dbl_ptr_free((void **)data->b_in->env_unset);
-	if (data->b_in->env_ord)
-		free(data->b_in->env_ord);
-	if (data->read_line)
-		free(data->read_line);
-	if (data->b_in)
-		free(data->b_in);
-	if (data->quote)
-		free(data->quote);
-	if (data->flag)
-		free(data->flag);
-	if (data->tab_arg)
-		ft_dbl_ptr_free((void **)data->tab_arg);
-	free (data->cmd->name);
-}
-	//ne pas oublier ç;
-
 void	ft_exit(t_vault *data)
 {
 	clean_before_exit(data);
 	unlink(".temp_error");
-	exit_minishell();
+	// exit_minishell();
 	exit (g_error_code);
 }
 
