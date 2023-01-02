@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 12:42:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:06:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	create_tab_arg(t_vault *data, int row, int line)
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
-	
 }
 
 void	switch_lines(t_vault *data, int row, int line)
