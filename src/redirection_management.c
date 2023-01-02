@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 14:59:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:36:06 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,23 +130,42 @@ void	stdin_redirection(t_vault *data, char *redirection)
 	}
 	else if (data->flag->heredoc_delimiter == TRUE)
 	{
-		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
-		if (data->flag->heredoc_fd == -1)
-		{
-			ft_putstr_fd("1\0", data->error_fd);
-			error_message(data, "heredoc - no such file or directory");
-			rl_replace_line("", 0);
-			rl_on_new_line();
-			rl_redisplay();
-			data->fail_redir = TRUE;
-		}
-		if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
-		{
-			ft_putstr_fd("1\0", data->error_fd);
-			error_message(data, "heredoc - I/O error (dup2)");
-			data->fail_redir = TRUE;
-		}
-		// data->flag->heredoc_delimiter = FALSE;
+		heredoc_redirection(data);
+		// data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
+		// if (data->flag->heredoc_fd == -1)
+		// {
+		// 	ft_putstr_fd("1\0", data->error_fd);
+		// 	error_message(data, "heredoc - no such file or directory");
+		// 	rl_replace_line("", 0);
+		// 	rl_on_new_line();
+		// 	rl_redisplay();
+		// 	data->fail_redir = TRUE;
+		// }
+		// if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
+		// {
+		// 	ft_putstr_fd("1\0", data->error_fd);
+		// 	error_message(data, "heredoc - I/O error (dup2)");
+		// 	data->fail_redir = TRUE;
+		// }
 	}
-	//ne pas oublier le unlink du heredoc temp.
+}
+
+void	heredoc_redirection(t_vault *data)
+{
+	data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
+	if (data->flag->heredoc_fd == -1)
+	{
+		ft_putstr_fd("1\0", data->error_fd);
+		error_message(data, "heredoc - no such file or directory");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+		data->fail_redir = TRUE;
+	}
+	if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
+	{
+		ft_putstr_fd("1\0", data->error_fd);
+		error_message(data, "heredoc - I/O error (dup2)");
+		data->fail_redir = TRUE;
+	}
 }

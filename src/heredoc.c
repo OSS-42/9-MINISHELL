@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/31 12:09:35 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/02 15:45:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	heredoc(t_vault *data)
 			&& ft_strlen(str) == ft_strlen(data->flag->output))
 			data->flag->heredoc_delimiter = TRUE;
 		else
+		{
 			ft_putstr_fd(str, data->flag->heredoc_fd);
+			ft_putstr_fd("\n", data->flag->heredoc_fd);
+		}
 		free(str);
 	}
 	ft_putstr_fd("\n", data->flag->heredoc_fd);

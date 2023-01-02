@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 14:59:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 16:58:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);					// se fait sur rl_dec
 		dollar_parsing(data);					// se fait sur rl_dec
 		create_tab_arg(data, -1, 0);
-		execute_redirection(data, 0, 0);
+		// execute_redirection(data, 0, 0);
 		if (!(data->tab_arg[0]))
 		{
 			ft_putstr_fd("1\0", data->error_fd);
@@ -211,9 +211,15 @@ void	child_creation(t_vault *data, int line)
 }
 
 // À corriger :
-// Gestion des fd
-// Gestion des leaks
-// echo bonjour | | nous fait sortir
+// Gestion des fd DUO
+// Gestion des leaks DUO
+// Probleme multiple heredoc MORGAN
+// Probleme de fd
+// Probleme avec $? ERIC
+// Mauvais comportement avec l'historique A DEBATTRE ERIC
+// unset ERIC
+// Export multiple variable dont une mauvaise au milieu ERIC
+// cd écrit une erreur alors qu'il devrait pas MORGAN
 
 
 //possibilite de suivre le child :
