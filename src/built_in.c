@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 14:51:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 15:09:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	clean_before_exit(t_vault *data)
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 	free (data->cmd->name);
-	ft_exit (data);
 }
 	//ne pas oublier exit_minishell();
 
