@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 09:49:33 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 12:29:29 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	init_data(t_vault *data, char **env)
 	data->read_line = NULL;
 	data->tab_arg = NULL;
 	data->dollar_var_len = 0;
-	find_paths(data);
+	if (getenv("PATH") == NULL)
+		ft_putstr_fd("1\0", data->error_fd);
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	data->fail_redir = FALSE;
@@ -92,7 +93,10 @@ int	main(int argc, char **argv, char **env)
 	g_error_code = ft_atoi(data.temp_str);
 	free (data.temp_str);
 	if (g_error_code != 0)
-		exit_process(&data);
+	{
+		error_message(&data, "missing env or path", "1\0");
+		ft_exit(&data);
+	}
 	else
 	{
 		intro_minishell();

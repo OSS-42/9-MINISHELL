@@ -6,13 +6,12 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 23:31:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:00:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// penser aux retour de code d'erreur;
 void	find_paths(t_vault *data)
 {
 	size_t	i;
@@ -31,7 +30,7 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		ft_putstr_fd("1\0", data->error_fd);
+		error_message(data, "missing env or path", "1\0");
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
@@ -44,6 +43,7 @@ void	cmd_path_check(t_vault *data)
 	size_t	i;
 
 	i = 0;
+	find_paths(data);
 	while (data->path_names[i])
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");
