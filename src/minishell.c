@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 23:22:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:49:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	init_data(&data, env);
-	g_error_code = ft_atoi(find_error_code(&data));
+	data.temp_str = find_error_code(&data);
+	g_error_code = ft_atoi(data.temp_str);
+	free (data.temp_str);
 	if (g_error_code != 0)
 		exit_process(&data);
 	else

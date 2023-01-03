@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:28:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:59:23 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	clean_before_exit(t_vault *data)
 		free(data->flag);
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
+	ft_dbl_ptr_free((void **)data->cmd->opt);
 	free (data->cmd->name);
 }

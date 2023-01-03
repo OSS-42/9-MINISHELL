@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 00:07:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:48:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_vault
 	char		**tab_arg;
 	char		**path_names;
 	char		**temp;
+	char		*temp_str;
 	char		*read_line;
 	// char		*env_path; //pas trouve, a supprimer ?
 	// char		*test; //pas trouve, a supprimer ?

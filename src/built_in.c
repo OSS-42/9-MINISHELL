@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 23:45:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:50:58 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	ft_pwd(t_vault *data)
 void	exit_process(t_vault *data)
 {
 	clean_before_exit(data);
-	g_error_code = ft_atoi(find_error_code(data));
+	data->temp_str = find_error_code(data);
+	g_error_code = ft_atoi(data->temp_str);
+	free (data->temp_str);
+	// g_error_code = ft_atoi(find_error_code(data));
 	exit(g_error_code);
 }
 
