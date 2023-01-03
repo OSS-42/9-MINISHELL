@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 00:11:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:42:14 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
+			free (data->pid);
 			exit_process(data);
 		}
 	}
@@ -215,7 +216,7 @@ void	child_creation(t_vault *data, int line)
 // Probleme de fd
 // Probleme avec $? ERIC - CORRIGE
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// unset ERIC 
+// unset ERIC
 // Export multiple variable dont une mauvaise au milieu ERIC - CORRIGE
 // cd écrit une erreur alors qu'il devrait pas MORGAN
 

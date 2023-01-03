@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 22:00:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 09:43:10 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	in_child_exec(t_vault *data, int line)
 	recompose_tab_arg(data, line);
 	close_pipe(data);
 	find_prog(data, line);
+	free (data->pid);
 	exit_process(data);
 }
