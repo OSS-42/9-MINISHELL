@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 23:29:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:29:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 			}
 		}
 	}
-	else if (data->flag->heredoc_delimiter == TRUE)
+	else if (data->flag->heredoc == TRUE)
 	{
 		heredoc_redirection(data);
 		// data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);

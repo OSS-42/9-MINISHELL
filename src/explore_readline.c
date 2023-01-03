@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 09:42:14 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 15:41:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,12 @@ void	launching_exec(t_vault *data)
 		}
 		else
 			forking(data, line, 2);
-	}
-	if (data->flag->heredoc_delimiter == TRUE)
-	{
-		data->flag->heredoc_delimiter = FALSE;
-		unlink("temp_heredoc");
+		if (data->flag->heredoc == TRUE)
+		{
+			data->flag->heredoc = FALSE;
+			unlink("temp_heredoc");
+		}
+		reset_io(data);
 	}
 }
 
@@ -219,6 +220,8 @@ void	child_creation(t_vault *data, int line)
 // unset ERIC
 // Export multiple variable dont une mauvaise au milieu ERIC - CORRIGE
 // cd écrit une erreur alors qu'il devrait pas MORGAN
+// cat tout seul ne fonctionne pas
+// Probleme de redirection de la sortie standart quand il y a 2 pipe et un heredoc dans la deuxieme commande
 
 
 //possibilite de suivre le child :

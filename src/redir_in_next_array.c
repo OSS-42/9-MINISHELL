@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 13:59:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 		else
 			clean_redir_next_array(data, i + 1);
 	}
-	if (data->flag->heredoc_delimiter == FALSE)
+	if (data->flag->heredoc == FALSE)
 		redirection(data, data->flag->output);
 	free (data->flag->output);
 	*j = -1;

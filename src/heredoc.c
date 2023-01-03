@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 15:45:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:32:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	heredoc(t_vault *data)
 	char	*str;
 
 	dup2(data->flag->stdin_backup, STDIN_FILENO);
+	dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	data->flag->heredoc_fd = open("temp_heredoc", O_CREAT
 			| O_WRONLY | O_TRUNC, 0644);
 	while (data->flag->heredoc_delimiter == FALSE)
@@ -38,6 +39,8 @@ void	heredoc(t_vault *data)
 		}
 		free(str);
 	}
+	data->flag->heredoc_delimiter = FALSE;
+	data->flag->heredoc = TRUE;
 	ft_putstr_fd("\n", data->flag->heredoc_fd);
 	close(data->flag->heredoc_fd);
 // ne pas oublier le unlink du temp.
