@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 23:30:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:07:47 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,9 @@ void	ft_unset(t_vault *data, int line)
 {
 	while (data->cmd->opt[line])
 	{
-		if (check_error(data, line) == 1)
-		{
-			join_unset(data, line);
-			ft_putstr_fd("0\0", data->error_fd);
-		}
-		else
-		{
+		if (check_error(data, line) == 0)
 			error_message(data, "missing or wrong arguments", "2\0");
-			return ;
-		}
+		join_unset(data, line);
 		line++;
 	}
 	return ;
@@ -92,12 +85,7 @@ void	ft_export(t_vault *data, int line)
 		while (data->cmd->opt[++line])
 		{
 			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
-			{
 				error_message(data, "missing or wrong arguments", "2\0");
-				return ;
-			}
-			else
-				ft_putstr_fd("0\0", data->error_fd);
 			if (data->b_in->export_var)
 				free(data->b_in->export_var);
 			data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);

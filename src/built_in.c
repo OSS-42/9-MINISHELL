@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 23:35:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 23:45:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	ft_cd(t_vault *data)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
 		error_message(data, "no such file or directory", "1\0");
-	else
-		ft_putstr_fd("0\0", data->error_fd);
 }
 
 void	ft_pwd(t_vault *data)
@@ -38,7 +36,6 @@ void	ft_pwd(t_vault *data)
 	}
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
-	ft_putstr_fd("0\0", data->error_fd);
 	free (pwd);
 }
 
@@ -82,7 +79,6 @@ void	ft_env(t_vault *data, int env)
 			i++;
 		}
 	}
-	ft_putstr_fd("0\0", data->error_fd);
 	return ;
 }
 
@@ -100,7 +96,6 @@ void	ft_echo(t_vault *data, int line)
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;
-	// ft_putstr_fd("0\0", data->error_fd);
 	return ;
 }
 

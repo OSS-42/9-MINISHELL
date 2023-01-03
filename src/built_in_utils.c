@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 16:39:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:08:09 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	join_unset(t_vault *data, int line)
 		{
 			remove_line_env(data, j);
 			free (data->b_in->unset_arg);
-			break ;
+			return ;
 		}
 	}
 	return ;
