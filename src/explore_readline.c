@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 23:31:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 00:11:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,10 +213,10 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme multiple heredoc MORGAN
 // Probleme de fd
-// Probleme avec $? ERIC
+// Probleme avec $? ERIC - CORRIGE
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// unset ERIC
-// Export multiple variable dont une mauvaise au milieu ERIC
+// unset ERIC 
+// Export multiple variable dont une mauvaise au milieu ERIC - CORRIGE
 // cd écrit une erreur alors qu'il devrait pas MORGAN
 
 
