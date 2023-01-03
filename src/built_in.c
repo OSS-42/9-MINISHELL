@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 15:44:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:40:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_exit(t_vault *data)
 {
 	clean_before_exit(data);
 	unlink(".temp_error");
-	// exit_minishell();
 	exit (g_error_code);
 }
 

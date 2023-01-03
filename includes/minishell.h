@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:39:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:40:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	execute_redirection(t_vault *data, int i, int j);
 void	redirection(t_vault *data, char *redirection);
 void	stdout_redirection(t_vault *data, char *redirection);
 void	stdin_redirection(t_vault *data, char *redirection);
+void	heredoc_redirection(t_vault *data);
 
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
