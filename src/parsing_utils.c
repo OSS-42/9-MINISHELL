@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/31 17:12:53 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 10:15:20 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	final_quotes_removing(t_vault *data, int line)
 	{
 		if (data->tab_arg[line][i] == ' ')
 		{
-			data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
+			// data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
 			data->cmd->opt[row] = ft_strdup(data->buffer);
 			free (data->buffer);
 			data->buffer = ft_calloc(sizeof(char), 500);
