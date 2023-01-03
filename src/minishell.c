@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 23:22:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 10:58:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	init_data(t_vault *data, char **env)
 	data->read_line = NULL;
 	data->tab_arg = NULL;
 	data->dollar_var_len = 0;
-	find_paths(data);
+	if (getenv("PATH") == NULL)
+		ft_putstr_fd("1\0", data->error_fd);
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	data->fail_redir = FALSE;
@@ -90,7 +91,10 @@ int	main(int argc, char **argv, char **env)
 	init_data(&data, env);
 	g_error_code = ft_atoi(find_error_code(&data));
 	if (g_error_code != 0)
-		exit_process(&data);
+	{
+		error_message(&data, "missing env or path", "1\0");
+		ft_exit(&data);
+	}
 	else
 	{
 		intro_minishell();

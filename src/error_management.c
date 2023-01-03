@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 23:33:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 10:45:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	*find_error_code(t_vault *data)
 	close(data->error_fd);
 	return (temp);
 }
-
 
 //bash error codes :
 // 1 - Catchall for general errors
