@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 14:43:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:28:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				i++;
 			if (!data->read_line[i])
 			{
-				data->error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-				ft_putstr_fd("1\0", data->error_fd);
-				error_message(data, "missing or wrong arguments");
+				data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				error_message(data, "missing or wrong arguments", "1\0");
 				return (FALSE);
 			}
 			else if (c == '\"')
@@ -99,10 +98,8 @@ int	pipe_check(t_vault *data)
 				}
 				else if (data->read_line[i] == '|' && g_error_code == 1)
 				{
-					ft_putstr_fd("1\0", data->error_fd);
-					error_message(data, "missing or wrong arguments");
+					error_message(data, "missing or wrong arguments", "1\0");
 					return (1);
-					// ft_exit(data);
 				}
 				g_error_code = 1;
 				i++;

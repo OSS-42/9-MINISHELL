@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:31:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:00:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,5 @@ void	in_child_exec(t_vault *data, int line)
 	recompose_tab_arg(data, line);
 	close_pipe(data);
 	find_prog(data, line);
-	ft_exit(data);
+	exit_process(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 21:40:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 23:23:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
 void	clean_before_exit(t_vault *data);
+void	exit_process(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int line);
@@ -239,8 +240,8 @@ void	print_double_array(char **array);
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
 //void	message(t_vault *data, char *str1);
-void	error_message(t_vault *data, char *message);
-void	error_message2(t_vault *data, char *message, char *code);
+//void	error_message(t_vault *data, char *message);
+void	error_message(t_vault *data, char *message, char *code);
 char	*find_error_code(t_vault *data);
 
 /***** minishell_utils.c *****/

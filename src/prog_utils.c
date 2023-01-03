@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 11:10:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:31:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ void	find_prog(t_vault *data, int line)
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);
-	ft_putstr_fd("127\0", data->error_fd);
-	error_message(data, "command not found");
+	error_message(data, "command not found", "127\0");
 }

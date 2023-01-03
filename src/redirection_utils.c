@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 09:28:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:29:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 	if (!temp)
 	{
 		free (temp);
-		ft_putstr_fd("1\0", data->error_fd);
-		error_message(data, "unexpected error");
+		error_message(data, "unexpected error", "1\0");
 		exit (EXIT_FAILURE);
 	}
 	while (str[i] && str[i] != '\0')

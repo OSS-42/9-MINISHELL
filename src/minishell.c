@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 12:21:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:22:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
-	data->error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd(ft_itoa(g_error_code), data->error_fd);
+	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	ft_putstr_fd("0\0", data->error_fd);
 	data->env = env;
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
@@ -71,9 +71,10 @@ void	launch_minishell(t_vault *data)
 		else
 		{
 			printf("exit\n");
+			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			ft_putstr_fd("131\0", data->error_fd);
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
-			ft_putstr_fd("131\0", data->error_fd);
 			ft_exit(data);
 		}
 	}
@@ -89,12 +90,12 @@ int	main(int argc, char **argv, char **env)
 	init_data(&data, env);
 	g_error_code = ft_atoi(find_error_code(&data));
 	if (g_error_code != 0)
-		ft_exit(&data);
+		exit_process(&data);
 	else
 	{
 		intro_minishell();
-		data.error_fd = open(".temp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		ft_putstr_fd(ft_itoa(g_error_code), data.error_fd);
+		data.error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		ft_putstr_fd("0\0", data.error_fd);
 		launch_minishell(&data);
 	}
 	return (g_error_code);

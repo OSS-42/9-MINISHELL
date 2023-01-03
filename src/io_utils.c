@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/01 20:46:10 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 23:27:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@ void	io_redirection(t_vault *data, int input, int output)
 {
 	(void)data;
 	if (dup2(input, STDIN_FILENO) == -1)
-	{
-//		g_error_code = 126;
-		ft_putstr_fd("126\0", data->error_fd);
-		error_message(data, "Command invoked cannot execute (dup2)");
-	}
+		error_message(data, "Command invoked cannot execute (dup2)", "126\0");
 	if (dup2(output, STDOUT_FILENO) == -1)
-	{
-//		g_error_code = 126;
-		ft_putstr_fd("126\0", data->error_fd);
-		error_message(data, "Command invoked cannot execute (dup2)");
-	}
+		error_message(data, "Command invoked cannot execute (dup2)", "126\0");
 }
 
 int	dup_fds(t_vault *data, int line)
@@ -40,11 +32,7 @@ int	dup_fds(t_vault *data, int line)
 	if (line == 0)
 	{
 		if (dup2(data->flag->pipe[line][p_write], STDOUT_FILENO) == -1)
-		{
-//			g_error_code = 126;
-			ft_putstr_fd("126\0", data->error_fd);
-			error_message(data, "Command invoked cannot execute (dup2)");
-		}
+			error_message(data, "Command invoked cannot execute (dup2)", "126\0");
 	}
 	else if (line != len - 1)
 		io_redirection(data, data->flag->pipe[line - 1][p_read],
@@ -52,11 +40,7 @@ int	dup_fds(t_vault *data, int line)
 	else
 	{
 		if (dup2(data->flag->pipe[line - 1][p_read], STDIN_FILENO) == -1)
-		{
-//			g_error_code = 126;
-			ft_putstr_fd("126\0", data->error_fd);
-			error_message(data, "Command invoked cannot execute (dup2)");
-		}
+			error_message(data, "Command invoked cannot execute (dup2)", "126\0");
 	}
 	return (0);
 }

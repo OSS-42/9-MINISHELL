@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 21:40:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/02 23:35:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	ft_cd(t_vault *data)
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
-	{
-		ft_putstr_fd("1\0", data->error_fd);
-		error_message(data, "no such file or directory");
-	}
+		error_message(data, "no such file or directory", "1\0");
 	else
 		ft_putstr_fd("0\0", data->error_fd);
 }
@@ -45,11 +42,20 @@ void	ft_pwd(t_vault *data)
 	free (pwd);
 }
 
+void	exit_process(t_vault *data)
+{
+	clean_before_exit(data);
+	g_error_code = ft_atoi(find_error_code(data));
+	exit(g_error_code);
+}
+
 void	ft_exit(t_vault *data)
 {
 	clean_before_exit(data);
-	unlink(".temp_error");
-	exit (g_error_code);
+	g_error_code = ft_atoi(find_error_code(data));
+	unlink(".tmp_error");
+	exit_minishell();
+	exit(g_error_code);
 }
 
 void	ft_env(t_vault *data, int env)
@@ -94,7 +100,7 @@ void	ft_echo(t_vault *data, int line)
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;
-	ft_putstr_fd("0\0", data->error_fd);
+	// ft_putstr_fd("0\0", data->error_fd);
 	return ;
 }
 
