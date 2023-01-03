@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 22:00:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:50:28 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	is_special_built_in(t_vault *data, int line)
 
 void	in_child_exec(t_vault *data, int line)
 {
-	// data->cmd->opt = ft_split(data->tab_arg[line], ' ');
 	final_quotes_removing(data, line);
 	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 	recompose_tab_arg(data, line);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 21:42:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:36:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	dollar_var_to_expand(t_vault *data, int row, int i)
 {
 	char	*temp;
-	int		k;
 
 	temp = NULL;
 	if (ft_char_env_var(data->rl_dec[row][i + 1]) != 1)
@@ -23,23 +22,19 @@ int	dollar_var_to_expand(t_vault *data, int row, int i)
 		if (data->rl_dec[row][i + 1] == '?')
 		{
 			temp = find_error_code(data);
-			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
+					| O_TRUNC, 0644);
 			ft_putstr_fd("0\0", data->error_fd);
- 			data->dollar_var_len = ft_strlen(temp);
+			data->dollar_var_len = ft_strlen(temp);
 		}
 		else
 			return (i);
 	}
 	if (!temp)
 		temp = var_extract(data, row, i + 1);
-	k = -1;
 	if (data->flag->var_not_found == 1)
 		return (0);
-	while (temp[++k])
-	{
-		data->buffer[data->pos] = temp[k];
-		data->pos++;
-	}
+	copy_buffer(data, temp);
 	free (temp);
 	return (0);
 }
@@ -114,4 +109,16 @@ char	*expand_var(t_vault *data, int row_var)
 		free (data->dollar_var);
 	}
 	return (temp);
+}
+
+void	copy_buffer(t_vault *data, char *temp)
+{
+	int	k;
+
+	k = -1;
+	while (temp[++k])
+	{
+		data->buffer[data->pos] = temp[k];
+		data->pos++;
+	}
 }

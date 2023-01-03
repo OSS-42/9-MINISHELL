@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 10:45:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:25:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ char	*find_error_code(t_vault *data)
 		perror("reading error");
 	close(data->error_fd);
 	return (temp);
+}
+
+void	exit_process(t_vault *data)
+{
+	clean_before_exit(data);
+	g_error_code = ft_atoi(find_error_code(data));
+	exit(g_error_code);
 }
 
 //bash error codes :

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:28:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:52:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,13 @@ void	clean_before_exit(t_vault *data)
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 	free (data->cmd->name);
+}
+
+void	heredoc_unlink(t_vault *data)
+{
+	if (data->flag->heredoc_delimiter == TRUE)
+	{
+		data->flag->heredoc_delimiter = FALSE;
+		unlink("temp_heredoc");
+	}
 }

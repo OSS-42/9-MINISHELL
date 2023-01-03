@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 10:45:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:43:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,8 @@ typedef struct s_builtins
 	char	*unset_arg;
 	char	*exp_arg;
 	char	*export_var;
-	// char	*order_var; //pas trouve, a supprimer ?
-	// char	*echo_var; //pas trouve, a supprimer ?
-	// char	echo_priority; //pas trouve, a supprimer ?
-	// int		echo_first; //pas utilise, a supprimer ?
 	int		echo_flag_n;
 	int		minus_n;
-	// int		echo_dble_q; //pas trouve, a supprimer ?
-	// int		echo_sgle_q; //pas trouve, a supprimer ?
 	int		forget_minus;
 	int		dont_do_minus;
 	int		first_word;
@@ -74,10 +68,6 @@ typedef struct s_builtins
 typedef struct s_flag
 {
 	char	*output;
-	// int		*fd_out; //pas trouve, a supprimer ?
-	// int		output_count; //trouve seulement incrementation, aucune utilisation, a supprimer ?
-	// int		chevron_count; //pas trouve, a supprimer ?
-	// int		input_count; //trouve seulement incrementation, aucune utilisation, a supprimer ?
 	int		pipe_count;
 	int		stdout_backup;
 	int		stdin_backup;
@@ -106,13 +96,10 @@ typedef struct s_vault
 {
 	char		**env;
 	char		**rl_dec;
-	// char		**clean_decomposer; //pas trouve, a supprimer ?
 	char		**tab_arg;
 	char		**path_names;
 	char		**temp;
 	char		*read_line;
-	// char		*env_path; //pas trouve, a supprimer ?
-	// char		*test; //pas trouve, a supprimer ?
 	char		*buffer;
 	t_builtins	*b_in;
 	t_quote		*quote;
@@ -124,15 +111,11 @@ typedef struct s_vault
 	int			spc_count;
 	int			pos;
 	int			begin;
-	// int			fd_in; //trouve juste initialisation a -1, aucune utilisation, a supprimer ?
-	// int			fd_out; //trouve juste initialisation a -1, aucune utilisation, a supprimer ?
-	// int			fork_count; //trouve juste initialisation a 0, aucune utilisation, a supprimer ?
 	pid_t		*pid;
 	int			child_id;
 	int			status;
 	int			fail_redir;
 	int			error_fd;
-	// int			debug; //pas trouve, a supprimer ?
 }	t_vault;
 
 /***** minishell.c *****/
@@ -147,7 +130,6 @@ void	piping(t_vault *data);
 void	launching_exec(t_vault *data);
 void	forking(t_vault *data, int line, int type);
 void	child_creation(t_vault *data, int line);
-void	dollar_parsing(t_vault *data);
 
 /***** explore_utils.c *****/
 void	built_in(t_vault *data, int line);
@@ -210,8 +192,6 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch);
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);
 void	ft_pwd(t_vault *data);
-void	clean_before_exit(t_vault *data);
-void	exit_process(t_vault *data);
 void	ft_exit(t_vault *data);
 void	ft_env(t_vault *data, int env);
 void	ft_echo(t_vault *data, int line);
@@ -219,11 +199,9 @@ void	ft_echo(t_vault *data, int line);
 /***** parsing_utils ******/
 void	final_quotes_removing(t_vault *data, int row);
 int		quote_mngmt(t_vault *data, int line, int i, char quote);
-//int		sgle_quote_mngmt(t_vault *data, int row, int i);
-//int		dble_quote_mngmt(t_vault *data, int row, int i);
-// void	row_parsing(t_vault *data);
 int		check_is_redir(t_vault *data, int row, int i);
 int		line_count(t_vault *data, int line);
+void	quote_parsing_removal(t_vault *data, int line);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int line);
@@ -239,15 +217,16 @@ void	print_double_array(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
-//void	message(t_vault *data, char *str1);
-//void	error_message(t_vault *data, char *message);
 void	error_message(t_vault *data, char *message, char *code);
 char	*find_error_code(t_vault *data);
+void	exit_process(t_vault *data);
 
 /***** minishell_utils.c *****/
 void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
 void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
+void	clean_before_exit(t_vault *data);
+void	heredoc_unlink(t_vault *data);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int line);
@@ -261,6 +240,7 @@ int		dollar_var_to_expand(t_vault *data, int row, int i);
 char	*var_extract(t_vault *data, int row, int position);
 char	*does_var_exist(t_vault *data);
 char	*expand_var(t_vault *data, int row_var);
+void	copy_buffer(t_vault *data, char *temp);
 
 /***** minus_utils. *****/
 void	parse_minus(t_vault *data);
@@ -309,9 +289,15 @@ int		prep_temp(t_vault *data, int row, int *i, int j);
 /***** signal_management.c *****/
 void	init_signal(int mode);
 void	interrupt_alive(int sig);
-void	quit_alive(int sig);
 void	interrupt_exec(int sig);
 void	quit_exec(int sig);
 //t_vault	*get_data(void);
+
+/***** dollar_parsing_utils.c *****/
+void	dollar_parsing(t_vault *data);
+int		move_index(t_vault *data, int row, int i);
+int		quote_parsing_with_dollar(t_vault *data, int row, int i);
+int		sgl_quote_parsing(t_vault *data, int row, int i);
+int		dbl_quote_parsing(t_vault *data, int row, int i);
 
 #endif

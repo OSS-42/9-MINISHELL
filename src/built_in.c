@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/02 23:45:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 11:25:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ void	ft_pwd(t_vault *data)
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
 	free (pwd);
-}
-
-void	exit_process(t_vault *data)
-{
-	clean_before_exit(data);
-	g_error_code = ft_atoi(find_error_code(data));
-	exit(g_error_code);
 }
 
 void	ft_exit(t_vault *data)

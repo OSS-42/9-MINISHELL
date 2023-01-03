@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 12:04:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 22:55:21 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:02:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_signal(int mode)
 	if (mode == ALIVE)
 	{
 		signal(SIGINT, interrupt_alive);
-		signal(SIGQUIT, quit_alive);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == EXEC)
 	{
@@ -41,21 +41,6 @@ void	interrupt_alive(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 	return ;
-}
-
-//management of ctrl+backslash
-void	quit_alive(int sig)
-{
-	int	fd_temp;
-
-	rl_reset_line_state();
-	rl_replace_line("  ", 0);
-	rl_on_new_line();
-	rl_forced_update_display();
-	sig = 128 + sig;
-	fd_temp = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd(ft_itoa(sig), fd_temp);
-	close(fd_temp);
 }
 
 //CMD EXEC - EXEC MODE
