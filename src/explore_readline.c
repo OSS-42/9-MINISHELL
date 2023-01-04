@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 22:33:59 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 10:09:26 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	forking(t_vault *data, int line, int type)
 		{
 			find_prog(data, line);
 			free (data->pid);
+			close_pipe(data);
 			exit_process(data);
 		}
 	}
@@ -136,10 +137,6 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme de fd
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// unset ERIC
-// cat tout seul fonctionne mais on peut pas en sortir. A DEBATTRE
-// wc >> eof - Si eof n'existe pas on reste dans un invité de commande - A DEBATTRE
-
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal

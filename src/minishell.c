@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:34:23 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 10:13:48 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	readline_exec(t_vault *data)
 	explore_readline(data);
 	free(data->read_line);
 	reinit_data(data);
-	ft_dbl_ptr_free((void **)data->rl_dec);
 }
 
 void	launch_minishell(t_vault *data)

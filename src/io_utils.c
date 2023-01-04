@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:20:49 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 09:48:01 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	close_pipe(t_vault *data)
 
 	x = 0;
 	if (data->flag->pipe_count == 0)
+	{
+		free(data->flag->pipe);
 		return ;
+	}
 	while (x < data->flag->pipe_count)
 	{
 		close (data->flag->pipe[x][p_write]);

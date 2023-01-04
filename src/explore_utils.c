@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:21:26 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 11:34:55 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ void	recompose_tab_arg(t_vault *data, int line)
 
 	i = 1;
 	buffer = NULL;
-	data->tab_arg[line] = NULL;
+	// data->tab_arg[line] = NULL;
 	if (data->cmd->opt[i])
+	{
+		free (data->tab_arg[line]);
 		data->tab_arg[line] = ft_strdup(data->cmd->opt[i]);
+	}
 	else
 		return ;
 	i++;
@@ -62,7 +65,8 @@ void	recompose_tab_arg(t_vault *data, int line)
 		while (data->cmd->opt[i])
 		{
 			buffer = ft_strjoin(data->tab_arg[line], " ");
-			data->tab_arg[line] = NULL;
+			// data->tab_arg[line] = NULL;
+			free (data->tab_arg[line]);
 			data->tab_arg[line] = ft_strjoin(buffer, data->cmd->opt[i]);
 			free (buffer);
 			i++;

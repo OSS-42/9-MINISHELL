@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:06:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:47:34 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ void	create_tab_arg(t_vault *data, int row, int line)
 			}
 		}
 		data->buffer = ft_strdup(data->rl_dec[row]);
+		free (data->rl_dec[row]);
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
+	free (data->rl_dec[row]);
 }
 
 void	switch_lines(t_vault *data, int row, int line)
