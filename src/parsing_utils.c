@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:21:49 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:25:10 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	final_quotes_removing(t_vault *data, int line)
 {
-	int	i;
+	// int	i;
 	int	row;
 	int	size;
 
-	i = 0;
+	// i = 0;
 	row = 0;
 	data->pos = 0;
 	data->buffer = ft_calloc(sizeof(char), 500);

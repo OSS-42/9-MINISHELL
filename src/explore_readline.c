@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 20:20:04 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:44:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		dollar_parsing(data);
 		create_tab_arg(data, -1, 0);
-		// execute_redirection(data, 0, 0);
+		execute_redirection(data, 0, 0);
 		if (!(data->tab_arg[0]))
 		{
 			error_message(data, "putain con, regarde ce que tu ecris", "1\0");

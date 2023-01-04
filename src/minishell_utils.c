@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:21:22 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:44:17 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	clean_before_exit(t_vault *data)
 
 void	heredoc_unlink(t_vault *data)
 {
-	if (data->flag->heredoc_delimiter == TRUE)
+	if (data->flag->heredoc == TRUE)
 	{
-		data->flag->heredoc_delimiter = FALSE;
+		data->flag->heredoc = FALSE;
 		unlink("temp_heredoc");
 	}
 }

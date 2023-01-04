@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 11:25:11 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:26:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_flag
 	int		heredoc_fd;
 	int		heredoc;
 	int		fd;
+	int		fd_out;
 	int		**pipe;
 }	t_flag;
 

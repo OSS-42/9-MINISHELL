@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/03 15:32:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 20:33:32 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	heredoc(t_vault *data)
 	data->flag->heredoc = TRUE;
 	ft_putstr_fd("\n", data->flag->heredoc_fd);
 	close(data->flag->heredoc_fd);
-// ne pas oublier le unlink du temp.
+	if (data->flag->fd_out > 0)
+		dup2(data->flag->fd_out, STDOUT_FILENO);
+// Ajouter un dup2 pour le pipe sur std_out si la fonction est compris entre deux pipes
 }

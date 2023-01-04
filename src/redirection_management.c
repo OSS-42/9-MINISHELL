@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/03 15:29:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 20:39:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,20 @@ void	redirection(t_vault *data, char *redirection)
 
 void	stdout_redirection(t_vault *data, char *redirection)
 {
-	if (data->flag->fd != 0)
-		close (data->flag->fd);
+	if (data->flag->fd_out != 0)
+		close (data->flag->fd_out);
 	if (data->flag->append == TRUE)
-		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		data->flag->fd_out = open(redirection,
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else
-		data->flag->fd = open(redirection, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (data->flag->fd == -1)
+		data->flag->fd_out = open(redirection,
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->flag->fd_out == -1)
 	{
 		error_message(data, "FD error", "1\0");
 		data->fail_redir = TRUE;
 	}
-	else if (dup2(data->flag->fd, STDOUT_FILENO) == -1)
+	else if (dup2(data->flag->fd_out, STDOUT_FILENO) == -1)
 	{
 		error_message(data, "FD error", "1\0");
 		data->fail_redir = TRUE;
@@ -107,7 +109,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 {
 	if (data->flag->fd != 0)
 		close (data->flag->fd);
-	if (data->flag->heredoc_delimiter == FALSE)
+	if (data->flag->heredoc == FALSE)
 	{
 		data->flag->fd = open(redirection, O_RDONLY);
 		if (data->flag->fd == -1)
