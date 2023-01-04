@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:25:10 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 22:27:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	final_quotes_removing(t_vault *data, int line)
 	data->buffer = ft_calloc(sizeof(char), 500);
 	size = line_count(data, line);
 	data->cmd->opt = ft_calloc(sizeof(char *), size + 2);
-	quote_parsing_removal(data, line);
+	row = quote_parsing_removal(data, line);
+	free (data->cmd->opt[row]);
 	data->cmd->opt[row] = ft_strdup(data->buffer);
 	free (data->buffer);
 	data->buffer = NULL;
 }
 
-void	quote_parsing_removal(t_vault *data, int line)
+int	quote_parsing_removal(t_vault *data, int line)
 {
 	int	i;
 	int	row;
@@ -56,6 +57,7 @@ void	quote_parsing_removal(t_vault *data, int line)
 		i++;
 		data->pos++;
 	}
+	return (row);
 }
 
 int	line_count(t_vault *data, int line)

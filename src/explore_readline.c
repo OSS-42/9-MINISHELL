@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 20:44:51 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 22:33:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		dollar_parsing(data);
 		create_tab_arg(data, -1, 0);
-		execute_redirection(data, 0, 0);
+		// execute_redirection(data, 0, 0);
 		if (!(data->tab_arg[0]))
 		{
 			error_message(data, "putain con, regarde ce que tu ecris", "1\0");
@@ -134,15 +134,11 @@ void	child_creation(t_vault *data, int line)
 // À corriger :
 // Gestion des fd DUO
 // Gestion des leaks DUO
-// Probleme multiple heredoc MORGAN
 // Probleme de fd
-// Probleme avec $? ERIC - CORRIGE
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
 // unset ERIC
-// Export multiple variable dont une mauvaise au milieu ERIC - CORRIGE
-// cd écrit une erreur alors qu'il devrait pas MORGAN
-// cat tout seul ne fonctionne pas
-// Probleme de redirection de la sortie standart quand il y a 2 pipe et un heredoc dans la deuxieme commande
+// cat tout seul fonctionne mais on peut pas en sortir. A DEBATTRE
+// wc >> eof - Si eof n'existe pas on reste dans un invité de commande - A DEBATTRE
 
 
 //possibilite de suivre le child :

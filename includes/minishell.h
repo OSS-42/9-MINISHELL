@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 21:21:54 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 22:21:12 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void	final_quotes_removing(t_vault *data, int row);
 int		quote_mngmt(t_vault *data, int line, int i, char quote);
 int		check_is_redir(t_vault *data, int row, int i);
 int		line_count(t_vault *data, int line);
-void	quote_parsing_removal(t_vault *data, int line);
+int		quote_parsing_removal(t_vault *data, int line);
 
 /***** built_in2.c *****/
 void	ft_unset(t_vault *data, int line);

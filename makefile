@@ -6,6 +6,7 @@ NAME = minishell
 
 CC = gcc
 #CC = gcc-11
+# CFLAGS = -g -Wall -Wextra
 CFLAGS = -g -Wall -Werror -Wextra
 #CFLAGS = -g -Wall -Wextra -Werror -fsanitize=leak
 # CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
