@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 11:47:34 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 12:05:05 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	create_tab_arg(t_vault *data, int row, int line)
 			}
 		}
 		data->buffer = ft_strdup(data->rl_dec[row]);
-		free (data->rl_dec[row]);
+		// free (data->rl_dec[row]);
 		if (data->buffer[0] != '\0')
 			switch_lines(data, row, line);
 	}
-	free (data->rl_dec[row]);
+	ft_dbl_ptr_free((void **)data->rl_dec);
 }
 
 void	switch_lines(t_vault *data, int row, int line)

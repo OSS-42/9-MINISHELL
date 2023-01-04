@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 11:33:16 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 12:11:47 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ void	clean_before_exit(t_vault *data)
 		ft_dbl_ptr_free((void **)data->tab_arg); //Que ce free soit la ou pas j'ai les mêmes leaks ...
 	ft_dbl_ptr_free((void **)data->cmd->opt);
 	free(data->cmd->name);
+	free (data->cmd);
+	// free (data->b_in); //
+	// free (data->quote);
+	// free (data->flag);
 }
 
 void	heredoc_unlink(t_vault *data)

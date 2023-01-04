@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parsing_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 14:46:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:12:51 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	dollar_parsing(t_vault *data)
 	i = 0;
 	row = 0;
 	data->pos = 0;
-	data->buffer = ft_calloc(sizeof(char), 500);
+	// data->buffer = ft_calloc(sizeof(char), 500);
 	while (data->rl_dec[row])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
