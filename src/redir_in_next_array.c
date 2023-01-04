@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_next_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/03 13:59:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 21:24:34 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 	{
 		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
 		find_redir_in_next_array(data, data->tab_arg[i + 1]);
-		heredoc(data);
+		heredoc(data, i);
 	}
 	else
 		find_redir_in_next_array(data, data->tab_arg[i + 1]);

@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 20:26:39 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 21:21:54 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void	switch_lines(t_vault *data, int row, int line);
 void	do_the_switch(t_vault *data, int line);
 
 /***** heredoc.c *****/
-void	heredoc(t_vault *data);
+void	heredoc(t_vault *data, int i);
 
 /***** prog_utils.c *****/
 void	find_paths(t_vault *data);
