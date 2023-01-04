@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 15:29:10 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 20:20:49 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	dup_fds(t_vault *data, int line)
 	if (line == 0)
 	{
 		if (dup2(data->flag->pipe[line][p_write], STDOUT_FILENO) == -1)
-			error_message(data, "Command invoked cannot execute (dup2)", "126\0");
+			error_message(data, "Command invoked cannot execute (dup2)",
+				"126\0");
 	}
 	else if (line != len - 1)
 		io_redirection(data, data->flag->pipe[line - 1][p_read],
@@ -40,7 +41,8 @@ int	dup_fds(t_vault *data, int line)
 	else
 	{
 		if (dup2(data->flag->pipe[line - 1][p_read], STDIN_FILENO) == -1)
-			error_message(data, "Command invoked cannot execute (dup2)", "126\0");
+			error_message(data, "Command invoked cannot execute (dup2)",
+				"126\0");
 	}
 	return (0);
 }

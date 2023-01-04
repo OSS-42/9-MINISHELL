@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 15:06:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 20:21:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int g_error_code = 0;
+int	g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
@@ -72,7 +72,8 @@ void	launch_minishell(t_vault *data)
 		else
 		{
 			printf("exit\n");
-			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
+					| O_TRUNC, 0644);
 			ft_putstr_fd("131\0", data->error_fd);
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
@@ -106,4 +107,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (g_error_code);
 }
-// valgrind --leak-check=full  --show-reachable=yes --suppressions=./minishell.sup ./minishell
+// valgrind --leak-check=full  --show-reachable=yes
+// --suppressions=./minishell.sup ./minishell

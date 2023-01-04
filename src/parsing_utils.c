@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 10:15:20 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:21:49 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,23 @@ void	final_quotes_removing(t_vault *data, int line)
 	data->buffer = ft_calloc(sizeof(char), 500);
 	size = line_count(data, line);
 	data->cmd->opt = ft_calloc(sizeof(char *), size + 2);
+	quote_parsing_removal(data, line);
+	data->cmd->opt[row] = ft_strdup(data->buffer);
+	free (data->buffer);
+	data->buffer = NULL;
+}
+
+void	quote_parsing_removal(t_vault *data, int line)
+{
+	int	i;
+	int	row;
+
+	i = 0;
+	row = 0;
 	while (data->tab_arg[line] && data->tab_arg[line][i])
 	{
 		if (data->tab_arg[line][i] == ' ')
 		{
-			// data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
 			data->cmd->opt[row] = ft_strdup(data->buffer);
 			free (data->buffer);
 			data->buffer = ft_calloc(sizeof(char), 500);
@@ -44,10 +56,6 @@ void	final_quotes_removing(t_vault *data, int line)
 		i++;
 		data->pos++;
 	}
-	data->cmd->opt[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
-	data->cmd->opt[row] = ft_strdup(data->buffer);
-	free (data->buffer);
-	data->buffer = NULL;
 }
 
 int	line_count(t_vault *data, int line)
@@ -84,7 +92,32 @@ int	quote_mngmt(t_vault *data, int line, int i, char quote)
 	data->pos = data->pos - 1;
 	return (i);
 }
-	// if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+
+int	check_is_redir(t_vault *data, int row, int i)
+{
+	int	end;
+
+	end = 0;
+	if (i != 0)
+	{
+		i--;
+		while (data->rl_dec[row][i] == ' ')
+			i--;
+		if (data->rl_dec[row][i] == '<' || data->rl_dec[row][i] == '>')
+			return (TRUE);
+	}
+	else if (row != 0)
+	{
+		end = ft_strlen(data->rl_dec[row - 1]) - 1;
+		if (data->rl_dec[row - 1][end] == '<'
+			|| data->rl_dec[row - 1][end] == '>')
+			return (TRUE);
+	}
+	return (FALSE);
+}
+
+// continuer de rajouter le contenu des guillemet dans buffer
+	// if (check_is_redir(data, row, i) == TRUE)
 	// {
 	// 	data->quote->quote_priority = data->rl_dec[row][i];
 	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
@@ -106,7 +139,9 @@ int	quote_mngmt(t_vault *data, int line, int i, char quote)
 // 	data->pos--;
 // 	return (i);
 // }
-	// if (check_is_redir(data, row, i) == TRUE)// continuer de rajouter le contenu des guillemet dans buffer
+
+// continuer de rajouter le contenu des guillemet dans buffer
+	// if (check_is_redir(data, row, i) == TRUE)
 	// {
 	// 	data->quote->quote_priority = data->rl_dec[row][i];
 	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
@@ -133,26 +168,3 @@ int	quote_mngmt(t_vault *data, int line, int i, char quote)
 // 		row++;
 // 	}
 // }
-
-int	check_is_redir(t_vault *data, int row, int i)
-{
-	int	end;
-
-	end = 0;
-	if (i != 0)
-	{
-		i--;
-		while (data->rl_dec[row][i] == ' ')
-			i--;
-		if (data->rl_dec[row][i] == '<' || data->rl_dec[row][i] == '>')
-			return (TRUE);
-	}
-	else if (row != 0)
-	{
-		end = ft_strlen(data->rl_dec[row - 1]) - 1;
-		if (data->rl_dec[row - 1][end] == '<'
-			|| data->rl_dec[row - 1][end] == '>')
-			return (TRUE);
-	}
-	return (FALSE);
-}

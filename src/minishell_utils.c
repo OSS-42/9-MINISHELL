@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 09:59:23 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:21:22 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,13 @@ void	clean_before_exit(t_vault *data)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 	ft_dbl_ptr_free((void **)data->cmd->opt);
 	free (data->cmd->name);
+}
+
+void	heredoc_unlink(t_vault *data)
+{
+	if (data->flag->heredoc_delimiter == TRUE)
+	{
+		data->flag->heredoc_delimiter = FALSE;
+		unlink("temp_heredoc");
+	}
 }

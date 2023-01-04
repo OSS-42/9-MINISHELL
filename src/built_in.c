@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 09:50:58 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/03 20:17:41 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ void	ft_pwd(t_vault *data)
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
 	free (pwd);
-}
-
-void	exit_process(t_vault *data)
-{
-	clean_before_exit(data);
-	data->temp_str = find_error_code(data);
-	g_error_code = ft_atoi(data->temp_str);
-	free (data->temp_str);
-	// g_error_code = ft_atoi(find_error_code(data));
-	exit(g_error_code);
 }
 
 void	ft_exit(t_vault *data)

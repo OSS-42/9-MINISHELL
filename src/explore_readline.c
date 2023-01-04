@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 15:41:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/03 20:20:04 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	explore_readline(t_vault *data)
 	data->rl_dec = ft_split(data->read_line, ' ');
 	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
 	{
-		find_str_quote(data);					// se fait sur readline
-		check_for_pipe(data);					// se fait sur rl_dec
+		find_str_quote(data);
+		check_for_pipe(data);
 		if (pipe_check(data) == 1)
-			return ;						// se fait sur readline
-		flag_count(data, 0, 0);					// se fait sur rl_dec
-		dollar_parsing(data);					// se fait sur rl_dec
+			return ;
+		flag_count(data, 0, 0);
+		dollar_parsing(data);
 		create_tab_arg(data, -1, 0);
 		// execute_redirection(data, 0, 0);
 		if (!(data->tab_arg[0]))
@@ -36,79 +36,6 @@ void	explore_readline(t_vault *data)
 			close (data->flag->fd);
 	}
 	return ;
-}
-
-void	dollar_parsing(t_vault *data)
-{
-	int	i;
-	int	row;
-
-	i = 0;
-	row = 0;
-	data->pos = 0;
-	data->buffer = ft_calloc(sizeof(char), 500);
-	while (data->rl_dec[row])
-	{
-		data->buffer = ft_calloc(sizeof(char), 500);
-		while (data->rl_dec[row][i])
-		{
-			data->dollar_var_len = 0;
-			if (ft_isinset(data->rl_dec[row][i]) == 0)
-				data->buffer[data->pos] = data->rl_dec[row][i];
-			else if (ft_isinset(data->rl_dec[row][i]) == 1)
-			{
-				data->quote->quote_priority = data->rl_dec[row][i];
-				data->buffer[data->pos] = data->rl_dec[row][i];
-				i++;
-				data->pos++;
-				while (data->rl_dec[row][i] != data->quote->quote_priority)
-				{
-					data->buffer[data->pos] = data->rl_dec[row][i];
-					data->pos++;
-					i++;
-				}
-				data->buffer[data->pos] = data->rl_dec[row][i];
-			}
-			else if (ft_isinset(data->rl_dec[row][i]) == 2)
-			{
-				data->quote->quote_priority = data->rl_dec[row][i];
-				data->buffer[data->pos] = data->rl_dec[row][i];
-				i++;
-				data->pos++;
-				while (data->rl_dec[row][i] != data->quote->quote_priority)
-				{
-					if (data->rl_dec[row][i] == '$'
-					&& ft_char_env_var(data->rl_dec[row][i + 1]) == 1)
-					{
-						dollar_var_to_expand(data, row, i);
-						i = i + data->dollar_var_len;
-						data->pos--;
-					}
-					else
-						data->buffer[data->pos] = data->rl_dec[row][i];
-					data->pos++;
-					i++;
-				}
-				data->buffer[data->pos] = data->rl_dec[row][i];
-			}
-			else if (ft_isinset(data->rl_dec[row][i]) == 3)
-			{
-				dollar_var_to_expand(data, row, i);
-				i = i + data->dollar_var_len;
-				data->pos--;
-			}
-			data->pos++;
-			i++;
-		}
-		free (data->rl_dec[row]);
-		data->rl_dec[row] = ft_calloc(sizeof(char), ft_strlen(data->buffer) + 1);
-		//ft_strlcpy(data->rl_dec[row], data->buffer, 500);
-		data->rl_dec[row] = ft_strdup(data->buffer);
-		free (data->buffer);
-		data->pos = 0;
-		i = 0;
-		row++;
-	}
 }
 
 void	piping(t_vault *data)
@@ -148,8 +75,6 @@ void	launching_exec(t_vault *data)
 			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 			{
-				//data->cmd->opt = ft_split(data->tab_arg[line], ' ');
-				// split intelligent ici (final_quotes_removing(line))
 				final_quotes_removing(data, line);
 				data->cmd->name = ft_strdup(data->cmd->opt[0]);
 				recompose_tab_arg(data, line);
@@ -161,13 +86,9 @@ void	launching_exec(t_vault *data)
 		}
 		else
 			forking(data, line, 2);
-		if (data->flag->heredoc == TRUE)
-		{
-			data->flag->heredoc = FALSE;
-			unlink("temp_heredoc");
-		}
-		reset_io(data);
 	}
+	heredoc_unlink(data);
+	reset_io(data);
 }
 
 void	forking(t_vault *data, int line, int type)
