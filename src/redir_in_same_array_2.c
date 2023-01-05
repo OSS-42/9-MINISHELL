@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 09:25:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/04 22:58:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ int	while_not_chevron(t_vault *data, int i, char *str, int *begin)
 	temp = 0;
 	while (data->tab_arg[i][*begin])
 	{
-		if (data->tab_arg[i][*begin] == data->flag->chevron && is_in_quote(data, i, *begin) == FALSE)
-			break;
+		if (data->tab_arg[i][*begin] == data->flag->chevron
+			&& is_in_quote(data, i, *begin) == FALSE)
+			break ;
 		str[temp] = data->tab_arg[i][*begin];
 		temp++;
 		(*begin)++;
@@ -108,13 +109,11 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		len = len_from_chevron_at_zero(data, i, begin);
 	else
 	{
-		// while (data->tab_arg[i][temp] != data->flag->chevron)
-		// 	temp++;
 		while (data->tab_arg[i][temp])
 		{
 			if (data->tab_arg[i][temp] == data->flag->chevron
 				&& is_in_quote(data, i, temp) == FALSE)
-				break;
+				break ;
 			temp++;
 		}
 		len = temp;
@@ -124,7 +123,8 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 			len++;
 			while (data->tab_arg[i][temp] == ' ')
 				temp++;
-			if (data->tab_arg[i][temp] == '\'' || data->tab_arg[i][temp] == '\"')
+			if (data->tab_arg[i][temp] == '\''
+				|| data->tab_arg[i][temp] == '\"')
 			{
 				data->quote->quote_priority = data->tab_arg[i][temp];
 				temp++;

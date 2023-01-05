@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/30 00:26:02 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:46:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	expand_tab(t_vault *data, int len)
 void	search_for_pipe(t_vault *data, int row, int *i)
 {
 	int	j;
-	// int	k;
 
 	j = -1;
 	while (data->rl_dec[row][++j])
@@ -89,20 +88,6 @@ void	search_for_pipe(t_vault *data, int row, int *i)
 			data->temp[*i] = ft_calloc(sizeof(char),
 					ft_strlen(data->rl_dec[row]));
 			j = prep_temp(data, row, i, j);
-			// k = 0;
-			// while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
-			// {
-			// 	if (data->rl_dec[row][j] == '\'' || data->rl_dec[row][j] == '\"')
-			// 	{
-			// 		data->quote->quote_priority = data->rl_dec[row][j];
-			// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-			// 		while (data->rl_dec[row][j] != data->quote->quote_priority)
-			// 			data->temp[*i][k++] = data->rl_dec[row][j++];
-			// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-			// 	}
-			// 	else
-			// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-			// }
 			(*i)++;
 			j--;
 		}
@@ -129,3 +114,19 @@ int	prep_temp(t_vault *data, int row, int *i, int j)
 	}
 	return (j);
 }
+
+//l:91
+// k = 0;
+// while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
+// {
+// 	if (data->rl_dec[row][j] == '\'' || data->rl_dec[row][j] == '\"')
+// 	{
+// 		data->quote->quote_priority = data->rl_dec[row][j];
+// 		data->temp[*i][k++] = data->rl_dec[row][j++];
+// 		while (data->rl_dec[row][j] != data->quote->quote_priority)
+// 			data->temp[*i][k++] = data->rl_dec[row][j++];
+// 		data->temp[*i][k++] = data->rl_dec[row][j++];
+// 	}
+// 	else
+// 		data->temp[*i][k++] = data->rl_dec[row][j++];
+// }

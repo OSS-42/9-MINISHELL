@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parsing_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 12:12:51 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 22:53:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	dollar_parsing(t_vault *data)
 	i = 0;
 	row = 0;
 	data->pos = 0;
-	// data->buffer = ft_calloc(sizeof(char), 500);
 	while (data->rl_dec[row])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
@@ -34,6 +33,9 @@ void	dollar_parsing(t_vault *data)
 	}
 }
 
+//l:23
+// data->buffer = ft_calloc(sizeof(char), 500);
+
 int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 {
 	while (data->rl_dec[row][i])
@@ -42,9 +44,9 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 		if (ft_isinset(data->rl_dec[row][i]) == 0)
 			data->buffer[data->pos] = data->rl_dec[row][i];
 		else if (ft_isinset(data->rl_dec[row][i]) == 1)
-			sgl_quote_parsing(data, row, i);
+			i = sgl_quote_parsing(data, row, i);
 		else if (ft_isinset(data->rl_dec[row][i]) == 2)
-			dbl_quote_parsing(data, row, i);
+			i = dbl_quote_parsing(data, row, i);
 		else if (ft_isinset(data->rl_dec[row][i]) == 3)
 		{
 			dollar_var_to_expand(data, row, i);
@@ -59,7 +61,7 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 
 int	sgl_quote_parsing(t_vault *data, int row, int i)
 {
-	move_index(data, row, i);
+	i = move_index(data, row, i);
 	while (data->rl_dec[row][i] != data->quote->quote_priority)
 	{
 		data->buffer[data->pos] = data->rl_dec[row][i];
@@ -72,7 +74,7 @@ int	sgl_quote_parsing(t_vault *data, int row, int i)
 
 int	dbl_quote_parsing(t_vault *data, int row, int i)
 {
-	move_index(data, row, i);
+	i = move_index(data, row, i);
 	while (data->rl_dec[row][i] != data->quote->quote_priority)
 	{
 		if (data->rl_dec[row][i] == '$'

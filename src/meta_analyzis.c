@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 23:28:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:35:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 				data->quote->double_quote_count++;
 			else if (c == '\'')
 				data->quote->simple_quote_count++;
-			i++; // ++i sur le ligne suivante ?
-			while (data->read_line[i] && data->read_line[i] != c)
-				i++;
+			i = move_index_delimiter(data, i, c);
 			if (!data->read_line[i])
 			{
-				data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
+						| O_TRUNC, 0644);
 				error_message(data, "missing or wrong arguments", "1\0");
 				return (FALSE);
 			}
@@ -56,12 +55,7 @@ void	flag_count(t_vault *data, int i, int j)
 				c = data->rl_dec[i][j];
 				j++;
 				while (data->rl_dec[i][j] != c)
-				// {
-					// if (data->rl_dec[i][j] == '|')
-					// 	if (data->rl_dec[i][j + 1] == c && data->rl_dec[i][j - 1] == c)
-					// 		data->flag->pipe_count++;
 					j++;
-				// }
 			}
 			if (data->rl_dec[i][j] == '|')
 				data->flag->pipe_count++;
@@ -76,36 +70,48 @@ int	pipe_check(t_vault *data)
 {
 	int	i;
 
-	i = 0;
-	while (data->read_line[i])
+	i = -1;
+	while (data->read_line[++i])
 	{
 		if (data->read_line[i] == '\'' || data->read_line[i] == '\"')
 		{
 			data->quote->quote_priority = data->read_line[i];
-			i++;
-			while (data->read_line[i] != data->quote->quote_priority)
-				i++;
+			i = move_index_delimiter(data, i, data->quote->quote_priority);
 		}
 		else if (data->read_line[i] == '|')
 		{
-			i++;
-			while (data->read_line[i])
+			if (check_pipe_syntax(data, i) == 1)
 			{
-				if (data->read_line[i] != ' ' && data->read_line[i] != '|')
-				{
-					g_error_code = 0;
-					return (0);
-				}
-				else if (data->read_line[i] == '|' && g_error_code == 1)
-				{
-					error_message(data, "missing or wrong arguments", "1\0");
-					return (1);
-				}
-				g_error_code = 1;
-				i++;
+				error_message(data, "missing or wrong arguments", "1\0");
+				return (1);
 			}
+			else
+				return (0);
 		}
-		i++;
 	}
 	return (0);
+}
+
+int	move_index_delimiter(t_vault *data, int i, char delimiter)
+{
+	i++;
+	while (data->read_line[i] && data->read_line[i] != delimiter)
+		i++;
+	return (i);
+}
+
+int	check_pipe_syntax(t_vault *data, int i)
+{
+	while (data->read_line[++i])
+	{
+		if (data->read_line[i] != ' ' && data->read_line[i] != '|')
+		{
+			g_error_code = 0;
+			return (0);
+		}
+		else if (data->read_line[i] == '|' && g_error_code == 1)
+			return (1);
+		g_error_code = 1;
+	}
+	return (1);
 }

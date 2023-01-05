@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 22:21:12 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 22:06:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ void	in_child_exec(t_vault *data, int line);
 int		rl_prio_n_qty(t_vault *data, int i, char c);
 void	flag_count(t_vault *data, int i, int j);
 int		pipe_check(t_vault *data);
+int		move_index_delimiter(t_vault *data, int i, char delimiter);
+int		check_pipe_syntax(t_vault *data, int i);
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data, int i, int j);
@@ -255,9 +257,11 @@ void	check_minus_validity(t_vault *data, int row, int i);
 void	create_tab_arg(t_vault *data, int row, int line);
 void	switch_lines(t_vault *data, int row, int line);
 void	do_the_switch(t_vault *data, int line);
+void	validate_the_switch(t_vault *data, int row, int line);
 
 /***** heredoc.c *****/
 void	heredoc(t_vault *data, int i);
+void	check_eof(t_vault *data, char *str);
 
 /***** prog_utils.c *****/
 void	find_paths(t_vault *data);

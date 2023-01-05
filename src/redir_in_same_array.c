@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/03 21:22:12 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 22:58:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,9 @@ void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
 	len = 0;
 	while (rl_dec_array[i])
 	{
-		if (rl_dec_array[i] == data->flag->chevron && is_in_quote(data, line, i) == FALSE)
-			break;
+		if (rl_dec_array[i] == data->flag->chevron
+			&& is_in_quote(data, line, i) == FALSE)
+			break ;
 		i++;
 	}
 	i++;

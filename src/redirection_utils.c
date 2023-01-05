@@ -6,13 +6,12 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/02 23:29:38 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:54:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// Ajouter des free et message d'erreur au exit
 char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 {
 	char	*temp;
@@ -30,7 +29,8 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 	}
 	while (str[i] && str[i] != '\0')
 	{
-		if (str[i] == data->flag->chevron && is_in_quote(data, line, i) == FALSE && clean == 0)
+		if (str[i] == data->flag->chevron
+			&& is_in_quote(data, line, i) == FALSE && clean == 0)
 		{
 			clean = 1;
 			i++;
@@ -56,7 +56,8 @@ int	flag_in_str(char *str)
 
 int	while_is_not_flag(char *str, int i)
 {
-	while (str[i] && str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != ' ')
+	while (str[i] && str[i] != '|' && str[i] != '>'
+		&& str[i] != '<' && str[i] != ' ')
 		i++;
 	return (i);
 }

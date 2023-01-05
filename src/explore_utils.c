@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 11:34:55 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 22:51:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	recompose_tab_arg(t_vault *data, int line)
 
 	i = 1;
 	buffer = NULL;
-	// data->tab_arg[line] = NULL;
 	if (data->cmd->opt[i])
 	{
 		free (data->tab_arg[line]);
@@ -59,13 +58,11 @@ void	recompose_tab_arg(t_vault *data, int line)
 	}
 	else
 		return ;
-	i++;
-	if (data->cmd->opt[i])
+	if (data->cmd->opt[++i])
 	{
 		while (data->cmd->opt[i])
 		{
 			buffer = ft_strjoin(data->tab_arg[line], " ");
-			// data->tab_arg[line] = NULL;
 			free (data->tab_arg[line]);
 			data->tab_arg[line] = ft_strjoin(buffer, data->cmd->opt[i]);
 			free (buffer);

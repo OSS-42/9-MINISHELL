@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 10:13:48 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 22:55:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	launch_minishell(t_vault *data)
 {
 	while (1)
 	{
-		// init_signal(ALIVE);
+		init_signal(ALIVE);
 		data->read_line = readline("\033[95malive>\033[0;39m");
 		if (data->read_line != NULL)
 		{
-			// init_signal(EXEC);
+			init_signal(EXEC);
 			if (ft_strcmp(data->read_line, "") != 0)
 				readline_exec(data);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   personnal_fonction.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2022/12/31 16:10:10 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 21:47:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ int	check_if_inside_quote(char *str, char c)
 	}
 	return (TRUE);
 }
-
