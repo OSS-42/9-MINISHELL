@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 22:13:36 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/05 09:28:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	find_paths(t_vault *data)
+int	find_paths(t_vault *data)
 {
 	size_t	i;
 	size_t	slen;
@@ -30,12 +30,13 @@ void	find_paths(t_vault *data)
 		i++;
 	}
 	if (!data->paths || !data->env[i])
-		error_message(data, "missing env or path", "1\0");
+		return (FALSE);
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
 		free (data->paths);
 	}
+	return (TRUE);
 }
 
 void	cmd_path_check(t_vault *data)
@@ -43,7 +44,8 @@ void	cmd_path_check(t_vault *data)
 	size_t	i;
 
 	i = 0;
-	find_paths(data);
+	if (find_paths(data) == FALSE)
+		return ;
 	while (data->path_names[i])
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");

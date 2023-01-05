@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 23:01:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:12:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void	heredoc(t_vault *data, int i);
 void	check_eof(t_vault *data, char *str);
 
 /***** prog_utils.c *****/
-void	find_paths(t_vault *data);
+int		find_paths(t_vault *data);
 void	cmd_path_check(t_vault *data);
 void	find_prog(t_vault *data, int line);
 

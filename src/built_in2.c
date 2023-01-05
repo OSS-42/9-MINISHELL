@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 23:23:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:29:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,4 @@ void	order_env(t_vault *data)
 // unset PATH (+export)										|		OK
 // env														|		OK
 // echo bonjour												|		OK
-// ls														|			KO segfault (cmd_path_check - prog_utils.c:47)
+// ls														|		OK

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/04 22:09:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:01:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void	heredoc(t_vault *data, int line)
 // 	ft_putstr_fd("\n", data->flag->heredoc_fd);
 // }
 // free(str);
-
-// Ajouter un dup2 pour le pipe sur std_out 
-// si la fonction est compris entre deux pipes
 
 void	check_eof(t_vault *data, char *str)
 {
