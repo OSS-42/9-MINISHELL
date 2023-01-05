@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 09:23:19 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:25:27 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	reinit_data(t_vault *data)
 	data->quote->simple_quote_count = 0;
 	data->quote->begin = 0;
 	data->quote->last_replace = 0;
+	free (data->cmd->name);
 	data->cmd->name = NULL;
 	data->fail_redir = FALSE;
+	ft_dbl_ptr_free((void **)data->cmd->opt);
 }
 
 void	readline_exec(t_vault *data)

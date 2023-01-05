@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 11:02:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:36:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme de fd
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
+// free non alloué avec une commande incorrect
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
