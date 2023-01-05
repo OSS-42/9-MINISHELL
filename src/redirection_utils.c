@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/04 22:54:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:51:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 	char	*temp;
 	int		clean;
 	int		j;
+	int		len; //debug
 
 	clean = 0;
 	j = 0;
-	temp = ft_calloc(sizeof(char), ft_strlen(str));
+	len = ft_strlen(str);// debug
+	// temp = ft_calloc(sizeof(char), ft_strlen(str) + 1);
+	temp = ft_calloc(sizeof(char), len + 1); //debug
 	if (!temp)
 	{
 		free (temp);
@@ -34,13 +37,13 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 		{
 			clean = 1;
 			i++;
-			while (str[i] == ' ')
+			while (str[i] && str[i] == ' ')
 				i++;
 		}
 		else if (str[i])
 			temp[j++] = str[i++];
 	}
-	if (temp[j - 1] == ' ')
+	if (j != 0 && temp[j - 1] == ' ')
 		temp[j - 1] = '\0';
 	free (str);
 	return (temp);
