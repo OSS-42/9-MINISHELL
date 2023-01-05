@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 09:35:27 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 09:54:35 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		dollar_parsing(data);
 		create_tab_arg(data, -1, 0);
-		execute_redirection(data, 0, 0);
-		// final_quotes_removing(data, 0);
 		if (!(data->tab_arg[0]))
 		{
 			error_message(data, "putain con, regarde ce que tu ecris", "1\0");
@@ -138,7 +136,6 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme de fd
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// <<eof - invalid read
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
