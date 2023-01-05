@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/03 20:17:41 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/04 23:12:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,14 @@ void	ft_echo(t_vault *data, int line)
 	return ;
 }
 
-// tests au 31/12 a 14h
+// tests au 4/01 a 23h
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
 //-------------------------------------------------
-//echo								|		OK
+//echo								|			KO (echo s'affiche)
 //echo bonjour						|		OK
-//echo -n							|		OK
+//echo -n							|			KO (-n s'affiche)
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
@@ -120,24 +120,24 @@ void	ft_echo(t_vault *data, int line)
 //echo '--n' salut bonjour			|		OK
 //echo "--n salut bonjour"			|		OK
 //echo $USER						|		OK
-//echo $"USER"						|			KO segfault
-//echo $USERA						|		OK
+//echo $"USER"						|		OK
+//echo $USERA						|			KO (echo s'affiche)
 //echo $USER$TERM					|		OK
 //echo "$USER"						|		OK
 //echo '$USER'						|		OK
 //echo "'$USER'"					|		OK
 //echo '"$USER"'					|		OK
-//echo '$USER'$TERM					|			KO espace en trop
-//echo "$USER"'$TERM'				|			KO espace en trop
-//echo $USER'$TERM					|			KO espace en trop
-//echo $USER"$TERM"					|			KO espace en trop
+//echo '$USER'$TERM					|		OK
+//echo "$USER"'$TERM'				|		OK
+//echo $USER'$TERM					|		OK
+//echo $USER"$TERM"					|		OK
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
 //echo $USER $TErM					|		OK
 //echo $USER $TErM $HOME			|		OK
 //echo "bonjour $USER"				|		OK
 //echo "bonjour '$USER'"			|		OK
-//echo "a"b'c'						|			KO espace en trop
-//echo ""x''y						|			KO espace en trop
-//echo 1' '2" "3					|			KO espaces en trop
+//echo "a"b'c'						|		OK
+//echo ""x''y						|		OK
+//echo 1' '2" "3					|		OK
 //echo "$USER "$USER" $TERM '$PATH'"|		OK

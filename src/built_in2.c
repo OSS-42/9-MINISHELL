@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 00:07:47 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:23:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,3 +126,22 @@ void	order_env(t_vault *data)
 	ft_env(data, 2);
 	return ;
 }
+
+// tests au 4/01 a 23h
+// commandes a faire dans la sequence affichee
+//			TESTS											|	RESULTS
+//---------------------------------------------------------------------------
+// export													|		OK
+// export banane (+ export)									|		OK
+// export wasabi = (+ export)								|			KO (message d'erreur a faire sur le = (et ne pas l'ajouter))
+// env														|			KO (= s<affiche)
+// export oss117=112 (+ export)								|		OK
+// export chocolat=13 4camions=300 _marvel=best (+export)	|		OK
+// env														|			KO (4camions s'affiche)
+// unset _marvel (+export)									|		OK
+// unset banane 4oss117 wasabi	(+export)					|		OK
+// unset chocolat= (+export)								|		OK
+// unset PATH (+export)										|		OK
+// env														|		OK
+// echo bonjour												|		OK
+// ls														|			KO segfault (cmd_path_check - prog_utils.c:47)
