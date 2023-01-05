@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/05 09:51:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 09:52:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 	char	*temp;
 	int		clean;
 	int		j;
-	int		len; //debug
 
 	clean = 0;
 	j = 0;
-	len = ft_strlen(str);// debug
-	// temp = ft_calloc(sizeof(char), ft_strlen(str) + 1);
-	temp = ft_calloc(sizeof(char), len + 1); //debug
+	temp = ft_calloc(sizeof(char), ft_strlen(str) + 1);
 	if (!temp)
 	{
 		free (temp);
