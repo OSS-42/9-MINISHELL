@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 09:24:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:16:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ft_pwd(t_vault *data)
 void	ft_exit(t_vault *data)
 {
 	clean_before_exit(data);
-	g_error_code = ft_atoi(find_error_code(data));
+	data->temp_str = find_error_code(data);
+	g_error_code = ft_atoi(data->temp_str);
+	free (data->temp_str);
 	unlink(".tmp_error");
 	exit_minishell();
 	exit(g_error_code);

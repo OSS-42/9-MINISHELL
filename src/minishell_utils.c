@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 09:26:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:29:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,24 @@ void	clean_before_exit(t_vault *data)
 		free(data->b_in->env_ord);
 	if (data->read_line)
 		free(data->read_line);
+	if (data->tab_arg)
+		ft_dbl_ptr_free((void **)data->tab_arg);
+	if (data->cmd->opt)
+		ft_dbl_ptr_free((void **)data->cmd->opt);
+	if (data->pid)
+		free (data->pid);
+	if (data->flag->pipe)
+		free (data->flag->pipe);
+	free(data->cmd->name);
+	free (data->cmd);
+	close (data->flag->stdin_backup);
+	close (data->flag->stdout_backup);
 	if (data->b_in)
 		free(data->b_in);
 	if (data->quote)
 		free(data->quote);
 	if (data->flag)
 		free(data->flag);
-	if (data->tab_arg)
-		ft_dbl_ptr_free((void **)data->tab_arg);
-	if (data->cmd->opt)
-		ft_dbl_ptr_free((void **)data->cmd->opt);
-	free(data->cmd->name);
-	free (data->cmd);
 }
 
 // l:88 : Que ce free soit la ou pas j'ai les mêmes leaks ...
