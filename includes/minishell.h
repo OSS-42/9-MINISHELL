@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 22:06:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:01:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../libart/includes/libart.h"
 
 /***** GLOBAL *****/
-extern int g_error_code;
+extern int	g_error_code;
 
 /***** DEFINES *****/
 # define TRUE 1
