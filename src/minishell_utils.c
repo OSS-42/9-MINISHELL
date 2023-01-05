@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 10:29:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 10:35:43 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,12 @@ void	clean_before_exit(t_vault *data)
 	if (data->pid)
 		free (data->pid);
 	if (data->flag->pipe)
-		free (data->flag->pipe);
-	free(data->cmd->name);
+		close_pipe(data);
+	free (data->cmd->name);
 	free (data->cmd);
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
+	close (data->error_fd);
 	if (data->b_in)
 		free(data->b_in);
 	if (data->quote)
@@ -97,11 +98,6 @@ void	clean_before_exit(t_vault *data)
 	if (data->flag)
 		free(data->flag);
 }
-
-// l:88 : Que ce free soit la ou pas j'ai les mêmes leaks ...
-// free (data->b_in); //
-// free (data->quote);
-// free (data->flag);
 
 void	heredoc_unlink(t_vault *data)
 {
