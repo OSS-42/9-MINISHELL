@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 23:48:54 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:49:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_echo(t_vault *data, int line)
 		recompose_tab_arg(data, line);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	while(data->cmd->opt[++line])
+	while (data->cmd->opt[++line])
 	{
 		print_row(data, line);
 	}
