@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 09:12:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 23:14:23 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
 void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
 void	clean_before_exit(t_vault *data);
+void	clean_before_execve(t_vault *data);
 void	heredoc_unlink(t_vault *data);
 
 /***** built_in_utils.c *****/

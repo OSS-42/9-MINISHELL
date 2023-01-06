@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 13:38:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 23:15:58 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,35 @@ void	clean_before_exit(t_vault *data)
 		close_pipe(data);
 	free (data->cmd->name);
 	free (data->cmd);
+	close (data->flag->stdin_backup);
+	close (data->flag->stdout_backup);
+	close (data->error_fd);
+	if (data->b_in)
+		free(data->b_in);
+	if (data->quote)
+		free(data->quote);
+	if (data->flag)
+		free(data->flag);
+}
+
+void	clean_before_execve(t_vault *data)
+{
+	if (data->b_in->export_var)
+		free (data->b_in->export_var);
+	if (data->b_in->env_export)
+		ft_dbl_ptr_free((void **)data->b_in->env_export);
+	if (data->b_in->env_unset)
+		ft_dbl_ptr_free((void **)data->b_in->env_unset);
+	if (data->b_in->env_ord)
+		free(data->b_in->env_ord);
+	if (data->read_line)
+		free(data->read_line);
+	if (data->tab_arg)
+		ft_dbl_ptr_free((void **)data->tab_arg);
+	if (data->pid)
+		free (data->pid);
+	if (data->flag->pipe)
+		close_pipe(data);
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
 	close (data->error_fd);
