@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 10:09:59 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 12:34:56 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_data(t_vault *data, char **env)
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	data->fail_redir = FALSE;
 	data->flag->execve = 0;
+	data->pid = NULL;
 	return ;
 }
 
@@ -79,6 +80,8 @@ void	launch_minishell(t_vault *data)
 		if (data->read_line != NULL)
 		{
 			init_signal(EXEC);
+			// data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			// ft_putstr_fd("0\0", data->error_fd); // ou l'ouvre deja dans data ...
 			if (ft_strcmp(data->read_line, "") != 0)
 				readline_exec(data);
 		}
@@ -90,6 +93,7 @@ void	launch_minishell(t_vault *data)
 			ft_putstr_fd("131\0", data->error_fd);
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
+			close (data->error_fd); // voir si ca pose pas de probleme avec eric
 			ft_exit(data);
 		}
 	}
@@ -114,8 +118,6 @@ int	main(int argc, char **argv, char **env)
 	else
 	{
 		intro_minishell();
-		data.error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		ft_putstr_fd("0\0", data.error_fd);
 		launch_minishell(&data);
 	}
 	return (g_error_code);

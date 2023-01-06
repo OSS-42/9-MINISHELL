@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 09:42:46 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 11:14:58 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	free_struct_b_in(t_vault *data)
 
 void	close_fd(t_vault *data)
 {
-	if (data->flag->pipe)
-		close_pipe(data);
+	// if (data->flag->pipe)
+	// 	close_pipe(data); // Si cette regle n'est pas la je leak apres un exit
 	if (data->flag->fd_out != 0)
 		close (data->flag->fd_out);
 	if (data->flag->fd != 0)

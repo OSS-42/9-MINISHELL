@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/06 10:16:13 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 12:38:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	forking(t_vault *data, int line, int type)
 		if (data->pid[line] == 0)
 		{
 			find_prog(data, line);
+			close_pipe(data);
 			exit_process(data);
 		}
 	}
@@ -135,7 +136,7 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme de fd
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// Leak quand unset PATH puis ls
+// Invalid read quand ctrl + c puis echo ?$
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal

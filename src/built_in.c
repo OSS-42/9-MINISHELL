@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 23:49:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:11:20 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_pwd(t_vault *data)
 
 void	ft_exit(t_vault *data)
 {
+	close_pipe(data);
 	clean_before_exit(data);
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
