@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 23:14:48 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 00:06:21 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	cmd_path_check(t_vault *data)
 	while (data->path_names[i])
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");
-		// free (data->cmd->name);
+		if (i == 0)
+			free (data->cmd->name);
 		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 		{
@@ -80,10 +81,13 @@ void	find_prog(t_vault *data, int line)
 		ft_dbl_ptr_free((void **) data->path_names);
 		ft_putstr_fd("0\0", data->error_fd);
 		close (data->error_fd);
-		clean_before_execve(data); // voir si ca pose pas problème
+		clean_before_execve(data);
 		execve(data->cmd->name, data->cmd->opt, data->env);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
+	{
 		cmd_path_check(data);
+		ft_dbl_ptr_free((void **)data->path_names);
+	}
 	error_message(data, "command not found", "127\0");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 22:52:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:45:02 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	error_message(t_vault *data, char *message, char *code)
 {
 	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(code, data->error_fd);
-	g_error_code = ft_atoi(find_error_code(data));
+	data->temp_str = find_error_code(data);
+	g_error_code = ft_atoi(data->temp_str);
+	free (data->temp_str);
 	ft_putstr_fd("minishell: ", 2);
 	if (data->cmd->name)
 	{
