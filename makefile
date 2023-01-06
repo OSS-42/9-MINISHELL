@@ -6,9 +6,9 @@ NAME = minishell
 
 CC = gcc
 #CC = gcc-11
-CFLAGS = -g -Wall -Werror -Wextra
+#CFLAGS = -g -Wall -Werror -Wextra
 #CFLAGS = -g -Wall -Wextra -Werror -fsanitize=leak
-# CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -rf
 
 #LSAN_OPTIONS=detect_leaks=1 ./minishell
@@ -66,7 +66,8 @@ SRCS =	src/minishell.c \
 		src/detached_quote_utils.c\
 		src/pipe_management.c\
 		src/signal_management.c\
-		src/dollar_parsing_utils.c
+		src/dollar_parsing_utils.c\
+		src/cleaning.c
 
 #HEADER_BONUS = includes/minishell_bonus.h
 #D_SRC_BONUS = src_bonus/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 00:06:21 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 00:36:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	cmd_path_check(t_vault *data)
 {
 	size_t	i;
 
-	i = 0;
+	i = -1;
 	if (find_paths(data) == FALSE)
 		return ;
-	while (data->path_names[i])
+	while (data->path_names[++i])
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");
 		if (i == 0)
@@ -56,7 +56,9 @@ void	cmd_path_check(t_vault *data)
 		{
 			ft_dbl_ptr_free((void **) data->path_names);
 			close (data->error_fd);
-			clean_before_execve(data);
+			data->flag->execve = 1;
+			clean_before_exit(data);
+			// clean_before_execve(data);
 			execve(data->cmd->name, data->cmd->opt, data->env);
 		}
 		else
@@ -64,7 +66,6 @@ void	cmd_path_check(t_vault *data)
 			free(data->cmd->name);
 			free(data->cmd->path);
 		}
-		i++;
 	}
 	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 }
@@ -81,7 +82,9 @@ void	find_prog(t_vault *data, int line)
 		ft_dbl_ptr_free((void **) data->path_names);
 		ft_putstr_fd("0\0", data->error_fd);
 		close (data->error_fd);
-		clean_before_execve(data);
+		data->flag->execve = 1;
+		clean_before_exit(data);
+		// clean_before_execve(data);
 		execve(data->cmd->name, data->cmd->opt, data->env);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)

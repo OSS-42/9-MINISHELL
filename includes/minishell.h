@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 23:14:23 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 00:34:08 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_flag
 	int		fd;
 	int		fd_out;
 	int		**pipe;
+	int		execve;
 }	t_flag;
 
 typedef struct s_quote
@@ -230,8 +231,6 @@ void	exit_process(t_vault *data);
 void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
 void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
-void	clean_before_exit(t_vault *data);
-void	clean_before_execve(t_vault *data);
 void	heredoc_unlink(t_vault *data);
 
 /***** built_in_utils.c *****/
@@ -307,5 +306,11 @@ int		move_index(t_vault *data, int row, int i);
 int		quote_parsing_with_dollar(t_vault *data, int row, int i);
 int		sgl_quote_parsing(t_vault *data, int row, int i);
 int		dbl_quote_parsing(t_vault *data, int row, int i);
+
+/***** cleaning.c *****/
+void	clean_before_exit(t_vault *data);
+// void	clean_before_execve(t_vault *data);
+void	close_fd(t_vault *data);
+void	free_struct_b_in(t_vault *data);
 
 #endif
