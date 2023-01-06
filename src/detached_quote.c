@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   detached_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/30 11:13:19 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/05 23:53:38 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	quote_to_quote(t_vault *data, int row, int *line, int *len)
 			{
 				data->quote->quote_priority = data->rl_dec[row][*line];
 				(*line)++;
-				while (data->rl_dec[row][*line]
-					!= data->quote->quote_priority)
+				while (data->rl_dec[row][*line] != data->quote->quote_priority)
 					(*line)++;
 				(*len)++;
 			}

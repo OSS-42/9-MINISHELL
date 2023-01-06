@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 09:29:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 23:49:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,24 @@ void	ft_export(t_vault *data, int line)
 		order_env(data);
 	else
 	{
-		while (data->cmd->opt[++line])
+		while (data->cmd->opt[++line] && data->cmd->opt[line][0])
 		{
 			if (ft_str_env_var(data->cmd->opt[line], '=') == 0)
 				error_message(data, "missing or wrong arguments", "2\0");
-			if (data->b_in->export_var)
-				free(data->b_in->export_var);
-			data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);
-			if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
-				var_prep(data, line);
 			else
-				data->b_in->export_var = ft_substr(data->cmd->opt[line], 0,
-						ft_strlen(data->cmd->opt[line])
-						- ft_strlen(ft_strchr(data->cmd->opt[line], '=')) + 1);
-			add_line_env(data);
+			{
+				if (data->b_in->export_var)
+					free(data->b_in->export_var);
+				data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);
+				if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
+					var_prep(data, line);
+				else
+					data->b_in->export_var = ft_substr(data->cmd->opt[line], 0,
+							ft_strlen(data->cmd->opt[line])
+							- ft_strlen(ft_strchr(data->cmd->opt[line], '='))
+							+ 1);
+				add_line_env(data);
+			}
 		}
 	}
 }
@@ -127,21 +131,21 @@ void	order_env(t_vault *data)
 	return ;
 }
 
-// tests au 4/01 a 23h
+// tests au 5/01 a 22h
 // commandes a faire dans la sequence affichee
 //			TESTS											|	RESULTS
 //---------------------------------------------------------------------------
 // export													|		OK
 // export banane (+ export)									|		OK
-// export wasabi = (+ export)								|			KO (message d'erreur a faire sur le = (et ne pas l'ajouter))
-// env														|			KO (= s<affiche)
+// export wasabi = (+ export)								|		OK
+// env														|		OK
 // export oss117=112 (+ export)								|		OK
 // export chocolat=13 4camions=300 _marvel=best (+export)	|		OK
-// env														|			KO (4camions s'affiche)
+// env														|		OK
 // unset _marvel (+export)									|		OK
 // unset banane 4oss117 wasabi	(+export)					|		OK
 // unset chocolat= (+export)								|		OK
 // unset PATH (+export)										|		OK
 // env														|		OK
 // echo bonjour												|		OK
-// ls														|		OK
+// ls														|		a valider : segfault (cmd_path_check - prog_utils.c:47)

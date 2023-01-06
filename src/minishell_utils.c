@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 00:07:55 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 00:09:52 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	print_row(t_vault *data, int line)
 {
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else if (data->b_in->first_word == 1)
 	{
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else
 	{
 		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 	}
 	return ;
 }
