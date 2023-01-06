@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 16:39:13 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:52:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	launch_minishell(t_vault *data)
 		else
 		{
 			printf("exit\n");
+			close (data->error_fd); // rajout ici pour ne pas ecrase si deja ouvert
 			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
 					| O_TRUNC, 0644);
 			ft_putstr_fd("131\0", data->error_fd);
