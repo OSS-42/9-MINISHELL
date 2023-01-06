@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 11:51:44 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 15:22:16 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_cmd
 {
 	char	*path;
 	char	*name;
+	char	*name_path;
 	char	**opt;
 	char	**output;
 }	t_cmd;

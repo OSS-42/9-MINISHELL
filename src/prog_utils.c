@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 09:26:56 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 15:24:33 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	cmd_path_check(t_vault *data)
 		}
 	}
 	ft_dbl_ptr_free((void **)data->path_names);
-	// data->cmd->name = ft_strdup(data->cmd->opt[0]); Pour quel raison ? A enlever ? 
+	data->cmd->name = ft_strdup(data->cmd->opt[0]); //Pour quel raison ? A enlever ?
 }
 
 void	find_prog(t_vault *data, int line)
