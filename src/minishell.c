@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 12:34:56 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 16:39:13 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_data(t_vault *data, char **env)
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	data->fail_redir = FALSE;
 	data->flag->execve = 0;
+	data->flag->rl_exit = 0;
 	data->pid = NULL;
 	return ;
 }
@@ -94,6 +95,7 @@ void	launch_minishell(t_vault *data)
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
 			close (data->error_fd); // voir si ca pose pas de probleme avec eric
+			data->flag->rl_exit = 1;
 			ft_exit(data);
 		}
 	}

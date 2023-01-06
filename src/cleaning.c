@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 11:14:58 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 16:43:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ void	clean_before_exit(t_vault *data)
 		free(data->quote);
 	if (data->read_line)
 		free(data->read_line);
-	if (data->tab_arg)
-		ft_dbl_ptr_free((void **)data->tab_arg);
-	if (data->pid)
-		free (data->pid);
+	if (data->flag->rl_exit == 0)
+	{
+		if (data->tab_arg)
+			ft_dbl_ptr_free((void **)data->tab_arg);
+		if (data->pid)
+			free (data->pid);
+	}
 	close_fd(data);
 	if (data->flag->execve == 0)
 	{
-		if (data->cmd->opt)
+		if (data->cmd->opt && data->flag->rl_exit == 0)
 			ft_dbl_ptr_free((void **)data->cmd->opt);
 		free (data->cmd->name);
 		free (data->cmd);

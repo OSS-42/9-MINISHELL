@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/06 15:37:58 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 16:17:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	child_creation(t_vault *data, int line)
 // invalid read avec <test cat quand test n'existe pas puis ctrl + D
 // <test grep salut | wc -l Probleme du file_descriptor
 // echo salut >> file puis ctrl + D - invalid read
-
+// cat + 2x ctrl-D = double free
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
