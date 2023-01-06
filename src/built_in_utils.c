@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/03 10:45:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:18:18 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	join_unset(t_vault *data, int line)
 {
 	int	j;
 
+	if (line > 0)
+		free (data->b_in->unset_arg);
 	data->b_in->unset_arg = ft_strjoin(data->cmd->opt[line], "=");
 	j = 0;
 	while (data->env[j])

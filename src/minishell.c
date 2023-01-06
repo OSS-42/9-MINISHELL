@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 00:24:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:09:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,15 @@ void	init_data(t_vault *data, char **env)
 void	reinit_data(t_vault *data)
 {
 	data->flag->pipe_count = 0;
+	if (data->flag->fd_out != 0)
+		close (data->flag->fd_out);
+	if (data->flag->fd != 0)
+		close (data->flag->fd);
+	if (data->flag->heredoc_fd != 0)
+		close (data->flag->heredoc_fd);
+	data->flag->heredoc_fd = 0;
 	data->flag->fd_out = 0;
+	data->flag->fd = 0;
 	data->quote->double_quote_count = 0;
 	data->quote->simple_quote_count = 0;
 	data->quote->begin = 0;
@@ -49,7 +57,8 @@ void	reinit_data(t_vault *data)
 	data->fail_redir = FALSE;
 	free (data->cmd->name);
 	data->cmd->name = NULL;
-	ft_dbl_ptr_free((void **)data->cmd->opt);
+	if (data->cmd->opt)
+		ft_dbl_ptr_free((void **)data->cmd->opt);
 	ft_dbl_ptr_free((void **)data->tab_arg);
 }
 
@@ -111,5 +120,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (g_error_code);
 }
-// valgrind --leak-check=full  --show-reachable=yes
+// valgrind --leak-check=full  --show-reachable=yes --track-fds=yes
 // --suppressions=./minishell.sup ./minishell

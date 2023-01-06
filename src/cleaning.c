@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 00:37:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 09:42:46 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	close_fd(t_vault *data)
 {
 	if (data->flag->pipe)
 		close_pipe(data);
+	if (data->flag->fd_out != 0)
+		close (data->flag->fd_out);
+	if (data->flag->fd != 0)
+		close (data->flag->fd);
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
 	close (data->error_fd);
