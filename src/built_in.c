@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/05 10:16:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 23:48:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,24 @@ void	ft_echo(t_vault *data, int line)
 		recompose_tab_arg(data, line);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	print_row(data, line);
+	while(data->cmd->opt[++line])
+	{
+		print_row(data, line);
+	}
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;
 	return ;
 }
 
-// tests au 4/01 a 23h
+// tests au 5/01 a 23:45h
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
 //-------------------------------------------------
-//echo								|			KO (echo s'affiche)
+//echo								|		OK
 //echo bonjour						|		OK
-//echo -n							|			KO (-n s'affiche)
+//echo -n							|		OK
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
@@ -123,7 +126,7 @@ void	ft_echo(t_vault *data, int line)
 //echo "--n salut bonjour"			|		OK
 //echo $USER						|		OK
 //echo $"USER"						|		OK
-//echo $USERA						|			KO (echo s'affiche)
+//echo $USERA						|		OK
 //echo $USER$TERM					|		OK
 //echo "$USER"						|		OK
 //echo '$USER'						|		OK

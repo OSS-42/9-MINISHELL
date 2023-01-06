@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 13:38:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/05 23:48:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	print_row(t_vault *data, int line)
 {
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else if (data->b_in->first_word == 1)
 	{
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 		data->b_in->first_word = 0;
 	}
 	else
 	{
 		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->tab_arg[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], 1);
 	}
 	return ;
 }
