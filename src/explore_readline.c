@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/07 17:59:25 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 18:46:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	explore_readline(t_vault *data)
 		}
 		piping(data);
 		reset_io(data);
-		if (data->flag->fd != 0)
-			close (data->flag->fd);
 	}
 	return ;
 }
@@ -111,6 +109,8 @@ void	forking(t_vault *data, int line, int type)
 			execute_redirection(data, line, 0);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 				in_child_exec(data, line);
+			close_pipe(data);
+			exit_process(data);
 		}
 	}
 }
