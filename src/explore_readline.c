@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/06 19:37:19 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 12:01:27 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	child_creation(t_vault *data, int line)
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
 // Invalid read quand ctrl + c puis echo ?$ - OK
 // .tmp_error leak quand on donne une commande invalid comme : salut
-// invalid read avec ls | ls | ls
+// invalid read avec ls | ls | ls - OK
 // invalid read avec <test cat quand test n'existe pas puis ctrl + D
 // <test grep salut | wc -l Probleme du file_descriptor
 // echo salut >> file puis ctrl + D - invalid read
