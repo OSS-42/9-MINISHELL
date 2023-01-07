@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 11:41:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:03:11 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	init_data(t_vault *data, char **env)
 void	reinit_data(t_vault *data)
 {
 	data->flag->pipe_count = 0;
-	if (data->flag->fd_out != 0)
+	if (data->flag->fd_out > 0)
 		close (data->flag->fd_out);
-	if (data->flag->fd != 0)
+	if (data->flag->fd > 0)
 		close (data->flag->fd);
-	if (data->flag->heredoc_fd != 0)
+	if (data->flag->heredoc_fd > 0)
 		close (data->flag->heredoc_fd);
 	data->flag->heredoc_fd = 0;
 	data->flag->fd_out = 0;

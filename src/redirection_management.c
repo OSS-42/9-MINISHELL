@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/04 21:46:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:01:57 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	redirection(t_vault *data, char *redirection)
 
 void	stdout_redirection(t_vault *data, char *redirection)
 {
-	if (data->flag->fd_out != 0)
+	if (data->flag->fd_out > 0)
 		close (data->flag->fd_out);
 	if (data->flag->append == TRUE)
 		data->flag->fd_out = open(redirection,
@@ -107,7 +107,7 @@ void	stdout_redirection(t_vault *data, char *redirection)
 
 void	stdin_redirection(t_vault *data, char *redirection)
 {
-	if (data->flag->fd != 0)
+	if (data->flag->fd > 0)
 		close (data->flag->fd);
 	if (data->flag->heredoc == FALSE)
 	{
