@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 11:32:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:10:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_message(t_vault *data, char *message, char *code)
 	close(data->error_fd);
 	// data->temp_str = find_error_code(data);
 	// g_error_code = ft_atoi(data->temp_str);
-	free (data->temp_str);
+	//free (data->temp_str);
 	g_error_code = ft_atoi(code);
 	if (data->flag->rl_exit == 0)
 		ft_putstr_fd("minishell: ", 2);
