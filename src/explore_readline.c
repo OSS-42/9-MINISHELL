@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/06 16:17:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:37:19 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ void	child_creation(t_vault *data, int line)
 // Gestion des leaks DUO
 // Probleme de fd
 // Mauvais comportement avec l'historique A DEBATTRE ERIC
-// Invalid read quand ctrl + c puis echo ?$
+// Invalid read quand ctrl + c puis echo ?$ - OK
 // .tmp_error leak quand on donne une commande invalid comme : salut
 // invalid read avec ls | ls | ls
 // invalid read avec <test cat quand test n'existe pas puis ctrl + D
 // <test grep salut | wc -l Probleme du file_descriptor
 // echo salut >> file puis ctrl + D - invalid read
-// cat + 2x ctrl-D = double free
+// cat + 2x ctrl-D - OK
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
