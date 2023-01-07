@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/06 10:14:15 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/06 17:06:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	heredoc(t_vault *data, int line)
 		}
 		check_eof(data, str);
 	}
-	data->flag->heredoc_delimiter = FALSE;
-	data->flag->heredoc = TRUE;
-	ft_putstr_fd("\n", data->flag->heredoc_fd);
-	close(data->flag->heredoc_fd);
+	reset_n_close_heredoc(data);
 	if (line != 0 && line != ft_dbl_ptr_len(data->tab_arg) - 1)
 		dup2(data->flag->pipe[line][p_write], STDOUT_FILENO);
 	if (data->flag->fd_out > 0)
@@ -66,4 +63,13 @@ void	check_eof(t_vault *data, char *str)
 		ft_putstr_fd("\n", data->flag->heredoc_fd);
 	}
 	free(str);
+}
+
+void	reset_n_close_heredoc(t_vault *data)
+{
+	data->flag->heredoc_delimiter = FALSE;
+	data->flag->heredoc = TRUE;
+	ft_putstr_fd("\n", data->flag->heredoc_fd);
+	close(data->flag->heredoc_fd);
+	return ;
 }
