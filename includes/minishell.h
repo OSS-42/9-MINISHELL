@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 16:39:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:06:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ void	validate_the_switch(t_vault *data, int row, int line);
 /***** heredoc.c *****/
 void	heredoc(t_vault *data, int i);
 void	check_eof(t_vault *data, char *str);
+void	reset_n_close_heredoc(t_vault *data);
 
 /***** prog_utils.c *****/
 int		find_paths(t_vault *data);
