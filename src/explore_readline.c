@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/06 19:37:19 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 11:14:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ void	child_creation(t_vault *data, int line)
 		error_message(data, "pid creation error", "1\0");
 		exit_process(data);
 	}
-	if (data->pid[line] == 0)
-	{
-		close (data->error_fd);
-		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		ft_putstr_fd("0\0", data->error_fd);
-	}
+	// if (data->pid[line] == 0)
+	// {
+	// 	close (data->error_fd);
+	// 	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// 	ft_putstr_fd("0\0", data->error_fd);
+	// }
 }
 
 // À corriger :

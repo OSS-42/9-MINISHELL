@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 19:25:30 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 11:40:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	dollar_var_to_expand(t_vault *data, int row, int i)
 			data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
 					| O_TRUNC, 0644);
 			ft_putstr_fd("0\0", data->error_fd);
+			close (data->error_fd);
 			data->dollar_var_len = ft_strlen(temp);
 		}
 		else
