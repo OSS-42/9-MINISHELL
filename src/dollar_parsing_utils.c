@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parsing_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 22:53:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/06 19:36:04 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 		}
 		data->pos++;
 		i++;
+		if (i > (int)ft_strlen(data->rl_dec[row]))
+			break ;
 	}
 	return (i);
 }
