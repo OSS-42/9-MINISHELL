@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 23:49:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 12:00:19 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	remove_line_env(t_vault *data, int i)
 		rows++;
 		j++;
 	}
-	data->env = &data->b_in->env_unset[0];
+	data->env = ft_dbl_ptr_copy(data->b_in->env_unset);
+	// data->env = &data->b_in->env_unset[0];
 	return ;
 }
 
@@ -72,7 +73,10 @@ void	add_line_env(t_vault *data)
 	dup_env(data);
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
 	free (data->b_in->exp_arg);
-	data->env = &data->b_in->env_export[0];
+	free(data->env);
+	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
+	ft_dbl_ptr_free((void **)data->b_in->env_export);
+	// data->env = &data->b_in->env_export[0];
 	return ;
 }
 

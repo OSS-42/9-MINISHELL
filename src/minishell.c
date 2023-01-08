@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 18:03:11 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 11:56:43 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_data(t_vault *data, char **env)
 	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd("0\0", data->error_fd);
 	close(data->error_fd);
-	data->env = env;
+	data->env = ft_dbl_ptr_copy(env);
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
 	data->b_in = ft_calloc(sizeof(t_builtins), 1);
