@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 22:37:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:16:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	dollar_parsing(t_vault *data)
 		row++;
 	}
 }
-
-//l:23
-// data->buffer = ft_calloc(sizeof(char), 500);
 
 int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 21:51:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 13:17:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	join_unset(t_vault *data, int line)
 {
 	int	j;
 
-	// if (line > 0)
-	// 	free (data->b_in->unset_arg);
 	data->b_in->unset_arg = ft_strjoin(data->cmd->opt[line], "=");
 	j = 0;
 	while (data->env[j])
