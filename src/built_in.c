@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/07 21:36:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 23:11:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	ft_echo(t_vault *data, int line)
 //echo $USER						|		OK
 //echo $"USER"						|		OK
 //echo $USERA						|		OK
-//echo $ USER						|			KO
+//echo $ USER						|		OK
 //echo $USER$TERM					|		OK
 //echo "$USER"						|		OK
 //echo '$USER'						|		OK
