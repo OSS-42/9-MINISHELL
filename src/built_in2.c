@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/05 23:49:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 21:53:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	order_env(t_vault *data)
 	return ;
 }
 
-// tests au 5/01 a 22h
+// tests au 7/01 a 21:39unset_marvel
 // commandes a faire dans la sequence affichee
 //			TESTS											|	RESULTS
 //---------------------------------------------------------------------------
@@ -148,4 +148,5 @@ void	order_env(t_vault *data)
 // unset PATH (+export)										|		OK
 // env														|		OK
 // echo bonjour												|		OK
-// ls														|		a valider : segfault (cmd_path_check - prog_utils.c:47)
+// ls														|		OK
+// echo $?													|		OK
