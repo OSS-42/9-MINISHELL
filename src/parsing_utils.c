@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 22:53:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 23:49:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	quote_parsing_removal(t_vault *data, int line)
 	int	i;
 	int	row;
 
-	i = 0;
+	i = -1;
 	row = 0;
-	while (data->tab_arg[line] && data->tab_arg[line][i])
+	while (data->tab_arg[line] && data->tab_arg[line][++i])
 	{
 		if (data->tab_arg[line][i] == ' ')
 		{
@@ -46,13 +46,14 @@ int	quote_parsing_removal(t_vault *data, int line)
 			row++;
 			data->pos = -1;
 		}
-		else if (ft_isinset(data->tab_arg[line][i]) == 0 || ft_isinset(data->tab_arg[line][i]) == 3)
+		else if (ft_isinset(data->tab_arg[line][i]) == 0
+			|| ft_isinset(data->tab_arg[line][i]) == 3)
 			data->buffer[data->pos] = data->tab_arg[line][i];
 		else if (ft_isinset(data->tab_arg[line][i]) == 1)
 			i = quote_mngmt(data, line, i, data->tab_arg[line][i]);
 		else if (ft_isinset(data->tab_arg[line][i]) == 2)
 			i = quote_mngmt(data, line, i, data->tab_arg[line][i]);
-		i++;
+		// i++;
 		data->pos++;
 	}
 	return (row);

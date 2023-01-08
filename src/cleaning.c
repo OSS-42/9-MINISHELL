@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 18:46:49 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 23:18:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	free_struct_b_in(t_vault *data)
 
 void	close_fd(t_vault *data)
 {
-	// if (data->flag->pipe)
-	// 	close_pipe(data); // Si cette regle n'est pas la je leak apres un exit
 	if (data->flag->fd_out > 0)
 		close (data->flag->fd_out);
 	if (data->flag->fd > 0)
@@ -66,32 +64,3 @@ void	close_fd(t_vault *data)
 	close (data->error_fd);
 	return ;
 }
-
-// void	clean_before_execve(t_vault *data)
-// {
-// 	if (data->b_in->export_var)
-// 		free (data->b_in->export_var);
-// 	if (data->b_in->env_export)
-// 		ft_dbl_ptr_free((void **)data->b_in->env_export);
-// 	if (data->b_in->env_unset)
-// 		ft_dbl_ptr_free((void **)data->b_in->env_unset);
-// 	if (data->b_in->env_ord)
-// 		free(data->b_in->env_ord);
-// 	if (data->read_line)
-// 		free(data->read_line);
-// 	if (data->tab_arg)
-// 		ft_dbl_ptr_free((void **)data->tab_arg);
-// 	if (data->pid)
-// 		free (data->pid);
-// 	if (data->flag->pipe)
-// 		close_pipe(data);
-// 	close (data->flag->stdin_backup);
-// 	close (data->flag->stdout_backup);
-// 	close (data->error_fd);
-// 	if (data->b_in)
-// 		free(data->b_in);
-// 	if (data->quote)
-// 		free(data->quote);
-// 	if (data->flag)
-// 		free(data->flag);
-// }

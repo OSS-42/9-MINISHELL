@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 17:06:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 23:45:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_next_array(t_vault *data, char *rl_dec_array);
 void	clean_redir_next_array(t_vault *data, int i);
 void	token_without_redir_name(t_vault *data, int i, int begin, int len);
-
+void	redir_in_next_array_interlude(t_vault *data, int *j, int i);
 /***** redirection_utils.c *****/
 char	*clean_the_chevron(t_vault *data, char *str, int line, int i);
 int		flag_in_str(char *str);
