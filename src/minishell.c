@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 18:03:11 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 23:03:11 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ void	reinit_data(t_vault *data)
 	data->quote->begin = 0;
 	data->quote->last_replace = 0;
 	data->fail_redir = FALSE;
-	free (data->cmd->name);
+	if (data->cmd->name)
+		free (data->cmd->name);
 	data->cmd->name = NULL;
 	if (data->cmd->opt)
 		ft_dbl_ptr_free((void **)data->cmd->opt);
-	ft_dbl_ptr_free((void **)data->tab_arg);
+	if (data->tab_arg)
+		ft_dbl_ptr_free((void **)data->tab_arg);
 }
 
 void	readline_exec(t_vault *data)

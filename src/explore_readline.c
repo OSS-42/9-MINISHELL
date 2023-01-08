@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/07 18:46:39 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 23:05:53 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	explore_readline(t_vault *data)
 		piping(data);
 		reset_io(data);
 	}
+	else
+		ft_dbl_ptr_free((void **)data->rl_dec);
 	return ;
 }
 
