@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 21:43:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 22:53:00 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	quote_parsing_removal(t_vault *data, int line)
 			row++;
 			data->pos = -1;
 		}
-		else if (ft_isinset(data->tab_arg[line][i]) == 0)
+		else if (ft_isinset(data->tab_arg[line][i]) == 0 || ft_isinset(data->tab_arg[line][i]) == 3)
 			data->buffer[data->pos] = data->tab_arg[line][i];
 		else if (ft_isinset(data->tab_arg[line][i]) == 1)
 			i = quote_mngmt(data, line, i, data->tab_arg[line][i]);
