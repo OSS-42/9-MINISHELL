@@ -14,3 +14,11 @@
    fun:readline
    ...
 }
+{
+   fork
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:fork
+   ...
+}
