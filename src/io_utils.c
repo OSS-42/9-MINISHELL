@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 16:27:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:36:41 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	close_pipe(t_vault *data)
 
 void	reset_io(t_vault *data)
 {
-	dup2(data->flag->stdout_backup, STDOUT_FILENO);
-	dup2(data->flag->stdin_backup, STDIN_FILENO);
+	if (dup2(data->flag->stdout_backup, STDOUT_FILENO) == -1)
+		printf("stdout\n");
+	if (dup2(data->flag->stdin_backup, STDIN_FILENO) == -1)
+		printf("stdin\n");
 }

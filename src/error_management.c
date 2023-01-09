@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 13:59:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 18:46:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*find_error_code(t_vault *data)
 	int		read_val;
 
 	temp = ft_calloc(sizeof(char), 4);
-	close(data->error_fd);
 	data->error_fd = open(".tmp_error", O_RDONLY);
 	read_val = read(data->error_fd, temp, 3);
 	if (read_val < 0)
