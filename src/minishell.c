@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 15:09:59 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:02:33 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	launch_minishell(t_vault *data)
 		data->read_line = readline("\033[95malive>\033[0;39m");
 		if (data->read_line != NULL)
 		{
-			init_signal(EXEC);
+			signal(SIGINT, SIG_IGN);
 			if (ft_strcmp(data->read_line, "") != 0)
 				readline_exec(data);
 		}

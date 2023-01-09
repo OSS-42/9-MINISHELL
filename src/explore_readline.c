@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 14:58:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:00:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void	child_creation(t_vault *data, int line)
 		error_message(data, "pid creation error", "1\0");
 		exit_process(data);
 	}
+	if (data->pid[line] == 0)
+		init_signal(EXEC);
 }
 
 // À corriger :
