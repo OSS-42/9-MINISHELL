@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minus_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/26 23:29:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:07:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	parse_minus(t_vault *data)
 		if (data->b_in->forget_minus == 0)
 		{
 			temp_swap = create_temp_swap(data, row);
-			ft_dbl_ptr_realloc(data->cmd->opt, ft_dbl_ptr_len(temp_swap));
+			ft_dbl_ptr_free((void **)data->cmd->opt);
+			data->cmd->opt = ft_calloc(sizeof (char *),
+					ft_dbl_ptr_len(temp_swap));
 			recreate_arg_tab(data, temp_swap);
 			data->b_in->echo_flag_n = 1;
 			data->b_in->minus_n = 1;

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 12:31:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 14:06:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_echo(t_vault *data, int line)
 //-------------------------------------------------
 //echo								|		OK
 //echo bonjour						|		OK
-//echo -n							|		LEAK
+//echo -n							|		OK
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
