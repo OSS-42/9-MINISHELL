@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 17:01:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:39:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	clean_redir(t_vault *data, int i)
 	}
 	else
 		data->buffer = clean_redir_from_zero(data, i, data->buffer, begin);
-	free (data->tab_arg[i]);
-	data->tab_arg[i] = ft_strdup(data->buffer);
-	free (data->buffer);
+	clean_clean_redir(data, i);
 }
 
 char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
@@ -58,21 +56,13 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
 		else
 		{
 			while (data->tab_arg[i][begin] == ' ')
-			{
-				str[temp] = data->tab_arg[i][begin];
-				temp++;
-				begin++;
-			}
+				str[temp++] = data->tab_arg[i][begin++];
 			begin = while_is_not_flag(data->tab_arg[i], begin);
 		}
 		if (data->tab_arg[i][begin])
 		{
 			while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != '\0')
-			{
-				str[temp] = data->tab_arg[i][begin];
-				temp++;
-				begin++;
-			}
+				str[temp++] = data->tab_arg[i][begin++];
 		}
 	}
 	return (str);

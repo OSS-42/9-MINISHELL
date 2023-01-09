@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 17:02:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:37:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void	heredoc_redirection(t_vault *data);
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
-void	len_of_redir(t_vault *data, char *rl_dec_array, int line);
 int		move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array);
@@ -172,7 +171,6 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
 int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
 int		len_without_redir(t_vault *data, int i, int temp, int *begin);
 int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
-int		return_len(t_vault *data, int i, int *temp, int len);
 
 /***** redirection_utils.c *****/
 char	*clean_the_chevron(t_vault *data, char *str, int line, int i);
@@ -183,6 +181,9 @@ int		while_quote(t_vault *data, char *str, int i);
 /***** redirection_utils_2.c *****/
 void	dup_from_begin(t_vault *data, int i, int j, char *temp);
 int		is_in_quote(t_vault *data, int line, int array);
+int		return_len(t_vault *data, int i, int *temp, int len);
+void	len_of_redir(t_vault *data, char *rl_dec_array, int line);
+void	end_of_redir(t_vault *data, int i, int len, char *rl_dec_array);
 
 /***** quote_management.c *****/
 void	find_str_quote(t_vault *data);
@@ -215,11 +216,6 @@ void	remove_line_env(t_vault *data, int i);
 void	ft_export(t_vault *data, int line);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
-
-/***** personnal_fonction.c *****/
-int		check_if_inside_quote(char *str, char c);
-void	print_double_array(char **array);
-//int		dbl_array_len(char **array);
 
 /***** error_mgmnt.c *****/
 int		check_error(t_vault *data, int row);
@@ -311,8 +307,15 @@ int		dbl_quote_parsing(t_vault *data, int row, int i);
 
 /***** cleaning.c *****/
 void	clean_before_exit(t_vault *data);
-// void	clean_before_execve(t_vault *data);
 void	close_fd(t_vault *data);
 void	free_struct_b_in(t_vault *data);
+
+/***** redirection_utils_3.c *****/
+void	clean_clean_redir(t_vault *data, int i);
+
+/***** DEBUG *****/
+int		check_if_inside_quote(char *str, char c);
+void	print_double_array(char **array);
+//int		dbl_array_len(char **array);
 
 #endif

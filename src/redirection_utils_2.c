@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:52:27 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 17:01:15 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:41:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,30 @@ int	return_len(t_vault *data, int i, int *temp, int len)
 		len++;
 	}
 	return (len);
+}
+
+void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	i = move_index_chevron(data, line, i, rl_dec_array);
+	i++;
+	while (rl_dec_array[i] == ' ')
+		i++;
+	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
+		i = move_index_chevron3(data, i, &len, rl_dec_array);
+	else
+		len = while_is_not_flag(rl_dec_array, i) - i;
+	data->flag->output = ft_calloc(sizeof(char), len + 1);
+}
+
+void	end_of_redir(t_vault *data, int i, int len, char *rl_dec_array)
+{
+	while (rl_dec_array[i] && rl_dec_array[i] != ' '
+		&& rl_dec_array[i] != '<' && rl_dec_array[i] != '>'
+		&& rl_dec_array[i] != '|')
+			data->flag->output[len++] = rl_dec_array[i++];
 }

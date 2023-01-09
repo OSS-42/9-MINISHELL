@@ -6,13 +6,12 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 16:27:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:35:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// penser au code de retour
 void	io_redirection(t_vault *data, int input, int output)
 {
 	(void)data;
