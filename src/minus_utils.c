@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 16:38:48 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:59:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	parse_minus(t_vault *data)
 			temp_swap = create_temp_swap(data, row);
 			ft_dbl_ptr_free((void **)data->cmd->opt);
 			data->cmd->opt = ft_calloc(sizeof (char *),
-					ft_dbl_ptr_len(temp_swap));
+					ft_dbl_ptr_len(temp_swap) + 1);
 			recreate_arg_tab(data, temp_swap);
 			data->b_in->echo_flag_n = 1;
 			data->b_in->minus_n = 1;
