@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 18:46:49 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 22:41:20 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	clean_before_exit(t_vault *data)
 {
 	free_struct_b_in(data);
+	if (data->env)
+		ft_dbl_ptr_free((void **)data->env);
 	if (data->quote)
 		free(data->quote);
 	if (data->read_line)
@@ -42,10 +44,6 @@ void	free_struct_b_in(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
-	if (data->b_in->env_export)
-		ft_dbl_ptr_free((void **)data->b_in->env_export);
-	if (data->b_in->env_unset)
-		ft_dbl_ptr_free((void **)data->b_in->env_unset);
 	if (data->b_in->env_ord)
 		free(data->b_in->env_ord);
 	if (data->b_in)

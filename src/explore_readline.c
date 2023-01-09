@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/07 23:05:53 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 22:36:44 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	child_creation(t_vault *data, int line)
 // echo salut >> file puis ctrl + D - OK
 // cat + 2x ctrl-D - OK
 //<test cat - Probleme de close quand test n'existe pas
+// invalid read quand un export puis unset puis env
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
