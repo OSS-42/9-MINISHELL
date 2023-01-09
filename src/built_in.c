@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/07 23:11:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:31:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_echo(t_vault *data, int line)
 //-------------------------------------------------
 //echo								|		OK
 //echo bonjour						|		OK
-//echo -n							|		OK
+//echo -n							|		LEAK
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
