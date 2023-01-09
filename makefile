@@ -55,6 +55,7 @@ SRCS =	src/minishell.c \
 		src/redir_in_same_array_2.c\
 		src/redirection_utils.c\
 		src/redirection_utils_2.c\
+		src/redirection_utils_3.c\
 		src/minus_utils.c\
 		src/pipe_utils.c\
 		src/heredoc.c\

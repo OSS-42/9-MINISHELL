@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/07 18:01:57 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/09 17:44:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 echo test 1 > test > test1 > test2
 echo test 2 >1 >2 >3
 echo test 3> test> test1> test2
-echo test 4>test>test1>test2
+echo test 4>test>test1>test2>test3>test4
 echo test 5>1 > 2> 3 >4 > 5
 echo "test 6">"test" > "test1"
 echo "test 7">"test" >"test1"

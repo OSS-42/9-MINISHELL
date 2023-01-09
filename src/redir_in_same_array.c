@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 16:45:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:45:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,7 @@ void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line)
 		}
 	}
 	else
-	{
-		while (rl_dec_array[i] && rl_dec_array[i] != ' '
-			&& rl_dec_array[i] != '<' && rl_dec_array[i]
-			!= '>' && rl_dec_array[i] != '|')
-			data->flag->output[len++] = rl_dec_array[i++];
-	}
-}
-
-void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	i = move_index_chevron(data, line, i, rl_dec_array);
-	i++;
-	while (rl_dec_array[i] == ' ')
-		i++;
-	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
-		i = move_index_chevron3(data, i, &len, rl_dec_array);
-	else
-		len = while_is_not_flag(rl_dec_array, i) - i;
-	data->flag->output = ft_calloc(sizeof(char), len + 1);
+		end_of_redir(data, i, len, rl_dec_array);
 }
 
 int	move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array)

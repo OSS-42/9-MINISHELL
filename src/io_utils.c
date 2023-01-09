@@ -6,13 +6,12 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:36:41 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 18:54:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-// penser au code de retour
 void	io_redirection(t_vault *data, int input, int output)
 {
 	(void)data;
@@ -71,7 +70,7 @@ void	close_pipe(t_vault *data)
 void	reset_io(t_vault *data)
 {
 	if (dup2(data->flag->stdout_backup, STDOUT_FILENO) == -1)
-		printf("stdout\n");
+		printf("Erreur dup2 stdout\n");
 	if (dup2(data->flag->stdin_backup, STDIN_FILENO) == -1)
-		printf("stdin\n");
+		printf("Erreur dup2 stdin\n");
 }
