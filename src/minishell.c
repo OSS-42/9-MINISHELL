@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 13:51:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 15:09:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	reinit_data(t_vault *data)
 	data->cmd->name = NULL;
 	if (data->cmd->opt)
 		ft_dbl_ptr_free((void **)data->cmd->opt);
+	data->cmd->opt = NULL;
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
 }
