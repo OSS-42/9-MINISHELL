@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 12:25:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 13:43:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ void	child_creation(t_vault *data, int line)
 
 //Mauvaise commande puis echo bonjour | cat -e - INVALID READ
 // Si j'utilise un append et que le fichier de redirection n'existe pas, double free et segfault
+
+//pwd + cd src + pwd - Bad file descriptor
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
