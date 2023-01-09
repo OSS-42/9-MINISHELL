@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 12:46:05 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 12:49:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,14 @@ void	child_creation(t_vault *data, int line)
 // <test grep salut | wc -l OK
 // echo salut >> file puis ctrl + D - OK
 // cat + 2x ctrl-D - OK
-//<test cat - Probleme de close quand test n'existe pas
+//<test cat - Probleme de close quand test n'existe pas - OK
+// echo bonjour > test | cat -e puis exit - OK
+
+// echo coucou >> file | grep al | wc -l > newfile - double free(parfois) et newfile ne ce créé pas. Leak de fd et invalid read
+// echo salut > file > file2 | wc - DOUBLE FREE et segfault en faisant la commande juste au dessus en premier
+
+//Mauvaise commande puis echo bonjour | cat -e - INVALID READ
+// Si j'utilise un append et que le fichier de redirection n'existe pas, double free et segfault
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
