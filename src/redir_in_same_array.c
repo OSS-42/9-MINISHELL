@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/08 13:39:01 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:05:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,17 @@ void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
 	while (rl_dec_array[i] == ' ')
 		i++;
 	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
-	{
-		data->quote->quote_priority = rl_dec_array[i];
-		i++;
-		len++;
-		while (rl_dec_array[i] != data->quote->quote_priority)
-		{
-			i++;
-			len++;
-		}
-	}
+		i = move_index_chevron3(data, i, &len, rl_dec_array);
+	// {
+	// 	data->quote->quote_priority = rl_dec_array[i];
+	// 	i++;
+	// 	len++;
+	// 	while (rl_dec_array[i] != data->quote->quote_priority)
+	// 	{
+	// 		i++;
+	// 		len++;
+	// 	}
+	// }
 	else
 		len = while_is_not_flag(rl_dec_array, i) - i;
 	data->flag->output = ft_calloc(sizeof(char), len + 1);
@@ -145,18 +146,18 @@ int	move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array)
 // autre fonction commune potentielle :
 // a la place des lignes 101-111 et 131-141.
 // attention au int *len
-// int	move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array)
-// {
-// 	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
-// 	{
-// 		data->quote->quote_priority = rl_dec_array[i];
-// 		i++;
-// 		(*len)++;
-// 		while (rl_dec_array[i] != data->quote->quote_priority)
-// 		{
-// 			i++;
-// 			(*len)++;
-// 		}
-// 	}
-// 	return (i);
-// }
+int	move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array)
+{
+	// if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')
+	// {
+	data->quote->quote_priority = rl_dec_array[i];
+	i++;
+	(*len)++;
+	while (rl_dec_array[i] != data->quote->quote_priority)
+	{
+		i++;
+		(*len)++;
+	}
+	// }
+	return (i);
+}

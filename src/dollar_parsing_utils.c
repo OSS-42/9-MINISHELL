@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 08:49:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 09:11:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	dollar_parsing(t_vault *data)
 
 int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 {
-	while (i > (int)ft_strlen(data->rl_dec[row]) && data->rl_dec[row][i])
+	while (i < (int)ft_strlen(data->rl_dec[row]) && data->rl_dec[row][i])
 	{
 		data->dollar_var_len = 0;
 		if (ft_isinset(data->rl_dec[row][i]) == 0)

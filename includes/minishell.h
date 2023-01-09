@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 21:22:53 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:04:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
 void	len_of_redir(t_vault *data, char *rl_dec_array, int line);
 int		move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array);
-//int		move_index_chevron3(t_vault *data, int *len, int i, char *rl_dec_array);
+int		move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array);
 
 /***** redir_in_same_array_2.c *****/
 void	clean_redir(t_vault *data, int i);
