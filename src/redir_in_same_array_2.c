@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 14:31:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:43:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	clean_redir(t_vault *data, int i)
 	int		len;
 	int		temp;
 	int		begin;
-	// char	*str;
 
 	len = 0;
 	begin = 0;
 	temp = 0;
 	len = len_without_redir(data, i, temp, &begin);
-	// str = ft_calloc(sizeof(char), len + 1);
 	data->buffer = ft_calloc(sizeof(char), len + 1);
 	if (begin != 0)
 	{
@@ -152,7 +150,6 @@ int	len_from_chevron_at_zero(t_vault *data, int i, int *begin)
 	return (len);
 }
 
-//attention a int *temp
 int	return_len(t_vault *data, int i, int *temp, int len)
 {
 	(*temp)++;

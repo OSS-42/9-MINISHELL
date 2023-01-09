@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 16:00:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 16:30:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ void	child_creation(t_vault *data, int line)
 //<test cat - Probleme de close quand test n'existe pas - OK
 // echo bonjour > test | cat -e puis exit - OK
 
-// Si j'utilise un append et que le fichier de redirection n'existe pas, double free et segfault
+// Si j'utilise un append et que le fichier de redirection n'existe pas, 
+// double free et segfault
 
 //wc - Quand on appuie sur entrée ca ne fait pas de saut de ligne - KO
 
