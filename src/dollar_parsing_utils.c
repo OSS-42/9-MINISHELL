@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 13:16:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:38:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	dollar_parsing(t_vault *data)
 
 int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 {
-	while (data->rl_dec[row][i])
+	while (i > (int)ft_strlen(data->rl_dec[row]) && data->rl_dec[row][i])
 	{
 		data->dollar_var_len = 0;
 		if (ft_isinset(data->rl_dec[row][i]) == 0)
@@ -57,8 +57,8 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 		}
 		data->pos++;
 		i++;
-		if (i > (int)ft_strlen(data->rl_dec[row]))
-			break ;
+		// if (i > (int)ft_strlen(data->rl_dec[row]))
+		// 	break ;
 	}
 	return (i);
 }

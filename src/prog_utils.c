@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 13:21:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 20:43:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	cmd_path_check(t_vault *data)
 			make_some_free(data);
 	}
 	ft_dbl_ptr_free((void **)data->path_names);
-	data->cmd->name = ft_strdup(data->cmd->opt[0]); //Pour quel raison ? A enlever ?
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 }
 
 void	find_prog(t_vault *data, int line)

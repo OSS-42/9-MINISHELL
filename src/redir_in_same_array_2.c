@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/08 13:47:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:50:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		len = temp;
 		if (data->tab_arg[i][temp])
 		{
-			len = return_len(data, i, temp, len);
+			len = return_len(data, i, &temp, len);
 			// temp++;
 			// len++;
 			// while (data->tab_arg[i][temp] == ' ')
@@ -192,7 +192,7 @@ int	return_len(t_vault *data, int i, int *temp, int len)
 	}
 	else
 	{
-		temp = while_is_not_flag(data->tab_arg[i], *temp);
+		*temp = while_is_not_flag(data->tab_arg[i], *temp);
 		len++;
 	}
 	while (data->tab_arg[i][*temp])
