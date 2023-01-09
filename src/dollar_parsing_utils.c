@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parsing_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 19:36:04 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/07 22:37:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,14 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 			i = dbl_quote_parsing(data, row, i);
 		else if (ft_isinset(data->rl_dec[row][i]) == 3)
 		{
-			dollar_var_to_expand(data, row, i);
-			i = i + data->dollar_var_len;
-			data->pos--;
+			if (!(data->rl_dec[row][i + 1]))
+				data->buffer[data->pos] = data->rl_dec[row][i];
+			else
+			{
+				dollar_var_to_expand(data, row, i);
+				i = i + data->dollar_var_len;
+				data->pos--;
+			}
 		}
 		data->pos++;
 		i++;

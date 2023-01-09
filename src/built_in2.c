@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 12:00:19 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 21:00:06 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	order_env(t_vault *data)
 	return ;
 }
 
-// tests au 5/01 a 22h
+// tests au 7/01 a 21:39unset_marvel
 // commandes a faire dans la sequence affichee
 //			TESTS											|	RESULTS
 //---------------------------------------------------------------------------
@@ -152,4 +152,5 @@ void	order_env(t_vault *data)
 // unset PATH (+export)										|		OK
 // env														|		OK
 // echo bonjour												|		OK
-// ls														|		a valider : segfault (cmd_path_check - prog_utils.c:47)
+// ls														|		OK
+// echo $?													|		OK
