@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 13:43:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 14:26:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	explore_readline(t_vault *data)
 			error_message(data, "putain con, regarde ce que tu ecris", "1\0");
 			return ;
 		}
+		print_double_array(data->tab_arg);
 		piping(data);
 		reset_io(data);
 	}
@@ -146,6 +147,8 @@ void	child_creation(t_vault *data, int line)
 
 //Mauvaise commande puis echo bonjour | cat -e - INVALID READ
 // Si j'utilise un append et que le fichier de redirection n'existe pas, double free et segfault
+
+//wc - Quand on appuie sur entrée ca ne fait pas de saut de ligne - KO
 
 //pwd + cd src + pwd - Bad file descriptor
 

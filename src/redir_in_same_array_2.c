@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 09:17:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 14:31:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,32 +118,7 @@ int	len_without_redir(t_vault *data, int i, int temp, int *begin)
 		}
 		len = temp;
 		if (data->tab_arg[i][temp])
-		{
 			len = return_len(data, i, &temp, len);
-			// temp++;
-			// len++;
-			// while (data->tab_arg[i][temp] == ' ')
-			// 	temp++;
-			// if (data->tab_arg[i][temp] == '\''
-			// 	|| data->tab_arg[i][temp] == '\"')
-			// {
-			// 	data->quote->quote_priority = data->tab_arg[i][temp];
-			// 	temp++;
-			// 	while (data->tab_arg[i][temp] != data->quote->quote_priority)
-			// 		temp++;
-			// 	temp++;
-			// }
-			// else
-			// {
-			// 	temp = while_is_not_flag(data->tab_arg[i], temp);
-			// 	len++;
-			// }
-			// while (data->tab_arg[i][temp])
-			// {
-			// 	temp++;
-			// 	len++;
-			// }
-		}
 	}
 	return (len);
 }
@@ -183,7 +158,7 @@ int	return_len(t_vault *data, int i, int *temp, int len)
 	(*temp)++;
 	len++;
 	while (data->tab_arg[i][*temp] == ' ')
-		temp++;
+		(*temp)++;
 	if (data->tab_arg[i][*temp] == '\'' || data->tab_arg[i][*temp] == '\"')
 	{
 		data->quote->quote_priority = data->tab_arg[i][*temp];
