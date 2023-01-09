@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 16:43:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:01:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,33 +146,6 @@ int	len_from_chevron_at_zero(t_vault *data, int i, int *begin)
 			temp++;
 			len++;
 		}
-	}
-	return (len);
-}
-
-int	return_len(t_vault *data, int i, int *temp, int len)
-{
-	(*temp)++;
-	len++;
-	while (data->tab_arg[i][*temp] == ' ')
-		(*temp)++;
-	if (data->tab_arg[i][*temp] == '\'' || data->tab_arg[i][*temp] == '\"')
-	{
-		data->quote->quote_priority = data->tab_arg[i][*temp];
-		(*temp)++;
-		while (data->tab_arg[i][*temp] != data->quote->quote_priority)
-			(*temp)++;
-		(*temp)++;
-	}
-	else
-	{
-		*temp = while_is_not_flag(data->tab_arg[i], *temp);
-		len++;
-	}
-	while (data->tab_arg[i][*temp])
-	{
-		(*temp)++;
-		len++;
 	}
 	return (len);
 }

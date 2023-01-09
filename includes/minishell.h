@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 09:04:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 17:02:58 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,13 +173,6 @@ int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
 int		len_without_redir(t_vault *data, int i, int temp, int *begin);
 int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
 int		return_len(t_vault *data, int i, int *temp, int len);
-
-// /***** redir_in_next_array.c *****/
-// void	redir_in_next_array(t_vault *data, int i, int *j, char c);
-// void	find_redir_in_next_array(t_vault *data, char *rl_dec_array);
-// void	clean_redir_next_array(t_vault *data, int i);
-// void	token_without_redir_name(t_vault *data, int i, int begin, int len);
-// void	redir_in_next_array_interlude(t_vault *data, int *j, int i);
 
 /***** redirection_utils.c *****/
 char	*clean_the_chevron(t_vault *data, char *str, int line, int i);
