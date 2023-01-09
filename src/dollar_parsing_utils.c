@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_parsing_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 22:37:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:11:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,9 @@ void	dollar_parsing(t_vault *data)
 	}
 }
 
-//l:23
-// data->buffer = ft_calloc(sizeof(char), 500);
-
 int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 {
-	while (data->rl_dec[row][i])
+	while (i < (int)ft_strlen(data->rl_dec[row]) && data->rl_dec[row][i])
 	{
 		data->dollar_var_len = 0;
 		if (ft_isinset(data->rl_dec[row][i]) == 0)
@@ -60,8 +57,6 @@ int	quote_parsing_with_dollar(t_vault *data, int row, int i)
 		}
 		data->pos++;
 		i++;
-		if (i > (int)ft_strlen(data->rl_dec[row]))
-			break ;
 	}
 	return (i);
 }

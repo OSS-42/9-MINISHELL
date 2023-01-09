@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 15:24:33 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 20:43:11 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,13 @@ void	cmd_path_check(t_vault *data)
 			close (data->error_fd);
 			data->flag->execve = 1;
 			clean_before_exit(data);
-			// clean_before_execve(data);
 			execve(data->cmd->name, data->cmd->opt, data->env);
 		}
 		else
-		{
-			free(data->cmd->name);
-			free(data->cmd->path);
-		}
+			make_some_free(data);
 	}
 	ft_dbl_ptr_free((void **)data->path_names);
-	data->cmd->name = ft_strdup(data->cmd->opt[0]); //Pour quel raison ? A enlever ?
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
 }
 
 void	find_prog(t_vault *data, int line)
@@ -85,13 +81,16 @@ void	find_prog(t_vault *data, int line)
 		close (data->error_fd);
 		data->flag->execve = 1;
 		clean_before_exit(data);
-		// clean_before_execve(data);
 		execve(data->cmd->name, data->cmd->opt, data->env);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
-	{
 		cmd_path_check(data);
-		// ft_dbl_ptr_free((void **)data->path_names);
-	}
 	error_message(data, "command not found", "127\0");
+}
+
+void	make_some_free(t_vault *data)
+{
+	free(data->cmd->name);
+	free(data->cmd->path);
+	return ;
 }

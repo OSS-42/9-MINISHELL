@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/06 17:06:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:04:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,9 @@ void	heredoc_redirection(t_vault *data);
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
 void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
 void	len_of_redir(t_vault *data, char *rl_dec_array, int line);
+int		move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array);
+int		move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array);
+int		move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array);
 
 /***** redir_in_same_array_2.c *****/
 void	clean_redir(t_vault *data, int i);
@@ -169,12 +172,14 @@ char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin);
 int		while_not_chevron(t_vault *data, int i, char *str, int *begin);
 int		len_without_redir(t_vault *data, int i, int temp, int *begin);
 int		len_from_chevron_at_zero(t_vault *data, int i, int *begin);
+int		return_len(t_vault *data, int i, int *temp, int len);
 
-/***** redir_in_next_array.c *****/
-void	redir_in_next_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_next_array(t_vault *data, char *rl_dec_array);
-void	clean_redir_next_array(t_vault *data, int i);
-void	token_without_redir_name(t_vault *data, int i, int begin, int len);
+// /***** redir_in_next_array.c *****/
+// void	redir_in_next_array(t_vault *data, int i, int *j, char c);
+// void	find_redir_in_next_array(t_vault *data, char *rl_dec_array);
+// void	clean_redir_next_array(t_vault *data, int i);
+// void	token_without_redir_name(t_vault *data, int i, int begin, int len);
+// void	redir_in_next_array_interlude(t_vault *data, int *j, int i);
 
 /***** redirection_utils.c *****/
 char	*clean_the_chevron(t_vault *data, char *str, int line, int i);
@@ -270,6 +275,7 @@ void	reset_n_close_heredoc(t_vault *data);
 int		find_paths(t_vault *data);
 void	cmd_path_check(t_vault *data);
 void	find_prog(t_vault *data, int line);
+void	make_some_free(t_vault *data);
 
 /***** io_utils.c *****/
 void	io_redirection(t_vault *data, int input, int output);

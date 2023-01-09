@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/07 11:14:41 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/07 23:17:59 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 			i = move_index_delimiter(data, i, c);
 			if (!data->read_line[i])
 			{
-				// data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
-				// 		| O_TRUNC, 0644);
 				error_message(data, "missing or wrong arguments", "1\0");
 				return (FALSE);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 21:00:26 by maison           ###   ########.fr       */
+/*   Updated: 2023/01/09 09:20:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void	init_data(t_vault *data, char **env)
 	data->flag->execve = 0;
 	data->flag->rl_exit = 0;
 	data->pid = NULL;
-	if (getenv("PATH") == NULL)
-	{
-		error_message(data, "missing env or path", "1\0");
-		ft_exit(data);
-	}
 	return ;
 }
 
@@ -87,19 +82,11 @@ void	launch_minishell(t_vault *data)
 		if (data->read_line != NULL)
 		{
 			init_signal(EXEC);
-			// data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			// ft_putstr_fd("0\0", data->error_fd); // ou l'ouvre deja dans data ...
 			if (ft_strcmp(data->read_line, "") != 0)
 				readline_exec(data);
 		}
 		else
 		{
-			// printf("exit\n");
-			// close (data->error_fd); // rajout ici pour ne pas ecrase si deja ouvert
-			// data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
-			// 		| O_TRUNC, 0644);
-			// ft_putstr_fd("131\0", data->error_fd);
-			// close (data->error_fd); // voir si ca pose pas de probleme avec eric
 			data->flag->rl_exit = 1;
 			close (data->flag->stdout_backup);
 			close (data->flag->stdin_backup);
@@ -117,19 +104,13 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	init_data(&data, env);
-	// data.temp_str = find_error_code(&data);
-	// g_error_code = ft_atoi(data.temp_str);
-	// free (data.temp_str);
-	// if (g_error_code != 0)
-	// {
-	// 	error_message(&data, "missing env or path", "1\0");
-	// 	ft_exit(&data);
-	// }
-	// else
-	// {
-		intro_minishell();
-		launch_minishell(&data);
-	// }
+	if (getenv("PATH") == NULL || data.env == NULL)
+	{
+		error_message(&data, "missing env or path", "1\0");
+		ft_exit(&data);
+	}
+	intro_minishell();
+	launch_minishell(&data);
 	return (g_error_code);
 }
 // valgrind --leak-check=full  --show-reachable=yes --track-fds=yes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_next_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:45:42 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/03 21:24:34 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/08 12:04:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,31 +37,32 @@ void	redir_in_next_array(t_vault *data, int i, int *j, char c)
 	}
 	else
 		find_redir_in_next_array(data, data->tab_arg[i + 1]);
-	if (*j == 0)
-	{
-		clean_redir_next_array(data, i + 1);
-		if (ft_strlen(data->tab_arg[i]) == 1)
-		{
-			find_decomposer_to_switch(data, i);
-			if (ft_strlen(data->tab_arg[i]) == 0)
-				find_decomposer_to_switch(data, i);
-		}
-		else
-		{
-			data->tab_arg[i]
-				= clean_the_chevron(data, data->tab_arg[i], 0, 0);
-			if (ft_strlen(data->tab_arg[i]) < 1)
-				find_decomposer_to_switch(data, i);
-		}
-	}
-	else
-	{
-		data->tab_arg[i][*j] = '\0';
-		if (flag_in_str(data->tab_arg[i + 1]) == FALSE)
-			find_decomposer_to_switch(data, i + 1);
-		else
-			clean_redir_next_array(data, i + 1);
-	}
+	redir_in_next_array_interlude(data, j, i);
+	// if (*j == 0)
+	// {
+	// 	clean_redir_next_array(data, i + 1);
+	// 	if (ft_strlen(data->tab_arg[i]) == 1)
+	// 	{
+	// 		find_decomposer_to_switch(data, i);
+	// 		if (ft_strlen(data->tab_arg[i]) == 0)
+	// 			find_decomposer_to_switch(data, i);
+	// 	}
+	// 	else
+	// 	{
+	// 		data->tab_arg[i]
+	// 			= clean_the_chevron(data, data->tab_arg[i], 0, 0);
+	// 		if (ft_strlen(data->tab_arg[i]) < 1)
+	// 			find_decomposer_to_switch(data, i);
+	// 	}
+	// }
+	// else
+	// {
+	// 	data->tab_arg[i][*j] = '\0';
+	// 	if (flag_in_str(data->tab_arg[i + 1]) == FALSE)
+	// 		find_decomposer_to_switch(data, i + 1);
+	// 	else
+	// 		clean_redir_next_array(data, i + 1);
+	// }
 	if (data->flag->heredoc == FALSE)
 		redirection(data, data->flag->output);
 	free (data->flag->output);
@@ -127,4 +128,33 @@ void	token_without_redir_name(t_vault *data, int i, int begin, int len)
 	}
 	free (data->tab_arg[i]);
 	data->tab_arg[i] = temp;
+}
+
+void	redir_in_next_array_interlude(t_vault *data, int *j, int i)
+{
+	if (*j == 0)
+	{
+		clean_redir_next_array(data, i + 1);
+		if (ft_strlen(data->tab_arg[i]) == 1)
+		{
+			find_decomposer_to_switch(data, i);
+			if (ft_strlen(data->tab_arg[i]) == 0)
+				find_decomposer_to_switch(data, i);
+		}
+		else
+		{
+			data->tab_arg[i]
+				= clean_the_chevron(data, data->tab_arg[i], 0, 0);
+			if (ft_strlen(data->tab_arg[i]) < 1)
+				find_decomposer_to_switch(data, i);
+		}
+	}
+	else
+	{
+		data->tab_arg[i][*j] = '\0';
+		if (flag_in_str(data->tab_arg[i + 1]) == FALSE)
+			find_decomposer_to_switch(data, i + 1);
+		else
+			clean_redir_next_array(data, i + 1);
+	}
 }

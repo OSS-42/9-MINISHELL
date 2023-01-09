@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:53:07 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/05 09:52:57 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/09 08:47:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ char	*clean_the_chevron(t_vault *data, char *str, int line, int i)
 	clean = 0;
 	j = 0;
 	temp = ft_calloc(sizeof(char), ft_strlen(str) + 1);
-	if (!temp)
-	{
-		free (temp);
-		error_message(data, "unexpected error", "1\0");
-		exit (EXIT_FAILURE);
-	}
 	while (str[i] && str[i] != '\0')
 	{
 		if (str[i] == data->flag->chevron
