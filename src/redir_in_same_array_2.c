@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:43:05 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/08 22:50:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 09:17:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,32 @@ void	clean_redir(t_vault *data, int i)
 	int		len;
 	int		temp;
 	int		begin;
-	char	*str;
+	// char	*str;
 
 	len = 0;
 	begin = 0;
 	temp = 0;
 	len = len_without_redir(data, i, temp, &begin);
-	str = ft_calloc(sizeof(char), len + 1);
+	// str = ft_calloc(sizeof(char), len + 1);
+	data->buffer = ft_calloc(sizeof(char), len + 1);
 	if (begin != 0)
 	{
-		str[temp] = data->flag->chevron;
+		data->buffer[temp] = data->flag->chevron;
 		temp++;
 		if (data->tab_arg[i][begin] == ' ')
 			begin++;
 		while (data->tab_arg[i][begin] && data->tab_arg[i][begin] != '\0')
 		{
-			str[temp] = data->tab_arg[i][begin];
+			data->buffer[temp] = data->tab_arg[i][begin];
 			temp++;
 			begin++;
 		}
 	}
 	else
-		str = clean_redir_from_zero(data, i, str, begin);
+		data->buffer = clean_redir_from_zero(data, i, data->buffer, begin);
 	free (data->tab_arg[i]);
-	data->tab_arg[i] = str;
+	data->tab_arg[i] = ft_strdup(data->buffer);
+	free (data->buffer);
 }
 
 char	*clean_redir_from_zero(t_vault *data, int i, char *str, int begin)
