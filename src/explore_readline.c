@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/08 13:17:28 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:54:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,11 @@ void	child_creation(t_vault *data, int line)
 // Invalid read quand ctrl + c puis echo ?$ - OK
 // .tmp_error leak quand on donne une commande invalid comme : salut - OK
 // invalid read avec ls | ls | ls - OK
-// <test grep salut | wc -l Probleme du file_descriptor
+// <test grep salut | wc -l OK
 // echo salut >> file puis ctrl + D - OK
 // cat + 2x ctrl-D - OK
-//<test cat - Probleme de close quand test n'existe pas
+//<test cat - Probleme de close quand test n'existe pas - OK
+// echo bonjour > test | cat -e puis exit - OK
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal
