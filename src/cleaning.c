@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 15:43:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:00:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	free_struct_b_in(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
-	if (data->b_in->env_unset)
-		ft_dbl_ptr_free((void **)data->b_in->env_unset);
 	if (data->b_in->env_ord)
 		free(data->b_in->env_ord);
 	if (data->b_in)

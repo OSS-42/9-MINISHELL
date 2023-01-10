@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/04 21:46:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:51:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	expand_tab(t_vault *data, int len)
 	int		row;
 
 	row = 0;
-	i = 0;
+	i = -1;
 	data->temp = NULL;
 	data->temp = ft_calloc(sizeof(char *),
 			ft_dbl_ptr_len(data->rl_dec) + len * 2 + 1);
-	while (data->rl_dec[row])
+	while (data->rl_dec[++row])
 	{
 		if (ft_strchr(data->rl_dec[row], '|') == 0)
 		{
@@ -64,10 +64,10 @@ void	expand_tab(t_vault *data, int len)
 			search_for_pipe(data, row, &i);
 			free (data->rl_dec[row]);
 		}
-		row++;
 	}
 	free(data->rl_dec);
 	data->rl_dec = ft_dbl_ptr_copy(data->temp);
+	ft_dbl_ptr_free((void **)data->temp);
 }
 
 void	search_for_pipe(t_vault *data, int row, int *i)
