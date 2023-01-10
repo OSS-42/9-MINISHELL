@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 15:11:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:03:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	child_creation(t_vault *data, int line)
 //Dans l'ordre
 //export test
 //unset test
-//export test
+//export test  - OK
 
 //Dans l'ordre
 // mauvaise commande
