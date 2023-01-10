@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 23:18:33 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:57:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_struct_b_in(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
-	if (data->b_in->env_export)
+	if (data->b_in->env_export && data->flag->execve == 0) // la regle concernant execve, si jamais je faisais un export je perdais le tableau pour la prochaine commande qui n'est pas un built_in
 		ft_dbl_ptr_free((void **)data->b_in->env_export);
 	if (data->b_in->env_unset)
 		ft_dbl_ptr_free((void **)data->b_in->env_unset);

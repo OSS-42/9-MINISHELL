@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 13:24:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 13:34:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	child_creation(t_vault *data, int line)
 
 //Dans l'ordre:
 // export test
-// clear -- ERREUR
+// clear -- OK
 
 // Si j'utilise un append et que le fichier de redirection n'existe pas,
 // double free et segfault
