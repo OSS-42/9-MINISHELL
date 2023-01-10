@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 16:09:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:19:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void	ft_exit(t_vault *data)
 {
 	if (data->flag->rl_exit == 0)
 		close_pipe(data);
+	if (data->cmd->opt[1] && ft_atoi(data->cmd->opt[1]) < 256)
+	{
+		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		ft_putstr_fd(data->cmd->opt[1], data->error_fd);
+		close(data->error_fd);
+	}
 	clean_before_exit(data);
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
