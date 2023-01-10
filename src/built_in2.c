@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 16:01:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:56:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ void	order_env(t_vault *data)
 
 	rows = ft_dbl_ptr_len(data->env);
 	temp = NULL;
-	temp = ft_dbl_ptr_realloc(temp, rows + 1);
-	data->b_in->env_ord = ft_dbl_ptr_realloc(data->b_in->env_ord, rows + 1);
+	temp = ft_calloc(sizeof(char *), rows + 1);
+	data->b_in->env_ord = ft_calloc(sizeof(char *), rows + 1);
 	buff2 = NULL;
 	i = -1;
 	while (++i < rows)
