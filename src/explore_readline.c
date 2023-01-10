@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 10:42:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 12:09:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,16 @@ void	child_creation(t_vault *data, int line)
 // cat + 2x ctrl-D - OK
 //<test cat - Probleme de close quand test n'existe pas - OK
 // echo bonjour > test | cat -e puis exit - OK
+// /bin/ls - NON
+// echo coucou > test > test > test - Il y a un espace en trop dans une des redirection
+
+//Dans l'ordre
+// mauvaise commande
+// expr $? + $? - Ne renvoie pas 254
+
+//Dans l'ordre:
+// export test
+// clear -- ERREUR
 
 // Si j'utilise un append et que le fichier de redirection n'existe pas,
 // double free et segfault
