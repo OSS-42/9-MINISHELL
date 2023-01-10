@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 17:13:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:47:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	join_unset(t_vault *data, int line)
 		else
 		{
 			remove_line_env(data, j);
+			free (data->b_in->unset_arg);
 			return ;
 		}
 	}
