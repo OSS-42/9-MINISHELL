@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 13:59:07 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:47:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	is_special_built_in(t_vault *data, int line)
 			&& !(data->tab_arg[line + 1]))
 		|| ft_strcmp(data->cmd->name, "unset") == 0
 		|| ft_strcmp(data->cmd->name, "export") == 0
-		|| ft_strcmp(data->cmd->name, "pwd") == 0)
+		|| ft_strcmp(data->cmd->name, "pwd") == 0
+		|| ft_strcmp(data->cmd->name, "env") == 0)
 		return (TRUE);
 	return (FALSE);
 }
