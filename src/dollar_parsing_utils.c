@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:46:05 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:52:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 10:52:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ void	dollar_parsing(t_vault *data)
 	i = 0;
 	row = 0;
 	data->pos = 0;
-	while (data->rl_dec[row])
+	while (data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		data->buffer = ft_calloc(sizeof(char), 500);
 		i = quote_parsing_with_dollar(data, row, i);
 		free (data->rl_dec[row]);
 		data->rl_dec[row] = ft_strdup(data->buffer);
 		free (data->buffer);
+		if (ft_strlen(data->rl_dec[row]) == 0) // Voir avec eric echo $USER $TErM $HOME
+		{
+			find_decomposer_to_switch(data, row);
+			row--;
+		}
 		data->pos = 0;
 		i = 0;
 		row++;

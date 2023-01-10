@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/09 16:34:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:02:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_echo(t_vault *data, int line)
 //-------------------------------------------------
 //echo								|		OK
 //echo bonjour						|		OK
-//echo -n							|			KO (invalid read)
+//echo -n							|		OK
 //echo salut bonjour				|		OK
 //echo -n salut						|		OK
 //echo -n salut bonjour				|		OK
@@ -115,7 +115,7 @@ void	ft_echo(t_vault *data, int line)
 //echo -n bonjour -n				|		OK
 //echo "-n salut bonjour"			|		OK
 //echo '-n salut bonjour'			|		OK
-//echo "-n" salut bonjour			|		OK
+//echo "-n" salut bonjour			|		OK ? problème de fd dans certain cas ...
 //echo '-n' salut bonjour			|		OK
 //echo -n -n salut bonjour			|		OK
 //echo -n4 -n salut bonjour			|		OK
@@ -142,8 +142,8 @@ void	ft_echo(t_vault *data, int line)
 //echo $USER $TERM					|		OK
 //echo $USER $TERM $HOME			|		OK
 //echo $USER $TErM					|		OK
-//echo $USER $TErM $HOME			|		OK
-//echo "bonjour $USER"				|		OK
+//echo $USER $TErM $HOME			|		KO HOME ne s'écrit pas
+//echo "bonjour $USER"				|		KO Problème de fd dans certain cas
 //echo "bonjour '$USER'"			|		OK
 //echo "a"b'c'						|		OK
 //echo ""x''y						|		OK

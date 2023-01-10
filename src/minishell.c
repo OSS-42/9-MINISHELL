@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:46:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 09:45:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	reinit_data(t_vault *data)
 	data->cmd->opt = NULL;
 	if (data->tab_arg)
 		ft_dbl_ptr_free((void **)data->tab_arg);
+	data->tab_arg = NULL;
 }
 
 void	readline_exec(t_vault *data)
@@ -79,7 +80,7 @@ void	launch_minishell(t_vault *data)
 	while (1)
 	{
 		init_signal(ALIVE);
-		data->read_line = readline("\033[95malive>\033[0;39m");
+		data->read_line = readline("alive>");
 		if (data->read_line != NULL)
 		{
 			signal(SIGINT, SIG_IGN);

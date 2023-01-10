@@ -16,9 +16,13 @@ void	ft_dbl_ptr_free(void **ptr)
 {
 	int	i;
 
-	i = -1;
-	while (ptr[++i])
+	i = 0;
+	while (ptr[i])
+	{
 		free(ptr[i]);
+		ptr[i] = NULL;
+		i++;
+	}
 	free(ptr);
 	ptr = NULL;
 }

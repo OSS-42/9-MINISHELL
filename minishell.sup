@@ -22,3 +22,19 @@
    fun:fork
    ...
 }
+{
+   libSystem_atfork_child
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:   fun:libSystem_atfork_child
+   ...
+}
+{
+   xpc_atfork_child
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:xpc_atfork_child
+   ...
+}
