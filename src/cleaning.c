@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 16:00:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:23:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clean_before_exit(t_vault *data)
 		free(data->quote);
 	if (data->read_line)
 		free(data->read_line);
-	if (data->env)
+	if (data->env && data->flag->execve == 0)
 		ft_dbl_ptr_free((void **)data->env);
 	if (data->flag->rl_exit == 0)
 	{

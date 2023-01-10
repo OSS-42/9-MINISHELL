@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 15:51:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:34:11 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	expand_tab(t_vault *data, int len)
 	int		i;
 	int		row;
 
-	row = 0;
-	i = -1;
+	row = -1;
+	i = 0;
 	data->temp = NULL;
 	data->temp = ft_calloc(sizeof(char *),
 			ft_dbl_ptr_len(data->rl_dec) + len * 2 + 1);
