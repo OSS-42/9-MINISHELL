@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 09:45:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 13:17:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_data(t_vault *data, char **env)
 	data->read_line = NULL;
 	data->tab_arg = NULL;
 	data->dollar_var_len = 0;
+	data->path_names = NULL;
 	data->flag->stdout_backup = dup(STDOUT_FILENO);
 	data->flag->stdin_backup = dup(STDIN_FILENO);
 	data->fail_redir = FALSE;
