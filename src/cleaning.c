@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 13:57:26 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 15:43:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	clean_before_exit(t_vault *data)
 		free(data->quote);
 	if (data->read_line)
 		free(data->read_line);
+	if (data->env)
+		ft_dbl_ptr_free((void **)data->env);
 	if (data->flag->rl_exit == 0)
 	{
 		if (data->tab_arg)
@@ -42,8 +44,6 @@ void	free_struct_b_in(t_vault *data)
 {
 	if (data->b_in->export_var)
 		free (data->b_in->export_var);
-	if (data->b_in->env_export && data->flag->execve == 0) // la regle concernant execve, si jamais je faisais un export je perdais le tableau pour la prochaine commande qui n'est pas un built_in
-		ft_dbl_ptr_free((void **)data->b_in->env_export);
 	if (data->b_in->env_unset)
 		ft_dbl_ptr_free((void **)data->b_in->env_unset);
 	if (data->b_in->env_ord)

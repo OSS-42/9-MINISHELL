@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 13:24:13 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 15:12:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	dollar_var_to_expand(t_vault *data, int row, int i)
 		if (data->rl_dec[row][i + 1] == '?')
 		{
 			temp = find_error_code(data);
-			data->error_fd = open(".tmp_error", O_RDONLY, 0644); // verifier avec eric
-			// data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY
-			// 		| O_TRUNC, 0644);
-			// ft_putstr_fd("0\0", data->error_fd);
-			close (data->error_fd);
 			data->dollar_var_len = ft_strlen(temp);
 		}
 		else

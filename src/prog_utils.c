@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 13:21:30 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 15:11:04 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	find_prog(t_vault *data, int line)
 	{
 		if (data->path_names)
 			ft_dbl_ptr_free((void **) data->path_names);
-		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);//voir avec eric
+		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		ft_putstr_fd("0\0", data->error_fd);
 		close (data->error_fd);
 		data->flag->execve = 1;

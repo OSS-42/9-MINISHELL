@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/07 21:53:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:46:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ void	add_line_env(t_vault *data)
 			return ;
 		}
 	}
-	data->b_in->env_export = ft_dbl_ptr_realloc(data->b_in->env_export, j + 2);
+	data->b_in->env_export = ft_calloc(sizeof(char *), j + 2);
 	dup_env(data);
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
 	free (data->b_in->exp_arg);
-	data->env = &data->b_in->env_export[0];
+	ft_dbl_ptr_free((void **)data->env);
+	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
+	//data->env = &data->b_in->env_export[0];
 	return ;
 }
 

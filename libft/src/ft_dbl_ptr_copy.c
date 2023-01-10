@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dbl_ptr_copy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 10:20:38 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/28 10:51:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:48:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ char **ft_dbl_ptr_copy(char **source)
 	while (source[row])
 	{
 		temp[row] = ft_strdup(source[row]);
-		free (source[row]);
 		row++;
 	}
-	free (source);
 	return (temp);
 }
