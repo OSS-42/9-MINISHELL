@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 12:21:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:42:22 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_echo(t_vault *data, int line)
 	return ;
 }
 
-// tests au 9/01 a 16:40
+// tests au 11/01 a 13:40
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS
