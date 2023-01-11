@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 16:17:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:30:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	ft_env(t_vault *data, int env)
 
 void	ft_echo(t_vault *data, int line)
 {
+	int	i;
+
+	i = 1;
 	data->b_in->forget_minus = 0;
 	data->b_in->minus_n = 0;
 	data->b_in->dont_do_minus = 0;
@@ -101,10 +104,13 @@ void	ft_echo(t_vault *data, int line)
 		recompose_tab_arg(data, line);
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
-	while (data->cmd->opt[++line])
-		print_row(data, line);
+	while (data->cmd->opt[i])
+	{
+		print_row(data, i);
+		i++;
+	}
 	if (data->b_in->minus_n == 0)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	data->b_in->forget_minus = 0;
 	on_success(data);
 	return ;
