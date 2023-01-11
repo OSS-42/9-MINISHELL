@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 10:08:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:02:12 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	clean_before_exit(t_vault *data)
 	if (data->quote)
 		free(data->quote);
 	ft_free_n_null(data->read_line);
+	data->read_line = NULL;
 	if (data->env && data->flag->execve == 0)
 		ft_dbl_ptr_free((void **)data->env);
 	if (data->flag->rl_exit == 0)
@@ -38,6 +39,7 @@ void	free_struct_flag(t_vault *data)
 		if (data->cmd->opt && data->flag->rl_exit == 0)
 			ft_dbl_ptr_free((void **)data->cmd->opt);
 		ft_free_n_null(data->cmd->name);
+		data->cmd->name = NULL;
 		free (data->cmd);
 	}
 	if (data->flag->pipe)
@@ -50,6 +52,7 @@ void	free_struct_flag(t_vault *data)
 void	free_struct_b_in(t_vault *data)
 {
 	ft_free_n_null(data->b_in->export_var);
+	data->b_in->export_var = NULL;
 	if (data->b_in->env_ord)
 		ft_dbl_ptr_free((void **)data->b_in->env_ord);
 	if (data->b_in)

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 09:00:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:05:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*var_extract(t_vault *data, int row, int position)
 				data->dollar_var_len);
 		data->dollar_var = ft_strjoin(temp, "=");
 		ft_free_n_null (temp);
+		temp = NULL;
 	}
 	else
 		return (NULL);
@@ -96,6 +97,7 @@ char	*expand_var(t_vault *data, int row_var)
 	if (data->flag->var_not_found == 1)
 	{
 		ft_free_n_null (data->dollar_var);
+		data->dollar_var = NULL;
 		return (temp);
 	}
 	else
@@ -104,6 +106,7 @@ char	*expand_var(t_vault *data, int row_var)
 		temp = ft_substr(data->env[row_var],
 				data->dollar_var_len + 1, len_var);
 		ft_free_n_null (data->dollar_var);
+		data->dollar_var = NULL;
 	}
 	return (temp);
 }

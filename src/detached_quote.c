@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 08:48:00 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 08:54:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:03:13 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	fill_detached_quote_tab(t_vault *data)
 		else
 			row_with_quote(data, &i, row, &line);
 		ft_free_n_null (data->rl_dec[row]);
+		data->rl_dec[row] = NULL;
 		row++;
 	}
 }

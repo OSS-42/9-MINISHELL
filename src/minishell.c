@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 11:03:17 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:49:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	reinit_data(t_vault *data)
 	data->quote->last_replace = 0;
 	data->fail_redir = FALSE;
 	ft_free_n_null (data->cmd->name);
+	data->cmd->name = NULL;
 	if (data->cmd->opt)
 		ft_dbl_ptr_free((void **)data->cmd->opt);
 	data->cmd->opt = NULL;

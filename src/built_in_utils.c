@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:52:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 11:56:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	join_unset(t_vault *data, int line)
 		}
 	}
 	ft_free_n_null (data->b_in->unset_arg);
+	data->b_in->unset_arg = NULL;
 	return ;
 }
 
@@ -52,8 +53,10 @@ void	swap_lines(t_vault *data, int rows)
 			{
 				temp = ft_strdup(data->b_in->env_ord[i]);
 				ft_free_n_null (data->b_in->env_ord[i]);
+				data->b_in->env_ord[i] = NULL;
 				data->b_in->env_ord[i] = ft_strdup(data->b_in->env_ord[j]);
 				ft_free_n_null (data->b_in->env_ord[j]);
+				data->b_in->env_ord[j] = NULL;
 				data->b_in->env_ord[j] = ft_strdup(temp);
 				ft_free_n_null (temp);
 			}

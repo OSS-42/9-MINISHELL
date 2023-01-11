@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 10:27:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:58:55 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_exit(t_vault *data)
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
 	ft_free_n_null (data->temp_str);
+	data->temp_str = NULL;
 	unlink(".tmp_error");
 	exit_minishell();
 	exit(g_error_code);
@@ -82,6 +83,7 @@ void	ft_env(t_vault *data, int env)
 			ft_putstr_fd(data->b_in->env_ord[i], 1);
 			ft_putstr_fd("\n", 1);
 			ft_free_n_null (data->b_in->env_ord[i]);
+			data->b_in->env_ord[i] = NULL;
 			i++;
 		}
 		free (data->b_in->env_ord);

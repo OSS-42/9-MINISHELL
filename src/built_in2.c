@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:53:54 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:01:28 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	add_line_env(t_vault *data)
 		else
 		{
 			ft_free_n_null (data->env[j]);
+			data->env[j] = NULL;
 			data->env[j] = ft_strdup(data->b_in->exp_arg);
 			ft_free_n_null(data->b_in->exp_arg);
+			data->b_in->exp_arg = NULL;
 			return ;
 		}
 	}
@@ -74,6 +76,7 @@ void	add_line_env(t_vault *data)
 	dup_env(data);
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
 	ft_free_n_null (data->b_in->exp_arg);
+	data->b_in->exp_arg = NULL;
 	ft_dbl_ptr_free((void **)data->env);
 	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
 	ft_dbl_ptr_free((void **)data->b_in->env_export);
@@ -93,6 +96,7 @@ void	ft_export(t_vault *data, int line)
 			else
 			{
 				ft_free_n_null(data->b_in->export_var);
+				data->b_in->export_var = NULL;
 				data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);
 				if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
 					var_prep(data, line);
@@ -125,8 +129,10 @@ void	order_env(t_vault *data)
 		copy_env(data, temp, i);
 		export_only_format(data, buff2, temp, i);
 		ft_free_n_null (data->b_in->env_ord[i]);
+		data->b_in->env_ord[i] = NULL;
 		data->b_in->env_ord[i] = ft_strdup(temp[i]);
 		ft_free_n_null(temp[i]);
+		temp[i] = NULL;
 	}
 	free (temp);
 	swap_lines(data, rows);
