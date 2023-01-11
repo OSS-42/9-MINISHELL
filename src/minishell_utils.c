@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 10:05:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:08:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	export_only_format(t_vault *data, char *buff2, char **temp, int i)
 	buff2 = ft_strtrim(ft_strchr(data->env[i], '='), "=");
 	data->buffer = ft_strjoin(temp[i], buff2);
 	ft_free_n_null (buff2);
+	buff2 = NULL;
 	ft_free_n_null (temp[i]);
 	temp[i] = ft_strdup(data->buffer);
 	ft_free_n_null (data->buffer);
@@ -64,6 +65,7 @@ void	export_only_format(t_vault *data, char *buff2, char **temp, int i)
 	ft_free_n_null (temp[i]);
 	temp[i] = ft_strdup(data->buffer);
 	ft_free_n_null (data->buffer);
+	data->buffer = NULL;
 }
 
 void	heredoc_unlink(t_vault *data)

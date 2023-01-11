@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:57:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:06:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	final_quotes_removing(t_vault *data, int line)
 	ft_free_n_null (data->cmd->opt[row]);
 	data->cmd->opt[row] = ft_strdup(data->buffer);
 	ft_free_n_null (data->buffer);
+	data->buffer = NULL;
 }
 
 int	quote_parsing_removal(t_vault *data, int line)

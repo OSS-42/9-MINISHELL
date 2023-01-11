@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 11:49:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:09:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	readline_exec(t_vault *data)
 	add_history(data->read_line);
 	explore_readline(data);
 	ft_free_n_null(data->read_line);
+	data->read_line = NULL;
 	reinit_data(data);
 }
 
