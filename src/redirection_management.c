@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 17:44:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:47:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,19 +149,3 @@ void	heredoc_redirection(t_vault *data)
 		data->fail_redir = TRUE;
 	}
 }
-
-//l:132
-// data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
-// if (data->flag->heredoc_fd == -1)
-// {
-// 	error_message(data, "heredoc - no such file or directory", "1\0");
-// 	rl_replace_line("", 0);
-// 	rl_on_new_line();
-// 	rl_redisplay();
-// 	data->fail_redir = TRUE;
-// }
-// if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
-// {
-// 	error_message(data, "heredoc - I/O error (dup2)", "1\0");
-// 	data->fail_redir = TRUE;
-// }

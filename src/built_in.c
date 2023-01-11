@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 15:55:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:17:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_exit(t_vault *data)
 		close_pipe(data);
 	if (data->cmd->opt && data->cmd->opt[1] && ft_atoi(data->cmd->opt[1]) < 256)
 	{
-		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		ft_putstr_fd(data->cmd->opt[1], data->error_fd);
 		close(data->error_fd);
 	}
@@ -57,7 +57,7 @@ void	ft_exit(t_vault *data)
 	g_error_code = ft_atoi(data->temp_str);
 	ft_free_n_null (data->temp_str);
 	data->temp_str = NULL;
-	unlink(".tmp_error");
+	unlink("/tmp/.tmp_error");
 	exit_minishell();
 	exit(g_error_code);
 }
@@ -110,7 +110,7 @@ void	ft_echo(t_vault *data, int line)
 	return ;
 }
 
-// tests au 9/01 a 16:40
+// tests au 11/01 a 13:40
 //echo $$ ou echo $!, etc pas gerer (on affiche juste les caracteres).
 //echo '-n' ou echo "-n" doivent renvoyer vers echo_minus.
 //			TESTS					|	RESULTS

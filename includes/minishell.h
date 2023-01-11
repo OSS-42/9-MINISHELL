@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 15:37:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:16:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,7 @@ int		find_paths(t_vault *data);
 void	cmd_path_check(t_vault *data);
 void	find_prog(t_vault *data, int line);
 void	make_some_free(t_vault *data);
+void	copy_cmd(t_vault *data, int line, int i);
 
 /***** io_utils.c *****/
 void	io_redirection(t_vault *data, int input, int output);

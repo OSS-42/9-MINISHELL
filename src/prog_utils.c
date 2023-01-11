@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:04:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:08:55 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	find_prog(t_vault *data, int line)
 	{
 		if (data->path_names)
 			ft_dbl_ptr_free((void **) data->path_names);
-		data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		ft_putstr_fd("0\0", data->error_fd);
 		close (data->error_fd);
 		data->flag->execve = 1;
@@ -100,4 +100,14 @@ void	make_some_free(t_vault *data)
 	ft_free_n_null(data->cmd->path);
 	data->cmd->path = NULL;
 	return ;
+}
+
+void	in_child_exec(t_vault *data, int line)
+{
+	final_quotes_removing(data, line);
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
+	recompose_tab_arg(data, line);
+	close_pipe(data);
+	find_prog(data, line);
+	exit_process(data);
 }

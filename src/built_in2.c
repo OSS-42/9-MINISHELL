@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:01:28 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 13:45:54 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,6 @@ void	add_line_env(t_vault *data)
 	}
 	data->b_in->env_export = ft_calloc(sizeof(char *), j + 2);
 	dup_env(data);
-	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
-	ft_free_n_null (data->b_in->exp_arg);
-	data->b_in->exp_arg = NULL;
-	ft_dbl_ptr_free((void **)data->env);
-	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
-	ft_dbl_ptr_free((void **)data->b_in->env_export);
 	return ;
 }
 
@@ -140,7 +134,7 @@ void	order_env(t_vault *data)
 	return ;
 }
 
-// tests au 10/01 a 23:28
+// tests au 11/01 a 13:45
 // commandes a faire dans la sequence affichee
 //			TESTS											|	RESULTS
 //---------------------------------------------------------------------------

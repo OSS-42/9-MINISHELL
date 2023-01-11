@@ -6,11 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:15:09 by momo              #+#    #+#             */
-/*   Updated: 2023/01/04 21:47:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:49:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+//FONCTIONS DEBOGAGE
 
 void	print_double_array(char **array)
 {

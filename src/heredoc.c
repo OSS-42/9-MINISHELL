@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/06 17:06:40 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:48:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ void	heredoc(t_vault *data, int line)
 	if (data->flag->fd_out > 0)
 		dup2(data->flag->fd_out, STDOUT_FILENO);
 }
-
-//l:32
-// if (ft_strncmp(str, data->flag->output,
-// 		ft_strlen(data->flag->output)) == 0
-// 	&& ft_strlen(str) == ft_strlen(data->flag->output))
-// 	data->flag->heredoc_delimiter = TRUE;
-// else
-// {
-// 	ft_putstr_fd(str, data->flag->heredoc_fd);
-// 	ft_putstr_fd("\n", data->flag->heredoc_fd);
-// }
-// free(str);
 
 void	check_eof(t_vault *data, char *str)
 {
