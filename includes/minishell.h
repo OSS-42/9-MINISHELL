@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:37:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:08:09 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ void	print_row(t_vault *data, int line);
 int		ft_isinset(char c);
 void	export_only_format(t_vault *data, char *buff2, char **temp, int i);
 void	heredoc_unlink(t_vault *data);
+void	execve_fail(t_vault *data);
 
 /***** built_in_utils.c *****/
 void	join_unset(t_vault *data, int line);
@@ -309,6 +310,7 @@ int		dbl_quote_parsing(t_vault *data, int row, int i);
 void	clean_before_exit(t_vault *data);
 void	close_fd(t_vault *data);
 void	free_struct_b_in(t_vault *data);
+void	free_struct_flag(t_vault *data);
 
 /***** redirection_utils_3.c *****/
 void	clean_clean_redir(t_vault *data, int i);

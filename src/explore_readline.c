@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 08:29:49 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:09:17 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	child_creation(t_vault *data, int line)
 // unset chocolat= puis ctrl + D - OK
 // double back slash (//) leak et probleme de free
 // unset PATH puis ls - OK
-
+// "///" puis exit - SEGFAULT
 
 //Dans l'ordre
 //export test
@@ -160,10 +160,11 @@ void	child_creation(t_vault *data, int line)
 // export test
 // clear -- OK
 
-//Faire les test dans built_in2.c puis faire une commande invalid. -- INVALID FREE cleaning.c ligne 48 - OK
+//Faire les test dans built_in2.c puis faire une commande invalid. - OK
 
 //ctrl-c + exit ou ctrl-D - definitively lost - KO -- morgan : OK ?
-//ctrl-\ pas d'erreur code envoye dans .tmp_error et pas de Quit affiche dans le terminal - KO
+//ctrl-\ pas d'erreur code envoye dans .tmp_error et pas de Quit
+//	affiche dans le terminal - KO
 
 // Si j'utilise un append et que le fichier de redirection n'existe pas,
 // double free et segfault - OK

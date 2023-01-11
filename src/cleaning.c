@@ -6,39 +6,11 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:47:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:08:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// void	clean_before_exit(t_vault *data)
-// {
-// 	free_struct_b_in(data);
-// 	if (data->quote)
-// 		free(data->quote);
-// 	if (data->read_line)
-// 		free(data->read_line);
-// 	if (data->env && data->flag->execve == 0)
-// 		ft_dbl_ptr_free((void **)data->env);
-// 	if (data->flag->rl_exit == 0)
-// 	{
-// 		if (data->tab_arg)
-// 			ft_dbl_ptr_free((void **)data->tab_arg);
-// 		if (data->pid)
-// 			free (data->pid);
-// 	}
-// 	close_fd(data);
-// 	if (data->flag->execve == 0)
-// 	{
-// 		if (data->cmd->opt && data->flag->rl_exit == 0)
-// 			ft_dbl_ptr_free((void **)data->cmd->opt);
-// 		free (data->cmd->name);
-// 		free (data->cmd);
-// 	}
-// 	if (data->flag)
-// 		free(data->flag);
-// }
 
 void	clean_before_exit(t_vault *data)
 {
@@ -56,6 +28,11 @@ void	clean_before_exit(t_vault *data)
 			free (data->pid);
 	}
 	close_fd(data);
+	free_struct_flag(data);
+}
+
+void	free_struct_flag(t_vault *data)
+{
 	if (data->flag->execve == 0)
 	{
 		if (data->cmd->opt && data->flag->rl_exit == 0)
@@ -63,6 +40,9 @@ void	clean_before_exit(t_vault *data)
 		ft_free_n_null(data->cmd->name);
 		free (data->cmd);
 	}
+	if (data->flag->pipe)
+		ft_dbl_ptr_free((void **)data->flag->pipe);
+	data->flag->pipe = NULL;
 	if (data->flag)
 		free(data->flag);
 }

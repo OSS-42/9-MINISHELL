@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 09:52:36 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	cmd_path_check(t_vault *data)
 			data->flag->execve = 1;
 			clean_before_exit(data);
 			execve(data->cmd->name, data->cmd->opt, data->env);
+			execve_fail(data);
 		}
 		else
 			make_some_free(data);
@@ -84,6 +85,7 @@ void	find_prog(t_vault *data, int line)
 		data->flag->execve = 1;
 		clean_before_exit(data);
 		execve(data->cmd->name, data->cmd->opt, data->env);
+		execve_fail(data);
 	}
 	else if (access(data->cmd->name, F_OK | X_OK) != 0)
 		cmd_path_check(data);

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:55:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:05:25 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,17 @@ void	heredoc_unlink(t_vault *data)
 		data->flag->heredoc = FALSE;
 		unlink("temp_heredoc");
 	}
+}
+
+void	execve_fail(t_vault *data)
+{
+	ft_putstr_fd("unexpected error\n", STDOUT_FILENO);
+	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	ft_putstr_fd("127\0", data->error_fd);
+	close (data->error_fd);
+	ft_free_n_null(data->cmd->name);
+	ft_dbl_ptr_free((void **)data->cmd->opt);
+	ft_dbl_ptr_free((void **)data->env);
+	free(data->cmd);
+	exit (127);
 }
