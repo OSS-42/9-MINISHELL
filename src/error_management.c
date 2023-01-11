@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 13:48:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:08:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_error(t_vault *data, int line)
 
 void	error_message(t_vault *data, char *message, char *code)
 {
-	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(code, data->error_fd);
 	close(data->error_fd);
 	g_error_code = ft_atoi(code);
@@ -43,7 +43,7 @@ char	*find_error_code(t_vault *data)
 	int		read_val;
 
 	temp = ft_calloc(sizeof(char), 4);
-	data->error_fd = open(".tmp_error", O_RDONLY);
+	data->error_fd = open("/tmp/.tmp_error", O_RDONLY);
 	read_val = read(data->error_fd, temp, 3);
 	if (read_val < 0)
 		perror("reading error");
@@ -63,7 +63,7 @@ void	exit_process(t_vault *data)
 
 void	on_success(t_vault *data)
 {
-	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd("0\0", data->error_fd);
 	close(data->error_fd);
 }
