@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:49:24 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 14:52:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,15 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 
 	next_array = to_switch + data->spc_count;
 	actual_array = to_switch;
-	while (data->rl_dec[next_array])
+	if (data->rl_dec[next_array])
 	{
-		ft_free_n_null (data->rl_dec[actual_array]);
-		data->rl_dec[actual_array] = ft_strdup(data->rl_dec[next_array]);
-		next_array++;
-		actual_array++;
+		while (data->rl_dec[next_array])
+		{
+			ft_free_n_null (data->rl_dec[actual_array]);
+			data->rl_dec[actual_array] = ft_strdup(data->rl_dec[next_array]);
+			next_array++;
+			actual_array++;
+		}
 	}
 	if (data->rl_dec[actual_array])
 	{

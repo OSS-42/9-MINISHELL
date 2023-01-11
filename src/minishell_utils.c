@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:08:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:44:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	execve_fail(t_vault *data)
 	ft_free_n_null(data->cmd->name);
 	ft_dbl_ptr_free((void **)data->cmd->opt);
 	ft_dbl_ptr_free((void **)data->env);
+	ft_free_n_null(data->cmd->path);
+	data->cmd->path = NULL;
 	free(data->cmd);
 	exit (127);
 }
