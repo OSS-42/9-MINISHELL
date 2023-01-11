@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 16:18:16 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 16:42:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ void	child_creation(t_vault *data, int line)
 //<<> - KO
 //>>< - KO
 //>>> test - KO
-// ls | echo coucou | cat -e - KO coucou ne s'écrit pas
-// ls | echo coucou - KO
+// ls | echo coucou | cat -e - OK coucou ne s'écrit pas
+// ls | echo coucou - OK
 // S'assurer que le .tmp_error ce créé au bon endroit et ce supprime, même si on change de dossier - OK
 
 //Dans l'ordre
