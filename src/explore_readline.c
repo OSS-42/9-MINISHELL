@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 18:18:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:27:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE && check_multiple_chevron(data) == TRUE)
+	if (rl_prio_n_qty(data, 0, '\0') == TRUE
+		&& check_multiple_chevron(data) == TRUE)
 	{
 		find_str_quote(data);
 		check_for_pipe(data);
@@ -34,7 +35,7 @@ void	explore_readline(t_vault *data)
 	else
 	{
 		ft_dbl_ptr_free((void **)data->rl_dec);
-		error_message(data, "missing or wrong arguments", "1\0");
+		error_message(data, "missing or wrong arguments", "1\0");//Était dans rl_prio_qty
 	}
 	return ;
 }
