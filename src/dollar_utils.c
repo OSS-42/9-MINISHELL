@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 11:21:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 15:12:38 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 09:00:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	dollar_var_to_expand(t_vault *data, int row, int i)
 	if (data->flag->var_not_found == 1)
 		return (0);
 	copy_buffer(data, temp);
-	free (temp);
+	ft_free_n_null (temp);
 	return (0);
 }
 
@@ -55,7 +55,7 @@ char	*var_extract(t_vault *data, int row, int position)
 		temp = ft_substr(data->rl_dec[row], position,
 				data->dollar_var_len);
 		data->dollar_var = ft_strjoin(temp, "=");
-		free (temp);
+		ft_free_n_null (temp);
 	}
 	else
 		return (NULL);
@@ -82,7 +82,7 @@ char	*does_var_exist(t_vault *data)
 		}
 		i++;
 	}
-	free (temp);
+	ft_free_n_null (temp);
 	temp = expand_var(data, i);
 	return (temp);
 }
@@ -95,7 +95,7 @@ char	*expand_var(t_vault *data, int row_var)
 	temp = NULL;
 	if (data->flag->var_not_found == 1)
 	{
-		free (data->dollar_var);
+		ft_free_n_null (data->dollar_var);
 		return (temp);
 	}
 	else
@@ -103,7 +103,7 @@ char	*expand_var(t_vault *data, int row_var)
 		len_var = ft_strlen(data->env[row_var]) - data->dollar_var_len;
 		temp = ft_substr(data->env[row_var],
 				data->dollar_var_len + 1, len_var);
-		free (data->dollar_var);
+		ft_free_n_null (data->dollar_var);
 	}
 	return (temp);
 }

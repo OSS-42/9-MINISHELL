@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:49:24 by mbertin           #+#    #+#             */
-/*   Updated: 2022/12/27 10:56:25 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 08:58:40 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 	int	j;
 
 	j = 0;
-	free(data->rl_dec[*i]);
+	ft_free_n_null(data->rl_dec[*i]);
 	data->rl_dec[*i]
 		= ft_calloc(sizeof(char), data->quote->len_of_replacement + 1);
 	while (data->quote->begin < end)
@@ -78,7 +78,7 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 	actual_array = to_switch;
 	while (data->rl_dec[next_array])
 	{
-		free (data->rl_dec[actual_array]);
+		ft_free_n_null (data->rl_dec[actual_array]);
 		data->rl_dec[actual_array] = ft_strdup(data->rl_dec[next_array]);
 		next_array++;
 		actual_array++;

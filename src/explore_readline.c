@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 23:38:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:29:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,11 +162,11 @@ void	child_creation(t_vault *data, int line)
 
 //Faire les test dans built_in2.c puis faire une commande invalid. -- INVALID FREE cleaning.c ligne 48 - OK
 
-//ctrl-c + exit ou ctrl-D - definitively lost - KO
+//ctrl-c + exit ou ctrl-D - definitively lost - KO -- morgan : OK ?
 //ctrl-\ pas d'erreur code envoye dans .tmp_error et pas de Quit affiche dans le terminal - KO
 
 // Si j'utilise un append et que le fichier de redirection n'existe pas,
-// double free et segfault
+// double free et segfault - OK
 
 //wc - Quand on appuie sur entrée ca ne fait pas de saut de ligne - OK
 

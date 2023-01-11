@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/08 13:21:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:57:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ void	final_quotes_removing(t_vault *data, int line)
 	size = line_count(data, line);
 	data->cmd->opt = ft_calloc(sizeof(char *), size + 2);
 	row = quote_parsing_removal(data, line);
-	free (data->cmd->opt[row]);
+	ft_free_n_null (data->cmd->opt[row]);
 	data->cmd->opt[row] = ft_strdup(data->buffer);
-	free (data->buffer);
-	data->buffer = NULL;
+	ft_free_n_null (data->buffer);
 }
 
 int	quote_parsing_removal(t_vault *data, int line)
@@ -41,7 +40,7 @@ int	quote_parsing_removal(t_vault *data, int line)
 		if (data->tab_arg[line][i] == ' ')
 		{
 			data->cmd->opt[row] = ft_strdup(data->buffer);
-			free (data->buffer);
+			ft_free_n_null (data->buffer);
 			data->buffer = ft_calloc(sizeof(char), 500);
 			row++;
 			data->pos = -1;

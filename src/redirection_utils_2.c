@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:52:27 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/09 17:41:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:58:52 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	dup_from_begin(t_vault *data, int decomp_i, int j, char *temp)
 		j++;
 	}
 	data->begin = 0;
-	free (data->rl_dec[decomp_i]);
+	ft_free_n_null (data->rl_dec[decomp_i]);
 	data->rl_dec[decomp_i] = temp;
 }
 

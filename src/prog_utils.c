@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 15:11:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 08:58:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	find_paths(t_vault *data)
 	else
 	{
 		data->path_names = ft_split(data->paths, ':');
-		free (data->paths);
+		ft_free_n_null (data->paths);
 	}
 	return (TRUE);
 }
@@ -50,7 +50,7 @@ void	cmd_path_check(t_vault *data)
 	{
 		data->cmd->path = ft_strjoin(data->path_names[i], "/");
 		if (i == 0)
-			free (data->cmd->name);
+			ft_free_n_null (data->cmd->name);
 		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 		{
@@ -92,7 +92,7 @@ void	find_prog(t_vault *data, int line)
 
 void	make_some_free(t_vault *data)
 {
-	free(data->cmd->name);
-	free(data->cmd->path);
+	ft_free_n_null(data->cmd->name);
+	ft_free_n_null(data->cmd->path);
 	return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 23:25:50 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:52:49 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ void	join_unset(t_vault *data, int line)
 {
 	int	j;
 
-	if (data->b_in->unset_arg)
-	{
-		free (data->b_in->unset_arg);
-		data->b_in->unset_arg = NULL;
-	}
+	ft_free_n_null (data->b_in->unset_arg);
 	data->b_in->unset_arg = ft_strjoin(data->cmd->opt[line], "=");
 	j = 0;
 	while (data->env[j])
@@ -31,13 +27,12 @@ void	join_unset(t_vault *data, int line)
 		else
 		{
 			remove_line_env(data, j);
-			free (data->b_in->unset_arg);
+			ft_free_n_null (data->b_in->unset_arg);
 			data->b_in->unset_arg = NULL;
 			return ;
 		}
 	}
-	free (data->b_in->unset_arg);
-	data->b_in->unset_arg = NULL;
+	ft_free_n_null (data->b_in->unset_arg);
 	return ;
 }
 
@@ -56,11 +51,11 @@ void	swap_lines(t_vault *data, int rows)
 			if (ft_strcmp(data->b_in->env_ord[i], data->b_in->env_ord[j]) > 0)
 			{
 				temp = ft_strdup(data->b_in->env_ord[i]);
-				free (data->b_in->env_ord[i]);
+				ft_free_n_null (data->b_in->env_ord[i]);
 				data->b_in->env_ord[i] = ft_strdup(data->b_in->env_ord[j]);
-				free (data->b_in->env_ord[j]);
+				ft_free_n_null (data->b_in->env_ord[j]);
 				data->b_in->env_ord[j] = ft_strdup(temp);
-				free (temp);
+				ft_free_n_null (temp);
 			}
 		}
 	}

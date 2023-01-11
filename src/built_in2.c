@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:06:21 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 23:28:46 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:53:54 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	add_line_env(t_vault *data)
 			j++;
 		else
 		{
-			free (data->env[j]);
+			ft_free_n_null (data->env[j]);
 			data->env[j] = ft_strdup(data->b_in->exp_arg);
-			free(data->b_in->exp_arg);
+			ft_free_n_null(data->b_in->exp_arg);
 			return ;
 		}
 	}
 	data->b_in->env_export = ft_calloc(sizeof(char *), j + 2);
 	dup_env(data);
 	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
-	free (data->b_in->exp_arg);
+	ft_free_n_null (data->b_in->exp_arg);
 	ft_dbl_ptr_free((void **)data->env);
 	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
 	ft_dbl_ptr_free((void **)data->b_in->env_export);
@@ -92,8 +92,7 @@ void	ft_export(t_vault *data, int line)
 				error_message(data, "missing or wrong arguments", "2\0");
 			else
 			{
-				if (data->b_in->export_var)
-					free(data->b_in->export_var);
+				ft_free_n_null(data->b_in->export_var);
 				data->b_in->exp_arg = ft_strdup(data->cmd->opt[line]);
 				if (ft_strchr(data->b_in->exp_arg, '=') == NULL)
 					var_prep(data, line);
@@ -125,9 +124,9 @@ void	order_env(t_vault *data)
 	{
 		copy_env(data, temp, i);
 		export_only_format(data, buff2, temp, i);
-		free (data->b_in->env_ord[i]);
+		ft_free_n_null (data->b_in->env_ord[i]);
 		data->b_in->env_ord[i] = ft_strdup(temp[i]);
-		free(temp[i]);
+		ft_free_n_null(temp[i]);
 	}
 	free (temp);
 	swap_lines(data, rows);

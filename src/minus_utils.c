@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minus_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:10:45 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 16:59:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 08:56:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	recreate_arg_tab(t_vault *data, char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free (data->cmd->opt[i]);
+		ft_free_n_null (data->cmd->opt[i]);
 		data->cmd->opt[i] = ft_strdup(tab[i]);
-		free (tab[i]);
+		ft_free_n_null (tab[i]);
 		i++;
 	}
 	data->cmd->opt[i] = NULL;

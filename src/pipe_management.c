@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/10 16:34:11 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 08:57:46 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	expand_tab(t_vault *data, int len)
 		if (ft_strchr(data->rl_dec[row], '|') == 0)
 		{
 			data->temp[i] = ft_strdup(data->rl_dec[row]);
-			free (data->rl_dec[row]);
+			ft_free_n_null (data->rl_dec[row]);
 			i++;
 		}
 		else
 		{
 			search_for_pipe(data, row, &i);
-			free (data->rl_dec[row]);
+			ft_free_n_null (data->rl_dec[row]);
 		}
 	}
 	free(data->rl_dec);

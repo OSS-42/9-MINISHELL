@@ -78,9 +78,10 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void		ft_dbl_ptr_free(void **ptr);
 int			ft_dbl_ptr_len(char **tab);
 char		**ft_dbl_ptr_realloc(char **tab, int size);
-char 		**ft_dbl_ptr_copy(char **source);
+char		**ft_dbl_ptr_copy(char **source);
 int			ft_str_env_var(char *str, char delimiter);
 int			ft_char_env_var(char c);
+void		ft_free_n_null(char *str);
 
 /***********************	Not asked for	****************************/
 

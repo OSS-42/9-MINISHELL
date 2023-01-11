@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:46:04 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 08:54:45 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exit_process(t_vault *data)
 	clean_before_exit(data);
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
-	free (data->temp_str);
+	ft_free_n_null (data->temp_str);
 	exit(g_error_code);
 }
 
