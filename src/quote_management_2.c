@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:49:24 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:49:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,17 @@ void	replace_decomposer_array(t_vault *data, int end, int *i)
 		j++;
 	}
 	(*i)++;
-	if (ft_strchr(data->rl_dec[*i - 1], ' ') != NULL)
+	if (!data->rl_dec[*i + 1])
+	{
+		ft_free_n_null(data->rl_dec[*i]);
+		data->rl_dec[*i] = NULL;
+	}
+	else if (ft_strchr(data->rl_dec[*i - 1], ' ') != NULL)
+	{
+		if (check_full_space(data, *i - 1) == TRUE)
+			data->spc_count = 1;
 		find_decomposer_to_switch(data, *i);
+	}
 }
 
 /*
@@ -91,4 +100,19 @@ void	find_decomposer_to_switch(t_vault *data, int to_switch)
 			actual_array++;
 		}
 	}
+}
+
+int	check_full_space(t_vault *data, int line)
+{
+	int	i;
+
+	i = 1;
+	while (data->rl_dec[line][i]
+		&& data->rl_dec[line][i] != data->quote->quote_priority)
+	{
+		if (data->rl_dec[line][i] != ' ' && data->rl_dec[line][i + 1])
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

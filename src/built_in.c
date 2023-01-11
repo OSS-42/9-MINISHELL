@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 12:21:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:55:03 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ void	ft_echo(t_vault *data, int line)
 	data->b_in->first_word = 1;
 	data->b_in->echo_flag_n = 0;
 	while (data->cmd->opt[++line])
-	{
 		print_row(data, line);
-	}
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;

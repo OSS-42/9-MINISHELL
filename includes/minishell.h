@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:17:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:37:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void	len_after_quote(t_vault *data, int *rl_index);
 void	find_decomposer_array_to_replace(t_vault *data, int end);
 void	replace_decomposer_array(t_vault *data, int end, int *i);
 void	find_decomposer_to_switch(t_vault *data, int to_switch);
+int		check_full_space(t_vault *data, int line);
 
 /***** built_in.c *****/
 void	ft_cd(t_vault *data);

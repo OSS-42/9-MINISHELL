@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:08:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:09:33 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 void	print_row(t_vault *data, int line)
 {
+	// int	fd;
+
+	// fd = 0;
+	// if (data->tab_arg[line + 1])
+	// 	fd = data->flag->pipe[p_write];
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
-		ft_putstr_fd(data->cmd->opt[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], STDOUT_FILENO);
 		data->b_in->first_word = 0;
 	}
 	else if (data->b_in->first_word == 1)
 	{
-		ft_putstr_fd(data->cmd->opt[line], 1);
+		ft_putstr_fd(data->cmd->opt[line], STDOUT_FILENO);
 		data->b_in->first_word = 0;
 	}
 	else
 	{
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(data->cmd->opt[line], 1);
+		ft_putstr_fd(" ", STDOUT_FILENO);
+		ft_putstr_fd(data->cmd->opt[line], STDOUT_FILENO);
 	}
 	return ;
 }

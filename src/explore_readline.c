@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 11:02:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:04:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,15 @@ void	child_creation(t_vault *data, int line)
 // double back slash (//) leak et probleme de free
 // unset PATH puis ls - OK
 // "///" puis exit - OK
+// echo '     ' ou "      " - OK
+// "    " ou '     ' - OK
+//'"' - OK
+//"'" - OK
+//<<> - KO
+//>>< - KO
+//>>> test - KO
+// ls | echo coucou | cat -e - KO coucou ne s'écrit pas
+// S'assurer que le .tmp_error ce créé au bon endroit et ce supprime, même si on change de dossier - OK
 
 //Dans l'ordre
 //export test
