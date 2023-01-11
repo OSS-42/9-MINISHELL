@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 21:05:24 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:06:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:48:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,56 +115,3 @@ int	check_is_redir(t_vault *data, int row, int i)
 	}
 	return (FALSE);
 }
-
-// continuer de rajouter le contenu des guillemet dans buffer
-	// if (check_is_redir(data, row, i) == TRUE)
-	// {
-	// 	data->quote->quote_priority = data->rl_dec[row][i];
-	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
-	// 	while (data->rl_dec[row][i] != data->quote->quote_priority)
-	// 		data->buffer[data->pos++] = data->rl_dec[row][i++];
-	// 	data->buffer[data->pos] = data->rl_dec[row][i];
-	// 	return (i);
-	// }
-
-// int	dble_quote_mngmt(t_vault *data, int row, int i)
-// {
-// 	i++;
-// 	while (data->rl_dec[row][i] && data->rl_dec[row][i] != '\"')
-// 	{
-// 		data->buffer[data->pos] = data->rl_dec[row][i];
-// 		data->pos++;
-// 		i++;
-// 	}
-// 	data->pos--;
-// 	return (i);
-// }
-
-// continuer de rajouter le contenu des guillemet dans buffer
-	// if (check_is_redir(data, row, i) == TRUE)
-	// {
-	// 	data->quote->quote_priority = data->rl_dec[row][i];
-	// 	data->buffer[data->pos++] = data->rl_dec[row][i++];
-	// 	while (data->rl_dec[row][i] != data->quote->quote_priority)
-	// 		data->buffer[data->pos++] = data->rl_dec[row][i++];
-	// 	data->buffer[data->pos] = data->rl_dec[row][i];
-	// 	return (i);
-	// }
-
-// void	row_parsing(t_vault *data)
-// {
-// 	int	row;
-
-// 	row = 0;
-// 	data->b_in->forget_minus = 0;
-// 	data->b_in->minus_n = 0;
-// 	data->b_in->dont_do_minus = 0;
-// 	while (data->rl_dec[row] && data->rl_dec[row][0])
-// 	{
-// 		data->buffer = ft_calloc(sizeof(char), 500);
-// //		parse_row(data, row);
-// 		free(data->buffer);
-// 		data->b_in->forget_minus = 0;
-// 		row++;
-// 	}
-// }

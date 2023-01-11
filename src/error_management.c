@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:06:06 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 13:48:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ void	on_success(t_vault *data)
 	ft_putstr_fd("0\0", data->error_fd);
 	close(data->error_fd);
 }
-
-//l:59
-// g_error_code = ft_atoi(find_error_code(data));
 
 //bash error codes :
 // 1 - Catchall for general errors
