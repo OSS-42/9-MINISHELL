@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 10:09:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:11:31 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	child_creation(t_vault *data, int line)
 // unset chocolat= puis ctrl + D - OK
 // double back slash (//) leak et probleme de free
 // unset PATH puis ls - OK
-// "///" puis exit - SEGFAULT
+// "///" puis exit - OK
 
 //Dans l'ordre
 //export test

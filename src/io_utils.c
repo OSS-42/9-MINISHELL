@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/09 18:54:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:14:59 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	close_pipe(t_vault *data)
 	if (data->flag->pipe_count == 0)
 	{
 		free(data->flag->pipe);
+		data->flag->pipe = NULL;
 		return ;
 	}
 	while (x < data->flag->pipe_count)
@@ -61,9 +62,11 @@ void	close_pipe(t_vault *data)
 		close (data->flag->pipe[x][p_write]);
 		close (data->flag->pipe[x][p_read]);
 		free (data->flag->pipe[x]);
+		data->flag->pipe[x] = NULL;
 		x++;
 	}
 	free(data->flag->pipe);
+	data->flag->pipe = NULL;
 	return ;
 }
 
