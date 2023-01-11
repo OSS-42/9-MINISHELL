@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 10:28:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:17:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,6 +292,7 @@ void	check_for_pipe(t_vault *data);
 void	expand_tab(t_vault *data, int len);
 void	search_for_pipe(t_vault *data, int row, int *i);
 int		prep_temp(t_vault *data, int row, int *i, int j);
+void	copy_or_search_pipe(t_vault *data, int row);
 
 /***** signal_management.c *****/
 void	init_signal(int mode);

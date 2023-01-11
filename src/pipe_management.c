@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:06:26 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:20:39 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,23 @@ void	check_for_pipe(t_vault *data)
 
 void	expand_tab(t_vault *data, int len)
 {
-	int		i;
 	int		row;
 
 	row = -1;
-	i = 0;
 	data->temp = NULL;
 	data->temp = ft_calloc(sizeof(char *),
 			ft_dbl_ptr_len(data->rl_dec) + len * 2 + 1);
+	copy_or_search_pipe(data, row);
+	free(data->rl_dec);
+	data->rl_dec = ft_dbl_ptr_copy(data->temp);
+	ft_dbl_ptr_free((void **)data->temp);
+}
+
+void	copy_or_search_pipe(t_vault *data, int row)
+{
+	int		i;
+
+	i = 0;
 	while (data->rl_dec[++row])
 	{
 		if (ft_strchr(data->rl_dec[row], '|') == 0)
@@ -67,9 +76,7 @@ void	expand_tab(t_vault *data, int len)
 			data->rl_dec[row] = NULL;
 		}
 	}
-	free(data->rl_dec);
-	data->rl_dec = ft_dbl_ptr_copy(data->temp);
-	ft_dbl_ptr_free((void **)data->temp);
+	return ;
 }
 
 void	search_for_pipe(t_vault *data, int row, int *i)
@@ -116,19 +123,3 @@ int	prep_temp(t_vault *data, int row, int *i, int j)
 	}
 	return (j);
 }
-
-//l:91
-// k = 0;
-// while (data->rl_dec[row][j] && data->rl_dec[row][j] != '|')
-// {
-// 	if (data->rl_dec[row][j] == '\'' || data->rl_dec[row][j] == '\"')
-// 	{
-// 		data->quote->quote_priority = data->rl_dec[row][j];
-// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-// 		while (data->rl_dec[row][j] != data->quote->quote_priority)
-// 			data->temp[*i][k++] = data->rl_dec[row][j++];
-// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-// 	}
-// 	else
-// 		data->temp[*i][k++] = data->rl_dec[row][j++];
-// }

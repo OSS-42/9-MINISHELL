@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 11:58:55 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:21:31 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,23 @@ void	ft_env(t_vault *data, int env)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (env == 1)
 	{
-		while (data->env[i])
+		while (data->env[++i])
 		{
 			ft_putstr_fd(data->env[i], 1);
 			ft_putstr_fd("\n", 1);
-			i++;
 		}
 	}
 	else if (env == 2)
 	{
-		while (data->b_in->env_ord[i])
+		while (data->b_in->env_ord[++i])
 		{
 			ft_putstr_fd(data->b_in->env_ord[i], 1);
 			ft_putstr_fd("\n", 1);
 			ft_free_n_null (data->b_in->env_ord[i]);
 			data->b_in->env_ord[i] = NULL;
-			i++;
 		}
 		free (data->b_in->env_ord);
 		data->b_in->env_ord = NULL;
