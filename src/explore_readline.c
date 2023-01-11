@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/10 17:55:03 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/10 23:38:07 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,15 @@ void	child_creation(t_vault *data, int line)
 // export test
 // clear -- OK
 
-//Faire les test dans built_in2.c puis faire une commande invalid. -- INVALID FREE cleaning.c ligne 48 - KO
+//Faire les test dans built_in2.c puis faire une commande invalid. -- INVALID FREE cleaning.c ligne 48 - OK
+
+//ctrl-c + exit ou ctrl-D - definitively lost - KO
+//ctrl-\ pas d'erreur code envoye dans .tmp_error et pas de Quit affiche dans le terminal - KO
 
 // Si j'utilise un append et que le fichier de redirection n'existe pas,
 // double free et segfault
 
-//wc - Quand on appuie sur entrée ca ne fait pas de saut de ligne - KO
+//wc - Quand on appuie sur entrée ca ne fait pas de saut de ligne - OK
 
 //possibilite de suivre le child :
 //1. ouvrir un 2e terminal

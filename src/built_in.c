@@ -82,6 +82,7 @@ void	ft_env(t_vault *data, int env)
 			i++;
 		}
 		free (data->b_in->env_ord);
+		data->b_in->env_ord = NULL;
 	}
 	return ;
 }
