@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 10:11:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 11:02:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void	child_creation(t_vault *data, int line)
 		error_message(data, "pid creation error", "1\0");
 		exit_process(data);
 	}
-	if (data->pid[line] == 0)
-		init_signal(EXEC);
+	// if (data->pid[line] == 0)
+	// 	init_signal(EXEC);
 }
 
 // À corriger :

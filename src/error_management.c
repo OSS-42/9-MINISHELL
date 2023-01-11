@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:54:45 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:29:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ void	exit_process(t_vault *data)
 	g_error_code = ft_atoi(data->temp_str);
 	ft_free_n_null (data->temp_str);
 	exit(g_error_code);
+}
+
+void	on_success(t_vault *data)
+{
+	data->error_fd = open(".tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	ft_putstr_fd("0\0", data->error_fd);
+	close(data->error_fd);
 }
 
 //l:59

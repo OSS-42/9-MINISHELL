@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 08:53:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 10:27:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_cd(t_vault *data)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
 		error_message(data, "no such file or directory", "1\0");
+	else
+		on_success(data);
 }
 
 void	ft_pwd(t_vault *data)
@@ -36,6 +38,7 @@ void	ft_pwd(t_vault *data)
 	}
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
+	on_success(data);
 	free (pwd);
 }
 
@@ -84,6 +87,7 @@ void	ft_env(t_vault *data, int env)
 		free (data->b_in->env_ord);
 		data->b_in->env_ord = NULL;
 	}
+	on_success(data);
 	return ;
 }
 
@@ -104,6 +108,7 @@ void	ft_echo(t_vault *data, int line)
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", 1);
 	data->b_in->forget_minus = 0;
+	on_success(data);
 	return ;
 }
 

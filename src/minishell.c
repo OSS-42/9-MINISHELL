@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:56:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 11:03:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	launch_minishell(t_vault *data)
 		data->read_line = readline("alive>");
 		if (data->read_line != NULL)
 		{
-			signal(SIGINT, SIG_IGN);
+			init_signal(EXEC);
 			if (ft_strcmp(data->read_line, "") != 0)
 				readline_exec(data);
 		}
@@ -114,5 +114,6 @@ int	main(int argc, char **argv, char **env)
 	launch_minishell(&data);
 	return (g_error_code);
 }
+
 // valgrind --leak-check=full  --show-reachable=yes --track-fds=yes
 // --suppressions=./minishell.sup ./minishell
