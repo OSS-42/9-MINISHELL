@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:05:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:57:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:06:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ void	expand_tab(t_vault *data, int len)
 		{
 			data->temp[i] = ft_strdup(data->rl_dec[row]);
 			ft_free_n_null (data->rl_dec[row]);
+			data->rl_dec[row] = NULL;
 			i++;
 		}
 		else
 		{
 			search_for_pipe(data, row, &i);
 			ft_free_n_null (data->rl_dec[row]);
+			data->rl_dec[row] = NULL;
 		}
 	}
 	free(data->rl_dec);

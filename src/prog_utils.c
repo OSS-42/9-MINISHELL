@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 09:52:36 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:04:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	find_paths(t_vault *data)
 	{
 		data->path_names = ft_split(data->paths, ':');
 		ft_free_n_null (data->paths);
+		data->paths = NULL;
 	}
 	return (TRUE);
 }
@@ -95,6 +96,8 @@ void	find_prog(t_vault *data, int line)
 void	make_some_free(t_vault *data)
 {
 	ft_free_n_null(data->cmd->name);
+	data->cmd->name = NULL;
 	ft_free_n_null(data->cmd->path);
+	data->cmd->path = NULL;
 	return ;
 }

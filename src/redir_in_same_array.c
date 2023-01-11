@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:46 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:03:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 	*j = -1;
 	redirection(data, data->flag->output);
 	ft_free_n_null (data->flag->output);
+	data->flag->output = NULL;
 }
 
 void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line)

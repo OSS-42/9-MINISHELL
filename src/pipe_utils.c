@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:05:51 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	switch_lines(t_vault *data, int row, int line)
 	{
 		data->tab_arg[line] = ft_strdup(data->buffer);
 		ft_free_n_null (data->buffer);
+		data->buffer = NULL;
 		if (data->rl_dec[row + 1] && data->rl_dec[row + 1][0])
 			validate_the_switch(data, row, line);
 	}
@@ -57,6 +58,7 @@ void	switch_lines(t_vault *data, int row, int line)
 	{
 		temp = ft_strjoin(data->tab_arg[line], data->buffer);
 		ft_free_n_null (data->buffer);
+		data->buffer = NULL;
 		ft_free_n_null (data->tab_arg[line]);
 		data->tab_arg[line] = ft_strdup(temp);
 		ft_free_n_null (temp);
@@ -71,6 +73,7 @@ void	do_the_switch(t_vault *data, int line)
 	ft_free_n_null (data->tab_arg[line]);
 	data->tab_arg[line] = ft_strdup(data->buffer);
 	ft_free_n_null (data->buffer);
+	data->buffer = NULL;
 }
 
 void	validate_the_switch(t_vault *data, int row, int line)
