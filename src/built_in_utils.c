@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 21:08:51 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 11:56:15 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:35:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ void	dup_env(t_vault *data)
 		data->b_in->env_export[j] = ft_strdup(data->env[j]);
 		j++;
 	}
+	data->b_in->env_export[j] = ft_strdup(data->b_in->exp_arg);
+	ft_free_n_null (data->b_in->exp_arg);
+	data->b_in->exp_arg = NULL;
+	ft_dbl_ptr_free((void **)data->env);
+	data->env = ft_dbl_ptr_copy(data->b_in->env_export);
+	ft_dbl_ptr_free((void **)data->b_in->env_export);
 	return ;
 }
 

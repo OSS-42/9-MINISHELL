@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:07:17 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 12:40:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,7 @@ void	recompose_tab_arg(t_vault *data, int line)
 	i = 1;
 	buffer = NULL;
 	if (data->cmd->opt[i])
-	{
-		ft_free_n_null (data->tab_arg[line]);
-		data->tab_arg[line] = NULL;
-		data->tab_arg[line] = ft_strdup(data->cmd->opt[i]);
-	}
+		copy_cmd(data, line, i);
 	else
 		return ;
 	if (data->cmd->opt[++i])
@@ -74,6 +70,13 @@ void	recompose_tab_arg(t_vault *data, int line)
 		return ;
 }
 
+void	copy_cmd(t_vault *data, int line, int i)
+{
+	ft_free_n_null (data->tab_arg[line]);
+	data->tab_arg[line] = NULL;
+	data->tab_arg[line] = ft_strdup(data->cmd->opt[i]);
+}
+
 int	is_special_built_in(t_vault *data, int line)
 {
 	if (ft_strcmp(data->cmd->name, "cd") == 0
@@ -85,14 +88,4 @@ int	is_special_built_in(t_vault *data, int line)
 		|| ft_strcmp(data->cmd->name, "env") == 0)
 		return (TRUE);
 	return (FALSE);
-}
-
-void	in_child_exec(t_vault *data, int line)
-{
-	final_quotes_removing(data, line);
-	data->cmd->name = ft_strdup(data->cmd->opt[0]);
-	recompose_tab_arg(data, line);
-	close_pipe(data);
-	find_prog(data, line);
-	exit_process(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:04:18 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 12:40:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,14 @@ void	make_some_free(t_vault *data)
 	ft_free_n_null(data->cmd->path);
 	data->cmd->path = NULL;
 	return ;
+}
+
+void	in_child_exec(t_vault *data, int line)
+{
+	final_quotes_removing(data, line);
+	data->cmd->name = ft_strdup(data->cmd->opt[0]);
+	recompose_tab_arg(data, line);
+	close_pipe(data);
+	find_prog(data, line);
+	exit_process(data);
 }
