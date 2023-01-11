@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 16:16:42 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:24:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,10 @@ void	flag_count(t_vault *data, int i, int j);
 int		pipe_check(t_vault *data);
 int		move_index_delimiter(t_vault *data, int i, char delimiter);
 int		check_pipe_syntax(t_vault *data, int i);
+
+/***** meta_analyzis2.c *****/
+int		check_multiple_chevron(t_vault *data);
+void	quote_iteration(t_vault *data, int *i);
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data, int i, int j);

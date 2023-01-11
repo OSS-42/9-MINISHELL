@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/07 23:17:59 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:27:18 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 			i = move_index_delimiter(data, i, c);
 			if (!data->read_line[i])
 			{
-				error_message(data, "missing or wrong arguments", "1\0");
+				// error_message(data, "missing or wrong arguments", "1\0");
 				return (FALSE);
 			}
 			else if (c == '\"')

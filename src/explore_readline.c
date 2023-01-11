@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 16:42:22 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:18:38 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE)
+	if (rl_prio_n_qty(data, 0, '\0') == TRUE && check_multiple_chevron(data) == TRUE)
 	{
 		find_str_quote(data);
 		check_for_pipe(data);
@@ -32,7 +32,10 @@ void	explore_readline(t_vault *data)
 		piping(data);
 	}
 	else
+	{
 		ft_dbl_ptr_free((void **)data->rl_dec);
+		error_message(data, "missing or wrong arguments", "1\0");
+	}
 	return ;
 }
 
@@ -148,12 +151,18 @@ void	child_creation(t_vault *data, int line)
 // "    " ou '     ' - OK
 //'"' - OK
 //"'" - OK
-//<<> - KO
-//>>< - KO
-//>>> test - KO
+//<<> - OK
+//>>< - OK
+//>>> test - OK
+// HEREDOC - OK
 // ls | echo coucou | cat -e - OK coucou ne s'écrit pas
 // ls | echo coucou - OK
 // S'assurer que le .tmp_error ce créé au bon endroit et ce supprime, même si on change de dossier - OK
+// echo "bonjour" - OK
+// ls | exit -KO
+// ls | exit | ls -KO
+
+//Faire des test poussé avec heredoc car j'ai un doute
 
 //Dans l'ordre
 //export test

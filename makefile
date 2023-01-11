@@ -45,6 +45,7 @@ SRCS =	src/minishell.c \
 		src/quote_management.c \
 		src/quote_management_2.c \
 		src/meta_analyzis.c \
+		src/meta_analyzis2.c \
 		src/parsing_utils.c \
 		src/error_management.c\
 		src/minishell_utils.c\
