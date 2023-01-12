@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:05:51 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:26:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	create_tab_arg(t_vault *data, int row, int line)
 {
+	if (data->rl_dec[0][0] == '|')
+	{
+		ft_dbl_ptr_free((void **)data->rl_dec);
+		return ;
+	}
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
 	while (data->rl_dec[++row] && data->rl_dec[row]
 		&& data->rl_dec[row][0])

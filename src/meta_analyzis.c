@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 09:28:21 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 09:44:39 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	pipe_check(t_vault *data)
 			if (check_pipe_syntax(data, i) == 1)
 			{
 				error_message(data, "missing or wrong arguments", "1\0");
+				ft_dbl_ptr_free((void **)data->rl_dec);
 				return (1);
 			}
 			else

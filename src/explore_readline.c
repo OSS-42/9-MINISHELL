@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 09:28:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:27:32 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	explore_readline(t_vault *data)
 		flag_count(data, 0, 0);
 		dollar_parsing(data);
 		create_tab_arg(data, -1, 0);
-		if (!(data->tab_arg[0]))
+		if (!data->tab_arg || !(data->tab_arg[0]))
 		{
 			error_message(data, "putain con, regarde ce que tu ecris", "1\0");
 			return ;
