@@ -6,22 +6,13 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 16:05:43 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:12:46 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	g_error_code = 0;
-
-void	readline_exec(t_vault *data)
-{
-	add_history(data->read_line);
-	explore_readline(data);
-	ft_free_n_null(data->read_line);
-	data->read_line = NULL;
-	reinit_data(data);
-}
 
 void	launch_minishell(t_vault *data)
 {

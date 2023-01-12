@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/01/12 16:21:44 by mbertin          ###   ########.fr       */
+=======
+/*   Updated: 2023/01/12 16:21:39 by ewurstei         ###   ########.fr       */
+>>>>>>> 58e4856440d4b6441823ae11e0920271bc490403
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +77,6 @@ void	close_fd(t_vault *data)
 	}
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
-	close (data->error_fd);
+	// close (data->error_fd);
 	return ;
 }
