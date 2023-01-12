@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 13:48:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:10:58 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	heredoc(t_vault *data, int line)
 {
 	char	*str;
 
-	if (data->flag->heredoc_fd != 0)
+	if (data->flag->heredoc_fd > 0)
 		close (data->flag->heredoc_fd);
 	dup2(data->flag->stdin_backup, STDIN_FILENO);
 	dup2(data->flag->stdout_backup, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 13:35:00 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:29:01 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ void	child_creation(t_vault *data, int line)
 // echo "bonjour" - OK
 // ls | exit -KO
 // ls | exit | ls -KO
+//<< eof cat < test inverser
+
+//ls | ls | lss -la | ls $? 1127
 
 //Faire des test poussé avec heredoc car j'ai un doute
 
@@ -173,7 +176,7 @@ void	child_creation(t_vault *data, int line)
 
 //Dans l'ordre
 // mauvaise commande
-// expr $? + $? - OK (dois renvoyer 254)
+// expr $? + $? *2  - KO (dois renvoyer 254 puis 0, )
 
 //Dans l'ordre:
 // export test

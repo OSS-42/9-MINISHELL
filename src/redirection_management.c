@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 13:47:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:03:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,5 @@ void	heredoc_redirection(t_vault *data)
 		error_message(data, "heredoc - I/O error (dup2)", "1\0");
 		data->fail_redir = TRUE;
 	}
+	data->flag->heredoc = FALSE;
 }

@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 19:00:47 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:16:51 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	reinit_data(t_vault *data)
 	if (data->flag->fd > 0)
 		close (data->flag->fd);
 	if (data->flag->heredoc_fd > 0)
+	{
+		unlink("temp_heredoc");
 		close (data->flag->heredoc_fd);
+	}
 	data->flag->heredoc_fd = 0;
 	data->flag->fd_out = 0;
 	data->flag->fd = 0;
