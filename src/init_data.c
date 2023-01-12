@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 15:26:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:04:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	init_data(t_vault *data, char **env)
 {
-	data->error_fd = open("/tmp/.tmp_error",
-			O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd("0\0", data->error_fd);
-	close(data->error_fd);
+	put_code_in_fd("0\0", data->error_fd);
+	// data->error_fd = open("/tmp/.tmp_error",
+	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// ft_putstr_fd("0\0", data->error_fd);
+	// close(data->error_fd);
 	data->env = ft_dbl_ptr_copy(env);
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
