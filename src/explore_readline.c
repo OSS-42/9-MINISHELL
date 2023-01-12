@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 10:27:32 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:35:00 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
-	if (rl_prio_n_qty(data, 0, '\0') == TRUE
+	if (data->rl_dec[0] && rl_prio_n_qty(data, 0, '\0') == TRUE
 		&& check_multiple_chevron(data) == TRUE)
 	{
 		find_str_quote(data);
