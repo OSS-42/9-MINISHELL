@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 16:04:34 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:59:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 void	init_data(t_vault *data, char **env)
 {
 	put_code_in_fd("0\0", data->error_fd);
-	// data->error_fd = open("/tmp/.tmp_error",
-	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	// ft_putstr_fd("0\0", data->error_fd);
-	// close(data->error_fd);
 	data->env = ft_dbl_ptr_copy(env);
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);
@@ -47,6 +43,7 @@ void	reinit_data(t_vault *data)
 	data->quote->simple_quote_count = 0;
 	data->quote->begin = 0;
 	data->quote->last_replace = 0;
+	data->flag->var_not_found = 0;
 	data->fail_redir = FALSE;
 	ft_free_n_null (data->cmd->name);
 	data->cmd->name = NULL;

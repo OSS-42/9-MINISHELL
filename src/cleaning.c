@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 16:21:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:00:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,5 @@ void	close_fd(t_vault *data)
 	}
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
-	// close (data->error_fd);
 	return ;
 }

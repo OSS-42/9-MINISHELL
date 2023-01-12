@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 16:16:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:59:18 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ int	check_error(t_vault *data, int line)
 void	error_message(t_vault *data, char *message, char *code)
 {
 	put_code_in_fd(code, data->error_fd);
-	// data->error_fd = open("/tmp/.tmp_error",
-	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	// ft_putstr_fd(code, data->error_fd);
-	// close(data->error_fd);
 	g_error_code = ft_atoi(code);
 	if (data->flag->rl_exit == 0)
 		ft_putstr_fd("minishell: ", 2);
