@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 08:54:02 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 10:41:23 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,7 @@ void	create_tab_arg(t_vault *data, int row, int line);
 void	switch_lines(t_vault *data, int row, int line);
 void	do_the_switch(t_vault *data, int line);
 void	validate_the_switch(t_vault *data, int row, int line);
+int		check_pipe_validity(t_vault *data);
 
 /***** heredoc.c *****/
 void	heredoc(t_vault *data, int i);

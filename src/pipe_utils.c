@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 10:15:12 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 10:26:20 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 11:18:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void	create_tab_arg(t_vault *data, int row, int line)
 {
-	if (data->rl_dec[0][0] == '|')
-	{
-		ft_dbl_ptr_free((void **)data->rl_dec);
+	if (check_pipe_validity(data) == 1)
 		return ;
-	}
 	data->tab_arg = ft_calloc(sizeof(char *), (data->flag->pipe_count + 1) + 1);
-	while (data->rl_dec[++row] && data->rl_dec[row]
-		&& data->rl_dec[row][0])
+	while (data->rl_dec[++row] && data->rl_dec[row] && data->rl_dec[row][0])
 	{
 		if (data->rl_dec[row][0] == '|')
 		{
@@ -31,13 +27,12 @@ void	create_tab_arg(t_vault *data, int row, int line)
 				data->flag->pipe_count = ft_dbl_ptr_len(data->tab_arg) - 1;
 				return ;
 			}
-			line++;
-			row++;
-			if (!(data->rl_dec[row]))
+			if (!(data->rl_dec[++row]))
 			{
 				data->flag->pipe_count = ft_dbl_ptr_len(data->tab_arg) - 1;
 				return ;
 			}
+			line++;
 		}
 		data->buffer = ft_strdup(data->rl_dec[row]);
 		if (data->buffer[0] != '\0')
@@ -87,4 +82,14 @@ void	validate_the_switch(t_vault *data, int row, int line)
 		&& ft_strlen((const char *) data->rl_dec[row + 1]) == 1)
 		return ;
 	do_the_switch(data, line);
+}
+
+int	check_pipe_validity(t_vault *data)
+{
+	if (data->rl_dec[0][0] == '|')
+	{
+		ft_dbl_ptr_free((void **)data->rl_dec);
+		return (1);
+	}
+	return (0);
 }
