@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 16:02:09 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:19:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void	find_str_quote(t_vault *data);
 void	len_of_replacement(t_vault *data, int *i);
 void	begin_of_new_replacement(t_vault *data, int *rl_index);
 void	len_after_quote(t_vault *data, int *rl_index);
+void	space_count_update(t_vault *data, int *rl_index);
 
 /***** quote_management_2.c *****/
 void	find_decomposer_array_to_replace(t_vault *data, int end);

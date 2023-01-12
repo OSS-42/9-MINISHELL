@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:58:22 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 16:56:39 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:17:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,26 @@ void	len_of_replacement(t_vault *data, int *rl_index)
 		{
 			(*rl_index)++;
 			data->quote->len_of_replacement++;
-			while ((data->read_line[*rl_index] != data->quote->quote_priority))
-			{
-				if (data->read_line[*rl_index] == ' ')
-				{
-					data->spc_count++;
-					while (data->read_line[*rl_index] == ' ')
-					{
-						(*rl_index)++;
-						data->quote->len_of_replacement++;
-					}
-					if (data->read_line[*rl_index] == data->quote->quote_priority)
-					{
-						(*rl_index)--;
-						data->quote->len_of_replacement--;
-					}
-				}
-				(*rl_index)++;
-				data->quote->len_of_replacement++;
-			}
+			space_count_update(data, rl_index);
+			// while ((data->read_line[*rl_index] != data->quote->quote_priority))
+			// {
+			// 	if (data->read_line[*rl_index] == ' ')
+			// 	{
+			// 		data->spc_count++;
+			// 		while (data->read_line[*rl_index] == ' ')
+			// 		{
+			// 			(*rl_index)++;
+			// 			data->quote->len_of_replacement++;
+			// 		}
+			// 		if (data->read_line[*rl_index] == data->quote->quote_priority)
+			// 		{
+			// 			(*rl_index)--;
+			// 			data->quote->len_of_replacement--;
+			// 		}
+			// 	}
+			// 	(*rl_index)++;
+			// 	data->quote->len_of_replacement++;
+			// }
 			if (data->read_line[*rl_index + 1])
 				len_after_quote(data, rl_index);
 			else
@@ -122,5 +123,28 @@ void	len_after_quote(t_vault *data, int *rl_index)
 		}
 		data->quote->len_of_replacement++;
 		(*rl_index)++;
+	}
+}
+
+void	space_count_update(t_vault *data, int *rl_index)
+{
+	while ((data->read_line[*rl_index] != data->quote->quote_priority))
+	{
+		if (data->read_line[*rl_index] == ' ')
+		{
+			data->spc_count++;
+			while (data->read_line[*rl_index] == ' ')
+			{
+				(*rl_index)++;
+				data->quote->len_of_replacement++;
+			}
+			if (data->read_line[*rl_index] == data->quote->quote_priority)
+			{
+				(*rl_index)--;
+				data->quote->len_of_replacement--;
+			}
+		}
+		(*rl_index)++;
+		data->quote->len_of_replacement++;
 	}
 }
