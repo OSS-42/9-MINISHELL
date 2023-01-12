@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 08:53:44 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:10:27 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ void	cmd_path_check(t_vault *data)
 		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 		{
-			ft_dbl_ptr_free((void **) data->path_names);
+			if (data->path_names)
+				ft_dbl_ptr_free((void **) data->path_names);
+			data->error_fd = open("/tmp/.tmp_error",
+					O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			ft_putstr_fd("0\0", data->error_fd);
+			close (data->error_fd);
 			close (data->error_fd);
 			data->flag->execve = 1;
 			clean_before_exit(data);
