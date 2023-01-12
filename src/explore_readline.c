@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 16:06:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:26:08 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,11 +161,11 @@ void	child_creation(t_vault *data, int line)
 // S'assurer que le .tmp_error ce créé au bon endroit et ce supprime,
 //	même si on change de dossier - OK
 // echo "bonjour" - OK
-// ls | exit -KO
-// ls | exit | ls -KO
-//<< eof cat < test inverser
+// ls | exit -OK
+// ls | exit | ls -OK
+//<< eof cat < test OK
 
-//ls | ls | lss -la | ls $? 1127
+//ls | ls | lss -la | ls $? OK
 
 //echo coucou
 
