@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 15:18:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:55:35 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	cmd_path_check(t_vault *data)
 		{
 			if (data->path_names)
 				ft_dbl_ptr_free((void **) data->path_names);
-			data->error_fd = open("/tmp/.tmp_error",
-					O_CREAT | O_WRONLY | O_TRUNC, 0644);
-			ft_putstr_fd("0\0", data->error_fd);
-			close (data->error_fd);
-			close (data->error_fd);
+			put_code_in_fd("0\0", data->error_fd);
+			// data->error_fd = open("/tmp/.tmp_error",
+			// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			// ft_putstr_fd("0\0", data->error_fd);
+			// close (data->error_fd);
 			data->flag->execve = 1;
 			clean_before_exit(data);
 			execve(data->cmd->name, data->cmd->opt, data->env);
@@ -86,10 +86,11 @@ void	find_prog(t_vault *data, int line)
 	{
 		if (data->path_names)
 			ft_dbl_ptr_free((void **) data->path_names);
-		data->error_fd = open("/tmp/.tmp_error",
-				O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		ft_putstr_fd("0\0", data->error_fd);
-		close (data->error_fd);
+		put_code_in_fd("0\0", data->error_fd);
+		// data->error_fd = open("/tmp/.tmp_error",
+		// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		// ft_putstr_fd("0\0", data->error_fd);
+		// close (data->error_fd);
 		data->flag->execve = 1;
 		clean_before_exit(data);
 		execve(data->cmd->name, data->cmd->opt, data->env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 13:25:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:54:43 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ void	ft_cd(t_vault *data)
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (chdir(data->cmd->opt[1]) != 0)
+	{
 		error_message(data, "no such file or directory", "1\0");
+		put_code_in_fd("1\0", data->error_fd);
+	}
 	else
-		on_success(data);
+		put_code_in_fd("0\0", data->error_fd);
+		// on_success(data);
 }
 
 void	ft_pwd(t_vault *data)
@@ -38,7 +42,7 @@ void	ft_pwd(t_vault *data)
 	}
 	ft_putstr_fd(pwd, 1);
 	write(1, "\n", 1);
-	on_success(data);
+	put_code_in_fd("0\0", data->error_fd);
 	free (pwd);
 }
 
@@ -48,10 +52,11 @@ void	ft_exit(t_vault *data)
 		close_pipe(data);
 	if (data->cmd->opt && data->cmd->opt[1] && ft_atoi(data->cmd->opt[1]) < 256)
 	{
-		data->error_fd = open("/tmp/.tmp_error", O_CREAT
-				| O_WRONLY | O_TRUNC, 0644);
-		ft_putstr_fd(data->cmd->opt[1], data->error_fd);
-		close(data->error_fd);
+		put_code_in_fd(data->cmd->opt[1], data->error_fd);
+		// data->error_fd = open("/tmp/.tmp_error", O_CREAT
+		// 		| O_WRONLY | O_TRUNC, 0644);
+		// ft_putstr_fd(data->cmd->opt[1], data->error_fd);
+		// close(data->error_fd);
 	}
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
@@ -60,6 +65,7 @@ void	ft_exit(t_vault *data)
 	if (data->flag->exit_fork != 1)
 	{
 		exit_minishell();
+		clear_history ();
 		unlink("/tmp/.tmp_error");
 	}
 	clean_before_exit(data);
@@ -91,7 +97,8 @@ void	ft_env(t_vault *data, int env)
 		free (data->b_in->env_ord);
 		data->b_in->env_ord = NULL;
 	}
-	on_success(data);
+	put_code_in_fd("0\0", data->error_fd);
+	//on_success(data);
 	return ;
 }
 
@@ -116,7 +123,8 @@ void	ft_echo(t_vault *data, int line)
 	if (data->b_in->minus_n == 0)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	data->b_in->forget_minus = 0;
-	on_success(data);
+	put_code_in_fd("0\0", data->error_fd);
+	// on_success(data);
 	return ;
 }
 

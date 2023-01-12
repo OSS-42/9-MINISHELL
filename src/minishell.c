@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 15:16:51 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:55:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int	g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
-	data->error_fd = open("/tmp/.tmp_error",
-			O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd("0\0", data->error_fd);
-	close(data->error_fd);
+	put_code_in_fd("0\0", data->error_fd);
+	// data->error_fd = open("/tmp/.tmp_error",
+	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// ft_putstr_fd("0\0", data->error_fd);
+	// close(data->error_fd);
 	data->env = ft_dbl_ptr_copy(env);
 	data->buffer = NULL;
 	data->cmd = ft_calloc(sizeof(t_cmd), 1);

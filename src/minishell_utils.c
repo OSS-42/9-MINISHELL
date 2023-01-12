@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 19:01:14 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:55:17 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ void	heredoc_unlink(t_vault *data)
 void	execve_fail(t_vault *data)
 {
 	ft_putstr_fd("unexpected error\n", STDOUT_FILENO);
-	data->error_fd = open("/tmp/.tmp_error",
-			O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd("127\0", data->error_fd);
-	close (data->error_fd);
+	put_code_in_fd("127\0", data->error_fd);
+	// data->error_fd = open("/tmp/.tmp_error",
+	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// ft_putstr_fd("127\0", data->error_fd);
+	// close (data->error_fd);
 	ft_free_n_null(data->cmd->name);
 	ft_dbl_ptr_free((void **)data->cmd->opt);
 	ft_dbl_ptr_free((void **)data->env);

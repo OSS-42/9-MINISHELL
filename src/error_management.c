@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 09:19:53 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:54:50 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int	check_error(t_vault *data, int line)
 
 void	error_message(t_vault *data, char *message, char *code)
 {
-	data->error_fd = open("/tmp/.tmp_error",
-			O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd(code, data->error_fd);
-	close(data->error_fd);
+	put_code_in_fd(code, data->error_fd);
+	// data->error_fd = open("/tmp/.tmp_error",
+	// 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// ft_putstr_fd(code, data->error_fd);
+	// close(data->error_fd);
 	g_error_code = ft_atoi(code);
 	if (data->flag->rl_exit == 0)
 		ft_putstr_fd("minishell: ", 2);
@@ -62,12 +63,20 @@ void	exit_process(t_vault *data)
 	exit(g_error_code);
 }
 
-void	on_success(t_vault *data)
+// void	on_success(t_vault *data)
+// {
+// 	data->error_fd = open("/tmp/.tmp_error",
+// 			O_CREAT | O_WRONLY | O_TRUNC, 0644);
+// 	ft_putstr_fd("0\0", data->error_fd);
+// 	close(data->error_fd);
+// }
+
+void	put_code_in_fd(char *code, int fd)
 {
-	data->error_fd = open("/tmp/.tmp_error",
+	fd = open("/tmp/.tmp_error",
 			O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd("0\0", data->error_fd);
-	close(data->error_fd);
+	ft_putstr_fd(code, fd);
+	close (fd);
 }
 
 //bash error codes :
