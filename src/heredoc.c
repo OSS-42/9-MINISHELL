@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 15:10:58 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:08:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	reset_n_close_heredoc(t_vault *data)
 {
 	data->flag->heredoc_delimiter = FALSE;
 	data->flag->heredoc = TRUE;
-	ft_putstr_fd("\n", data->flag->heredoc_fd);
+	// ft_putstr_fd("\n", data->flag->heredoc_fd);
 	close(data->flag->heredoc_fd);
 	return ;
 }
