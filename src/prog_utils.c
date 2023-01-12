@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 19:01:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 08:53:44 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	find_prog(t_vault *data, int line)
 {
 	if (is_built_in(data->cmd->name) == 1)
 	{
+		data->flag->exit_fork = 1;
 		built_in(data, line);
 		return ;
 	}

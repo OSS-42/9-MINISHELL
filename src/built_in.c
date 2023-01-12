@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 18:56:33 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 09:22:34 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_pwd(t_vault *data)
 
 void	ft_exit(t_vault *data)
 {
-	if (data->flag->rl_exit == 0)
+	if (data->flag->rl_exit == 0 && data->flag->exit_fork != 1)
 		close_pipe(data);
 	if (data->cmd->opt && data->cmd->opt[1] && ft_atoi(data->cmd->opt[1]) < 256)
 	{
@@ -53,13 +53,16 @@ void	ft_exit(t_vault *data)
 		ft_putstr_fd(data->cmd->opt[1], data->error_fd);
 		close(data->error_fd);
 	}
-	clean_before_exit(data);
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
 	ft_free_n_null (data->temp_str);
 	data->temp_str = NULL;
-	unlink("/tmp/.tmp_error");
-	exit_minishell();
+	if (data->flag->exit_fork != 1)
+	{
+		exit_minishell();
+		unlink("/tmp/.tmp_error");
+	}
+	clean_before_exit(data);
 	exit(g_error_code);
 }
 

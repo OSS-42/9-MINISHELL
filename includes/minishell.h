@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 18:24:24 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 08:54:02 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_flag
 	int		**pipe;
 	int		execve;
 	int		rl_exit;
+	int		exit_fork;
 }	t_flag;
 
 typedef struct s_quote

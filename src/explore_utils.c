@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 23:49:56 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 12:40:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:54:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	built_in(t_vault *data, int line)
 	if (ft_strcmp("unset", data->cmd->name) == 0)
 		ft_unset (data, line);
 	if (ft_strcmp("exit", data->cmd->name) == 0)
+	{
 		ft_exit (data);
+	}
 	return ;
 }
 
