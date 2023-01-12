@@ -68,7 +68,8 @@ SRCS =	src/minishell.c \
 		src/pipe_management.c\
 		src/signal_management.c\
 		src/dollar_parsing_utils.c\
-		src/cleaning.c
+		src/cleaning.c\
+		src/init_data.c
 
 #retire : 		src/redir_in_next_array.c
 
