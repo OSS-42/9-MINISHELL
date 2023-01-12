@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 17:00:35 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:25:57 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void	cmd_path_check(t_vault *data)
 		return ;
 	while (data->path_names[++i])
 	{
-		data->cmd->path = ft_strjoin(data->path_names[i], "/");
-		if (i == 0)
-			ft_free_n_null (data->cmd->name);
-		data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
+		cmd_prep(data, i);
 		if (access(data->cmd->name, F_OK | X_OK) == 0)
 		{
 			if (data->path_names)

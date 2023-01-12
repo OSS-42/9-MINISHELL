@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 16:59:04 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:23:45 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,12 @@ void	reinit_fd(t_vault *data)
 		close (data->flag->heredoc_fd);
 	}
 	data->flag->heredoc_fd = 0;
+}
+
+void	cmd_prep(t_vault *data, int i)
+{
+	data->cmd->path = ft_strjoin(data->path_names[i], "/");
+	if (i == 0)
+		ft_free_n_null (data->cmd->name);
+	data->cmd->name = ft_strjoin(data->cmd->path, data->cmd->opt[0]);
 }

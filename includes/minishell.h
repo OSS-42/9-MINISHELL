@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 17:19:42 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:23:33 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	launch_minishell(t_vault *data);
 void	init_data(t_vault *dat, char **env);
 void	reinit_data(t_vault *data);
 void	reinit_fd(t_vault *data);
+void	cmd_prep(t_vault *data, int i);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
