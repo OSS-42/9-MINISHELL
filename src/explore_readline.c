@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/11 18:53:30 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:59:56 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,8 @@ void	child_creation(t_vault *data, int line)
 // HEREDOC - OK
 // ls | echo coucou | cat -e - OK coucou ne s'écrit pas
 // ls | echo coucou - OK
-// S'assurer que le .tmp_error ce créé au bon endroit et ce supprime, même si on change de dossier - OK
+// S'assurer que le .tmp_error ce créé au bon endroit et ce supprime,
+//	même si on change de dossier - OK
 // echo "bonjour" - OK
 // ls | exit -KO
 // ls | exit | ls -KO

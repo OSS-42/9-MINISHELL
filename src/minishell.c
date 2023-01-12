@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 15:06:27 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:00:47 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	g_error_code = 0;
 
 void	init_data(t_vault *data, char **env)
 {
-	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error",
+			O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd("0\0", data->error_fd);
 	close(data->error_fd);
 	data->env = ft_dbl_ptr_copy(env);

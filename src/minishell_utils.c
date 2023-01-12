@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 23:09:55 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 16:20:40 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 19:01:14 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	print_row(t_vault *data, int line)
 {
-	// int	fd;
-
-	// fd = 0;
-	// if (data->tab_arg[line + 1])
-	// 	fd = data->flag->pipe[p_write];
 	if ((data->b_in->echo_flag_n == 1 && data->b_in->forget_minus == 0))
 	{
 		ft_putstr_fd(data->cmd->opt[line], STDOUT_FILENO);
@@ -85,7 +80,8 @@ void	heredoc_unlink(t_vault *data)
 void	execve_fail(t_vault *data)
 {
 	ft_putstr_fd("unexpected error\n", STDOUT_FILENO);
-	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error",
+			O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd("127\0", data->error_fd);
 	close (data->error_fd);
 	ft_free_n_null(data->cmd->name);

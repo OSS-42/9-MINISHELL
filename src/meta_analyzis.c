@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:05:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 17:27:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/11 19:00:26 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	rl_prio_n_qty(t_vault *data, int i, char c)
 			i = move_index_delimiter(data, i, c);
 			if (!data->read_line[i])
 			{
-				// error_message(data, "missing or wrong arguments", "1\0");
+				// error_message(data, "missing or wrong arguments", "1\0"); Maintenant dans explore_readline
 				return (FALSE);
 			}
 			else if (c == '\"')

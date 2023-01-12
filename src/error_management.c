@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 22:20:15 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 15:08:39 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:59:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	check_error(t_vault *data, int line)
 
 void	error_message(t_vault *data, char *message, char *code)
 {
-	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error",
+			O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd(code, data->error_fd);
 	close(data->error_fd);
 	g_error_code = ft_atoi(code);
@@ -63,7 +64,8 @@ void	exit_process(t_vault *data)
 
 void	on_success(t_vault *data)
 {
-	data->error_fd = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	data->error_fd = open("/tmp/.tmp_error",
+			O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	ft_putstr_fd("0\0", data->error_fd);
 	close(data->error_fd);
 }
