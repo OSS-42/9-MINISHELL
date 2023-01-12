@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:27:46 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 15:18:18 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:31:22 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	cmd_path_check(t_vault *data)
 			data->error_fd = open("/tmp/.tmp_error",
 					O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			ft_putstr_fd("0\0", data->error_fd);
-			close (data->error_fd);
 			close (data->error_fd);
 			data->flag->execve = 1;
 			clean_before_exit(data);

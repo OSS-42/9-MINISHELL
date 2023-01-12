@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 10:41:23 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:27:24 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,13 @@ typedef struct s_vault
 }	t_vault;
 
 /***** minishell.c *****/
-void	init_data(t_vault *dat, char **env);
-void	reinit_data(t_vault *data);
 void	readline_exec(t_vault *data);
 void	launch_minishell(t_vault *data);
+
+/***** init_data.c *****/
+void	init_data(t_vault *dat, char **env);
+void	reinit_data(t_vault *data);
+void	reinit_fd(t_vault *data);
 
 /***** explore_readline.c *****/
 void	explore_readline(t_vault *data);
