@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 14:29:01 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 16:06:42 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ void	child_creation(t_vault *data, int line)
 //<< eof cat < test inverser
 
 //ls | ls | lss -la | ls $? 1127
+
+//echo coucou
 
 //Faire des test poussé avec heredoc car j'ai un doute
 
