@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:57:20 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 18:25:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/12 11:50:21 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ void	quote_iteration(t_vault *data, int *i)
 	if (data->read_line[*i] == '\'' || data->read_line[*i] == '\"')
 	{
 		data->quote->quote_priority = data->read_line[*i];
-		i++;
+		(*i)++;
 		while (data->read_line[*i] != data->quote->quote_priority)
-			i++;
-		i++;
+			(*i)++;
 	}
 }
