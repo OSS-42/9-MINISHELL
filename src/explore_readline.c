@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 17:26:08 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/13 11:23:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	piping(t_vault *data)
 		i++;
 	}
 	free(data->pid);
+	if (data->status != 0)
+		put_code_in_fd(ft_itoa(WEXITSTATUS(data->status)), data->error_fd);
 }
 
 void	launching_exec(t_vault *data)
