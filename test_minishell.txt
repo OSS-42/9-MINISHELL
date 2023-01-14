@@ -1,9 +1,12 @@
 
 -- eCHO 2x-- Leaks avec un itoa
 
--- cat << | wc -- wc ne devrait pas renvoyer de resultat (Quand une redirection ce fait mal dans une suite de commande, aucune commande ne doit s'executer)
-
--- cat makefile >test | wc < | cat makefile >test1 -- aucun fichier ne devrait ce creer et aucune commande executer (Difficle a mettre en place, obligatoire ?)
+---- A retester dans sa totalité a chaque fois que je modifie ----
+-- cat << | wc -- OK
+-- cat makefile >test | wc < | cat makefile >test1 -- OK
+-- >echo>echo1> -- OK
+-- echo >> | cat makefile -- OK
+-- Continuer de faire des tests plus poussé
 
 -- exit "coucou"
 -- echo $? -- revnoie 0 mais devrait renvoyer 2
@@ -22,7 +25,6 @@
 
 -- >echo> -- unintialised values
 
--- >echo>echo1> -- echo et echo1 ne devrait pas être créé ( a verifier a l'école )
 
 -- export TEST="ls       -l     - a" -- conditionnal jump
 

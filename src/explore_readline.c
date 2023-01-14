@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/13 11:23:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/14 09:54:21 by maison           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	explore_readline(t_vault *data)
 {
 	data->rl_dec = ft_split(data->read_line, ' ');
 	if (data->rl_dec[0] && rl_prio_n_qty(data, 0, '\0') == TRUE
-		&& check_multiple_chevron(data) == TRUE)
+		&& check_wrong_redirection(data) == TRUE)
 	{
 		find_str_quote(data);
 		check_for_pipe(data);
