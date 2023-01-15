@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/15 12:09:58 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/15 12:15:10 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void	explore_readline(t_vault *data)
 void	piping(t_vault *data)
 {
 	int		i;
-	char	*temp;
 
 	i = 0;
-	temp = NULL;
 	data->flag->pipe = ft_calloc(sizeof(int *), (data->flag->pipe_count) + 1);
 	while (i < data->flag->pipe_count)
 	{
@@ -65,12 +63,7 @@ void	piping(t_vault *data)
 	}
 	free(data->pid);
 	if (data->status != 0)
-	{
-		temp = ft_itoa(WEXITSTATUS(data->status));
-		put_code_in_fd(temp, data->error_fd);
-		ft_free_n_null(temp);
-		temp = NULL;
-	}
+		pid_status_execve(data);
 }
 
 void	launching_exec(t_vault *data)

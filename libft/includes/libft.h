@@ -82,6 +82,7 @@ char		**ft_dbl_ptr_copy(char **source);
 int			ft_str_env_var(char *str, char delimiter);
 int			ft_char_env_var(char c);
 void		ft_free_n_null(char *str);
+int			ft_is_str_digit(char *str);
 
 /***********************	Not asked for	****************************/
 

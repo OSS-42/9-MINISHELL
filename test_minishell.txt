@@ -1,5 +1,5 @@
 
--- eCHO 2x-- Leaks avec un itoa
+-- eCHO 2x-- Leaks avec un itoa - OK
 
 ---- A retester dans sa totalité a chaque fois que je modifie ----
 -- cat << | wc -- OK
@@ -9,19 +9,19 @@
 -- Continuer de faire des tests plus poussé
 
 -- exit "coucou"
--- echo $? -- revnoie 0 mais devrait renvoyer 2
+-- echo $? -- revnoie 0 mais devrait renvoyer 2 - OK
 
 -- exit +204
--- echo $? -- renvoie 20 mais devrait renvoyer 204
+-- echo $? -- renvoie 20 mais devrait renvoyer 204 - OK
 
 -- exit "+102"
--- echo $? -- renvoie 10 mais devrait renvoyer 102
+-- echo $? -- renvoie 10 mais devrait renvoyer 102 - OK
 
 -- exit 42 42 42
--- echo $? -- renvoie 42 mais devrait renvoyer 1
+-- echo $? -- renvoie 42 mais devrait renvoyer 1 - OK
 
 -- exit ++2
--- echo $? -- renvoie 0 mais devrait renvoyer 2
+-- echo $? -- renvoie 0 mais devrait renvoyer 2 - OK
 
 -- >echo> -- unintialised values
 

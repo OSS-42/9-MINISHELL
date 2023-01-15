@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maison <maison@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/14 10:42:30 by maison           ###   ########.fr       */
+/*   Updated: 2023/01/15 13:57:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ int		check_wrong_redirection(t_vault *data);
 void	quote_iteration(t_vault *data, int *i);
 int		pipe_after_chevron(t_vault *data, int *i);
 int		triple_chevron(t_vault *data, int *i);
-
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data, int i, int j);
@@ -333,6 +332,10 @@ void	free_struct_flag(t_vault *data);
 
 /***** redirection_utils_3.c *****/
 void	clean_clean_redir(t_vault *data, int i);
+
+/***** minishell_utils2.c *****/
+void	pid_status_execve(t_vault *data);
+void	good_code_format(t_vault *data);
 
 /***** DEBUG *****/
 int		check_if_inside_quote(char *str, char c);

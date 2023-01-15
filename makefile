@@ -49,6 +49,7 @@ SRCS =	src/minishell.c \
 		src/parsing_utils.c \
 		src/error_management.c\
 		src/minishell_utils.c\
+		src/minishell_utils2.c\
 		src/built_in_utils.c\
 		src/dollar_utils.c\
 		src/redirection_management.c\

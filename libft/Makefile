@@ -70,7 +70,8 @@ SRCS = \
 		src/ft_dbl_ptr_realloc.c\
 		src/ft_dbl_ptr_copy.c\
 		src/ft_atolong.c\
-		src/ft_free_n_null.c
+		src/ft_free_n_null.c\
+		src/ft_is_str_digit.c
 
 #------------------------------------------------------------------------------#
 #									 RULES									   #

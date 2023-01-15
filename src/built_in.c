@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/12 16:59:57 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/15 13:58:03 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ void	ft_exit(t_vault *data)
 {
 	if (data->flag->rl_exit == 0 && data->flag->exit_fork != 1)
 		close_pipe(data);
-	if (data->cmd->opt && data->cmd->opt[1] && ft_atoi(data->cmd->opt[1]) < 256)
-		put_code_in_fd(data->cmd->opt[1], data->error_fd);
+	if ((data->cmd->opt[1] && data->cmd->opt[2])
+		|| (data->cmd->opt[1] && ft_is_str_digit(data->cmd->opt[1]) == 0))
+		put_code_in_fd("2\0", data->error_fd);
+	else if (data->cmd->opt && data->cmd->opt[1]
+		&& ft_atoi(data->cmd->opt[1]) < 257)
+		good_code_format(data);
 	data->temp_str = find_error_code(data);
 	g_error_code = ft_atoi(data->temp_str);
 	ft_free_n_null (data->temp_str);
