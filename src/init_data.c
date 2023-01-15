@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/12 17:23:45 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:08:29 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_data(t_vault *data, char **env)
 	data->flag->execve = 0;
 	data->flag->rl_exit = 0;
 	data->pid = NULL;
+	data->status = 0;
 	return ;
 }
 
