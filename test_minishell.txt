@@ -23,10 +23,10 @@
 -- exit ++2
 -- echo $? -- renvoie 0 mais devrait renvoyer 2 - OK
 
--- >echo> -- unintialised values
+-- >echo> -- unintialised values (pas reproduisible - peut etre corrige avec conditional jump ?)
 
 
--- export TEST="ls       -l     - a" -- conditionnal jump
+-- export TEST="ls       -l     - a" -- conditionnal jump - OK (data->status etait pas initialise)
 
 //			TESTS											|	RESULTS
 //---------------------------------------------------------------------------
