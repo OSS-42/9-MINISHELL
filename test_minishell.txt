@@ -6,6 +6,10 @@
 -- cat makefile >test | wc < | cat makefile >test1 -- OK
 -- >echo>echo1> -- OK
 -- echo >> | cat makefile -- OK
+-- echo > -- Invalid read -- OK
+-- echo coucou >test > >test2 -- OK
+-- cat << c -- marche pas
+-- cat << c|oucou -- cat ouvre un invité de commande au lieu de prendre l'entrée standart du heredoc
 -- Continuer de faire des tests plus poussé
 
 -- exit "coucou"

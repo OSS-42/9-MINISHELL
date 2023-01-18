@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:57:20 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/15 14:13:31 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:52:09 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	pipe_after_chevron(t_vault *data, int *i)
 		(*i)++;
 		while (data->read_line[*i] == ' ')
 			(*i)++;
-		if (data->read_line[*i] && data->read_line[*i] == '|')
+		if (data->read_line[*i] && (data->read_line[*i] == '|'
+				|| data->read_line[*i] == '>' || data->read_line[*i] == '<'))
 			return (FALSE);
 	}
 	return (TRUE);
