@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 12:04:04 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/11 15:09:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:57:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,15 @@ void	init_signal(int mode)
 //management of ctrl+C
 void	interrupt_alive(int sig)
 {
-	int	fd_temp;
+	int		fd_temp;
+	char	*temp;
 
 	sig = 128 + sig;
+	temp = ft_itoa(sig);
 	fd_temp = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd(ft_itoa(sig), fd_temp);
+	ft_putstr_fd(temp, fd_temp);
 	close(fd_temp);
+	free (temp);
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -47,11 +50,14 @@ void	interrupt_alive(int sig)
 //management of ctrl+C
 void	interrupt_exec(int sig)
 {
-	int	fd_temp;
+	int		fd_temp;
+	char	*temp;
 
 	sig = 128 + sig;
+	temp = ft_itoa(sig);
 	fd_temp = open("/tmp/.tmp_error", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	ft_putstr_fd(ft_itoa(sig), fd_temp);
+	ft_putstr_fd(temp, fd_temp);
+	free (temp);
 	close(fd_temp);
 	kill(0, 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
