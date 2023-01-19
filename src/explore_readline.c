@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 13:06:19 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 14:03:48 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ void	piping(t_vault *data)
 	launching_exec(data);
 	i = 0;
 	close_pipe(data);
-	// while (i < data->flag->pipe_count + 1)
-	// {
-	// 	data->child_id = waitpid(data->pid[i], &data->status, 0);
-	// 	i++;
-	// }
-	data->child_id = waitpid(data->pid[ft_dbl_ptr_len(data->tab_arg) - 1],
-			&data->status, 0); //Pour le dernier enfant
+	while (i < data->flag->pipe_count + 1)
+	{
+		data->child_id = waitpid(data->pid[i], &data->status, 0);
+		i++;
+	}
 	free(data->pid);
 	if (data->status != 0)
 		pid_status_execve(data);
@@ -111,8 +109,6 @@ void	forking(t_vault *data, int line, int type)
 	}
 	else if (type == 2)
 	{
-		if (line > 0)
-			data->child_id = waitpid(data->pid[line - 1], &data->status, 0);// On wait tous sauf le dernier
 		child_creation(data, line);
 		if (data->pid[line] == 0)
 		{
