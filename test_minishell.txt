@@ -11,6 +11,7 @@
 -- cat << c -- OK
 -- cat << c|oucou -- la mauvaise commande oucou s'execute avant la commande cat
 -- cat >> -- invalid read (quelque chose de free trop tot)
+-- cat << eof | wc << eof | cat -e | ls << eof -- cat ne fonctionne pas
 -- Continuer de faire des tests plus poussé
 
 -- exit "coucou"
