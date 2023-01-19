@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 14:03:48 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 17:34:32 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ void	explore_readline(t_vault *data)
 		}
 		piping(data);
 	}
-	else
-	{
-		ft_dbl_ptr_free((void **)data->rl_dec);
-		error_message(data, "missing or wrong arguments", "1\0");
-	}
+	//Essayer de se rappeler pourquoi ces lignes - en les enlevant ca resoud probleme #1 du 19 janvier.
+	// else
+	// {
+	// 	ft_dbl_ptr_free((void **)data->rl_dec);
+	// 	error_message(data, "missing or wrong arguments", "1\0");
+	// }
 	return ;
 }
 

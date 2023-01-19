@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 10:01:03 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 17:34:25 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,6 +338,7 @@ void	clean_clean_redir(t_vault *data, int i);
 void	pid_status_execve(t_vault *data);
 void	good_code_format(t_vault *data);
 int		check_wrong_redirection(t_vault *data);
+char	*check_env_home_exist(t_vault *data);
 
 /***** DEBUG *****/
 int		check_if_inside_quote(char *str, char c);
