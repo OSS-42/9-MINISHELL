@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/13 10:47:29 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/19 10:51:52 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ echo test 14 > 1> 2
 echo test 15 >"tes>t">test1
 echo test 16>"tes>t">test1
 echo "tes>t"
-echo "bon>jour" ">test" >coucou SEGFAULT
+echo "bon>jour" ">test" >coucou
 
 echo test 1 >> test >> test1 >> test2
 echo test 2 >>1 >>2 >>3
