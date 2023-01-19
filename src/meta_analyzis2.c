@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:57:20 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/18 10:52:09 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/18 11:52:59 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,14 @@
 
 int	check_wrong_redirection(t_vault *data)
 {
-	int	i;
-
-	i = 0;
-	while (data->read_line[i])
-	{
-		quote_iteration(data, &i);
-		if (data->read_line[i] == '<' || data->read_line[i] == '>')
-		{
-			if (pipe_after_chevron(data, &i) == FALSE)
-				return (FALSE);
-			else if ((data->read_line[i] == '<'
-					&& data->read_line[i + 1] == '>')
-				|| (data->read_line[i] == '>' && data->read_line[i + 1] == '<'))
-				return (FALSE);
-			else if (triple_chevron(data, &i) == FALSE)
-				return (FALSE);
-			else if (!data->read_line[i + 1])
-				return (FALSE);
-		}
-		if (data->read_line[i])
-			i++;
-	}
+	if (pipe_after_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (opposite_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (triple_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (chevron_space_chevron(data, 0) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -50,41 +36,77 @@ void	quote_iteration(t_vault *data, int *i)
 	}
 }
 
-int	pipe_after_chevron(t_vault *data, int *i)
+int	pipe_after_chevron(t_vault *data, int i)
 {
-	if (data->read_line[*i + 1] == data->read_line[*i]
-		&& data->read_line[*i + 2] == '|')
-		return (FALSE);
-	else if (data->read_line[*i + 1] == data->read_line[*i]
-		&& data->read_line[*i + 2] == ' ')
+	while (data->read_line[i])
 	{
-		*i = *i + 2;
-		while (data->read_line[*i] == ' ')
-			(*i)++;
-		if (data->read_line[*i] && data->read_line[*i] == '|')
-			return (FALSE);
-	}
-	else if (data->read_line[*i + 1] == ' ')
-	{
-		(*i)++;
-		while (data->read_line[*i] == ' ')
-			(*i)++;
-		if (data->read_line[*i] && (data->read_line[*i] == '|'
-				|| data->read_line[*i] == '>' || data->read_line[*i] == '<'))
-			return (FALSE);
+		quote_iteration(data, &i);
+		if (data->read_line[i] == '<' || data->read_line[i] == '>')
+		{
+			i++;
+			if (data->read_line[i] == '<' || data->read_line[i] == '>')
+				i++;
+			if (!data->read_line[i])
+				return (FALSE);
+			while (data->read_line[i] == ' ')
+				i++;
+			if (data->read_line[i] == '|')
+				return (FALSE);
+		}
+		i++;
 	}
 	return (TRUE);
 }
 
-int	triple_chevron(t_vault *data, int *i)
+int	triple_chevron(t_vault *data, int i)
 {
-	if ((data->read_line[*i] == '<' && data->read_line[*i + 1] == '<')
-		|| (data->read_line[*i] == '>' && data->read_line[*i + 1] == '>'))
+	while (data->read_line[i])
 	{
-		(*i)++;
-		if (data->read_line[*i + 1] == '<'
-			|| data->read_line[*i + 1] == '>')
+		quote_iteration(data, &i);
+		if (data->read_line[i] == '<' || data->read_line[i] == '>')
+		{
+			data->flag->chevron = data->read_line[i];
+			if (data->read_line[i + 1] && data->read_line[i + 2]
+				&& data->read_line[i + 1] == data->flag->chevron
+				&& data->read_line[i + 2] == data->flag->chevron)
+				return (FALSE);
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int	opposite_chevron(t_vault *data, int i)
+{
+	while (data->read_line[i])
+	{
+		quote_iteration(data, &i);
+		if ((data->read_line[i] == '<' && !data->read_line[i + 1])
+			|| (data->read_line[i] == '<' && data->read_line[i + 1] == '>')
+			|| (data->read_line[i] == '>' && data->read_line[i + 1] == '<'))
 			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+int	chevron_space_chevron(t_vault *data, int i)
+{
+	while (data->read_line[i])
+	{
+		quote_iteration(data, &i);
+		if (data->read_line[i] == '<' || data->read_line[i] == '>')
+		{
+			if (data->read_line[i + 1] && data->read_line[i + 1] == ' ')
+			{
+				i++;
+				if (data->read_line[i + 1]
+					&& (data->read_line[i + 1] == '<'
+						|| data->read_line[i + 1] == '>'))
+					return (FALSE);
+			}
+		}
+		i++;
 	}
 	return (TRUE);
 }

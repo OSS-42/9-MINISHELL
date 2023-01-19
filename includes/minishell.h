@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/15 13:57:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:52:38 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,10 @@ int		check_pipe_syntax(t_vault *data, int i);
 /***** meta_analyzis2.c *****/
 int		check_wrong_redirection(t_vault *data);
 void	quote_iteration(t_vault *data, int *i);
-int		pipe_after_chevron(t_vault *data, int *i);
-int		triple_chevron(t_vault *data, int *i);
+int		pipe_after_chevron(t_vault *data, int i);
+int		triple_chevron(t_vault *data, int i);
+int		opposite_chevron(t_vault *data, int i);
+int		chevron_space_chevron(t_vault *data, int i);
 
 /***** redirection_management.c *****/
 void	execute_redirection(t_vault *data, int i, int j);
