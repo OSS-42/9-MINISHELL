@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   meta_analyzis2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 16:57:20 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/18 11:52:59 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 09:59:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	check_wrong_redirection(t_vault *data)
-{
-	if (pipe_after_chevron(data, 0) == FALSE)
-		return (FALSE);
-	if (opposite_chevron(data, 0) == FALSE)
-		return (FALSE);
-	if (triple_chevron(data, 0) == FALSE)
-		return (FALSE);
-	if (chevron_space_chevron(data, 0) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}
 
 void	quote_iteration(t_vault *data, int *i)
 {

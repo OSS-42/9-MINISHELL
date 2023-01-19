@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:13:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/15 13:57:00 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:59:53 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,17 @@ void	good_code_format(t_vault *data)
 	put_code_in_fd(temp, data->error_fd);
 	ft_free_n_null(temp);
 	temp = NULL;
+}
+
+int	check_wrong_redirection(t_vault *data)
+{
+	if (pipe_after_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (opposite_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (triple_chevron(data, 0) == FALSE)
+		return (FALSE);
+	if (chevron_space_chevron(data, 0) == FALSE)
+		return (FALSE);
+	return (TRUE);
 }
