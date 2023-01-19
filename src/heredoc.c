@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/19 11:36:13 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 12:01:39 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	heredoc(t_vault *data, int line)
 		check_eof(data, str);
 	}
 	reset_n_close_heredoc(data);
-	if (line == 0 || line != ft_dbl_ptr_len(data->tab_arg) - 1)
+	if (data->flag->pipe_count > 0
+		&& (line == 0 || line != ft_dbl_ptr_len(data->tab_arg) - 1))
 		dup2(data->flag->pipe[line][p_write], STDOUT_FILENO);
 	if (data->flag->fd_out > 0)
 		dup2(data->flag->fd_out, STDOUT_FILENO);

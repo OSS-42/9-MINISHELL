@@ -6,7 +6,7 @@
 /*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 11:40:07 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 12:07:54 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	forking(t_vault *data, int line, int type)
 	}
 	else if (type == 2)
 	{
+		if (line > 0)
+			waitpid(data->pid[line - 1], &data->status, 0); // A voir avec eric
 		child_creation(data, line);
 		if (data->pid[line] == 0)
 		{
@@ -119,7 +121,6 @@ void	forking(t_vault *data, int line, int type)
 			close_pipe(data);
 			exit_process(data);
 		}
-		waitpid(data->pid[line], &data->status, 0); // A voir avec eric
 	}
 }
 
