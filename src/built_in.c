@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/15 22:46:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/18 21:29:16 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_exit(t_vault *data)
 {
 	if (data->flag->rl_exit == 0 && data->flag->exit_fork != 1)
 		close_pipe(data);
-	if (getenv("PATH") && data->env)
+	if (getenv("PATH") && data->env && data->cmd->opt)
 	{
 		if ((data->cmd->opt[1] && data->cmd->opt[2])
 			|| (data->cmd->opt[1] && ft_is_str_digit(data->cmd->opt[1]) == 0))
