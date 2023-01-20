@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:13:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 11:12:03 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 20:02:12 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ int	check_wrong_redirection(t_vault *data)
 	if (chevron_space_chevron(data, 0) == FALSE)
 		return (FALSE);
 	return (TRUE);
+}
+
+char	*check_env_home_exist(t_vault *data)
+{
+	int		i;
+	int		slen;
+	char	*temp;
+
+	i = 0;
+	slen = 0;
+	temp = NULL;
+	while (data->env[i] && data->env[i][0])
+	{
+		if (ft_strnstr(data->env[i], "HOME=", 5) != NULL)
+		{
+			slen = ft_strlen(data->env[i]);
+			temp = ft_substr(data->env[i], 5, slen);
+			return (temp);
+		}
+		i++;
+	}
+	return (temp);
 }

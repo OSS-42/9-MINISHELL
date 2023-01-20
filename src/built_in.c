@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 19:13:01 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 20:02:02 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	ft_cd(t_vault *data) // correction de "cd" sans argument
 {
 	char	*temp;
-	// char	*temp2;
+	char	*temp2;
 
 	temp = NULL;
-	// temp2 = NULL;
+	temp2 = NULL;
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (data->cmd->opt[1] == NULL)
@@ -28,20 +28,21 @@ void	ft_cd(t_vault *data) // correction de "cd" sans argument
 		data->cmd->opt = ft_calloc(sizeof(char *), 3);
 		data->cmd->opt[0] = ft_strdup(temp);
 		free (temp);
-		// temp2 = check_env_home_exist(data);
-		// if (temp2 == NULL)
-		// {
-		// 	error_message(data, "HOME not set", "1\0");
-		// 	put_code_in_fd("1\0", data->error_fd);
-		// 	return ;
-		// }
-		// else
-		// {
-		// 	data->cmd->opt[1] = ft_strdup(temp2);
-		// 	free(temp2);
-		// }
+		temp2 = check_env_home_exist(data);
+		if (temp2 == NULL)
+		{
+			error_message(data, "HOME not set", "1\0");
+			put_code_in_fd("1\0", data->error_fd);
+			free (temp2);
+			return ;
+		}
+		else
+		{
+			data->cmd->opt[1] = ft_strdup(temp2);
+			free(temp2);
+		}
 	}
-	else if (chdir(data->cmd->opt[1]) != 0)
+	if (chdir(data->cmd->opt[1]) != 0)
 	{
 		error_message(data, "no such file or directory", "1\0");
 		put_code_in_fd("1\0", data->error_fd);
