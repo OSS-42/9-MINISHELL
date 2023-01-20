@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:22:01 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/20 12:19:31 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/20 12:31:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int	main(int argc, char **argv, char **env)
 	intro_minishell();
 	launch_minishell(&data);
 	return (g_error_code);
+}
+
+void	readline_error(t_vault *data, int i)
+{
+	ft_dbl_ptr_free((void **)data->rl_dec);
+	while (data->read_line[i] == ' ')
+		i++;
+	if (data->read_line[i] && data->read_line[i] != ' ')
+		error_message(data, "missing or wrong arguments", "1\0");
 }
 
 // valgrind --leak-check=full  --show-reachable=yes --track-fds=yes

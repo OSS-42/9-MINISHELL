@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:13:30 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 20:02:12 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:20:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,15 @@ char	*check_env_home_exist(t_vault *data)
 		i++;
 	}
 	return (temp);
+}
+
+void	change_arg_cd(t_vault *data)
+{
+	char	*temp;
+
+	temp = ft_strdup(data->cmd->opt[0]);
+	ft_dbl_ptr_free ((void **)data->cmd->opt);
+	data->cmd->opt = ft_calloc(sizeof(char *), 3);
+	data->cmd->opt[0] = ft_strdup(temp);
+	free (temp);
 }

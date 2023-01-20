@@ -6,41 +6,32 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:52:13 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 20:04:07 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:23:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_cd(t_vault *data) // correction de "cd" sans argument
+void	ft_cd(t_vault *data)
 {
 	char	*temp;
-	char	*temp2;
 
 	temp = NULL;
-	temp2 = NULL;
 	if (data->flag->pipe_count != 0)
 		return ;
 	if (data->cmd->opt[1] == NULL)
 	{
-		temp = ft_strdup(data->cmd->opt[0]);
-		ft_dbl_ptr_free ((void **)data->cmd->opt);
-		data->cmd->opt = ft_calloc(sizeof(char *), 3);
-		data->cmd->opt[0] = ft_strdup(temp);
-		free (temp);
-		temp2 = check_env_home_exist(data);
-		if (temp2 == NULL)
+		change_arg_cd(data);
+		temp = check_env_home_exist(data);
+		if (temp == NULL)
 		{
 			error_message(data, "HOME not set", "1\0");
 			put_code_in_fd("1\0", data->error_fd);
-			free (temp2);
+			free (temp);
 			return ;
 		}
-		else
-		{
-			data->cmd->opt[1] = ft_strdup(temp2);
-			free(temp2);
-		}
+		data->cmd->opt[1] = ft_strdup(temp);
+		free(temp);
 	}
 	if (chdir(data->cmd->opt[1]) != 0)
 	{
