@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 11:50:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:27:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	redirection(t_vault *data, char *redirection)
 	else if (data->flag->chevron == '<')
 		stdin_redirection(data, redirection);
 }
-
 
 //mettre reset_io avec les messages d'erreur ?
 void	stdout_redirection(t_vault *data, char *redirection)

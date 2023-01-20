@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 10:09:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:26:42 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ void	reinit_fd(t_vault *data)
 	if (data->flag->fd > 0)
 		close (data->flag->fd);
 	data->flag->fd = 0;
-	// if (data->flag->heredoc_fd > 0)
-	// {
-	// 	unlink("temp_heredoc");
-	// 	close (data->flag->heredoc_fd);
-	// }
 	data->flag->heredoc_fd = 0;
 }
 
