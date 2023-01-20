@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/20 11:59:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:29:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_vault
 /***** minishell.c *****/
 void	readline_exec(t_vault *data);
 void	launch_minishell(t_vault *data);
+void	readline_error(t_vault *data, int i);
 
 /***** init_data.c *****/
 void	init_data(t_vault *dat, char **env);
@@ -172,7 +173,8 @@ void	heredoc_redirection(t_vault *data);
 
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line, int j);
+void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line,
+			int j);
 int		move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array);
@@ -231,12 +233,11 @@ void	ft_export(t_vault *data, int line);
 void	add_line_env(t_vault *data);
 void	order_env(t_vault *data);
 
-/***** error_mgmnt.c *****/
+/***** error_management.c *****/
 int		check_error(t_vault *data, int row);
 void	error_message(t_vault *data, char *message, char *code);
 char	*find_error_code(t_vault *data);
 void	exit_process(t_vault *data);
-// void	on_success(t_vault *data);
 void	put_code_in_fd(char *code, int fd);
 
 /***** minishell_utils.c *****/
@@ -340,6 +341,7 @@ void	pid_status_execve(t_vault *data);
 void	good_code_format(t_vault *data);
 int		check_wrong_redirection(t_vault *data);
 char	*check_env_home_exist(t_vault *data);
+void	change_arg_cd(t_vault *data);
 
 /***** DEBUG *****/
 int		check_if_inside_quote(char *str, char c);

@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/20 11:28:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:30:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,7 @@ void	explore_readline(t_vault *data)
 		piping(data);
 	}
 	else
-	{
-		ft_dbl_ptr_free((void **)data->rl_dec);
-		while (data->read_line[i] == ' ')
-			i++;
-		if (data->read_line[i] && data->read_line[i] != ' ')
-			error_message(data, "missing or wrong arguments", "1\0");
-	}
+		readline_error(data, i);
 	return ;
 }
 
@@ -81,7 +75,6 @@ void	launching_exec(t_vault *data)
 		{
 			check_heredoc_active(data, line, 0);
 			execute_redirection(data, line, 0);
-			// heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 			{
 				final_quotes_removing(data, line);
@@ -119,7 +112,6 @@ void	forking(t_vault *data, int line, int type)
 		{
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
-			// heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 				in_child_exec(data, line);
 			close_pipe(data);
