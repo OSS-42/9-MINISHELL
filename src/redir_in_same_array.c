@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_in_same_array.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 08:50:08 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/13 11:25:09 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:40 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ void	redir_in_same_array(t_vault *data, int i, int *j, char c)
 		data->flag->append = TRUE;
 		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
 		find_redir_in_same_array(data, data->tab_arg[i], i);
-	}
-	else if (c == '<' && data->tab_arg[i][*j + 1] == c)
-	{
-		data->tab_arg[i] = clean_the_chevron(data, data->tab_arg[i], 0, 0);
-		find_redir_in_same_array(data, data->tab_arg[i], i);
-		if (data->tab_arg[i][ft_strlen(data->tab_arg[i]) - 1]
-			!= data->flag->chevron)
-			heredoc(data, i);
 	}
 	else
 		find_redir_in_same_array(data, data->tab_arg[i], i);

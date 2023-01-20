@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 21:03:20 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:33:14 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void	launching_exec(t_vault *data)
 	{
 		if (data->flag->pipe_count == 0)
 		{
+			check_heredoc_active(data, line, 0);
 			execute_redirection(data, line, 0);
+			heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 			{
 				final_quotes_removing(data, line);
@@ -95,7 +97,6 @@ void	launching_exec(t_vault *data)
 			forking(data, line, 2);
 		reset_io(data);
 	}
-	heredoc_unlink(data);
 }
 
 void	forking(t_vault *data, int line, int type)
@@ -112,11 +113,13 @@ void	forking(t_vault *data, int line, int type)
 	}
 	else if (type == 2)
 	{
+		check_heredoc_active(data, line, 0);
 		child_creation(data, line);
 		if (data->pid[line] == 0)
 		{
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
+			heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 				in_child_exec(data, line);
 			close_pipe(data);

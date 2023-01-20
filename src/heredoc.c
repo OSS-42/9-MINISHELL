@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/19 21:36:49 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:44 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	heredoc(t_vault *data, int line)
 	if (data->flag->heredoc_fd > 0)
 		close (data->flag->heredoc_fd);
 	dup2(data->flag->stdin_backup, STDIN_FILENO);
-	dup2(data->flag->stdout_backup, STDOUT_FILENO); // a mettre en commentaire pour faire disparaitre le double heredoc, mais perte du terminal
+	dup2(data->flag->stdout_backup, STDOUT_FILENO);
 	data->flag->heredoc_fd = open("temp_heredoc", O_CREAT
 			| O_WRONLY | O_TRUNC, 0644);
 	while (data->flag->heredoc_delimiter == FALSE)
@@ -64,4 +64,32 @@ void	reset_n_close_heredoc(t_vault *data)
 	data->flag->heredoc = TRUE;
 	close(data->flag->heredoc_fd);
 	return ;
+}
+
+void	check_heredoc_active(t_vault *data, int line, int j)
+{
+	while (data->tab_arg[line][j])
+	{
+		if (data->tab_arg[line][j] == '<')
+		{
+			if (is_in_quote(data, line, j) == FALSE)
+			{
+				if (data->tab_arg[line][j + 1] == '<')
+				{
+					data->flag->chevron = data->tab_arg[line][j];
+					data->tab_arg[line]
+						= clean_the_chevron(data, data->tab_arg[line], 0, 0);
+					find_redir_in_same_array(data, data->tab_arg[line], line);
+					if (data->tab_arg[line][ft_strlen(data->tab_arg[line]) - 1]
+						!= data->flag->chevron)
+						heredoc(data, line);
+					clean_redir(data, line);
+					data->tab_arg[line]
+						= clean_the_chevron(data, data->tab_arg[line], line, 0);
+					j = -1;
+				}
+			}
+		}
+		j++;
+	}
 }

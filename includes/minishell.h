@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 17:34:25 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 09:40:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,7 @@ int		check_pipe_validity(t_vault *data);
 void	heredoc(t_vault *data, int i);
 void	check_eof(t_vault *data, char *str);
 void	reset_n_close_heredoc(t_vault *data);
+void	check_heredoc_active(t_vault *data, int line, int j);
 
 /***** prog_utils.c *****/
 int		find_paths(t_vault *data);

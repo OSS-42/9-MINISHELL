@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/19 19:35:32 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/20 10:09:05 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	reinit_fd(t_vault *data)
 	if (data->flag->fd > 0)
 		close (data->flag->fd);
 	data->flag->fd = 0;
-	if (data->flag->heredoc_fd > 0)
-	{
-		unlink("temp_heredoc");
-		close (data->flag->heredoc_fd);
-	}
+	// if (data->flag->heredoc_fd > 0)
+	// {
+	// 	unlink("temp_heredoc");
+	// 	close (data->flag->heredoc_fd);
+	// }
 	data->flag->heredoc_fd = 0;
 }
 

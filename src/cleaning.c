@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 00:19:39 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/12 17:01:55 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:37:26 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ void	close_fd(t_vault *data)
 		close (data->flag->fd_out);
 	if (data->flag->fd > 0)
 		close (data->flag->fd);
-	if (data->flag->heredoc_fd > 0)
-	{
-		unlink("temp_heredoc");
-		close(data->flag->heredoc_fd);
-	}
 	close (data->flag->stdin_backup);
 	close (data->flag->stdout_backup);
 	return ;

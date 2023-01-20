@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 21:54:56 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 10:31:48 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	reset_io(t_vault *data)
 		error_message(data, "Erreur dup2 stdout\n", "126\0");
 	if (dup2(data->flag->stdin_backup, STDIN_FILENO) == -1)
 		error_message(data, "Erreur dup2 stdin\n", "126\0");
+	data->flag->heredoc = FALSE;
 }
