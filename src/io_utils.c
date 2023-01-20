@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:38:02 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/19 12:59:01 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 21:54:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	close_pipe(t_vault *data)
 void	reset_io(t_vault *data)
 {
 	if (dup2(data->flag->stdout_backup, STDOUT_FILENO) == -1)
-		printf("Erreur dup2 stdout\n");
+		error_message(data, "Erreur dup2 stdout\n", "126\0");
 	if (dup2(data->flag->stdin_backup, STDIN_FILENO) == -1)
-		printf("Erreur dup2 stdin\n");
+		error_message(data, "Erreur dup2 stdin\n", "126\0");
 }
