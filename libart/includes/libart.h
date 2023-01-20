@@ -6,12 +6,12 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 00:15:03 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/02 15:24:30 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 20:50:34 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRETTY_H
-# define PRETTY_H
+#ifndef LIBART_H
+# define LIBART_H
 
 # include <stdio.h>
 
@@ -42,4 +42,3 @@ void	lgray(void);
 void	dgray(void);
 
 #endif
-

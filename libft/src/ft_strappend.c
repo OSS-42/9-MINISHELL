@@ -6,12 +6,11 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 10:54:25 by ewurstei          #+#    #+#             */
-/*   Updated: 2022/12/07 11:30:08 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 20:48:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-#include <stdio.h>
 
 char	*ft_strappend(char *str, char c)
 {
@@ -33,16 +32,16 @@ char	*ft_strappend(char *str, char c)
 	return (buffer);
 }
 
-int	main(void)
-{
-	char	c;
-	char	*str;
-	char	*temp;
+// int	main(void)
+// {
+// 	char	c;
+// 	char	*str;
+// 	char	*temp;
 
-	c = '1';
-	str = "hello";
-	temp = ft_strappend(str, c);
-	printf("%s\n", temp);
-	free (temp);
-	return (0);
-}
+// 	c = '1';
+// 	str = "hello";
+// 	temp = ft_strappend(str, c);
+// 	printf("%s\n", temp);
+// 	free (temp);
+// 	return (0);
+// }
