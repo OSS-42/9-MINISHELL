@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 12:23:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:14:48 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	check_heredoc_active(t_vault *data, int line, int j)
 					if (data->tab_arg[line][ft_strlen(data->tab_arg[line]) - 1]
 						!= data->flag->chevron)
 						heredoc(data, line);
-					dprintf(2, "%s\n", data->tab_arg[line]);
+					ft_free_n_null (data->flag->output);
+					data->flag->output = NULL;
 				}
 			}
 		}

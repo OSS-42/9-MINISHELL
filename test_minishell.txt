@@ -1,6 +1,8 @@
 
 -- eCHO 2x-- Leaks avec un itoa - OK
 
+-- < a << eof < a cat -e | cat -e
+
 ---- A retester dans sa totalité a chaque fois que je modifie ----
 -- cat << | wc -- OK
 -- cat makefile >test | wc < | cat makefile >test1 -- OK

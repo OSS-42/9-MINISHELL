@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:52:27 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/11 08:58:52 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:22:20 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	len_of_redir(t_vault *data, char *rl_dec_array, int line)
 	len = 0;
 	i = move_index_chevron(data, line, i, rl_dec_array);
 	i++;
+	if (rl_dec_array[i] == data->flag->chevron)
+		i++;
 	while (rl_dec_array[i] == ' ')
 		i++;
 	if (rl_dec_array[i] == '\"' || rl_dec_array[i] == '\'')

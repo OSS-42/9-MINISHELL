@@ -6,7 +6,7 @@
 /*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 12:27:37 by mbertin          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:17:53 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	stdin_redirection(t_vault *data, char *redirection)
 
 void	heredoc_redirection(t_vault *data)
 {
-	dprintf(2, "%d\n", data->flag->heredoc);
 	if (data->flag->heredoc == TRUE)
 	{
 		data->flag->heredoc_fd = open("temp_heredoc", O_RDONLY);
@@ -159,5 +158,6 @@ void	heredoc_redirection(t_vault *data)
 			reset_io(data);
 		}
 		data->flag->heredoc = FALSE;
+		close(data->flag->heredoc_fd);
 	}
 }
