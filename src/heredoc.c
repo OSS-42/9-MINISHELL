@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/19 14:52:33 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 21:36:49 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	heredoc(t_vault *data, int line)
 	if (data->flag->heredoc_fd > 0)
 		close (data->flag->heredoc_fd);
 	dup2(data->flag->stdin_backup, STDIN_FILENO);
-	dup2(data->flag->stdout_backup, STDOUT_FILENO);
+	dup2(data->flag->stdout_backup, STDOUT_FILENO); // a mettre en commentaire pour faire disparaitre le double heredoc, mais perte du terminal
 	data->flag->heredoc_fd = open("temp_heredoc", O_CREAT
 			| O_WRONLY | O_TRUNC, 0644);
 	while (data->flag->heredoc_delimiter == FALSE)
