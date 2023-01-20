@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/20 09:40:05 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:59:52 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	heredoc_redirection(t_vault *data);
 
 /***** redir_in_same_array.c *****/
 void	redir_in_same_array(t_vault *data, int i, int *j, char c);
-void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line);
+void	find_redir_in_same_array(t_vault *data, char *rl_dec_array, int line, int j);
 int		move_index_chevron(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron2(t_vault *data, int line, int i, char *rl_dec_array);
 int		move_index_chevron3(t_vault *data, int i, int *len, char *rl_dec_array);

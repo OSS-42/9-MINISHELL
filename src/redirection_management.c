@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 10:43:06 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:50:56 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	execute_redirection(t_vault *data, int line, int j)
 		}
 		j++;
 	}
+	heredoc_unlink(data);
 }
 
 void	redirection(t_vault *data, char *redirection)
@@ -114,22 +115,27 @@ void	stdin_redirection(t_vault *data, char *redirection)
 {
 	if (data->flag->fd > 0)
 		close (data->flag->fd);
-	data->flag->fd = open(redirection, O_RDONLY);
-	if (data->flag->fd == -1)
+	if (data->flag->heredoc == FALSE)
 	{
-		error_message(data, "no such file or directory", "1\0");
-		data->fail_redir = TRUE;
-		reset_io(data);
-	}
-	else
-	{
-		if (dup2(data->flag->fd, STDIN_FILENO) == -1)
+		data->flag->fd = open(redirection, O_RDONLY);
+		if (data->flag->fd == -1)
 		{
-			error_message(data, "FD error (dup2)", "1\0");
+			error_message(data, "no such file or directory", "1\0");
 			data->fail_redir = TRUE;
 			reset_io(data);
 		}
+		else
+		{
+			if (dup2(data->flag->fd, STDIN_FILENO) == -1)
+			{
+				error_message(data, "FD error (dup2)", "1\0");
+				data->fail_redir = TRUE;
+				reset_io(data);
+			}
+		}
 	}
+	else
+		heredoc_redirection(data);
 }
 
 void	heredoc_redirection(t_vault *data)
@@ -153,6 +159,6 @@ void	heredoc_redirection(t_vault *data)
 			data->fail_redir = TRUE;
 			reset_io(data);
 		}
-		heredoc_unlink(data);
+		data->flag->heredoc = FALSE;
 	}
 }

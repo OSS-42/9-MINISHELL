@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 10:37:44 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:59:24 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,24 @@ void	check_heredoc_active(t_vault *data, int line, int j)
 {
 	while (data->tab_arg[line][j])
 	{
-		if (data->tab_arg[line][j] == '<')
+		if (data->tab_arg[line][j] == '<' && data->tab_arg[line][j + 1] == '<')
 		{
 			if (is_in_quote(data, line, j) == FALSE)
 			{
 				if (data->tab_arg[line][j + 1] == '<')
 				{
 					data->flag->chevron = data->tab_arg[line][j];
-					data->tab_arg[line]
-						= clean_the_chevron(data, data->tab_arg[line], 0, 0);
-					find_redir_in_same_array(data, data->tab_arg[line], line);
+					// data->tab_arg[line]
+					// 	= clean_the_chevron(data, data->tab_arg[line], 0, 0);
+					find_redir_in_same_array(data, data->tab_arg[line], line, j);
 					if (data->tab_arg[line][ft_strlen(data->tab_arg[line]) - 1]
 						!= data->flag->chevron)
 						heredoc(data, line);
-					clean_redir(data, line);
-					data->tab_arg[line]
-						= clean_the_chevron(data, data->tab_arg[line], line, 0);
-					j = -1;
+					// clean_redir(data, line);
+					// data->tab_arg[line]
+					// 	= clean_the_chevron(data, data->tab_arg[line], line, 0);
+					dprintf(2, "%s\n", data->tab_arg[line]);
+					// j = -1;
 				}
 			}
 		}
