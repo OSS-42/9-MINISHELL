@@ -6,7 +6,7 @@
 /*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 20:37:37 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:03:20 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,10 @@ void	piping(t_vault *data)
 		i++;
 	}
 	launching_exec(data);
-	i = 0;
 	close_pipe(data);
-	while (i < data->flag->pipe_count + 1)
-	{
+	i = -1;
+	while (++i < data->flag->pipe_count + 1)
 		data->child_id = waitpid(data->pid[i], &data->status, 0);
-		i++;
-	}
 	free(data->pid);
 	if (data->status != 0)
 		pid_status_execve(data);

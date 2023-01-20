@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_management.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:10:10 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/19 10:51:52 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 21:23:04 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	redirection(t_vault *data, char *redirection)
 		stdin_redirection(data, redirection);
 }
 
+
+//mettre reset_io avec les messages d'erreur ?
 void	stdout_redirection(t_vault *data, char *redirection)
 {
 	if (data->flag->fd_out > 0)
@@ -96,15 +98,18 @@ void	stdout_redirection(t_vault *data, char *redirection)
 	{
 		error_message(data, "FD error", "1\0");
 		data->fail_redir = TRUE;
+		reset_io(data);
 	}
 	else if (dup2(data->flag->fd_out, STDOUT_FILENO) == -1)
 	{
 		error_message(data, "FD error", "1\0");
 		data->fail_redir = TRUE;
+		reset_io(data);
 	}
 	data->flag->append = FALSE;
 }
 
+//mettre reset_io avec les messages d'erreur ?
 void	stdin_redirection(t_vault *data, char *redirection)
 {
 	if (data->flag->fd > 0)
@@ -116,6 +121,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 		{
 			error_message(data, "no such file or directory", "1\0");
 			data->fail_redir = TRUE;
+			reset_io(data);
 		}
 		else
 		{
@@ -123,6 +129,7 @@ void	stdin_redirection(t_vault *data, char *redirection)
 			{
 				error_message(data, "FD error (dup2)", "1\0");
 				data->fail_redir = TRUE;
+				reset_io(data);
 			}
 		}
 	}
@@ -142,11 +149,13 @@ void	heredoc_redirection(t_vault *data)
 		rl_on_new_line();
 		rl_redisplay();
 		data->fail_redir = TRUE;
+		reset_io(data);
 	}
 	if (dup2(data->flag->heredoc_fd, STDIN_FILENO) == -1)
 	{
 		error_message(data, "heredoc - I/O error (dup2)", "1\0");
 		data->fail_redir = TRUE;
+		reset_io(data);
 	}
 	data->flag->heredoc = FALSE;
 }
