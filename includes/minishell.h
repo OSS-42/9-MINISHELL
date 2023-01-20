@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 19:18:06 by ewurstei          #+#    #+#             */
-/*   Updated: 2023/01/20 11:59:52 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:25:57 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ int		check_pipe_validity(t_vault *data);
 /***** heredoc.c *****/
 void	heredoc(t_vault *data, int i);
 void	check_eof(t_vault *data, char *str);
-void	reset_n_close_heredoc(t_vault *data);
+void	reset_n_close_heredoc(t_vault *data, int line);
 void	check_heredoc_active(t_vault *data, int line, int j);
 
 /***** prog_utils.c *****/

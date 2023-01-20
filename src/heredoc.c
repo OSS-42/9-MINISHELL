@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 15:24:04 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/20 11:59:24 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:23:37 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,7 @@ void	heredoc(t_vault *data, int line)
 		}
 		check_eof(data, str);
 	}
-	reset_n_close_heredoc(data);
-	if (data->flag->pipe_count > 0
-		&& (line == 0 || line != ft_dbl_ptr_len(data->tab_arg) - 1))
-		dup2(data->flag->pipe[line][p_write], STDOUT_FILENO);
-	if (data->flag->fd_out > 0)
-		dup2(data->flag->fd_out, STDOUT_FILENO);
-	if (data->flag->pipe_count > 0 && line != 0)
-		dup2(data->flag->pipe[line - 1][p_read], STDIN_FILENO);
-	if (data->flag->fd > 0)
-		dup2(data->flag->fd, STDIN_FILENO);
+	reset_n_close_heredoc(data, line);
 }
 
 void	check_eof(t_vault *data, char *str)
@@ -58,11 +49,20 @@ void	check_eof(t_vault *data, char *str)
 	free(str);
 }
 
-void	reset_n_close_heredoc(t_vault *data)
+void	reset_n_close_heredoc(t_vault *data, int line)
 {
 	data->flag->heredoc_delimiter = FALSE;
 	data->flag->heredoc = TRUE;
 	close(data->flag->heredoc_fd);
+	if (data->flag->pipe_count > 0
+		&& (line == 0 || line != ft_dbl_ptr_len(data->tab_arg) - 1))
+		dup2(data->flag->pipe[line][p_write], STDOUT_FILENO);
+	if (data->flag->fd_out > 0)
+		dup2(data->flag->fd_out, STDOUT_FILENO);
+	if (data->flag->pipe_count > 0 && line != 0)
+		dup2(data->flag->pipe[line - 1][p_read], STDIN_FILENO);
+	if (data->flag->fd > 0)
+		dup2(data->flag->fd, STDIN_FILENO);
 	return ;
 }
 
@@ -77,17 +77,12 @@ void	check_heredoc_active(t_vault *data, int line, int j)
 				if (data->tab_arg[line][j + 1] == '<')
 				{
 					data->flag->chevron = data->tab_arg[line][j];
-					// data->tab_arg[line]
-					// 	= clean_the_chevron(data, data->tab_arg[line], 0, 0);
-					find_redir_in_same_array(data, data->tab_arg[line], line, j);
+					find_redir_in_same_array(data, data->tab_arg[line],
+						line, j);
 					if (data->tab_arg[line][ft_strlen(data->tab_arg[line]) - 1]
 						!= data->flag->chevron)
 						heredoc(data, line);
-					// clean_redir(data, line);
-					// data->tab_arg[line]
-					// 	= clean_the_chevron(data, data->tab_arg[line], line, 0);
 					dprintf(2, "%s\n", data->tab_arg[line]);
-					// j = -1;
 				}
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mbertin <mbertin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/20 11:28:22 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:20:15 by mbertin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	launching_exec(t_vault *data)
 		{
 			check_heredoc_active(data, line, 0);
 			execute_redirection(data, line, 0);
-			// heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 			{
 				final_quotes_removing(data, line);
@@ -119,7 +118,6 @@ void	forking(t_vault *data, int line, int type)
 		{
 			dup_fds(data, line);
 			execute_redirection(data, line, 0);
-			// heredoc_redirection(data);
 			if (data->tab_arg[line][0] != '\0' && data->fail_redir == FALSE)
 				in_child_exec(data, line);
 			close_pipe(data);
