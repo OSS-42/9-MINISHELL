@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:24:14 by mbertin           #+#    #+#             */
-/*   Updated: 2023/01/15 14:08:29 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:35:32 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	init_data(t_vault *data, char **env)
 
 void	reinit_data(t_vault *data)
 {
+	reinit_fd(data);
 	data->flag->pipe_count = 0;
 	data->quote->double_quote_count = 0;
 	data->quote->simple_quote_count = 0;

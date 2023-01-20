@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 17:34:32 by ewurstei         ###   ########.fr       */
+/*   Updated: 2023/01/19 19:51:41 by momo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@ void	explore_readline(t_vault *data)
 		piping(data);
 	}
 	//Essayer de se rappeler pourquoi ces lignes - en les enlevant ca resoud probleme #1 du 19 janvier.
+	// Parce que normalement c'est create_tab_arg qui libere rl_dec mais vue que la on passe pas dedans
+	// il faut le free manuellement
 	// else
 	// {
 	// 	ft_dbl_ptr_free((void **)data->rl_dec);
-	// 	error_message(data, "missing or wrong arguments", "1\0");
+	// 	while (data->read_line[i] == ' ')
+	// 		i++;
+	// 	if (data->read_line[i] && data->read_line[i] != ' ')
+	// 		error_message(data, "missing or wrong arguments", "1\0");
 	// }
 	return ;
 }
