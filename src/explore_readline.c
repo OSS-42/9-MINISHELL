@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   explore_readline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momo <momo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ewurstei <ewurstei@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:55:29 by momo              #+#    #+#             */
-/*   Updated: 2023/01/19 19:51:41 by momo             ###   ########.fr       */
+/*   Updated: 2023/01/19 20:26:30 by ewurstei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	explore_readline(t_vault *data)
 {
+	int	i;
+
+	i = 0;
 	data->rl_dec = ft_split(data->read_line, ' ');
 	if (data->rl_dec[0] && rl_prio_n_qty(data, 0, '\0') == TRUE
 		&& check_wrong_redirection(data) == TRUE)
@@ -35,14 +38,14 @@ void	explore_readline(t_vault *data)
 	//Essayer de se rappeler pourquoi ces lignes - en les enlevant ca resoud probleme #1 du 19 janvier.
 	// Parce que normalement c'est create_tab_arg qui libere rl_dec mais vue que la on passe pas dedans
 	// il faut le free manuellement
-	// else
-	// {
-	// 	ft_dbl_ptr_free((void **)data->rl_dec);
-	// 	while (data->read_line[i] == ' ')
-	// 		i++;
+	else
+	{
+		ft_dbl_ptr_free((void **)data->rl_dec);
+		while (data->read_line[i] == ' ')
+			i++;
 	// 	if (data->read_line[i] && data->read_line[i] != ' ')
 	// 		error_message(data, "missing or wrong arguments", "1\0");
-	// }
+	}
 	return ;
 }
 
