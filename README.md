@@ -1,4 +1,4 @@
 # 9-MINISHELL
-minishell project
+minishell project\n
 ![GitHub last commit](https://img.shields.io/github/last-commit/xDeadpoolx/9-MINISHELL?style=for-the-badge)
-![Your Repository's Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=xDeadpoolx&theme=blue-green)
+https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white
