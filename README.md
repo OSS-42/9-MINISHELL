@@ -1,5 +1,5 @@
 # 9-MINISHELL
-![MINISHELL](https://github.com/byaliego/42-project-badges/blob/main/badges/minishell-bonus.png)
+![MINISHELL](https://github.com/byaliego/42-project-badges/blob/main/badges/minishell-bonus2.png)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/xDeadpoolx/9-MINISHELL?style=for-the-badge)
 
