@@ -11,6 +11,4 @@
 
 ![Language](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
 
-
-
-
+Contributor : <a href="https://github.com/Mbertin44"><img src="https://avatars.githubusercontent.com/u/100396045?v=4" width="50" height="50" /></a>
