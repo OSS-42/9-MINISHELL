@@ -51,9 +51,9 @@ Ce projet a été réalisé en collaboration avec [OSS-42](https://github.com/OS
 
 Nous espérons que vous apprécierez ce projet autant que nous avons aimé le réaliser.
 
+## Remerciement
+Merci à [byaliego](https://github.com/byaliego) pour le badge de projet.
+
 ## Auteur
 
 [Mbertin44](https://github.com/Mbertin44)
-
-## Remerciement
-Merci à [byaliego](https://github.com/byaliego) pour le badge de projet.
