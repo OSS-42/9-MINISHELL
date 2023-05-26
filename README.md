@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/byaliego/42-project-badges/blob/main/badges/minishell-bonus_alt.png?raw=true">
+  <img src="https://github.com/byaliego/42-project-badges/blob/main/badges/minishellm.png">
 </p>
 
 
